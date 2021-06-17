@@ -1,0 +1,11 @@
+server:
+  port: 9000
+module:
+  shiro:
+    rule: gateway-cms
+    token-prefix: ${server.port}
+  gateway:
+    group: CMS_GROUP
+    route-data-id: cms-route
+    white-route-data-id: cms-white-route
+    route-rouse-data-id: cms-route-rouse

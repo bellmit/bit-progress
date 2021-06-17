@@ -1,0 +1,45 @@
+package com.wpx.constant;
+
+/**
+ * @author wpx
+ */
+public class RedisKeyPrefix {
+
+
+    /** ************************************************************************************************************** */
+
+    /**
+     * RabbitMQ 相关
+     */
+
+    /**
+     * RabbitMQ 消息标识码 自增生成RabbitMQ的标识码
+     * Redis value increment
+     */
+    public static String rabbitMQIdentifier(int day) {
+        return "RabbitMQIdentifier:" + day;
+    }
+
+    /**
+     * RabbitMQ 已消费消息标识码  键值对（key -- value -- 都是标识码）
+     * Redis hash
+     * 消息消费前从hash中查询是否存在标识码，存在则标识消息已消费，不存在则表示未消费
+     * 消息消费后将标识码保存到hash中
+     * 改为以天为key
+     */
+    public static String rabbitMQConsumedIdentifier(String day){
+        return "RabbitMQConsumedIdentifier:" + day;
+    }
+
+    /** ************************************************************************************************************** */
+
+    /**
+     * 存放验证码的key
+     *
+     * @param uuid
+     */
+    public static String captcha(String uuid) {
+        return "Captcha:" + uuid;
+    }
+
+}

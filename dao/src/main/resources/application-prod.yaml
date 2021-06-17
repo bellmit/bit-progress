@@ -1,0 +1,3 @@
+logging:
+  level:
+    com.luwei.model: warn

@@ -1,0 +1,11 @@
+server:
+  port: 9001
+module:
+  shiro:
+    rule: gateway-web
+    token-prefix: ${server.port}
+  gateway:
+    group: WEB_GROUP
+    route-data-id: web-route
+    white-route-data-id: web-white-route
+    route-rouse-data-id: web-route-rouse
