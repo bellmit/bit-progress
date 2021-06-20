@@ -1,8 +1,8 @@
 package com.wpx.gatewayweb;
 
+import com.wpx.model.login.LoginDTO;
+import com.wpx.model.login.LogoutDTO;
 import com.wpx.model.login.TokenCheckDTO;
-import com.wpx.model.login.UserLoginDTO;
-import com.wpx.model.login.UserLogoutDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +23,7 @@ public interface GatewayWebRemoteService {
      * @param dto
      */
     @RequestMapping(value = "rest/auth/login", method = RequestMethod.POST)
-    String login(@RequestBody UserLoginDTO dto);
+    String login(@RequestBody LoginDTO dto);
 
     /**
      * 退出登录
@@ -31,7 +31,7 @@ public interface GatewayWebRemoteService {
      * @param dto
      */
     @RequestMapping(value = "rest/auth/logout", method = RequestMethod.POST)
-    void logout(@RequestBody UserLogoutDTO dto);
+    void logout(@RequestBody LogoutDTO dto);
 
     /**
      * 解析token获取用户的userId

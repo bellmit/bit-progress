@@ -14,6 +14,7 @@ import com.wpx.model.system.application.pojo.ApplicationMessageVO;
 import com.wpx.model.system.application.pojo.cms.*;
 import com.wpx.redis.SystemRedisService;
 import com.wpx.service.system.applicationtopic.ApplicationTopicService;
+import com.wpx.util.BeanUtils;
 import com.wpx.util.ConversionBeanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
