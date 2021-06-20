@@ -28,9 +28,9 @@ public class GatewayRoute {
     private static final Map<String, List<String>> ROUTE_ROUSE_MAP = new HashMap<>();
 
     /**
-     * 路由资源
+     * 路由API_TOKEN
      */
-    private static final List<String> THIRD_ROUTE = new ArrayList<>();
+    private static final Map<String, String> ROUTE_API_TOKEN_MAP = new HashMap<>();
 
     /**
      * 获取路由ID列表
@@ -61,12 +61,13 @@ public class GatewayRoute {
     }
 
     /**
-     * 获取三方路由
+     * 获取路由的token
      *
-     * @return   List<String>
+     * @param    key
+     * @return   String
      */
-    public static List<String> getThirdRouteList() {
-        return THIRD_ROUTE;
+    public static String getRouteApiToken(String key) {
+        return ROUTE_API_TOKEN_MAP.get(key);
     }
 
     /**
@@ -97,12 +98,12 @@ public class GatewayRoute {
     }
 
     /**
-     * 添加三方路由
+     * 添加路由API_TOKEN
      *
-     * @param    thirdRoutes
+     * @param    tokenMap
      */
-    public static void addThirdRoute(List<String> thirdRoutes) {
-        THIRD_ROUTE.addAll(thirdRoutes);
+    public static void addRouteApiTokenMap(Map<String, String> tokenMap) {
+        ROUTE_API_TOKEN_MAP.putAll(tokenMap);
     }
 
     /**
@@ -127,10 +128,10 @@ public class GatewayRoute {
     }
 
     /**
-     * 清空三方路由
+     * 清空路由API_TOKEN
      */
-    public static void clearThirdRouteList() {
-        THIRD_ROUTE.clear();
+    public static void clearRouteApiTokenMap() {
+        ROUTE_API_TOKEN_MAP.clear();
     }
 
 }

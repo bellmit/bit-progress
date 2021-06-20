@@ -9,3 +9,4 @@ module:
     route-data-id: web-route
     white-route-data-id: web-white-route
     route-rouse-data-id: web-route-rouse
+    route-api-token-data-id: web-route-api-token

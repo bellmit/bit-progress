@@ -15,7 +15,7 @@
         <module>remote-common</module>
         <module>remote-base</module>
         <module>remote-gateway-web</module>
+        <module>remote-gateway-cms</module>
     </modules>
-
 
 </project>

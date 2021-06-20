@@ -1,7 +1,5 @@
 package com.wpx.common.util;
 
-import org.springframework.lang.NonNull;
-
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
@@ -359,7 +357,7 @@ public class LocalDateTimeUtils {
      * @param type 时刻的类型
      * @return 当前月的最后一天
      */
-    public static LocalDateTime getLastDayOfMonth(@NonNull LocalDateTime time, MomentType type) {
+    public static LocalDateTime getLastDayOfMonth(LocalDateTime time, MomentType type) {
         return getMomentByType(time.with(TemporalAdjusters.lastDayOfMonth()), type);
     }
 
@@ -370,7 +368,7 @@ public class LocalDateTimeUtils {
      * @param time LocalDateTime
      * @return yyyy-MM-dd HH:mm:ss
      */
-    public static String format(@NonNull LocalDateTime time) {
+    public static String format(LocalDateTime time) {
         return time.format(DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_PATTERN));
     }
 
@@ -381,7 +379,7 @@ public class LocalDateTimeUtils {
      * @param pattern 日期格式
      * @return LocalDateTime with pattern
      */
-    public static String format(@NonNull LocalDateTime time, @NonNull String pattern) {
+    public static String format(LocalDateTime time, String pattern) {
         return time.format(DateTimeFormatter.ofPattern(pattern));
     }
 
@@ -392,7 +390,7 @@ public class LocalDateTimeUtils {
      * @param two two
      * @return 日期毫秒差值(绝对值)
      */
-    public static long getDuration(@NonNull LocalDateTime one, @NonNull LocalDateTime two) {
+    public static long getDuration(LocalDateTime one, LocalDateTime two) {
         return Math.abs(toMilliseconds(two) - toMilliseconds(one));
     }
 
@@ -402,7 +400,7 @@ public class LocalDateTimeUtils {
      * @param time time
      * @return 指定时间到现在的差值(绝对值)
      */
-    public static long getDurationFromNow(@NonNull LocalDateTime time) {
+    public static long getDurationFromNow(LocalDateTime time) {
         return Math.abs(toMilliseconds(time) - toMilliseconds(LocalDateTime.now()));
     }
 
@@ -422,7 +420,7 @@ public class LocalDateTimeUtils {
      * @param time LocalDateTime
      * @return 对应的毫秒值
      */
-    public static long toMilliseconds(@NonNull LocalDateTime time) {
+    public static long toMilliseconds(LocalDateTime time) {
         return time.toInstant(ZoneOffset.of("+8")).toEpochMilli();
     }
 
@@ -434,8 +432,7 @@ public class LocalDateTimeUtils {
      * @param end       范围结束值
      * @return 是否在指定时间范围内
      */
-    public boolean isBetween(@NonNull LocalDateTime toCompare,
-                             @NonNull LocalDateTime begin, @NonNull LocalDateTime end) {
+    public boolean isBetween(LocalDateTime toCompare, LocalDateTime begin, LocalDateTime end) {
         if (begin.isAfter(end)) {
             throw new IllegalArgumentException("The begin time can not be after the end time!");
         }

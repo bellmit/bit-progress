@@ -1,7 +1,9 @@
 package com.wpx.nacos.service;
 
 import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.PropertyKeyConst;
 import com.alibaba.nacos.api.config.ConfigService;
@@ -24,6 +26,7 @@ import org.springframework.util.CollectionUtils;
 import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -125,7 +128,6 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
                     }
                     List<String> whiteRoutes = JSONArray.parseArray(configInfo, String.class);
                     GatewayRoute.addWhiteRoute(whiteRoutes);
-                    publish();
                 }
 
                 @Override
@@ -173,7 +175,6 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
                     if (!CollectionUtils.isEmpty(roleMap)) {
                         GatewayRoute.addRouteRouse(roleMap);
                     }
-                    publish();
                 }
 
                 @Override
@@ -183,6 +184,51 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
             });
         }catch (NacosException e) {
             log.error("NacosRouteRouseSetError ", e);
+        }
+    }
+
+    /**
+     * 监听路由ApiToken配置
+     */
+    @PostConstruct
+    public void nacosRouteApiTokenListener() {
+        String routeApiTokenDataId = nacosGatewayProperties.getRouteApiTokenDataId();
+        String group = nacosGatewayProperties.getGroup();
+        String namespace = nacosDiscoveryProperties.getNamespace();
+        String serverAddr = nacosDiscoveryProperties.getServerAddr();
+
+        try {
+            Properties properties = new Properties();
+            properties.put(PropertyKeyConst.NAMESPACE, namespace);
+            properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
+            ConfigService configService = NacosFactory.createConfigService(properties);
+            String config = configService.getConfig(routeApiTokenDataId, group, 5000);
+
+            // gateway启动初始化资源
+            initRouteApiToken(config);
+
+            configService.addListener(routeApiTokenDataId, group, new Listener() {
+
+                @Override
+                public void receiveConfigInfo(String configInfo) {
+                    clearRouteRouse();
+                    // 如果资源配置为空，则不需要配置
+                    if (StringUtils.isEmpty(configInfo)) {
+                        return;
+                    }
+                    JSONObject apiTokenObject = JSON.parseObject(configInfo);
+                    Map<String, String> apiTokenMap = new HashMap<>();
+                    apiTokenObject.forEach((key, value) -> apiTokenMap.put(key, String.valueOf(value)));
+                    GatewayRoute.addRouteApiTokenMap(apiTokenMap);
+                }
+
+                @Override
+                public Executor getExecutor() {
+                    return null;
+                }
+            });
+        }catch (NacosException e) {
+            log.error("NacosRouteApiTokenSetError ", e);
         }
     }
 
@@ -215,7 +261,6 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
         }
         List<String> whiteRoutes = JSONArray.parseArray(configInfo, String.class);
         GatewayRoute.addWhiteRoute(whiteRoutes);
-        publish();
     }
 
     /**
@@ -235,7 +280,23 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
         if (!CollectionUtils.isEmpty(roleMap)) {
             GatewayRoute.addRouteRouse(roleMap);
         }
-        publish();
+    }
+
+    /**
+     * 初始化路由ApiToken
+     *
+     * @param    configInfo
+     */
+    private void initRouteApiToken(String configInfo) {
+        clearRouteApiToken();
+        // 如果资源配置为空，则不需要配置
+        if (StringUtils.isEmpty(configInfo)) {
+            return;
+        }
+        JSONObject apiTokenObject = JSON.parseObject(configInfo);
+        Map<String, String> apiTokenMap = new HashMap<>();
+        apiTokenObject.forEach((key, value) -> apiTokenMap.put(key, String.valueOf(value)));
+        GatewayRoute.addRouteApiTokenMap(apiTokenMap);
     }
 
     /**
@@ -272,6 +333,13 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
      */
     private void clearRouteRouse() {
         GatewayRoute.clearRouteRouseMap();
+    }
+
+    /**
+     * 清空路由ApiToken
+     */
+    private void clearRouteApiToken() {
+        GatewayRoute.clearRouteApiTokenMap();
     }
 
     /**

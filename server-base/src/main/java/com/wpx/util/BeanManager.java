@@ -1,4 +1,4 @@
-package com.wpx.common.util;
+package com.wpx.util;
 
 import org.springframework.context.ApplicationContext;
 

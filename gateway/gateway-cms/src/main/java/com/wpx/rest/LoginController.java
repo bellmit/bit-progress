@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author wpx
  * Created on 2021/1/26 16:03
- * @description：
+ * @description：Cms端登录调用接口
  */
 @RestController
 @RequestMapping("rest/auth")

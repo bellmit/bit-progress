@@ -4,9 +4,13 @@ package com.wpx.common.util;
  * @author 不会飞的小鹏
  * create on 2021/5/31 22:40
  */
-public class StringUtils extends org.springframework.util.StringUtils {
+public class StringUtils {
 
     public static final String SPACE = " ";
+
+    public static final String ZERO = "0";
+
+    public static final String NEGATIVE_ONE = "-1";
 
     public static boolean isEmpty(String str) {
         return str == null || str.isEmpty();

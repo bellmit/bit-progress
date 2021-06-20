@@ -32,6 +32,11 @@ public class NacosGatewayProperties {
      */
     private String routeRouseDataId;
 
+    /**
+     * 路由ApiToken配置ID
+     */
+    private String routeApiTokenDataId;
+
     public NacosGatewayProperties() {
     }
 
@@ -65,6 +70,14 @@ public class NacosGatewayProperties {
 
     public void setRouteRouseDataId(String routeRouseDataId) {
         this.routeRouseDataId = routeRouseDataId;
+    }
+
+    public String getRouteApiTokenDataId() {
+        return routeApiTokenDataId;
+    }
+
+    public void setRouteApiTokenDataId(String routeApiTokenDataId) {
+        this.routeApiTokenDataId = routeApiTokenDataId;
     }
 
 }

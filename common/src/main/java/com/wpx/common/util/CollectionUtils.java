@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  * Created on 2020/11/18 16:17
  * @description: 集合的工具类
  */
-public class CollectionUtils extends org.springframework.util.CollectionUtils {
+public class CollectionUtils {
 
     private static final String TYPE_NOT_APPOINT = "type_not_appoint";
 
@@ -46,6 +46,30 @@ public class CollectionUtils extends org.springframework.util.CollectionUtils {
 
     }
 
+    /**
+     * 判断集合是否为空
+     *
+     * @param collection
+     */
+    public static boolean isEmpty(Collection<?> collection) {
+        return collection == null || collection.isEmpty();
+    }
+
+    /**
+     * 判断集合是否为空
+     *
+     * @param map
+     */
+    public static boolean isEmpty(Map<?, ?> map) {
+        return map == null || map.isEmpty();
+    }
+
+    /**
+     * 集合是否包含元素
+     *
+     * @param collection
+     * @param obj
+     */
     public static boolean contains(Collection<?> collection, Object obj) {
         return nonEmpty(collection) && collection.contains(obj);
     }

@@ -1,14 +1,19 @@
 package com.wpx.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.wpx.common.util.StringUtils;
+import com.wpx.constant.VerifyConstant;
 import com.wpx.exception.envm.AuthException;
 import com.wpx.model.result.AuthResult;
 import com.wpx.model.result.Result;
+import com.wpx.nacos.route.GatewayRoute;
 import com.wpx.nacos.service.NacosRouteMatchService;
 import com.wpx.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.cloud.gateway.route.Route;
+import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
@@ -49,17 +54,33 @@ public class AccessGatewayFilter implements GlobalFilter {
         String authentication = headers.getFirst(HttpHeaders.AUTHORIZATION);
 
         if (nacosRouteMatchService.ignoreAuthentication(url)) {
-            return chain.filter(exchange);
+            return authorized(chain, exchange, request, StringUtils.NEGATIVE_ONE);
         }
         // 校验token
         AuthResult authResult = authService.checkToken(authentication);
         if (authResult.getResult()) {
-            ServerHttpRequest httpRequest = request.mutate().header(USER_ID, authResult.getUserId()).build();
-            ServerWebExchange cmsExchange = exchange.mutate().request(httpRequest).build();
-            return chain.filter(cmsExchange);
+            return authorized(chain, exchange, request, authResult.getUserId());
         }
 
         return unauthorized(exchange, authResult.getAuthException());
+    }
+
+    /**
+     * 通过检验，重新构建exchange
+     */
+    private Mono<Void> authorized(GatewayFilterChain chain,
+                                  ServerWebExchange exchange,
+                                  ServerHttpRequest request,
+                                  String userId) {
+        Route route =(Route) exchange.getAttributes().get(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR);
+        String routeId = route.getId();
+        String routeApiToken = GatewayRoute.getRouteApiToken(routeId);
+        ServerHttpRequest httpRequest = request.mutate()
+                .header(VerifyConstant.USER_ID, userId)
+                .header(VerifyConstant.ROUTE_API_TOKEN, routeApiToken)
+                .build();
+        ServerWebExchange cmsExchange = exchange.mutate().request(httpRequest).build();
+        return chain.filter(cmsExchange);
     }
 
     /**

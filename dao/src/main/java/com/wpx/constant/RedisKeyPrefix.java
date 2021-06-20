@@ -42,4 +42,20 @@ public class RedisKeyPrefix {
         return "Captcha:" + uuid;
     }
 
+    /* ====================================== 应用信息 ======================================= */
+
+    /**
+     * 存放应用信息的key   hash（key：应用信息ID，value：应用信息）
+     */
+    public static String applicationMessage() {
+        return "ApplicationMessage:";
+    }
+
+    /**
+     * 存放应用主题消息信息的key   hash（key：topic，value：应用信息）
+     */
+    public static String applicationTopicMessage() {
+        return "ApplicationTopicMessage:";
+    }
+
 }
