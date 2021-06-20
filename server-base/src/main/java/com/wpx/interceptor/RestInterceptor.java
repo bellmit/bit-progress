@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/21 1:41
- * @Description API拦截器，检验对外提供的接口token
+ * @Description REST拦截器，检验对内部提供的接口token
  */
 @Service
-public class ApiInterceptor implements HandlerInterceptor {
+public class RestInterceptor implements HandlerInterceptor {
 
     @Autowired
     private ServerBaseProperties serverBaseProperties;
@@ -25,9 +25,9 @@ public class ApiInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
                              Object handler) throws Exception {
-        String routeApiToken = request.getHeader(VerifyConstant.ROUTE_API_TOKEN);
-        String apiToken = serverBaseProperties.getApiToken();
-        return StringUtils.equals(routeApiToken, apiToken);
+        String routeRestToken = request.getHeader(VerifyConstant.ROUTE_REST_TOKEN);
+        String restToken = serverBaseProperties.getRestToken();
+        return StringUtils.equals(routeRestToken, restToken);
     }
 
 }

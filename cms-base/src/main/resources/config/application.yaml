@@ -69,5 +69,9 @@ spring:
 wpx:
   config:
     salt: ufg48UH849Yhngf4
+  server:
+    base:
+      route-api-token: cms-base-api
+      route-rest-token: cms-rest-api
 swagger:
   show: true

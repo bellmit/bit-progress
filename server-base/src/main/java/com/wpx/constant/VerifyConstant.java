@@ -17,4 +17,9 @@ public class VerifyConstant {
      */
     public static final String ROUTE_API_TOKEN = "route_api_token";
 
+    /**
+     * 对于Rest接口的token追加
+     */
+    public static final String ROUTE_REST_TOKEN = "route_rest_token";
+
 }
