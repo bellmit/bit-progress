@@ -72,8 +72,8 @@ public class AccessGatewayFilter implements GlobalFilter {
                                   ServerHttpRequest request,
                                   String userId) {
         Route route =(Route) exchange.getAttributes().get(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR);
-        String routeId = route.getId();
-        String routeApiToken = GatewayRoute.getRouteApiToken(routeId);
+        String serverName = (String) route.getMetadata().get(VerifyConstant.SERVER_NAME);
+        String routeApiToken = GatewayRoute.getRouteApiToken(serverName);
         ServerHttpRequest httpRequest = request.mutate()
                 .header(VerifyConstant.USER_ID, userId)
                 .header(VerifyConstant.ROUTE_API_TOKEN, routeApiToken)

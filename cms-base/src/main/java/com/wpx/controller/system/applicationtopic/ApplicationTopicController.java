@@ -22,7 +22,7 @@ import java.util.Set;
  */
 @Api(tags = {"系统 -- 应用主题消息"})
 @RestController
-@RequestMapping("/api/system/applicationTopic")
+@RequestMapping("/api/base/system/applicationTopic")
 public class ApplicationTopicController {
 
     @Autowired

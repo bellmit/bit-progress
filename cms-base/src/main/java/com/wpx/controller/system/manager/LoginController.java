@@ -20,7 +20,7 @@ import javax.validation.Valid;
  **/
 @RestController
 @Api(tags = "系统 -- 登录模块")
-@RequestMapping("/api/system/login")
+@RequestMapping("/api/base/system/login")
 public class LoginController {
 
     @Resource

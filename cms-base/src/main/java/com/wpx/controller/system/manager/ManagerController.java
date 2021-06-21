@@ -19,7 +19,7 @@ import java.util.Set;
  **/
 @RestController
 @Api(tags = "系统 -- 管理员模块")
-@RequestMapping("/api/system/manager")
+@RequestMapping("/api/base/system/manager")
 public class ManagerController {
 
     @Autowired

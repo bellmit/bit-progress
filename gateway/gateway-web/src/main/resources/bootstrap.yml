@@ -4,10 +4,10 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8849
+        server-addr: 127.0.0.1:8848
         metadata:
           version: default
           default: true
       config:
-        server-addr: 127.0.0.1:8849
+        server-addr: 127.0.0.1:8848
         file-extension: yml

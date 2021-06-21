@@ -21,7 +21,7 @@ import java.util.Set;
  */
 @Api(tags = {"系统 -- 应用信息"})
 @RestController
-@RequestMapping("/api/system/application")
+@RequestMapping("/api/base/system/application")
 public class ApplicationController {
 
     @Autowired

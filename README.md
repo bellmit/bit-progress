@@ -8,3 +8,8 @@
 ###依赖问题
   1. 需要注册为SpringCloud的服务都需要依赖remote-common
   
+##需要改进
+###dao模块
+  1. 为避免mapper层的混乱调用，需要将dao曾进行拆分，按服务区分
+  2. 后续或可能将mapper曾和pojo层进行分离
+  

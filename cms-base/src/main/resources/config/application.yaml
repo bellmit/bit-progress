@@ -7,7 +7,7 @@ server:
       enabled: true
   compression:
     enabled: true
-  port: 9000
+  port: 9010
 
 spring:
   datasource:
@@ -71,7 +71,7 @@ wpx:
     salt: ufg48UH849Yhngf4
   server:
     base:
-      route-api-token: cms-base-api
-      route-rest-token: cms-rest-api
+      api-token: main-cms-base-api-token
+      rest-token: main-cms-base-rest-token
 swagger:
   show: true

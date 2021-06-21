@@ -17,4 +17,9 @@ public class VerifyConstant {
      */
     public static final String ROUTE_API_TOKEN = "route_api_token";
 
+    /**
+     * 服务名称标识
+     */
+    public static final String SERVER_NAME = "server-name";
+
 }

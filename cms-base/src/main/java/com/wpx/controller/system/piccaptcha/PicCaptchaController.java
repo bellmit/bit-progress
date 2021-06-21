@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author luwei
+ * @author wpx
  **/
 @RestController
 @Api(tags = "系统 -- 验证码模块")
-@RequestMapping("/api/system/picCaptcha")
+@RequestMapping("/api/base/system/picCaptcha")
 public class PicCaptchaController {
 
     @Autowired
