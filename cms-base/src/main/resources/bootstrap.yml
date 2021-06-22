@@ -8,7 +8,7 @@ spring:
         metadata:
           version: default
           default: true
-          server-name: main-cms-base
+          server-name: ${spring.application.name}
       config:
         server-addr: 127.0.0.1:8848
         file-extension: yml

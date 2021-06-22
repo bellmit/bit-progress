@@ -2,8 +2,7 @@ package com.wpx.exception;
 
 
 /**
- *
- * @author luwei
+ * @author wpx
  **/
 public class Result {
 

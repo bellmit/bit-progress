@@ -20,6 +20,7 @@
         <module>remote</module>
         <module>cms-base</module>
         <module>server-base</module>
+        <module>web-base</module>
     </modules>
 
     <properties>

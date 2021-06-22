@@ -1,7 +1,8 @@
 package com.wpx.interceptor;
 
+import com.wpx.common.constant.VerifyConstant;
+import com.wpx.common.exception.MessageCodes;
 import com.wpx.common.util.StringUtils;
-import com.wpx.constant.VerifyConstant;
 import com.wpx.property.ServerBaseProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,10 @@ public class ApiInterceptor implements HandlerInterceptor {
                              Object handler) throws Exception {
         String routeApiToken = request.getHeader(VerifyConstant.ROUTE_API_TOKEN);
         String apiToken = serverBaseProperties.getApiToken();
-        return StringUtils.equals(routeApiToken, apiToken);
+        if (StringUtils.equals(routeApiToken, apiToken)) {
+            return true;
+        }
+        throw new Exception(MessageCodes.AUTH_TOKEN);
     }
 
 }

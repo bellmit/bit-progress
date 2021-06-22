@@ -1,6 +1,6 @@
 package com.wpx.util;
 
-import com.wpx.constant.VerifyConstant;
+import com.wpx.common.constant.VerifyConstant;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

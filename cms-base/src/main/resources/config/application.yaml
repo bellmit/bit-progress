@@ -7,7 +7,7 @@ server:
       enabled: true
   compression:
     enabled: true
-  port: 9010
+  port: 9011
 
 spring:
   datasource:
@@ -65,6 +65,9 @@ spring:
       max-file-size: 8MB
       max-request-size: 8MB
       location: ${user.dir}/tmp
+ribbon:
+  ReadTimeout: 6000
+  ConnectTimeout: 6000
 
 wpx:
   config:
@@ -73,5 +76,8 @@ wpx:
     base:
       api-token: main-cms-base-api-token
       rest-token: main-cms-base-rest-token
+      server-token:
+        gateway-cms: gateway-cms-rest-token
+        main-web-base: main-web-base-rest-token
 swagger:
   show: true

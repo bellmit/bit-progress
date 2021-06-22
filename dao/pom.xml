@@ -10,6 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>dao</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>dao-base</module>
+        <module>dao-common</module>
+    </modules>
 
     <dependencies>
         <!-- common模块 -->
