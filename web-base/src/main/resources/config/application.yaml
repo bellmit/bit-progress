@@ -56,23 +56,29 @@ spring:
     serialization:
       write-dates-as-timestamps: true
 
-  http:
-    encoding:
-      charset: UTF-8
-
   servlet:
     multipart:
       max-file-size: 8MB
       max-request-size: 8MB
       location: ${user.dir}/tmp
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 6000
+        readTimeout: 10000
+ribbon:
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 0
+  OkToRetryOnAllOperations: false
 
 wpx:
   config:
     salt: ufg48UH849Yhngf4
   server:
     base:
-      api-token: main-cms-web-api-token
-      rest-token: main-cms-web-rest-token
+      api-token: main-web-base-api-token
+      rest-token: main-web-base-rest-token
       server-token:
         gateway-web: gateway-web-rest-token
         main-cms-base: main-cms-base-rest-token

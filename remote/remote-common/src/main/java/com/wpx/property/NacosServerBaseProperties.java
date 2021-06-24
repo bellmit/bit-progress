@@ -12,7 +12,7 @@ import java.util.Map;
  */
 @Configuration
 @ConfigurationProperties(prefix = "wpx.server.base")
-public class ServerBaseProperties {
+public class NacosServerBaseProperties {
 
     /**
      * 调用服务配置rest-token

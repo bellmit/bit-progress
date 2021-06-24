@@ -65,9 +65,16 @@ spring:
       max-file-size: 8MB
       max-request-size: 8MB
       location: ${user.dir}/tmp
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 6000
+        readTimeout: 10000
 ribbon:
-  ReadTimeout: 6000
-  ConnectTimeout: 6000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 0
+  OkToRetryOnAllOperations: false
 
 wpx:
   config:
