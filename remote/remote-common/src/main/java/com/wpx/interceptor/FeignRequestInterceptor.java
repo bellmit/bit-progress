@@ -1,7 +1,7 @@
 package com.wpx.interceptor;
 
 import com.wpx.common.constant.VerifyConstant;
-import com.wpx.property.NacosServerBaseProperties;
+import com.wpx.property.NacosServerProperties;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class FeignRequestInterceptor implements RequestInterceptor {
 
     @Autowired
-    private NacosServerBaseProperties nacosServerBaseProperties;
+    private NacosServerProperties nacosServerProperties;
 
     /**
      * 为所有rest请求加上调用服务对应的token
@@ -24,7 +24,7 @@ public class FeignRequestInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate template) {
         String serverName = template.feignTarget().name();
-        String serverToken = nacosServerBaseProperties.getServerTokenByServerName(serverName);
+        String serverToken = nacosServerProperties.getServerTokenByServerName(serverName);
         template.header(VerifyConstant.ROUTE_REST_TOKEN, serverToken);
     }
 

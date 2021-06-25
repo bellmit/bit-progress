@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @Description ServerProperties is
  */
 @Configuration
-@ConfigurationProperties(prefix = "wpx.server.base")
+@ConfigurationProperties(prefix = "spring.cloud.nacos")
 public class ServerBaseProperties {
 
     /**

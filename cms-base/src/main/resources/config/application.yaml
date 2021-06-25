@@ -79,12 +79,5 @@ ribbon:
 wpx:
   config:
     salt: ufg48UH849Yhngf4
-  server:
-    base:
-      api-token: main-cms-base-api-token
-      rest-token: main-cms-base-rest-token
-      server-token:
-        gateway-cms: gateway-cms-rest-token
-        main-web-base: main-web-base-rest-token
 swagger:
   show: true
