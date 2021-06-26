@@ -19,7 +19,7 @@ public class ApplicationMessageVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "应用ID")
-    private Integer applicationId;
+    private Long applicationId;
 
     @ApiModelProperty(value = "应用名称")
     private String appName;

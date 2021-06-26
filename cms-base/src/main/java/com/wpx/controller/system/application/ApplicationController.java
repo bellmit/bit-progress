@@ -29,7 +29,7 @@ public class ApplicationController {
 
     @GetMapping
     @ApiOperation("查询详情")
-    public ApplicationCmsVO findById(@RequestParam @ApiParam("applicationId") Integer applicationId) {
+    public ApplicationCmsVO findById(@RequestParam @ApiParam("applicationId") Long applicationId) {
         return applicationService.findById(applicationId);
     }
 
@@ -41,7 +41,7 @@ public class ApplicationController {
 
     @DeleteMapping
     @ApiOperation("删除")
-    public void delete(@RequestParam @ApiParam("applicationId列表") Set<Integer> applicationIds) {
+    public void delete(@RequestParam @ApiParam("applicationId列表") Set<Long> applicationIds) {
         applicationService.deleteApplications(applicationIds);
     }
 

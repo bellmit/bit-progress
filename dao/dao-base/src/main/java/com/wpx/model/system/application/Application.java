@@ -28,7 +28,7 @@ public class Application implements Serializable {
 
     @ApiModelProperty(value = "应用ID")
     @TableId(value = "application_id", type = IdType.AUTO)
-    private Integer applicationId;
+    private Long applicationId;
 
     @ApiModelProperty(value = "应用类型，IOS，ANDROID")
     private Integer appType;

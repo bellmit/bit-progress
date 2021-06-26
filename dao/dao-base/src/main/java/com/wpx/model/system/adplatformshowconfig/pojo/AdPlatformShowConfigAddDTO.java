@@ -21,7 +21,7 @@ public class AdPlatformShowConfigAddDTO implements Serializable {
 
     @ApiModelProperty(value = "广告平台id")
     @NotNull(message = "广告平台id不能为空")
-    private Integer adPlatformId;
+    private Long adPlatformId;
 
     @ApiModelProperty(value = "该位置该广告的百分比")
     @NotNull(message = "该位置该广告的百分比不能为空")

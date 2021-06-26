@@ -17,7 +17,7 @@ public class ApplicationTopicCmsQueryDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "应用主题ID")
-    private Integer applicationTopicId;
+    private Long applicationTopicId;
 
     @ApiModelProperty(value = "应用ID")
     private Integer applicationId;

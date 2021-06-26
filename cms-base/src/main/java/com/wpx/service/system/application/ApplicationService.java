@@ -45,7 +45,7 @@ public class ApplicationService extends ServiceImpl<ApplicationMapper, Applicati
     @Autowired
     private SystemRedisService systemRedisService;
 
-    public ApplicationCmsVO findById(Integer applicationId) {
+    public ApplicationCmsVO findById(Long applicationId) {
         Application application = getById(applicationId);
         Assert.notNull(application, MessageCodes.APPLICATION_NOT_EXIST);
         return toApplicationCmsVO(application);
@@ -82,7 +82,7 @@ public class ApplicationService extends ServiceImpl<ApplicationMapper, Applicati
      * @param applicationIds
      */
     @Transactional
-    public void deleteApplications(Set<Integer> applicationIds) {
+    public void deleteApplications(Set<Long> applicationIds) {
         if (CollectionUtils.isEmpty(applicationIds)) {
             return;
         }
@@ -127,7 +127,7 @@ public class ApplicationService extends ServiceImpl<ApplicationMapper, Applicati
      * @param disabledDTO
      */
     public ApplicationCmsVO disabled(ApplicationCmsDisabledDTO disabledDTO) {
-        Integer applicationId = disabledDTO.getApplicationId();
+        Long applicationId = disabledDTO.getApplicationId();
         Application application = getById(applicationId);
         Assert.notNull(application, MessageCodes.APPLICATION_NOT_EXIST);
         Boolean disabled = application.getDisabled();
@@ -161,7 +161,7 @@ public class ApplicationService extends ServiceImpl<ApplicationMapper, Applicati
      *
      * @param applicationId
      */
-    public boolean checkApplication(Integer applicationId) {
+    public boolean checkApplication(Long applicationId) {
         LambdaQueryWrapper<Application> lambda = new QueryWrapper<Application>().lambda();
         lambda.select(Application::getDisabled).eq(Application::getApplicationId, applicationId);
         Application application = getOne(lambda);

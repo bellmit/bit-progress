@@ -19,8 +19,9 @@ public class AdPlatformUpdateDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "不能为空")
-    private Integer adPlatformId;
+    @ApiModelProperty(value = "广告平台ID")
+    @NotNull(message = "广告平台ID不能为空")
+    private Long adPlatformId;
 
     @ApiModelProperty(value = "广告平台名称")
     private String adPlatformName;

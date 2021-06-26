@@ -42,7 +42,7 @@ public class ControllerAspect {
     @Before(value = "controllerPointcut()")
     public void controllerBefore(JoinPoint joinPoint) {
         try {
-            Integer userId = UserHelper.getUserId();
+            Long userId = UserHelper.getUserId();
             if (userId == -1) {
                 return;
             }

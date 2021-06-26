@@ -16,6 +16,5 @@ spring:
       rest-token: main-cms-base-rest-token
       server-token:
         gateway-cms: gateway-cms-rest-token
-        main-web-base: main-web-base-rest-token
       server-version:
         gateway-cms: default

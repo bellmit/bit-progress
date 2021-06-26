@@ -47,7 +47,7 @@ public class ApplicationTopicService extends ServiceImpl<ApplicationTopicMapper,
     @Autowired
     private SystemRedisService systemRedisService;
 
-    public ApplicationTopicCmsVO findById(Integer applicationTopicId) {
+    public ApplicationTopicCmsVO findById(Long applicationTopicId) {
         ApplicationTopic applicationTopic = getById(applicationTopicId);
         Assert.notNull(applicationTopic, MessageCodes.APPLICATIONTOPIC_NOT_EXIST);
         return toApplicationTopicCmsVO(applicationTopic);
@@ -87,7 +87,7 @@ public class ApplicationTopicService extends ServiceImpl<ApplicationTopicMapper,
      * @param applicationTopicIds
      */
     @Transactional
-    public void deleteApplicationTopics(Set<Integer> applicationTopicIds) {
+    public void deleteApplicationTopics(Set<Long> applicationTopicIds) {
         if (CollectionUtils.isEmpty(applicationTopicIds)) {
             return;
         }
@@ -130,7 +130,7 @@ public class ApplicationTopicService extends ServiceImpl<ApplicationTopicMapper,
      *
      * @param applicationIds
      */
-    public void deleteByApplicationIds(Set<Integer> applicationIds) {
+    public void deleteByApplicationIds(Set<Long> applicationIds) {
         if (CollectionUtils.nonEmpty(applicationIds)) {
             LambdaQueryWrapper<ApplicationTopic> wrapper = new QueryWrapper<ApplicationTopic>().lambda();
             wrapper.select(ApplicationTopic::getTopic).in(ApplicationTopic::getApplicationId, applicationIds);

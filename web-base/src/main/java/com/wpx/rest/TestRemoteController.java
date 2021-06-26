@@ -1,6 +1,6 @@
 package com.wpx.rest;
 
-import com.wpx.model.system.manager.Manager;
+import com.wpx.model.user.manager.Manager;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;

@@ -28,10 +28,10 @@ public class ApplicationTopic implements Serializable {
 
     @ApiModelProperty(value = "应用主题ID")
     @TableId(value = "application_topic_id", type = IdType.AUTO)
-    private Integer applicationTopicId;
+    private Long applicationTopicId;
 
     @ApiModelProperty(value = "应用ID")
-    private Integer applicationId;
+    private Long applicationId;
 
     @ApiModelProperty(value = "主题名称")
     private String topic;

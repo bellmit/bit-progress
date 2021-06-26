@@ -30,7 +30,7 @@ public class ApplicationTopicController {
 
     @GetMapping
     @ApiOperation("查询详情")
-    public ApplicationTopicCmsVO findById(@RequestParam @ApiParam("applicationTopicId") Integer applicationTopicId) {
+    public ApplicationTopicCmsVO findById(@RequestParam @ApiParam("applicationTopicId") Long applicationTopicId) {
         return applicationTopicService.findById(applicationTopicId);
     }
 
@@ -42,7 +42,7 @@ public class ApplicationTopicController {
 
     @DeleteMapping
     @ApiOperation("删除")
-    public void delete(@RequestParam @ApiParam("applicationTopicId列表") Set<Integer> applicationTopicIds) {
+    public void delete(@RequestParam @ApiParam("applicationTopicId列表") Set<Long> applicationTopicIds) {
         applicationTopicService.deleteApplicationTopics(applicationTopicIds);
     }
 

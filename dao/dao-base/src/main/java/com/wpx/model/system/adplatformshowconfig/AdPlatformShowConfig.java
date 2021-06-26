@@ -26,6 +26,7 @@ public class AdPlatformShowConfig implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "广告配置ID")
     @TableId(value = "ad_platform_show_config_id", type = IdType.AUTO)
     private Integer adPlatformShowConfigId;
 

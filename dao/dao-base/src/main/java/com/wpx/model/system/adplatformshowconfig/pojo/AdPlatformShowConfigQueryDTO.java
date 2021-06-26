@@ -19,7 +19,7 @@ public class AdPlatformShowConfigQueryDTO implements Serializable {
     private Integer adPlatformShowConfigId;
 
     @ApiModelProperty(value = "广告平台id")
-    private Integer adPlatformId;
+    private Long adPlatformId;
 
     @ApiModelProperty(value = "该位置该广告的百分比")
     private Integer percent;

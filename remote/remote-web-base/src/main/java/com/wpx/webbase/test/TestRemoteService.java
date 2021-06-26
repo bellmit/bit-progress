@@ -1,6 +1,6 @@
 package com.wpx.webbase.test;
 
-import com.wpx.model.system.manager.Manager;
+import com.wpx.model.user.manager.Manager;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

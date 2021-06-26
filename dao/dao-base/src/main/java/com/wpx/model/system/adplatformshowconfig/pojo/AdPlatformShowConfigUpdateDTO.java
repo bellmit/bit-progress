@@ -19,8 +19,8 @@ public class AdPlatformShowConfigUpdateDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull(message = "不能为空")
-    private Integer adPlatformShowConfigId;
+    @NotNull(message = "广告配置ID不能为空")
+    private Long adPlatformShowConfigId;
 
     @ApiModelProperty(value = "广告平台id")
     @NotNull(message = "广告平台id不能为空")

@@ -18,7 +18,7 @@ public class ApplicationWebQueryDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "应用ID")
-    private Integer applicationId;
+    private Long applicationId;
 
     @ApiModelProperty(value = "应用类型，IOS，ANDROID")
     private AppTypeEnum appType;

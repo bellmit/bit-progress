@@ -22,11 +22,11 @@ public class ApplicationTopicCmsUpdateDTO implements Serializable {
 
     @ApiModelProperty(value = "应用主题ID")
     @NotNull(message = "应用主题ID不能为空")
-    private Integer applicationTopicId;
+    private Long applicationTopicId;
 
     @ApiModelProperty(value = "应用ID")
     @NotNull(message = "应用ID不能为空")
-    private Integer applicationId;
+    private Long applicationId;
 
     @ApiModelProperty(value = "主题名称")
     @NotNull(message = "主题名称不能为空")

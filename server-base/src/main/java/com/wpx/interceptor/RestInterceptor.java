@@ -1,7 +1,9 @@
 package com.wpx.interceptor;
 
 import com.wpx.common.constant.VerifyConstant;
+import com.wpx.common.exception.CustomizeException;
 import com.wpx.common.exception.MessageCodes;
+import com.wpx.common.exception.RequestException;
 import com.wpx.common.util.StringUtils;
 import com.wpx.property.ServerBaseProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +25,14 @@ public class RestInterceptor implements HandlerInterceptor {
     private ServerBaseProperties serverBaseProperties;
 
     @Override
-    public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response,
-                             Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String routeRestToken = request.getHeader(VerifyConstant.ROUTE_REST_TOKEN);
         String restToken = serverBaseProperties.getRestToken();
+        request.setAttribute(VerifyConstant.ENCAPSULATION_RESULT, VerifyConstant.ENCAPSULATION_RESULT);
         if (StringUtils.equals(routeRestToken, restToken)) {
             return true;
         }
-        throw new Exception(MessageCodes.AUTH_TOKEN);
+        throw new CustomizeException(RequestException.AUTH_TOKEN_WRONG);
     }
 
 }

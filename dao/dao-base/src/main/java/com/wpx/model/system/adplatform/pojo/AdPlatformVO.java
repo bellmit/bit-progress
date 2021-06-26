@@ -19,7 +19,8 @@ public class AdPlatformVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer adPlatformId;
+    @ApiModelProperty(value = "广告平台ID")
+    private Long adPlatformId;
 
     @ApiModelProperty(value = "广告平台名称")
     private String adPlatformName;

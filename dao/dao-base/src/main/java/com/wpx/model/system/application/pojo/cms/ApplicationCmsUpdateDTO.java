@@ -23,7 +23,7 @@ public class ApplicationCmsUpdateDTO implements Serializable {
 
     @ApiModelProperty(value = "应用ID")
     @NotNull(message = "应用ID不能为空")
-    private Integer applicationId;
+    private Long applicationId;
 
     @ApiModelProperty(value = "应用类型，IOS，ANDROID")
     @NotNull(message = "应用类型，IOS，ANDROID不能为空")

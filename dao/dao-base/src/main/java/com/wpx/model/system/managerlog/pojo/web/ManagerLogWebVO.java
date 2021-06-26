@@ -21,10 +21,10 @@ public class ManagerLogWebVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "管理员操作日志ID")
-    private Integer managerLogId;
+    private Long managerLogId;
 
     @ApiModelProperty(value = "管理员ID")
-    private Integer managerId;
+    private Long managerId;
 
     @ApiModelProperty(value = "请求方法类型")
     private String method;

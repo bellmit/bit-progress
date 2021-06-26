@@ -27,7 +27,7 @@ public class AdPlatform implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "ad_platform_id", type = IdType.AUTO)
-    private Integer adPlatformId;
+    private Long adPlatformId;
 
     @ApiModelProperty(value = "广告平台名称")
     private String adPlatformName;

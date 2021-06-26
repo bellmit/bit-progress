@@ -27,4 +27,9 @@ public class VerifyConstant {
      */
     public static final String SERVER_NAME = "server-name";
 
+    /**
+     * 封装结果集
+     */
+    public static final String ENCAPSULATION_RESULT = "encapsulation_result";
+
 }

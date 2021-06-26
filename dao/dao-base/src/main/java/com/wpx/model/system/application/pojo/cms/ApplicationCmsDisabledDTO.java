@@ -17,6 +17,6 @@ public class ApplicationCmsDisabledDTO implements Serializable {
 
     @ApiModelProperty(value = "应用ID")
     @NotNull(message = "应用ID不能为空")
-    private Integer applicationId;
+    private Long applicationId;
 
 }

@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 
 public class FileUtils {
+
     private static final String FOLDER_SEPARATOR = "/";
     private static final char EXTENSION_SEPARATOR = '.';
 

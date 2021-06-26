@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class UserHelper {
 
-    public static Integer getUserId() {
+    public static Long getUserId() {
         RequestAttributes ra = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes sra = (ServletRequestAttributes) ra;
         HttpServletRequest request = sra.getRequest();
         String userId = request.getHeader(VerifyConstant.USER_ID);
-        return Integer.parseInt(userId);
+        return Long.parseLong(userId);
     }
 
 }

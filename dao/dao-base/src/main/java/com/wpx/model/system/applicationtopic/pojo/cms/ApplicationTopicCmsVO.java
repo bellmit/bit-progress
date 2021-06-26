@@ -19,10 +19,10 @@ public class ApplicationTopicCmsVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "应用主题ID")
-    private Integer applicationTopicId;
+    private Long applicationTopicId;
 
     @ApiModelProperty(value = "应用ID")
-    private Integer applicationId;
+    private Long applicationId;
 
     @ApiModelProperty(value = "主题名称")
     private String topic;

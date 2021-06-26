@@ -5,6 +5,9 @@ import com.wpx.constant.NacosConstant;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,5 +69,16 @@ public class NacosServerProperties {
         String version = this.serverVersion.get(serviceId);
         return StringUtils.isEmpty(version) ? NacosConstant.DEFAULT : version;
     }
+//
+//    public static void main(String[] args) throws FileNotFoundException {
+//        Http
+//        byte[] bytes = .createGet("https://soupang.qacm.net/Storage/Shop/1/Products/725/remark/91fd2b27d8364b2dbb18d6706ba78d0d.jpg")
+//                .keepAlive(true)
+//                .execute()
+//                .bodyBytes();
+//
+//        FileOutputStream fileOutputStream = new FileOutputStream("D:\\test.jpg");
+//        System.out.println(Arrays.toString(bytes));
+//    }
 
 }

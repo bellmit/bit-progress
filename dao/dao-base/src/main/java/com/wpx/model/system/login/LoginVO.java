@@ -2,6 +2,9 @@ package com.wpx.model.system.login;
 
 public class LoginVO {
 
+    /**
+     * 用户登录后的token
+     */
     private String token;
 
     public String getToken() {
