@@ -1,6 +1,5 @@
 package com.wpx.model.system.application.pojo.web;
 
-import com.wpx.model.system.application.envm.AppTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,23 +19,11 @@ public class ApplicationWebQueryDTO implements Serializable {
     @ApiModelProperty(value = "应用ID")
     private Long applicationId;
 
-    @ApiModelProperty(value = "应用类型，IOS，ANDROID")
-    private AppTypeEnum appType;
-
     @ApiModelProperty(value = "应用名称")
     private String appName;
 
     @ApiModelProperty(value = "应用标识")
     private String appSign;
-
-    @ApiModelProperty(value = "firebase平台申请的databaseUrl")
-    private String databaseUrl;
-
-    @ApiModelProperty(value = "应用在firebase下载的google.json")
-    private String googleJson;
-
-    @ApiModelProperty(value = "firebase的包名")
-    private String packageName;
 
     @ApiModelProperty(value = "是否禁用")
     private Boolean disabled;

@@ -5,7 +5,7 @@ package com.wpx.common.exception;
  * create on 2021/6/26 20:08
  * @Description 请求异常信息枚举
  */
-public enum RequestException implements IRequestException {
+public enum ExceptionMessage implements IExceptionMessage {
 
     /**
      * 请求参数错误或者参数为空
@@ -115,37 +115,41 @@ public enum RequestException implements IRequestException {
      */
     APPLICATION_UPDATE_ERROR(3003, MessageCodes.APPLICATION_UPDATE_ERROR),
     /**
+     * 应用信息删除失败
+     */
+    APPLICATION_DELETE_ERROR(3004, MessageCodes.APPLICATION_DELETE_ERROR),
+    /**
+     * 应用配置信息不存在
+     */
+    APPLICATIONINFO_NOT_EXIST(3005, MessageCodes.APPLICATIONINFO_NOT_EXIST),
+    /**
+     * 应用配置信息保存失败
+     */
+    APPLICATIONINFO_SAVE_ERROR(3006, MessageCodes.APPLICATIONINFO_SAVE_ERROR),
+    /**
+     * 应用配置信息更新失败
+     */
+    APPLICATIONINFO_UPDATE_ERROR(3007, MessageCodes.APPLICATIONINFO_UPDATE_ERROR),
+    /**
+     * 应用配置信息删除失败
+     */
+    APPLICATIONINFO_DELETE_ERROR(3008, MessageCodes.APPLICATIONINFO_DELETE_ERROR),
+    /**
      * 应用主题不存在
      */
-    APPLICATIONTOPIC_NOT_EXIST(3004, MessageCodes.APPLICATIONTOPIC_NOT_EXIST),
+    APPLICATIONTOPIC_NOT_EXIST(3009, MessageCodes.APPLICATIONTOPIC_NOT_EXIST),
     /**
      * 应用主题保存失败
      */
-    APPLICATIONTOPIC_SAVE_ERROR(3005, MessageCodes.APPLICATIONTOPIC_SAVE_ERROR),
+    APPLICATIONTOPIC_SAVE_ERROR(3010, MessageCodes.APPLICATIONTOPIC_SAVE_ERROR),
     /**
      * 应用主题更新失败
      */
-    APPLICATIONTOPIC_UPDATE_ERROR(3006, MessageCodes.APPLICATIONTOPIC_UPDATE_ERROR),
+    APPLICATIONTOPIC_UPDATE_ERROR(3011, MessageCodes.APPLICATIONTOPIC_UPDATE_ERROR),
     /**
-     * 应用信息删除失败
+     * 应用主题删除失败
      */
-    APPLICATION_DELETE_ERROR(3007, MessageCodes.APPLICATION_DELETE_ERROR),
-    /**
-     * 小程序信息不存在
-     */
-    APPLET_NOT_EXIST(3008, MessageCodes.APPLET_NOT_EXIST),
-    /**
-     * 小程序信息保存失败
-     */
-    APPLET_SAVE_ERROR(3009, MessageCodes.APPLET_SAVE_ERROR),
-    /**
-     * 小程序信息更新失败
-     */
-    APPLET_UPDATE_ERROR(3010, MessageCodes.APPLET_UPDATE_ERROR),
-    /**
-     * 小程序信息删除失败
-     */
-    APPLET_DELETE_ERROR(3011, MessageCodes.APPLET_DELETE_ERROR),
+    APPLICATIONTOPIC_DELETE_ERROR(3012, MessageCodes.APPLICATIONTOPIC_DELETE_ERROR),
 
     ;
 
@@ -183,7 +187,7 @@ public enum RequestException implements IRequestException {
         this.message = message;
     }
 
-    RequestException(Integer code, String message) {
+    ExceptionMessage(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

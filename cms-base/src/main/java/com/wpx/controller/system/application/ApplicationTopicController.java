@@ -1,4 +1,4 @@
-package com.wpx.controller.system.applicationtopic;
+package com.wpx.controller.system.application;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -6,7 +6,7 @@ import com.wpx.model.system.applicationtopic.pojo.cms.ApplicationTopicCmsAddDTO;
 import com.wpx.model.system.applicationtopic.pojo.cms.ApplicationTopicCmsQueryDTO;
 import com.wpx.model.system.applicationtopic.pojo.cms.ApplicationTopicCmsUpdateDTO;
 import com.wpx.model.system.applicationtopic.pojo.cms.ApplicationTopicCmsVO;
-import com.wpx.service.system.applicationtopic.ApplicationTopicService;
+import com.wpx.service.system.application.ApplicationTopicService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

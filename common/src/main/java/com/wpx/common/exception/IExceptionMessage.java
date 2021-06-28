@@ -5,7 +5,7 @@ package com.wpx.common.exception;
  * create on 2021/6/26 20:03
  * @Description 请求异常信息接口
  */
-public interface IRequestException {
+public interface IExceptionMessage {
 
     /**
      * 获取异常状态码

@@ -1,4 +1,4 @@
-package com.wpx.service.system.applicationtopic;
+package com.wpx.service.system.application;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wpx.model.system.applicationtopic.ApplicationTopic;

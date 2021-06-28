@@ -5,15 +5,17 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.wpx.common.exception.MessageCodes;
-import com.wpx.common.exception.ValidationException;
+import com.wpx.common.exception.CustomizeException;
+import com.wpx.common.exception.ExceptionMessage;
 import com.wpx.common.util.BcryptUtils;
 import com.wpx.common.util.CollectionUtils;
 import com.wpx.common.util.StringUtils;
+import com.wpx.constant.ManagerConstant;
 import com.wpx.model.user.manager.Manager;
 import com.wpx.model.user.manager.ManagerMapper;
 import com.wpx.model.user.manager.envm.RoleEnum;
 import com.wpx.model.user.manager.pojo.cms.*;
+import com.wpx.util.Assert;
 import com.wpx.util.BeanUtils;
 import com.wpx.util.ConversionBeanUtils;
 import com.wpx.util.UserHelper;
@@ -22,7 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 import org.springframework.util.DigestUtils;
 
 import javax.annotation.PostConstruct;
@@ -39,6 +40,8 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
     @Value("${wpx.config.salt}")
     private String salt;
 
+    private final String rootManagerName = ManagerConstant.ROOT_MANAGER_NAME;
+
     @Autowired
     private LoginService loginService;
 
@@ -52,8 +55,8 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
             return;
         }
         Manager manager = new Manager();
-        manager.setAccount("wpx");
-        manager.setPassword(DigestUtils.md5DigestAsHex(("wpx" + salt).getBytes()));
+        manager.setAccount(rootManagerName);
+        manager.setPassword(DigestUtils.md5DigestAsHex((rootManagerName + salt).getBytes()));
         manager.setUsername("ROOT");
         manager.setRole(RoleEnum.ROOT);
         manager.setDisabled(false);
@@ -65,7 +68,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
      */
     public boolean checkSupperManager() {
         LambdaQueryWrapper<Manager> lambda = new QueryWrapper<Manager>().lambda();
-        lambda.eq(Manager::getAccount, "wpx");
+        lambda.eq(Manager::getAccount, rootManagerName);
         return count(lambda) > 0;
     }
 
@@ -78,9 +81,9 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
     public ManagerCmsVO findById(Integer managerId, Long userId) {
         Manager manager = getById(userId);
         Assert.isTrue(Objects.equals(RoleEnum.ROOT, manager.getRole()) || Objects.equals(managerId, userId),
-                MessageCodes.NOT_ROOT_ONLY_CAN_CHECK_SELF_INFO);
+                ExceptionMessage.NOT_ROOT_ONLY_CAN_CHECK_SELF_INFO);
         Manager checkManager = getById(managerId);
-        Assert.notNull(checkManager, MessageCodes.MANAGER_NOT_EXIST);
+        Assert.notNull(checkManager, ExceptionMessage.MANAGER_NOT_EXIST);
         return toManagerPageVO(manager);
     }
 
@@ -121,8 +124,8 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
     @Transactional
     public ManagerCmsVO add(ManagerCmsAddDTO addDTO) {
         String account = addDTO.getAccount();
-        if (!Objects.equals("luwei", account) && addDTO.getRole().equals(RoleEnum.ROOT)) {
-            throw new IllegalArgumentException(MessageCodes.NOT_ALLOW_ADD_WPX_EXCEPT_ROOT);
+        if (!Objects.equals(rootManagerName, account) && addDTO.getRole().equals(RoleEnum.ROOT)) {
+            throw new CustomizeException(ExceptionMessage.NOT_ALLOW_ADD_WPX_EXCEPT_ROOT);
         }
 
         String password;
@@ -130,14 +133,14 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
             password = DigestUtils.md5DigestAsHex((BcryptUtils.decrypt(addDTO.getPassword()) + salt).getBytes());
         } catch (Exception e) {
             log.error("RSAUtil.decrypt exception", e);
-            throw new IllegalArgumentException(MessageCodes.RSAUtil_DECRYPT_ERROR);
+            throw new CustomizeException(ExceptionMessage.RSAUtil_DECRYPT_ERROR);
         }
         LambdaQueryWrapper<Manager> lambda = new QueryWrapper<Manager>().lambda();
         lambda.eq(Manager::getAccount, account);
-        Assert.isTrue(count(lambda) == 0, MessageCodes.ACCOUNT_ALREADY_EXIST);
+        Assert.isTrue(count(lambda) == 0, ExceptionMessage.ACCOUNT_ALREADY_EXIST);
         Manager manager = BeanUtils.copyNonNullProperties(addDTO, Manager.class);
         manager.setPassword(password);
-        Assert.isTrue(save(manager), MessageCodes.MANAGER_SAVE_ERROR);
+        Assert.isTrue(save(manager), ExceptionMessage.MANAGER_SAVE_ERROR);
         return toManagerPageVO(manager);
     }
 
@@ -151,14 +154,14 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
         Long managerId = updateDTO.getManagerId();
         RoleEnum role = updateDTO.getRole();
         Manager manager = getById(managerId);
-        Assert.notNull(manager, MessageCodes.MANAGER_NOT_EXIST);
+        Assert.notNull(manager, ExceptionMessage.MANAGER_NOT_EXIST);
         // 非超管只能编辑自己的信息
         if (!Objects.equals(manager.getRole(), RoleEnum.ROOT) && !Objects.equals(managerId, UserHelper.getUserId())) {
-            throw new ValidationException(MessageCodes.NOT_ROOT_ONLY_CAN_EDIT_SELF_INFO);
+            throw new CustomizeException(ExceptionMessage.NOT_ROOT_ONLY_CAN_EDIT_SELF_INFO);
         }
         // 检查角色权限
-        if (!Objects.equals("luwei", manager.getAccount()) && Objects.equals(RoleEnum.ROOT, role)) {
-            throw new IllegalArgumentException(MessageCodes.NOT_ALLOW_ADD_WPX_EXCEPT_ROOT);
+        if (!Objects.equals(rootManagerName, manager.getAccount()) && Objects.equals(RoleEnum.ROOT, role)) {
+            throw new CustomizeException(ExceptionMessage.NOT_ALLOW_ADD_WPX_EXCEPT_ROOT);
         }
         manager.setRole(role);
         manager.setUsername(updateDTO.getUsername());
@@ -173,17 +176,17 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
     @Transactional
     public ManagerCmsVO handleDisabled(ManagerStateDTO managerStateDTO, Long userId) {
         Manager manager = getById(userId);
-        Assert.isTrue(Objects.equals(RoleEnum.ROOT, manager.getRole()), MessageCodes.NOT_ROOT_CANNOT_DISABLED);
+        Assert.isTrue(Objects.equals(RoleEnum.ROOT, manager.getRole()), ExceptionMessage.NOT_ROOT_CANNOT_DISABLED);
 
         Long managerId = managerStateDTO.getManagerId();
         Manager handleManager = getById(managerId);
-        Assert.notNull(handleManager, MessageCodes.MANAGER_NOT_EXIST);
-        Assert.isTrue(!Objects.equals(RoleEnum.ROOT, handleManager.getRole()), MessageCodes.ROOT_CANNOT_DISABLED);
+        Assert.notNull(handleManager, ExceptionMessage.MANAGER_NOT_EXIST);
+        Assert.isTrue(!Objects.equals(RoleEnum.ROOT, handleManager.getRole()), ExceptionMessage.ROOT_CANNOT_DISABLED);
         handleManager.setDisabled(!handleManager.getDisabled());
         if (handleManager.getDisabled()) {
 
         }
-        Assert.isTrue(updateById(handleManager), MessageCodes.MANAGER_UPDATE_ERROR);
+        Assert.isTrue(updateById(handleManager), ExceptionMessage.MANAGER_UPDATE_ERROR);
         return toManagerPageVO(handleManager);
     }
 
@@ -198,7 +201,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
             return;
         }
         Manager manager = getById(userId);
-        Assert.isTrue(Objects.equals(RoleEnum.ROOT, manager.getRole()), MessageCodes.NOT_ROOT_CANNOT_DELETE);
+        Assert.isTrue(Objects.equals(RoleEnum.ROOT, manager.getRole()), ExceptionMessage.NOT_ROOT_CANNOT_DELETE);
         managerIds.forEach(this::deleteManager);
     }
 
@@ -211,10 +214,10 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
     public void deleteManager(Long managerId) {
         Manager manager = getById(managerId);
         if (Objects.nonNull(manager)) {
-            Assert.isTrue(!Objects.equals(RoleEnum.ROOT, manager.getRole()), MessageCodes.ROOT_CANNOT_DELETE);
+            Assert.isTrue(!Objects.equals(RoleEnum.ROOT, manager.getRole()), ExceptionMessage.ROOT_CANNOT_DELETE);
             loginService.removeToken(String.valueOf(managerId));
             manager.setDeleted(true);
-            Assert.isTrue(updateById(manager), MessageCodes.MANAGER_UPDATE_ERROR);
+            Assert.isTrue(updateById(manager), ExceptionMessage.MANAGER_UPDATE_ERROR);
         }
     }
 
@@ -227,9 +230,9 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
     public ManagerCmsVO resetPassword(ManagerResetPasswordDTO managerResetPasswordDTO, Long userId) {
         Long managerId = managerResetPasswordDTO.getManagerId();
         Manager manager = getById(managerId);
-        Assert.notNull(manager, MessageCodes.MANAGER_NOT_EXIST);
+        Assert.notNull(manager, ExceptionMessage.MANAGER_NOT_EXIST);
         if (!Objects.equals(manager.getRole(), RoleEnum.ROOT) && !Objects.equals(managerId, userId)) {
-            throw new ValidationException(MessageCodes.NOT_ROOT_ONLY_CAN_EDIT_SELF_INFO);
+            throw new CustomizeException(ExceptionMessage.NOT_ROOT_ONLY_CAN_EDIT_SELF_INFO);
         }
         String unencryptedPassword = managerResetPasswordDTO.getPassword();
         String md5Password;
@@ -237,10 +240,10 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
             md5Password = DigestUtils.md5DigestAsHex((BcryptUtils.decrypt(unencryptedPassword) + salt).getBytes());
         } catch (Exception e) {
             log.error("RSAUtil.decrypt exception", e);
-            throw new IllegalArgumentException(MessageCodes.RSAUtil_DECRYPT_ERROR);
+            throw new CustomizeException(ExceptionMessage.RSAUtil_DECRYPT_ERROR);
         }
         manager.setPassword(md5Password);
-        Assert.isTrue(updateById(manager), MessageCodes.MANAGER_UPDATE_ERROR);
+        Assert.isTrue(updateById(manager), ExceptionMessage.MANAGER_UPDATE_ERROR);
         return toManagerPageVO(manager);
     }
 
@@ -252,14 +255,14 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
     @Transactional
     public ManagerCmsVO handleRole(ManagerRoleDTO managerRoleDTO) {
         Manager manager = getById(managerRoleDTO.getManagerId());
-        Assert.notNull(manager, MessageCodes.MANAGER_NOT_EXIST);
+        Assert.notNull(manager, ExceptionMessage.MANAGER_NOT_EXIST);
 
         Manager currentManager = getById(UserHelper.getUserId());
-        Assert.notNull(currentManager, MessageCodes.MANAGER_NOT_EXIST);
+        Assert.notNull(currentManager, ExceptionMessage.MANAGER_NOT_EXIST);
 
-        Assert.isTrue(currentManager.getRole().ordinal() < manager.getRole().ordinal(), MessageCodes.NOT_ALLOW_SUPERIOR_ROLE);
+        Assert.isTrue(currentManager.getRole().ordinal() < manager.getRole().ordinal(), ExceptionMessage.NOT_ALLOW_SUPERIOR_ROLE);
         manager.setRole(managerRoleDTO.getRole());
-        Assert.isTrue(updateById(manager), MessageCodes.MANAGER_UPDATE_ERROR);
+        Assert.isTrue(updateById(manager), ExceptionMessage.MANAGER_UPDATE_ERROR);
 
         return toManagerPageVO(manager);
     }

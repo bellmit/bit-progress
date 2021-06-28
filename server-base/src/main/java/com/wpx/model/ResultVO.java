@@ -2,7 +2,7 @@ package com.wpx.model;
 
 import com.wpx.common.constant.ResultConstant;
 import com.wpx.common.exception.CustomizeException;
-import com.wpx.common.exception.RequestException;
+import com.wpx.common.exception.ExceptionMessage;
 
 /**
  * @author 不会飞的小鹏
@@ -150,7 +150,7 @@ public class ResultVO<T> {
      *
      * @param exception
      */
-    public static ResultVO errorOf(RequestException exception) {
+    public static ResultVO errorOf(ExceptionMessage exception) {
         return errorOf(exception.getCode(), exception.getMessage());
     }
 

@@ -40,9 +40,13 @@ public class CustomizeException extends RuntimeException {
         this.message = message;
     }
 
-    public CustomizeException(IRequestException requestException) {
+    public CustomizeException(IExceptionMessage requestException) {
         this.code = requestException.getCode();
         this.message = requestException.getMessage();
+    }
+
+    public static CustomizeException error(IExceptionMessage requestException) {
+        return new CustomizeException(requestException);
     }
 
 }

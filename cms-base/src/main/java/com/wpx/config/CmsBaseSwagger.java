@@ -1,6 +1,9 @@
 package com.wpx.config;
 
+import com.fasterxml.classmate.TypeResolver;
+import com.wpx.model.ResultVO;
 import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +31,9 @@ public class CmsBaseSwagger {
     @Value("${swagger.show}")
     private Boolean enable;
 
+    @Autowired
+    private TypeResolver typeResolver;
+
     @Bean
     public Docket swaggerSpringMvcPlugin() {
         Parameter parameter = new ParameterBuilder()
@@ -47,7 +53,7 @@ public class CmsBaseSwagger {
                 .select()
                 .apis(withClassAnnotation(Api.class))
                 .paths(PathSelectors.any())
-                .build();
+                .build().additionalModels(typeResolver.resolve(ResultVO.class));
     }
 
     private ApiInfo apiInfo() {

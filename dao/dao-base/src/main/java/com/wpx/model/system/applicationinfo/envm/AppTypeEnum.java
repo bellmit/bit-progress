@@ -1,4 +1,4 @@
-package com.wpx.model.system.application.envm;
+package com.wpx.model.system.applicationinfo.envm;
 
 import com.baomidou.mybatisplus.core.enums.IEnum;
 
@@ -6,9 +6,11 @@ import java.io.Serializable;
 
 public enum AppTypeEnum implements IEnum<Integer>, Serializable {
 
-    ANDROID(0, "安卓app"),
+    ANDROID(0, "安卓应用"),
 
-    IOS(1, "iosapp"),
+    IOS(1, "ios应用"),
+
+    WECHAT_APPLET(2, "微信小程序"),
 
     ;
 

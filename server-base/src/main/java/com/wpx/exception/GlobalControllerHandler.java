@@ -2,7 +2,7 @@ package com.wpx.exception;
 
 import com.wpx.common.constant.VerifyConstant;
 import com.wpx.common.exception.CustomizeException;
-import com.wpx.common.exception.RequestException;
+import com.wpx.common.exception.ExceptionMessage;
 import com.wpx.common.exception.ValidationException;
 import com.wpx.common.util.StringUtils;
 import com.wpx.model.ResultVO;
@@ -102,7 +102,7 @@ public class GlobalControllerHandler implements ResponseBodyAdvice<Object> {
     @ExceptionHandler(FailedLoginException.class)
     public ResultVO handleFailedLoginException(FailedLoginException e) {
         logger.error("", e);
-        return ResultVO.errorOf(RequestException.AUTH_ACCOUNT_PASSWORD_WRONG);
+        return ResultVO.errorOf(ExceptionMessage.AUTH_ACCOUNT_PASSWORD_WRONG);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

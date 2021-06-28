@@ -1,4 +1,4 @@
-package com.wpx.service.system.applicationtopic;
+package com.wpx.service.system.application;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.wpx.common.exception.MessageCodes;
+import com.wpx.common.exception.ExceptionMessage;
 import com.wpx.common.util.CollectionUtils;
 import com.wpx.model.system.applicationtopic.ApplicationTopic;
 import com.wpx.model.system.applicationtopic.ApplicationTopicMapper;
@@ -18,13 +18,13 @@ import com.wpx.model.system.applicationtopic.pojo.cms.ApplicationTopicCmsUpdateD
 import com.wpx.model.system.applicationtopic.pojo.cms.ApplicationTopicCmsVO;
 import com.wpx.redis.SystemRedisService;
 import com.wpx.service.system.application.ApplicationService;
+import com.wpx.util.Assert;
 import com.wpx.util.BeanUtils;
 import com.wpx.util.ConversionBeanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -49,7 +49,7 @@ public class ApplicationTopicService extends ServiceImpl<ApplicationTopicMapper,
 
     public ApplicationTopicCmsVO findById(Long applicationTopicId) {
         ApplicationTopic applicationTopic = getById(applicationTopicId);
-        Assert.notNull(applicationTopic, MessageCodes.APPLICATIONTOPIC_NOT_EXIST);
+        Assert.notNull(applicationTopic, ExceptionMessage.APPLICATIONTOPIC_NOT_EXIST);
         return toApplicationTopicCmsVO(applicationTopic);
     }
 
@@ -68,7 +68,7 @@ public class ApplicationTopicService extends ServiceImpl<ApplicationTopicMapper,
         ApplicationTopic applicationTopic = BeanUtils.copyNonNullProperties(addDTO, ApplicationTopic.class);
         LocalDateTime time = LocalDateTime.now();
         applicationTopic.setUpdateTime(time).setCreateTime(time).setDeleted(false);
-        Assert.isTrue(save(applicationTopic), MessageCodes.APPLICATIONTOPIC_SAVE_ERROR);
+        Assert.isTrue(save(applicationTopic), ExceptionMessage.APPLICATIONTOPIC_SAVE_ERROR);
         if (!disabled) {
             ApplicationTopicItem item = toApplicationTopicItem(applicationTopic);
             systemRedisService.putApplicationTopicMessageToRedis(item);
@@ -97,7 +97,7 @@ public class ApplicationTopicService extends ServiceImpl<ApplicationTopicMapper,
                 .in(ApplicationTopic::getApplicationTopicId, applicationTopicIds);
         Set<String> topics = CollectionUtils.conversionSet(list(lambda), ApplicationTopic::getTopic);
         int count = baseMapper.deleteBatchIds(applicationTopicIds);
-        Assert.isTrue(count == applicationTopicIds.size(), MessageCodes.APPLICATIONTOPIC_DELETE_ERROR);
+        Assert.isTrue(count == applicationTopicIds.size(), ExceptionMessage.APPLICATIONTOPIC_DELETE_ERROR);
         systemRedisService.deleteApplicationTopicMessageForRedis(topics);
     }
 
@@ -111,7 +111,7 @@ public class ApplicationTopicService extends ServiceImpl<ApplicationTopicMapper,
         boolean disabled = applicationService.checkApplication(updateDTO.getApplicationId());
         ApplicationTopic applicationTopic = BeanUtils.copyNonNullProperties(updateDTO, ApplicationTopic.class);
         applicationTopic.setUpdateTime(LocalDateTime.now());
-        Assert.isTrue(updateById(applicationTopic), MessageCodes.APPLICATIONTOPIC_UPDATE_ERROR);
+        Assert.isTrue(updateById(applicationTopic), ExceptionMessage.APPLICATIONTOPIC_UPDATE_ERROR);
         ApplicationTopic topic = getById(applicationTopic.getApplicationTopicId());
         if (!disabled) {
             ApplicationTopicItem item = toApplicationTopicItem(applicationTopic);

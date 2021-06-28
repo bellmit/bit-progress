@@ -3,7 +3,6 @@ package com.wpx.redis;
 import com.alibaba.fastjson.JSON;
 import com.wpx.common.util.CollectionUtils;
 import com.wpx.constant.RedisKeyPrefix;
-import com.wpx.model.system.application.pojo.ApplicationItem;
 import com.wpx.model.system.applicationtopic.pojo.ApplicationTopicItem;
 import com.wpx.util.RedisCacheUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,16 +46,6 @@ public class SystemRedisService {
     public void deleteCaptcha(String uuid) {
         String key = RedisKeyPrefix.captcha(uuid);
         redisCacheUtil.delete(key);
-    }
-
-    /**
-     * 将应用信息put到redis hash中
-     *
-     * @param item
-     */
-    public void putApplicationMessageToRedis(ApplicationItem item) {
-        String key = RedisKeyPrefix.applicationMessage();
-        redisCacheUtil.putForHash(key, item.getAppSign(), JSON.toJSONString(item));
     }
 
     /**

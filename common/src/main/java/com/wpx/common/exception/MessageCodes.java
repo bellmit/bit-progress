@@ -35,15 +35,13 @@ public class MessageCodes {
     public static final String APPLICATION_UPDATE_ERROR = "应用信息更新失败";
     public static final String APPLICATION_DELETE_ERROR = "应用信息删除失败";
     public static final String APPLICATION_SAVE_ERROR = "应用信息保存失败";
-
+    public static final String APPLICATIONINFO_NOT_EXIST = "应用配置信息不存在";
+    public static final String APPLICATIONINFO_SAVE_ERROR = "应用配置信息保存失败";
+    public static final String APPLICATIONINFO_UPDATE_ERROR = "应用配置信息更新失败";
+    public static final String APPLICATIONINFO_DELETE_ERROR = "应用配置信息删除失败";
     public static final String APPLICATIONTOPIC_NOT_EXIST = "应用主题不存在";
+    public static final String APPLICATIONTOPIC_SAVE_ERROR = "应用主题保存失败";
     public static final String APPLICATIONTOPIC_UPDATE_ERROR = "应用主题更新失败";
     public static final String APPLICATIONTOPIC_DELETE_ERROR = "应用主题删除失败";
-    public static final String APPLICATIONTOPIC_SAVE_ERROR = "应用主题保存失败";
-
-    public static final String APPLET_NOT_EXIST = "小程序信息不存在";
-    public static final String APPLET_SAVE_ERROR = "小程序信息保存失败";
-    public static final String APPLET_UPDATE_ERROR = "小程序信息更新失败";
-    public static final String APPLET_DELETE_ERROR = "小程序信息删除失败";
 
 }

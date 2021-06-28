@@ -2,7 +2,7 @@ package com.wpx.interceptor;
 
 import com.wpx.common.constant.VerifyConstant;
 import com.wpx.common.exception.CustomizeException;
-import com.wpx.common.exception.RequestException;
+import com.wpx.common.exception.ExceptionMessage;
 import com.wpx.common.util.StringUtils;
 import com.wpx.property.ServerBaseProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class ApiInterceptor implements HandlerInterceptor {
         if (StringUtils.equals(routeApiToken, apiToken)) {
             return true;
         }
-        throw new CustomizeException(RequestException.AUTH_TOKEN_WRONG);
+        throw new CustomizeException(ExceptionMessage.AUTH_TOKEN_WRONG);
     }
 
 }
