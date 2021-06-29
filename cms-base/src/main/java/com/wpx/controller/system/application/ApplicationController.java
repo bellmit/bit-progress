@@ -2,6 +2,7 @@ package com.wpx.controller.system.application;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wpx.common.model.ResultVO;
 import com.wpx.model.system.application.pojo.ApplicationMessageVO;
 import com.wpx.model.system.application.pojo.cms.*;
 import com.wpx.service.system.application.ApplicationService;
@@ -29,44 +30,45 @@ public class ApplicationController {
 
     @GetMapping
     @ApiOperation("查询详情")
-    public ApplicationCmsVO findById(@RequestParam @ApiParam("applicationId") Long applicationId) {
-        return applicationService.findById(applicationId);
+    public ResultVO<ApplicationCmsVO> findById(@RequestParam @ApiParam("applicationId") Long applicationId) {
+        return ResultVO.success(applicationService.findById(applicationId));
     }
 
     @PostMapping
     @ApiOperation("添加")
-    public ApplicationCmsVO save(@RequestBody @Valid ApplicationCmsAddDTO applicationAddDTO) {
-        return applicationService.saveApplication(applicationAddDTO);
+    public ResultVO<ApplicationCmsVO> save(@RequestBody @Valid ApplicationCmsAddDTO applicationAddDTO) {
+        return ResultVO.success(applicationService.saveApplication(applicationAddDTO));
     }
 
     @DeleteMapping
     @ApiOperation("删除")
-    public void delete(@RequestParam @ApiParam("applicationId列表") Set<Long> applicationIds) {
+    public ResultVO delete(@RequestParam @ApiParam("applicationId列表") Set<Long> applicationIds) {
         applicationService.deleteApplications(applicationIds);
+        return ResultVO.success();
     }
 
     @PutMapping
     @ApiOperation("修改")
-    public ApplicationCmsVO update(@RequestBody @Valid ApplicationCmsUpdateDTO applicationUpdateDTO) {
-        return applicationService.updateApplication(applicationUpdateDTO);
+    public ResultVO<ApplicationCmsVO> update(@RequestBody @Valid ApplicationCmsUpdateDTO applicationUpdateDTO) {
+        return ResultVO.success(applicationService.updateApplication(applicationUpdateDTO));
     }
 
     @PutMapping("disabled")
     @ApiOperation("禁用和启用应用信息")
-    public ApplicationCmsVO disabled(@RequestBody @Valid ApplicationCmsDisabledDTO disabledDTO) {
-        return applicationService.disabled(disabledDTO);
+    public ResultVO<ApplicationCmsVO> disabled(@RequestBody @Valid ApplicationCmsDisabledDTO disabledDTO) {
+        return ResultVO.success(applicationService.disabled(disabledDTO));
     }
 
     @GetMapping("page")
     @ApiOperation("分页")
-    public IPage<ApplicationCmsVO> page(@ModelAttribute ApplicationCmsQueryDTO applicationQueryDTO, Page page) {
-        return applicationService.findApplicationPage(applicationQueryDTO, page);
+    public ResultVO<IPage<ApplicationCmsVO>> page(@ModelAttribute ApplicationCmsQueryDTO applicationQueryDTO, Page page) {
+        return ResultVO.success(applicationService.findApplicationPage(applicationQueryDTO, page));
     }
 
     @GetMapping("list")
     @ApiOperation("应用列表")
-    public List<ApplicationMessageVO> list() {
-        return applicationService.listApplicationMessage();
+    public ResultVO<List<ApplicationMessageVO>> list() {
+        return ResultVO.success(applicationService.listApplicationMessage());
     }
 
 }

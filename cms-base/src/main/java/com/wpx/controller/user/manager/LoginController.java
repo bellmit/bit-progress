@@ -1,5 +1,6 @@
 package com.wpx.controller.user.manager;
 
+import com.wpx.common.model.ResultVO;
 import com.wpx.model.user.manager.pojo.cms.LoginSuccessVO;
 import com.wpx.model.user.manager.pojo.cms.ManagerLoginDTO;
 import com.wpx.service.user.manager.LoginService;
@@ -28,8 +29,8 @@ public class LoginController {
 
     @ApiOperation("登录")
     @PostMapping
-    public LoginSuccessVO login(@RequestBody @Valid ManagerLoginDTO loginDTO) {
-        return loginService.login(loginDTO);
+    public ResultVO<LoginSuccessVO> login(@RequestBody @Valid ManagerLoginDTO loginDTO) {
+        return ResultVO.success(loginService.login(loginDTO));
     }
 
 }

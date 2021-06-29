@@ -2,6 +2,7 @@ package com.wpx.controller.system.application;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wpx.common.model.ResultVO;
 import com.wpx.model.system.applicationtopic.pojo.cms.ApplicationTopicCmsAddDTO;
 import com.wpx.model.system.applicationtopic.pojo.cms.ApplicationTopicCmsQueryDTO;
 import com.wpx.model.system.applicationtopic.pojo.cms.ApplicationTopicCmsUpdateDTO;
@@ -30,32 +31,33 @@ public class ApplicationTopicController {
 
     @GetMapping
     @ApiOperation("查询详情")
-    public ApplicationTopicCmsVO findById(@RequestParam @ApiParam("applicationTopicId") Long applicationTopicId) {
-        return applicationTopicService.findById(applicationTopicId);
+    public ResultVO<ApplicationTopicCmsVO> findById(@RequestParam @ApiParam("applicationTopicId") Long applicationTopicId) {
+        return ResultVO.success(applicationTopicService.findById(applicationTopicId));
     }
 
     @PostMapping
     @ApiOperation("添加")
-    public ApplicationTopicCmsVO save(@RequestBody @Valid ApplicationTopicCmsAddDTO applicationTopicAddDTO) {
-        return applicationTopicService.saveApplicationTopic(applicationTopicAddDTO);
+    public ResultVO<ApplicationTopicCmsVO> save(@RequestBody @Valid ApplicationTopicCmsAddDTO applicationTopicAddDTO) {
+        return ResultVO.success(applicationTopicService.saveApplicationTopic(applicationTopicAddDTO));
     }
 
     @DeleteMapping
     @ApiOperation("删除")
-    public void delete(@RequestParam @ApiParam("applicationTopicId列表") Set<Long> applicationTopicIds) {
+    public ResultVO delete(@RequestParam @ApiParam("applicationTopicId列表") Set<Long> applicationTopicIds) {
         applicationTopicService.deleteApplicationTopics(applicationTopicIds);
+        return ResultVO.success();
     }
 
     @PutMapping
     @ApiOperation("修改")
-    public ApplicationTopicCmsVO update(@RequestBody @Valid ApplicationTopicCmsUpdateDTO applicationTopicUpdateDTO) {
-        return applicationTopicService.updateApplicationTopic(applicationTopicUpdateDTO);
+    public ResultVO<ApplicationTopicCmsVO> update(@RequestBody @Valid ApplicationTopicCmsUpdateDTO applicationTopicUpdateDTO) {
+        return ResultVO.success(applicationTopicService.updateApplicationTopic(applicationTopicUpdateDTO));
     }
 
     @GetMapping("page")
     @ApiOperation("分页")
-    public IPage<ApplicationTopicCmsVO> page(@ModelAttribute ApplicationTopicCmsQueryDTO applicationTopicQueryDTO, Page page) {
-        return applicationTopicService.findApplicationTopicPage(applicationTopicQueryDTO, page);
+    public ResultVO<IPage<ApplicationTopicCmsVO>> page(@ModelAttribute ApplicationTopicCmsQueryDTO queryDTO, Page page) {
+        return ResultVO.success(applicationTopicService.findApplicationTopicPage(queryDTO, page));
     }
 
 }

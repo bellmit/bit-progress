@@ -27,7 +27,6 @@ public class RestInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String routeRestToken = request.getHeader(VerifyConstant.ROUTE_REST_TOKEN);
         String restToken = serverBaseProperties.getRestToken();
-        request.setAttribute(VerifyConstant.ENCAPSULATION_RESULT, VerifyConstant.ENCAPSULATION_RESULT);
         if (StringUtils.equals(routeRestToken, restToken)) {
             return true;
         }

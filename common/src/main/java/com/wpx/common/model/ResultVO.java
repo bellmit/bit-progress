@@ -1,4 +1,4 @@
-package com.wpx.model;
+package com.wpx.common.model;
 
 import com.wpx.common.constant.ResultConstant;
 import com.wpx.common.exception.CustomizeException;
@@ -67,8 +67,8 @@ public class ResultVO<T> {
     /**
      * 请求成功，无返回信息
      */
-    public static ResultVO okOf() {
-        return okOf(ResultConstant.SUCCESS_MESSAGE);
+    public static ResultVO success() {
+        return success(ResultConstant.SUCCESS_MESSAGE);
     }
 
     /**
@@ -76,8 +76,8 @@ public class ResultVO<T> {
      * 
      * @param message
      */
-    public static ResultVO okOf(String message) {
-        return okOf(ResultConstant.SUCCESS_CODE, message, null);
+    public static ResultVO success(String message) {
+        return success(ResultConstant.SUCCESS_CODE, message, null);
     }
 
     /**
@@ -85,8 +85,8 @@ public class ResultVO<T> {
      *
      * @param data
      */
-    public static <T> ResultVO<T> okOf(T data) {
-        return okOf(ResultConstant.SUCCESS_CODE, ResultConstant.SUCCESS_MESSAGE, data);
+    public static <T> ResultVO<T> success(T data) {
+        return success(ResultConstant.SUCCESS_CODE, ResultConstant.SUCCESS_MESSAGE, data);
     }
 
     /**
@@ -95,8 +95,8 @@ public class ResultVO<T> {
      * @param message
      * @param data
      */
-    public static <T> ResultVO<T> okOf(String message, T data) {
-        return okOf(ResultConstant.SUCCESS_CODE, message, data);
+    public static <T> ResultVO<T> success(String message, T data) {
+        return success(ResultConstant.SUCCESS_CODE, message, data);
     }
 
     /**
@@ -106,7 +106,7 @@ public class ResultVO<T> {
      * @param message
      * @param data
      */
-    public static <T> ResultVO<T> okOf(Integer code, String message, T data) {
+    public static <T> ResultVO<T> success(Integer code, String message, T data) {
         return new ResultVO(code, message, data);
     }
 

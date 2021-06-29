@@ -1,5 +1,6 @@
 package com.wpx.controller.system.application;
 
+import com.wpx.common.model.ResultVO;
 import com.wpx.model.system.applicationinfo.pojo.cms.ApplicationInfoCmsAddDTO;
 import com.wpx.model.system.applicationinfo.pojo.cms.ApplicationInfoCmsQueryDTO;
 import com.wpx.model.system.applicationinfo.pojo.cms.ApplicationInfoCmsUpdateDTO;
@@ -33,32 +34,33 @@ public class ApplicationInfoController {
 
     @GetMapping
     @ApiOperation("查询详情")
-    public ApplicationInfoCmsVO findById(@RequestParam @ApiParam("applicationInfoId") Long applicationInfoId) {
-        return applicationInfoService.findById(applicationInfoId);
+    public ResultVO<ApplicationInfoCmsVO> findById(@RequestParam @ApiParam("applicationInfoId") Long applicationInfoId) {
+        return ResultVO.success(applicationInfoService.findById(applicationInfoId));
     }
 
     @PostMapping
     @ApiOperation("添加")
-    public ApplicationInfoCmsVO save(@RequestBody @Valid ApplicationInfoCmsAddDTO applicationInfoAddDTO) {
-        return applicationInfoService.saveApplicationInfo(applicationInfoAddDTO);
+    public ResultVO<ApplicationInfoCmsVO> save(@RequestBody @Valid ApplicationInfoCmsAddDTO applicationInfoAddDTO) {
+        return ResultVO.success(applicationInfoService.saveApplicationInfo(applicationInfoAddDTO));
     }
 
     @DeleteMapping
     @ApiOperation("删除")
-    public void delete(@RequestParam @ApiParam("applicationInfoId列表") Set<Long> applicationInfoIds) {
+    public ResultVO delete(@RequestParam @ApiParam("applicationInfoId列表") Set<Long> applicationInfoIds) {
         applicationInfoService.deleteApplicationInfos(applicationInfoIds);
+        return ResultVO.success();
     }
 
     @PutMapping
     @ApiOperation("修改")
-    public ApplicationInfoCmsVO update(@RequestBody @Valid ApplicationInfoCmsUpdateDTO applicationInfoUpdateDTO) {
-        return applicationInfoService.updateApplicationInfo(applicationInfoUpdateDTO);
+    public ResultVO<ApplicationInfoCmsVO> update(@RequestBody @Valid ApplicationInfoCmsUpdateDTO applicationInfoUpdateDTO) {
+        return ResultVO.success(applicationInfoService.updateApplicationInfo(applicationInfoUpdateDTO));
     }
 
     @GetMapping("page")
     @ApiOperation("分页")
-    public IPage<ApplicationInfoCmsVO> page(@ModelAttribute ApplicationInfoCmsQueryDTO applicationInfoQueryDTO, Page page) {
-        return applicationInfoService.findApplicationInfoPage(applicationInfoQueryDTO, page);
+    public ResultVO<IPage<ApplicationInfoCmsVO>> page(@ModelAttribute ApplicationInfoCmsQueryDTO queryDTO, Page page) {
+        return ResultVO.success(applicationInfoService.findApplicationInfoPage(queryDTO, page));
     }
 }
 

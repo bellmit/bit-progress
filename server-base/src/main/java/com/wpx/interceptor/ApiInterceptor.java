@@ -27,7 +27,6 @@ public class ApiInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String routeApiToken = request.getHeader(VerifyConstant.ROUTE_API_TOKEN);
         String apiToken = serverBaseProperties.getApiToken();
-        request.setAttribute(VerifyConstant.ENCAPSULATION_RESULT, VerifyConstant.ENCAPSULATION_RESULT);
         if (StringUtils.equals(routeApiToken, apiToken)) {
             return true;
         }

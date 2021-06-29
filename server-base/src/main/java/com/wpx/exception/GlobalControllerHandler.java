@@ -1,83 +1,32 @@
 package com.wpx.exception;
 
-import com.wpx.common.constant.VerifyConstant;
 import com.wpx.common.exception.CustomizeException;
 import com.wpx.common.exception.ExceptionMessage;
 import com.wpx.common.exception.ValidationException;
 import com.wpx.common.util.StringUtils;
-import com.wpx.model.ResultVO;
+import com.wpx.common.model.ResultVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.server.ServerHttpRequest;
-import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import javax.security.auth.login.FailedLoginException;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 import java.util.Objects;
 
 @RestControllerAdvice
-public class GlobalControllerHandler implements ResponseBodyAdvice<Object> {
+public class GlobalControllerHandler {
 
     public static final Logger logger = LoggerFactory.getLogger(GlobalControllerHandler.class);
 
     @Autowired
     private ApplicationContext applicationContext;
-
-    /**
-     * 直接进入封装返回
-     *
-     * @param returnType
-     * @param converterType
-     */
-    @Override
-    public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
-        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
-        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
-        HttpServletRequest request = sra.getRequest();
-        return Objects.equals(VerifyConstant.ENCAPSULATION_RESULT, request.getAttribute(VerifyConstant.ENCAPSULATION_RESULT));
-    }
-
-    /**
-     * 将返回结果进行封装
-     *
-     * @param body
-     * @param returnType
-     * @param selectedContentType
-     * @param selectedConverterType
-     * @param request
-     * @param response
-     */
-    @Override
-    public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType,
-                                  Class<? extends HttpMessageConverter<?>> selectedConverterType,
-                                  ServerHttpRequest request, ServerHttpResponse response) {
-        return body instanceof ResultVO ? body : handleReturnValue(body);
-    }
-
-    /**
-     * 返回值是否为异常信息
-     *
-     * @param body
-     */
-    private ResultVO handleReturnValue(Object body) {
-        return body instanceof Exception ? ResultVO.errorOf(((Exception) body).getMessage()) : ResultVO.okOf(body);
-    }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(CustomizeException.class)

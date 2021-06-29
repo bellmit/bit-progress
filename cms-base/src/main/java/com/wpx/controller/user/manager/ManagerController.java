@@ -2,6 +2,7 @@ package com.wpx.controller.user.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wpx.common.model.ResultVO;
 import com.wpx.model.user.manager.pojo.cms.*;
 import com.wpx.service.user.manager.ManagerService;
 import com.wpx.util.UserHelper;
@@ -27,50 +28,51 @@ public class ManagerController {
 
     @GetMapping
     @ApiOperation("获取管理员信息")
-    public ManagerCmsVO findById(@RequestParam("managerId") Integer managerId) {
-        return managerService.findById(managerId, UserHelper.getUserId());
+    public ResultVO<ManagerCmsVO> findById(@RequestParam("managerId") Integer managerId) {
+        return ResultVO.success(managerService.findById(managerId, UserHelper.getUserId()));
     }
 
     @PostMapping
     @ApiOperation("添加")
-    public ManagerCmsVO add(@RequestBody @Valid ManagerCmsAddDTO addDTO) {
-        return managerService.add(addDTO);
+    public ResultVO<ManagerCmsVO> add(@RequestBody @Valid ManagerCmsAddDTO addDTO) {
+        return ResultVO.success(managerService.add(addDTO));
     }
 
     @PutMapping
     @ApiOperation("修改")
-    public ManagerCmsVO update(@RequestBody @Valid ManagerCmsUpdateDTO managerUpdateDTO) {
-        return managerService.update(managerUpdateDTO);
+    public ResultVO<ManagerCmsVO> update(@RequestBody @Valid ManagerCmsUpdateDTO managerUpdateDTO) {
+        return ResultVO.success(managerService.update(managerUpdateDTO));
     }
 
     @DeleteMapping
     @ApiOperation("删除")
-    public void delete(@RequestParam @ApiParam("id列表") Set<Long> managerIds) {
+    public ResultVO delete(@RequestParam @ApiParam("id列表") Set<Long> managerIds) {
         managerService.delete(managerIds, UserHelper.getUserId());
+        return ResultVO.success();
     }
 
     @GetMapping("page")
     @ApiOperation("分页列表")
-    public IPage<ManagerCmsVO> findPage(@ModelAttribute ManagerCmsQueryDTO managerQueryVO, Page page) {
-        return managerService.findPage(managerQueryVO, page);
+    public ResultVO<IPage<ManagerCmsVO>> findPage(@ModelAttribute ManagerCmsQueryDTO managerQueryVO, Page page) {
+        return ResultVO.success(managerService.findPage(managerQueryVO, page));
     }
 
     @PutMapping("password")
     @ApiOperation("重置密码")
-    public ManagerCmsVO resetPassword(@RequestBody @Valid ManagerResetPasswordDTO managerResetPasswordVO) {
-        return managerService.resetPassword(managerResetPasswordVO, UserHelper.getUserId());
+    public ResultVO<ManagerCmsVO> resetPassword(@RequestBody @Valid ManagerResetPasswordDTO managerResetPasswordVO) {
+        return ResultVO.success(managerService.resetPassword(managerResetPasswordVO, UserHelper.getUserId()));
     }
 
     @PutMapping("state")
     @ApiOperation("禁用|开启")
-    public ManagerCmsVO handleDisabled(@RequestBody @Valid ManagerStateDTO managerStateVO) {
-        return managerService.handleDisabled(managerStateVO, UserHelper.getUserId());
+    public ResultVO<ManagerCmsVO> handleDisabled(@RequestBody @Valid ManagerStateDTO managerStateVO) {
+        return ResultVO.success(managerService.handleDisabled(managerStateVO, UserHelper.getUserId()));
     }
 
     @PutMapping("role")
     @ApiOperation("禁用|开启")
-    public ManagerCmsVO handleRole(@RequestBody @Valid ManagerRoleDTO managerRoleVO) {
-        return managerService.handleRole(managerRoleVO);
+    public ResultVO<ManagerCmsVO> handleRole(@RequestBody @Valid ManagerRoleDTO managerRoleVO) {
+        return ResultVO.success(managerService.handleRole(managerRoleVO));
     }
 
 }
