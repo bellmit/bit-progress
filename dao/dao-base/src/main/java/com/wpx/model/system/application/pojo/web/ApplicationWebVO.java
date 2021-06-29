@@ -1,14 +1,11 @@
 package com.wpx.model.system.application.pojo.web;
 
-import com.wpx.model.system.application.envm.AppTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-
 
 /**
  * @author wupengxiao
@@ -23,9 +20,6 @@ public class ApplicationWebVO implements Serializable {
 
     @ApiModelProperty(value = "应用ID")
     private Long applicationId;
-
-    @ApiModelProperty(value = "应用类型，IOS，ANDROID")
-    private AppTypeEnum appType;
 
     @ApiModelProperty(value = "应用名称")
     private String appName;
