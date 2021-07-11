@@ -1,6 +1,7 @@
 package com.wpx.aspect;
 
 import com.alibaba.fastjson.JSON;
+import com.wpx.common.util.NumberUtils;
 import com.wpx.model.system.managerlog.ManagerLog;
 import com.wpx.model.system.managerlog.ManagerLogMapper;
 import com.wpx.util.UserHelper;
@@ -19,6 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * 切入所有的对外开放的controller，记录下POST、PUT、DELETE操作的操作信息
+ */
 @Aspect
 @Component
 @Slf4j
@@ -43,7 +47,7 @@ public class ControllerAspect {
     public void controllerBefore(JoinPoint joinPoint) {
         try {
             Long userId = UserHelper.getUserId();
-            if (userId == -1) {
+            if (userId == NumberUtils.INT_MINUS_ONE) {
                 return;
             }
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();

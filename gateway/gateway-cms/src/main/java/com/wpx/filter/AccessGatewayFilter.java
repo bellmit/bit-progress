@@ -36,8 +36,6 @@ public class AccessGatewayFilter implements GlobalFilter {
     @Autowired
     private NacosRouteMatchService nacosRouteMatchService;
 
-    private static final String USER_ID = "User-Id";
-
     /**
      * 1. 检验是否白名单或非api开头 {@link NacosRouteMatchService#ignoreAuthentication(String)}
      * 2. 检验token是否正确 {@link AuthService#checkToken(String)}
@@ -54,7 +52,7 @@ public class AccessGatewayFilter implements GlobalFilter {
         String authentication = headers.getFirst(HttpHeaders.AUTHORIZATION);
 
         if (nacosRouteMatchService.ignoreAuthentication(url)) {
-            return authorized(chain, exchange, request, StringUtils.NEGATIVE_ONE);
+            return authorized(chain, exchange, request, StringUtils.MINUS_ONE);
         }
         // 校验token
         AuthResult authResult = authService.checkToken(authentication);
@@ -67,6 +65,7 @@ public class AccessGatewayFilter implements GlobalFilter {
 
     /**
      * 通过检验，重新构建exchange
+     * 将解析token获取的userId以及服务元数据中的中token放到ServerHttpRequest的header中，用以标识是通过网关转发的请求
      */
     private Mono<Void> authorized(GatewayFilterChain chain,
                                   ServerWebExchange exchange,

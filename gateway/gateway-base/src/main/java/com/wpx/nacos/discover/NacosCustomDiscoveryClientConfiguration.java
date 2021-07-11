@@ -1,4 +1,4 @@
-package com.wpx.nacos;
+package com.wpx.nacos.discover;
 
 import com.alibaba.cloud.nacos.ConditionalOnNacosDiscoveryEnabled;
 import com.alibaba.cloud.nacos.NacosDiscoveryProperties;

@@ -10,7 +10,7 @@ public class StringUtils {
 
     public static final String ZERO = "0";
 
-    public static final String NEGATIVE_ONE = "-1";
+    public static final String MINUS_ONE = "-1";
 
     public static boolean isEmpty(String str) {
         return str == null || str.isEmpty();

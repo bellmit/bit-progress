@@ -14,9 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 public class UserHelper {
 
     public static Long getUserId() {
-        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
-        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
-        HttpServletRequest request = sra.getRequest();
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
         String userId = request.getHeader(VerifyConstant.USER_ID);
         return Long.parseLong(userId);
     }

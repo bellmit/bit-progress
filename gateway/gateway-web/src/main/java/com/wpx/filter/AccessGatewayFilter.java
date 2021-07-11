@@ -53,7 +53,7 @@ public class AccessGatewayFilter implements GlobalFilter {
 
         if (nacosRouteMatchService.ignoreAuthentication(url)) {
             // 白名单，不需要检验token，使用-1作为userId
-            return authorized(chain, exchange, request, StringUtils.NEGATIVE_ONE);
+            return authorized(chain, exchange, request, StringUtils.MINUS_ONE);
         }
         // 校验token
         AuthResult authResult = authService.checkToken(authentication);

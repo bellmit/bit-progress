@@ -1,11 +1,9 @@
-package com.wpx.nacos.reactive;
+package com.wpx.nacos.discover.reactive;
 
 import com.alibaba.cloud.nacos.ConditionalOnNacosDiscoveryEnabled;
-import com.alibaba.cloud.nacos.discovery.NacosDiscoveryAutoConfiguration;
-import com.alibaba.cloud.nacos.discovery.NacosDiscoveryClientConfiguration;
 import com.alibaba.cloud.nacos.discovery.reactive.NacosReactiveDiscoveryClientConfiguration;
-import com.wpx.nacos.NacosCustomDiscoveryAutoConfiguration;
-import com.wpx.nacos.NacosServiceDiscovery;
+import com.wpx.nacos.discover.NacosCustomDiscoveryAutoConfiguration;
+import com.wpx.nacos.discover.NacosServiceDiscovery;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -31,8 +29,7 @@ public class NacosCustomReactiveDiscoveryClientConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean
-	public NacosReactiveDiscoveryClient nacosReactiveDiscoveryClient(
-			NacosServiceDiscovery nacosServiceDiscovery) {
+	public NacosReactiveDiscoveryClient nacosReactiveDiscoveryClient(NacosServiceDiscovery nacosServiceDiscovery) {
 		return new NacosReactiveDiscoveryClient(nacosServiceDiscovery);
 	}
 

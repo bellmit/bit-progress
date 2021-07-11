@@ -1,7 +1,7 @@
-package com.wpx.nacos.reactive;
+package com.wpx.nacos.discover.reactive;
 
 import com.alibaba.nacos.api.exception.NacosException;
-import com.wpx.nacos.NacosServiceDiscovery;
+import com.wpx.nacos.discover.NacosServiceDiscovery;
 import org.reactivestreams.Publisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
