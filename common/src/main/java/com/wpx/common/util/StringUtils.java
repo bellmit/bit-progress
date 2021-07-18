@@ -1,5 +1,7 @@
 package com.wpx.common.util;
 
+import com.wpx.common.constant.StringConstants;
+
 /**
  * @author 不会飞的小鹏
  * create on 2021/5/31 22:40
@@ -92,6 +94,30 @@ public class StringUtils {
         } else {
             return str1.toString().contentEquals(str2);
         }
+    }
+
+    /**
+     * 驼峰转换
+     * camelCase -> camel_case
+     *
+     * @param str
+     */
+    public static String camelCase(String str) {
+        if (isEmpty(str)) {
+            return "";
+        }
+        int length = str.length();
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            char c = str.charAt(i);
+            if (Character.isUpperCase(c)) {
+                sb.append(StringConstants.UNDERLINE);
+                sb.append(Character.toLowerCase(c));
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
     }
 
 }
