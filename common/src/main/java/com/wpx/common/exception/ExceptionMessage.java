@@ -151,6 +151,15 @@ public enum ExceptionMessage implements IExceptionMessage {
      */
     APPLICATIONTOPIC_DELETE_ERROR(3012, MessageCodes.APPLICATIONTOPIC_DELETE_ERROR),
 
+    /**
+     * JSAPI支付统一下单失败
+     */
+    JSAPI_UNIFIED_ORDER_ERROR(4001, MessageCodes.JSAPI_UNIFIED_ORDER_ERROR),
+    /**
+     * JSAPI支付信息签名失败
+     */
+    JSAPI_PAY_SIGN_ERROR(4001, MessageCodes.JSAPI_PAY_SIGN_ERROR),
+
     ;
 
     /**

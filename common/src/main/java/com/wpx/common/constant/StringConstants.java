@@ -7,9 +7,18 @@ package com.wpx.common.constant;
  */
 public class StringConstants {
 
+    public static final String EMPTY = "";
+
+    /**
+     * 空格字符串
+     */
+    public static final char SPACE = ' ';
+
     /**
      * 驼峰字符串
      */
-    public static final char UNDERLINE='_';
+    public static final char UNDERLINE = '_';
+
+    public static final char EQUAL_SIGN = '=';
 
 }

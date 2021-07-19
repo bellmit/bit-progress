@@ -1,5 +1,7 @@
 package com.wpx.model.jsapi;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * @author 不会飞的小鹏
  * create on 2021/7/19 0:00
@@ -32,6 +34,7 @@ public class JsApiUnifiedOrder {
      * 商户系统内部订单号，只能是数字、大小写字母_-*且在同一个商户号下唯一
      * string[6,32]
      */
+    @JSONField(name = "out_trade_no")
     private String outTradeNo;
 
     /**
@@ -43,6 +46,7 @@ public class JsApiUnifiedOrder {
      * string[1,64]
      * LocalDateTime.toString()
      */
+    @JSONField(name = "time_expire")
     private String timeExpire;
 
     /**
@@ -57,6 +61,7 @@ public class JsApiUnifiedOrder {
      * 即支付结果的回调地址
      * string[1,256]
      */
+    @JSONField(name = "notify_url")
     private String notifyUrl;
 
     /**

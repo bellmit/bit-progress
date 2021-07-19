@@ -44,4 +44,7 @@ public class MessageCodes {
     public static final String APPLICATIONTOPIC_UPDATE_ERROR = "应用主题更新失败";
     public static final String APPLICATIONTOPIC_DELETE_ERROR = "应用主题删除失败";
 
+    public static final String JSAPI_UNIFIED_ORDER_ERROR = "JSAPI支付统一下单失败";
+    public static final String JSAPI_PAY_SIGN_ERROR = "JSAPI支付信息签名失败";
+
 }

@@ -2,6 +2,8 @@ package com.wpx.common.util;
 
 import com.wpx.common.constant.StringConstants;
 
+import java.util.Random;
+
 /**
  * @author 不会飞的小鹏
  * create on 2021/5/31 22:40
@@ -13,6 +15,8 @@ public class StringUtils {
     public static final String ZERO = "0";
 
     public static final String MINUS_ONE = "-1";
+
+    public static final String STRING_VALUE = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     public static boolean isEmpty(String str) {
         return str == null || str.isEmpty();
@@ -30,6 +34,14 @@ public class StringUtils {
         return startWith(str, prefix, ignoreCase, false);
     }
 
+    /**
+     * 检查字符串是否由指定字符开始
+     *
+     * @param str
+     * @param prefix
+     * @param ignoreCase
+     * @param ignoreEquals
+     */
     public static boolean startWith(CharSequence str, CharSequence prefix, boolean ignoreCase, boolean ignoreEquals) {
         if (null != str && null != prefix) {
             boolean isStartWith;
@@ -118,6 +130,21 @@ public class StringUtils {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * 生成随机字符串
+     *
+     * @param len
+     */
+    public static String randomString(int len) {
+        StringBuilder builder = new StringBuilder(len);
+        Random random = new Random();
+        for (int i = 0; i < len; i++) {
+            int index = random.nextInt(STRING_VALUE.length());
+            builder.append(STRING_VALUE.charAt(index));
+        }
+        return builder.toString();
     }
 
 }
