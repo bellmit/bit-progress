@@ -1,4 +1,4 @@
-package com.wpx.model.jsapi;
+package com.wpx.model.pay;
 
 /**
  * @author 不会飞的小鹏

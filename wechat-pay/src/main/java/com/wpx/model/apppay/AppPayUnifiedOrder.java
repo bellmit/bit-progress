@@ -1,8 +1,7 @@
-package com.wpx.model.jsapi;
+package com.wpx.model.apppay;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.wpx.model.pay.Amount;
-import com.wpx.model.pay.Payer;
 
 /**
  * @author 不会飞的小鹏
@@ -10,11 +9,11 @@ import com.wpx.model.pay.Payer;
  * 官方文档 https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_1.shtml
  * @Description: 微信支付JSAPI订单
  */
-public class JsApiUnifiedOrder {
+public class AppPayUnifiedOrder {
 
     /**
      * 必填
-     * 公众账号ID
+     * 由微信生成的应用ID，全局唯一。请求基础下单接口时请注意APPID的应用属性，例如公众号场景下，需使用应用属性为公众号的APPID
      */
     private String appid;
 
@@ -79,17 +78,11 @@ public class JsApiUnifiedOrder {
      */
     private Amount amount;
 
-    /**
-     * 必填
-     * 支付人信息
-     */
-    private Payer payer;
-
     public String getAppid() {
         return appid;
     }
 
-    public JsApiUnifiedOrder setAppid(String appid) {
+    public AppPayUnifiedOrder setAppid(String appid) {
         this.appid = appid;
         return this;
     }
@@ -98,7 +91,7 @@ public class JsApiUnifiedOrder {
         return mchid;
     }
 
-    public JsApiUnifiedOrder setMchid(String mchid) {
+    public AppPayUnifiedOrder setMchid(String mchid) {
         this.mchid = mchid;
         return this;
     }
@@ -107,7 +100,7 @@ public class JsApiUnifiedOrder {
         return description;
     }
 
-    public JsApiUnifiedOrder setDescription(String description) {
+    public AppPayUnifiedOrder setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -116,7 +109,7 @@ public class JsApiUnifiedOrder {
         return outTradeNo;
     }
 
-    public JsApiUnifiedOrder setOutTradeNo(String outTradeNo) {
+    public AppPayUnifiedOrder setOutTradeNo(String outTradeNo) {
         this.outTradeNo = outTradeNo;
         return this;
     }
@@ -125,7 +118,7 @@ public class JsApiUnifiedOrder {
         return timeExpire;
     }
 
-    public JsApiUnifiedOrder setTimeExpire(String timeExpire) {
+    public AppPayUnifiedOrder setTimeExpire(String timeExpire) {
         this.timeExpire = timeExpire;
         return this;
     }
@@ -134,7 +127,7 @@ public class JsApiUnifiedOrder {
         return attach;
     }
 
-    public JsApiUnifiedOrder setAttach(String attach) {
+    public AppPayUnifiedOrder setAttach(String attach) {
         this.attach = attach;
         return this;
     }
@@ -143,7 +136,7 @@ public class JsApiUnifiedOrder {
         return notifyUrl;
     }
 
-    public JsApiUnifiedOrder setNotifyUrl(String notifyUrl) {
+    public AppPayUnifiedOrder setNotifyUrl(String notifyUrl) {
         this.notifyUrl = notifyUrl;
         return this;
     }
@@ -152,7 +145,7 @@ public class JsApiUnifiedOrder {
         return goodsTag;
     }
 
-    public JsApiUnifiedOrder setGoodsTag(String goodsTag) {
+    public AppPayUnifiedOrder setGoodsTag(String goodsTag) {
         this.goodsTag = goodsTag;
         return this;
     }
@@ -161,17 +154,8 @@ public class JsApiUnifiedOrder {
         return amount;
     }
 
-    public JsApiUnifiedOrder setAmount(Amount amount) {
+    public AppPayUnifiedOrder setAmount(Amount amount) {
         this.amount = amount;
-        return this;
-    }
-
-    public Payer getPayer() {
-        return payer;
-    }
-
-    public JsApiUnifiedOrder setPayer(Payer payer) {
-        this.payer = payer;
         return this;
     }
 

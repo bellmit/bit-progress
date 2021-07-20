@@ -1,5 +1,7 @@
 package com.wpx.common.util;
 
+import com.wpx.common.constant.StringConstants;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -31,8 +33,8 @@ public class BcryptUtils {
 
     static {
         try {
-            cipher = Cipher.getInstance("RSA");
-            keyFactory = KeyFactory.getInstance("RSA");
+            cipher = Cipher.getInstance(StringConstants.CIPHER_RSA);
+            keyFactory = KeyFactory.getInstance(StringConstants.CIPHER_RSA);
         } catch (Exception e) {
             e.printStackTrace();
         }

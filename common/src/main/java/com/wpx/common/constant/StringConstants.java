@@ -12,13 +12,26 @@ public class StringConstants {
     /**
      * 空格字符串
      */
-    public static final char SPACE = ' ';
+    public static final String SPACE = " ";
 
     /**
      * 驼峰字符串
      */
-    public static final char UNDERLINE = '_';
+    public static final String UNDERLINE = "_";
 
-    public static final char EQUAL_SIGN = '=';
+    /**
+     * 减号字符串
+     */
+    public static final String MINUS_SIGN = "-";
+
+    /**
+     * 等号字符串
+     */
+    public static final String EQUAL_SIGN = "=";
+
+    /**
+     * 签名方式
+     */
+    public static final String CIPHER_RSA = "RSA";
 
 }

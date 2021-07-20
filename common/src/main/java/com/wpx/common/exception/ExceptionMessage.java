@@ -159,6 +159,14 @@ public enum ExceptionMessage implements IExceptionMessage {
      * JSAPI支付信息签名失败
      */
     JSAPI_PAY_SIGN_ERROR(4001, MessageCodes.JSAPI_PAY_SIGN_ERROR),
+    /**
+     * APP支付统一下单失败
+     */
+    APP_PAY_UNIFIED_ORDER_ERROR(4001, MessageCodes.JSAPI_UNIFIED_ORDER_ERROR),
+    /**
+     * APP支付信息签名失败
+     */
+    APP_PAY_SIGN_ERROR(4001, MessageCodes.JSAPI_PAY_SIGN_ERROR),
 
     ;
 

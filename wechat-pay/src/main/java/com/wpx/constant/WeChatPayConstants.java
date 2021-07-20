@@ -7,6 +7,14 @@ package com.wpx.constant;
  */
 public class WeChatPayConstants {
 
+    /**
+     * 签名类型
+     */
     public static final String SIGN_TYPE = "RSA";
+
+    /**
+     * 签名类型
+     */
+    public static final String PACKAGE = "Sign=WXPay";
 
 }

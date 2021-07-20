@@ -12,4 +12,9 @@ public class WeChatUrl {
      */
     public static final String JS_API_UNIFIED_URL = "https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi";
 
+    /**
+     * APP支付的请求地址
+     */
+    public static final String APP_PAY_UNIFIED_URL = "https://api.mch.weixin.qq.com/v3/pay/transactions/app";
+
 }
