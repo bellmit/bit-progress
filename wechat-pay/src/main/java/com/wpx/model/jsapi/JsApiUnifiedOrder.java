@@ -1,14 +1,13 @@
 package com.wpx.model.jsapi;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.wpx.model.pay.Amount;
-import com.wpx.model.pay.Payer;
+import com.wpx.model.pay.*;
 
 /**
  * @author 不会飞的小鹏
  * create on 2021/7/19 0:00
  * 官方文档 https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_1.shtml
- * @Description: 微信支付JSAPI订单
+ * @Description: 微信支付 JSAPI支付下单
  */
 public class JsApiUnifiedOrder {
 
@@ -84,6 +83,25 @@ public class JsApiUnifiedOrder {
      * 支付人信息
      */
     private Payer payer;
+
+    /**
+     * 非必填
+     * 优惠功能
+     */
+    private Detail detail;
+
+    /**
+     * 非必填
+     * 支付场景描述
+     */
+    @JSONField(name = "scene_info")
+    private SceneInfo sceneInfo;
+
+    /**
+     * 结算信息
+     */
+    @JSONField(name = "settle_info")
+    private SettleInfo settleInfo;
 
     public String getAppid() {
         return appid;
@@ -172,6 +190,33 @@ public class JsApiUnifiedOrder {
 
     public JsApiUnifiedOrder setPayer(Payer payer) {
         this.payer = payer;
+        return this;
+    }
+
+    public Detail getDetail() {
+        return detail;
+    }
+
+    public JsApiUnifiedOrder setDetail(Detail detail) {
+        this.detail = detail;
+        return this;
+    }
+
+    public SceneInfo getSceneInfo() {
+        return sceneInfo;
+    }
+
+    public JsApiUnifiedOrder setSceneInfo(SceneInfo sceneInfo) {
+        this.sceneInfo = sceneInfo;
+        return this;
+    }
+
+    public SettleInfo getSettleInfo() {
+        return settleInfo;
+    }
+
+    public JsApiUnifiedOrder setSettleInfo(SettleInfo settleInfo) {
+        this.settleInfo = settleInfo;
         return this;
     }
 

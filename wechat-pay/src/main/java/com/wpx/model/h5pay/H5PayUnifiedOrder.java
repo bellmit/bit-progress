@@ -1,18 +1,15 @@
-package com.wpx.model.apppay;
+package com.wpx.model.h5pay;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.wpx.model.pay.Amount;
-import com.wpx.model.pay.Detail;
-import com.wpx.model.pay.SceneInfo;
-import com.wpx.model.pay.SettleInfo;
+import com.wpx.model.pay.*;
 
 /**
  * @author 不会飞的小鹏
  * create on 2021/7/19 0:00
  * 官方文档 https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_1.shtml
- * @Description: 微信支付APP下单
+ * @Description: 微信支付 H5下单
  */
-public class AppPayUnifiedOrder {
+public class H5PayUnifiedOrder {
 
     /**
      * 必填
@@ -88,11 +85,11 @@ public class AppPayUnifiedOrder {
     private Detail detail;
 
     /**
-     * 非必填
+     * 必填
      * 支付场景描述
      */
     @JSONField(name = "scene_info")
-    private SceneInfo sceneInfo;
+    private H5SceneInfo sceneInfo;
 
     /**
      * 结算信息
@@ -104,7 +101,7 @@ public class AppPayUnifiedOrder {
         return appid;
     }
 
-    public AppPayUnifiedOrder setAppid(String appid) {
+    public H5PayUnifiedOrder setAppid(String appid) {
         this.appid = appid;
         return this;
     }
@@ -113,7 +110,7 @@ public class AppPayUnifiedOrder {
         return mchid;
     }
 
-    public AppPayUnifiedOrder setMchid(String mchid) {
+    public H5PayUnifiedOrder setMchid(String mchid) {
         this.mchid = mchid;
         return this;
     }
@@ -122,7 +119,7 @@ public class AppPayUnifiedOrder {
         return description;
     }
 
-    public AppPayUnifiedOrder setDescription(String description) {
+    public H5PayUnifiedOrder setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -131,7 +128,7 @@ public class AppPayUnifiedOrder {
         return outTradeNo;
     }
 
-    public AppPayUnifiedOrder setOutTradeNo(String outTradeNo) {
+    public H5PayUnifiedOrder setOutTradeNo(String outTradeNo) {
         this.outTradeNo = outTradeNo;
         return this;
     }
@@ -140,7 +137,7 @@ public class AppPayUnifiedOrder {
         return timeExpire;
     }
 
-    public AppPayUnifiedOrder setTimeExpire(String timeExpire) {
+    public H5PayUnifiedOrder setTimeExpire(String timeExpire) {
         this.timeExpire = timeExpire;
         return this;
     }
@@ -149,7 +146,7 @@ public class AppPayUnifiedOrder {
         return attach;
     }
 
-    public AppPayUnifiedOrder setAttach(String attach) {
+    public H5PayUnifiedOrder setAttach(String attach) {
         this.attach = attach;
         return this;
     }
@@ -158,7 +155,7 @@ public class AppPayUnifiedOrder {
         return notifyUrl;
     }
 
-    public AppPayUnifiedOrder setNotifyUrl(String notifyUrl) {
+    public H5PayUnifiedOrder setNotifyUrl(String notifyUrl) {
         this.notifyUrl = notifyUrl;
         return this;
     }
@@ -167,7 +164,7 @@ public class AppPayUnifiedOrder {
         return goodsTag;
     }
 
-    public AppPayUnifiedOrder setGoodsTag(String goodsTag) {
+    public H5PayUnifiedOrder setGoodsTag(String goodsTag) {
         this.goodsTag = goodsTag;
         return this;
     }
@@ -176,7 +173,7 @@ public class AppPayUnifiedOrder {
         return amount;
     }
 
-    public AppPayUnifiedOrder setAmount(Amount amount) {
+    public H5PayUnifiedOrder setAmount(Amount amount) {
         this.amount = amount;
         return this;
     }
@@ -185,7 +182,7 @@ public class AppPayUnifiedOrder {
         return detail;
     }
 
-    public AppPayUnifiedOrder setDetail(Detail detail) {
+    public H5PayUnifiedOrder setDetail(Detail detail) {
         this.detail = detail;
         return this;
     }
@@ -194,7 +191,7 @@ public class AppPayUnifiedOrder {
         return sceneInfo;
     }
 
-    public AppPayUnifiedOrder setSceneInfo(SceneInfo sceneInfo) {
+    public H5PayUnifiedOrder setSceneInfo(H5SceneInfo sceneInfo) {
         this.sceneInfo = sceneInfo;
         return this;
     }
@@ -203,9 +200,8 @@ public class AppPayUnifiedOrder {
         return settleInfo;
     }
 
-    public AppPayUnifiedOrder setSettleInfo(SettleInfo settleInfo) {
+    public H5PayUnifiedOrder setSettleInfo(SettleInfo settleInfo) {
         this.settleInfo = settleInfo;
         return this;
     }
-
 }

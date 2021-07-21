@@ -11,6 +11,8 @@ import com.wpx.constant.WeChatPayConstants;
 import com.wpx.constant.WeChatUrl;
 import com.wpx.model.apppay.AppPayOrder;
 import com.wpx.model.apppay.AppPayUnifiedOrder;
+import com.wpx.model.h5pay.H5PayOrder;
+import com.wpx.model.h5pay.H5PayUnifiedOrder;
 import com.wpx.model.jsapi.JsApiPayOrder;
 import com.wpx.model.jsapi.JsApiUnifiedOrder;
 import com.wpx.util.HttpClientUtils;
@@ -48,7 +50,7 @@ public class WeChatPayService {
         String timestamp = String.valueOf(Instant.now().getEpochSecond());
         jsApiPayOrder.setTimeStamp(timestamp);
         jsApiPayOrder.setSignType(WeChatPayConstants.SIGN_TYPE);
-        String nonceStr = UUID.randomUUID().toString().replaceAll(StringConstants.MINUS_SIGN, StringConstants.EMPTY);
+        String nonceStr = StringUtils.randomStringByUUID();
         jsApiPayOrder.setNonceStr(nonceStr);
         try {
             String result = HttpClientUtils.doPost(WeChatUrl.JS_API_UNIFIED_URL, body, mediaType);
@@ -85,7 +87,7 @@ public class WeChatPayService {
         appPayOrder.setPartnerid(unifiedOrder.getMchid());
         String timestamp = String.valueOf(Instant.now().getEpochSecond());
         appPayOrder.setTimestamp(timestamp);
-        String nonceStr = UUID.randomUUID().toString().replaceAll(StringConstants.MINUS_SIGN, StringConstants.EMPTY);
+        String nonceStr = StringUtils.randomStringByUUID();
         appPayOrder.setNoncestr(nonceStr);
         appPayOrder.setPackaged(WeChatPayConstants.PACKAGE);
         try {
@@ -109,6 +111,21 @@ public class WeChatPayService {
             throw new CustomizeException(ExceptionMessage.APP_PAY_SIGN_ERROR);
         }
         return appPayOrder;
+    }
+
+    /**
+     * H5支付统一下单
+     */
+    public static H5PayOrder appPayUnifiedOrder(H5PayUnifiedOrder unifiedOrder) {
+        String body = JSON.toJSONString(unifiedOrder);
+        MediaType mediaType = MediaType.get("application/json; charset=utf-8");
+        try {
+            String result = HttpClientUtils.doPost(WeChatUrl.H5_PAY_UNIFIED_URL, body, mediaType);
+            return JSON.parseObject(result, H5PayOrder.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomizeException(ExceptionMessage.APP_PAY_UNIFIED_ORDER_ERROR);
+        }
     }
 
     /**

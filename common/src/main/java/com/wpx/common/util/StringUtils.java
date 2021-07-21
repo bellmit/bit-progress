@@ -3,6 +3,7 @@ package com.wpx.common.util;
 import com.wpx.common.constant.StringConstants;
 
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * @author 不会飞的小鹏
@@ -145,6 +146,13 @@ public class StringUtils {
             builder.append(STRING_VALUE.charAt(index));
         }
         return builder.toString();
+    }
+
+    /**
+     * 生成32位随机字符串
+     */
+    public static String randomStringByUUID() {
+        return UUID.randomUUID().toString().replaceAll(StringConstants.MINUS_SIGN, StringConstants.EMPTY);
     }
 
 }

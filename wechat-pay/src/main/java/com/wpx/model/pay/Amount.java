@@ -25,16 +25,18 @@ public class Amount {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public Amount setTotal(Integer total) {
         this.total = total;
+        return this;
     }
 
     public String getCurrency() {
         return currency;
     }
 
-    public void setCurrency(String currency) {
+    public Amount setCurrency(String currency) {
         this.currency = currency;
+        return this;
     }
 
     public Amount(Integer total, String currency) {

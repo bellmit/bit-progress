@@ -18,8 +18,9 @@ public class Payer {
         return openid;
     }
 
-    public void setOpenid(String openid) {
+    public Payer setOpenid(String openid) {
         this.openid = openid;
+        return this;
     }
 
     public Payer(String openid) {

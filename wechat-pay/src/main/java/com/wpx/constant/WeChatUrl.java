@@ -17,4 +17,9 @@ public class WeChatUrl {
      */
     public static final String APP_PAY_UNIFIED_URL = "https://api.mch.weixin.qq.com/v3/pay/transactions/app";
 
+    /**
+     * H5支付的请求地址
+     */
+    public static final String H5_PAY_UNIFIED_URL = "https://api.mch.weixin.qq.com/v3/pay/transactions/h5";
+
 }
