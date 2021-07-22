@@ -12,7 +12,7 @@ import java.io.IOException;
 public class HttpClientUtils {
 
     /**
-     * 发起post请求
+     * 发起POST请求
      *
      * @param url
      * @param body
@@ -22,6 +22,17 @@ public class HttpClientUtils {
         OkHttpClient client = new OkHttpClient();
         RequestBody requestBody = RequestBody.create(mediaType, body);
         Request request = new Request.Builder().url(url).post(requestBody).build();
+        return client.newCall(request).execute().body().string();
+    }
+
+    /**
+     * 发起GET请求
+     *
+     * @param url
+     */
+    public static String doGet(String url) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(url).build();
         return client.newCall(request).execute().body().string();
     }
 

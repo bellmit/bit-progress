@@ -7,8 +7,6 @@ package com.wpx.common.constant;
  */
 public class CharacterConstants {
 
-    public static final char EMPTY = ' ';
-
     /**
      * 空格字符
      */
@@ -28,5 +26,20 @@ public class CharacterConstants {
      * 等号字符
      */
     public static final char EQUAL_SIGN = '=';
+
+    /**
+     * 斜杠字符
+     */
+    public static final char SLASH = '/';
+
+    /**
+     * 反斜杠字符
+     */
+    public static final char BACK_SLASH = '\\';
+
+    /**
+     * 问号字符
+     */
+    public static final char QUESTION_MARK = '?';
 
 }

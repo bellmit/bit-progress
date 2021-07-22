@@ -39,7 +39,7 @@ public enum ExceptionMessage implements IExceptionMessage {
     /**
      * 解密失败
      */
-    RSAUtil_DECRYPT_ERROR(2006, MessageCodes.RSAUtil_DECRYPT_ERROR),
+    RSAUtil_DECRYPT_ERROR(2006, MessageCodes.RSAUTIL_DECRYPT_ERROR),
 
     /**
      * 账号已被禁用
@@ -158,15 +158,23 @@ public enum ExceptionMessage implements IExceptionMessage {
     /**
      * JSAPI支付信息签名失败
      */
-    JSAPI_PAY_SIGN_ERROR(4001, MessageCodes.JSAPI_PAY_SIGN_ERROR),
+    JSAPI_PAY_SIGN_ERROR(4002, MessageCodes.JSAPI_PAY_SIGN_ERROR),
     /**
      * APP支付统一下单失败
      */
-    APP_PAY_UNIFIED_ORDER_ERROR(4001, MessageCodes.JSAPI_UNIFIED_ORDER_ERROR),
+    APP_PAY_UNIFIED_ORDER_ERROR(4003, MessageCodes.APP_PAY_UNIFIED_ORDER_ERROR),
+    /**
+     * H5支付统一下单失败
+     */
+    H5_PAY_UNIFIED_ORDER_ERROR(4004, MessageCodes.H5_PAY_UNIFIED_ORDER_ERROR),
     /**
      * APP支付信息签名失败
      */
-    APP_PAY_SIGN_ERROR(4001, MessageCodes.JSAPI_PAY_SIGN_ERROR),
+    APP_PAY_SIGN_ERROR(4005, MessageCodes.JSAPI_PAY_SIGN_ERROR),
+    /**
+     * 微信支付订单查询失败
+     */
+    TRANSACTION_QUERY_ERROR(4006, MessageCodes.TRANSACTION_QUERY_ERROR),
 
     ;
 

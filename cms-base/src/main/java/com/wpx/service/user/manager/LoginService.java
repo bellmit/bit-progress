@@ -70,7 +70,7 @@ public class LoginService {
                     log.info("md5Password:[{}]", md5Password);
                 } catch (Exception e) {
                     log.error("RSAUtil.decrypt exception", e);
-                    throw new IllegalArgumentException(MessageCodes.RSAUtil_DECRYPT_ERROR);
+                    throw new IllegalArgumentException(MessageCodes.RSAUTIL_DECRYPT_ERROR);
                 }
                 Manager manager = managerService.getByAccountWithPassword(loginDTO.getAccount(), md5Password);
                 log.info("manager:[{}]", manager);

@@ -29,7 +29,7 @@ public class MessageCodes {
     public static final String AUTH_PICCAPTCHA_LOST = "验证码已失效";
 
     //加密解密相关
-    public static final String RSAUtil_DECRYPT_ERROR = "解密失败";
+    public static final String RSAUTIL_DECRYPT_ERROR = "解密失败";
 
     public static final String APPLICATION_NOT_EXIST = "应用信息不存在";
     public static final String APPLICATION_UPDATE_ERROR = "应用信息更新失败";
@@ -45,6 +45,9 @@ public class MessageCodes {
     public static final String APPLICATIONTOPIC_DELETE_ERROR = "应用主题删除失败";
 
     public static final String JSAPI_UNIFIED_ORDER_ERROR = "JSAPI支付统一下单失败";
+    public static final String APP_PAY_UNIFIED_ORDER_ERROR = "APP支付统一下单失败";
+    public static final String H5_PAY_UNIFIED_ORDER_ERROR = "H5支付统一下单失败";
     public static final String JSAPI_PAY_SIGN_ERROR = "JSAPI支付信息签名失败";
+    public static final String TRANSACTION_QUERY_ERROR = "微信支付订单查询失败";
 
 }

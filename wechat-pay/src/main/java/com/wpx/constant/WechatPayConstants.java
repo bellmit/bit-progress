@@ -5,7 +5,7 @@ package com.wpx.constant;
  * create on 2021/7/19 21:29
  * @Description：微信支付相关常量
  */
-public class WeChatPayConstants {
+public class WechatPayConstants {
 
     /**
      * 签名类型
