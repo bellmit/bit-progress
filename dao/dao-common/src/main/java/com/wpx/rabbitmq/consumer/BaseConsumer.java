@@ -5,7 +5,7 @@ import com.rabbitmq.client.Channel;
 import com.wpx.constant.RabbitMQConstant;
 import com.wpx.constant.RedisKeyPrefix;
 import com.wpx.rabbitmq.property.RabbitMQProperties;
-import com.wpx.util.RedisCacheUtil;
+import com.wpx.util.RedisCacheUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
@@ -21,7 +21,7 @@ import java.util.Map;
 public abstract class BaseConsumer {
 
     @Autowired
-    private RedisCacheUtil redisCacheUtil;
+    private RedisCacheUtils redisCacheUtils;
 
     /**
      * 消息幂等性
@@ -37,11 +37,11 @@ public abstract class BaseConsumer {
         String messageIdentifier = String.valueOf(headers.get(RabbitMQConstant.IDENTIFIER));
         log.info("consumedIdentifier examine [{}]", messageIdentifier);
         String consumedIdentifierKey = RedisKeyPrefix.rabbitMQConsumedIdentifier(String.valueOf(day));
-        String identifier = redisCacheUtil.getForHash(consumedIdentifierKey, messageIdentifier);
+        String identifier = redisCacheUtils.getForHash(consumedIdentifierKey, messageIdentifier);
         if (StringUtils.isEmpty(identifier)) {
             log.info("consumeMessage start message [{}]", message);
-            redisCacheUtil.putForHash(consumedIdentifierKey, messageIdentifier, messageIdentifier);
-            redisCacheUtil.expire(consumedIdentifierKey);
+            redisCacheUtils.putForHash(consumedIdentifierKey, messageIdentifier, messageIdentifier);
+            redisCacheUtils.expire(consumedIdentifierKey);
             return Boolean.TRUE;
         } else {
             log.info("consumeMessage is repeat message [{}]", message);
@@ -68,7 +68,7 @@ public abstract class BaseConsumer {
         String day = String.valueOf(headers.get(RabbitMQConstant.DAY));
         String identifier = String.valueOf(headers.get(RabbitMQConstant.IDENTIFIER));
         String consumedIdentifierKey = RedisKeyPrefix.rabbitMQConsumedIdentifier(day);
-        redisCacheUtil.deleteForHash(consumedIdentifierKey, identifier);
+        redisCacheUtils.deleteForHash(consumedIdentifierKey, identifier);
         log.info("consumedIdentifier is deleteForRedis");
 
         if (retryTimes > maxRetryTimes) {

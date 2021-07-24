@@ -4,7 +4,7 @@ import com.wpx.constant.RabbitMQConstant;
 import com.wpx.constant.RedisKeyPrefix;
 import com.wpx.rabbitmq.config.RabbitMQDefaultConfig;
 import com.wpx.rabbitmq.property.RabbitMQProperties;
-import com.wpx.util.RedisCacheUtil;
+import com.wpx.util.RedisCacheUtils;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public abstract class BaseProducer {
     private RabbitMQDefaultConfig rabbitMQDefaultConfig;
 
     @Autowired
-    private RedisCacheUtil redisCacheUtil;
+    private RedisCacheUtils redisCacheUtils;
 
     /**
      * 创建并发送消息，使用默认的重试次数
@@ -49,8 +49,8 @@ public abstract class BaseProducer {
         int day = LocalDateTime.now().getDayOfYear();
         Integer maxRetryTimesConfig = null == maxRetryTimes ? rabbitMQDefaultConfig.getMaxRetryTimes() : maxRetryTimes;
         String identifierKey = RedisKeyPrefix.rabbitMQIdentifier(day);
-        Long identifier = redisCacheUtil.incrementForValue(identifierKey, 1L);
-        redisCacheUtil.expire(identifierKey);
+        Long identifier = redisCacheUtils.incrementForValue(identifierKey, 1L);
+        redisCacheUtils.expire(identifierKey);
 
         rabbitTemplate.convertAndSend(exchangeName, routingKey, t, message -> {
                     MessageProperties messageProperties = message.getMessageProperties();

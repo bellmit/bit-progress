@@ -41,4 +41,12 @@ public class WechatUrl {
      */
     public static final String OUT_TRADE_NO_QUERY_URL = "https://api.mch.weixin.qq.com/v3/pay/transactions/out-trade-no/";
 
+    /**
+     * 关闭订单请求地址
+     * 根据商户订单号关闭
+     * POST
+     * https://api.mch.weixin.qq.com/v3/pay/transactions/out-trade-no/{out_trade_no}/close
+     */
+    public static final String ORDER_CLOSE_URL = "https://api.mch.weixin.qq.com/v3/pay/transactions/out-trade-no/{out_trade_no}/close";
+
 }

@@ -17,4 +17,9 @@ public class WechatPayConstants {
      */
     public static final String PACKAGE = "Sign=WXPay";
 
+    /**
+     * out_trade_no占位符
+     */
+    public static final String OUT_TRADE_NO_PLACEHOLDER = "{out_trade_no}";
+
 }

@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.wpx.common.util.CollectionUtils;
 import com.wpx.common.util.StringUtils;
-import com.wpx.util.RedisCacheUtil;
+import com.wpx.util.RedisCacheUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class BaseRedisService {
 
     @Autowired
-    private RedisCacheUtil redisCacheUtil;
+    private RedisCacheUtils redisCacheUtils;
 
     /**
      * 缓存3天
@@ -116,7 +116,7 @@ public class BaseRedisService {
      * @param    timeout
      */
     public void expire(String key, long timeout, TimeUnit timeUnit) {
-        redisCacheUtil.expire(key, timeout, timeUnit);
+        redisCacheUtils.expire(key, timeout, timeUnit);
     }
 
 
@@ -127,7 +127,7 @@ public class BaseRedisService {
      * @param value
      */
     public void setForValue(String key, String value) {
-        redisCacheUtil.setForValue(key, value);
+        redisCacheUtils.setForValue(key, value);
     }
 
     /**
@@ -138,7 +138,7 @@ public class BaseRedisService {
      */
     public <T> void setForValue(String key, T data) {
         String value = Objects.isNull(data) ? "" : JSON.toJSONString(data);
-        redisCacheUtil.setForValue(key, value);
+        redisCacheUtils.setForValue(key, value);
     }
 
     /**
@@ -172,7 +172,7 @@ public class BaseRedisService {
      * @param timeUnit  时间单位
      */
     public void setForValueTtl(String key, String value, Long timeout, TimeUnit timeUnit) {
-        redisCacheUtil.setForValueTtl(key, value, timeout, timeUnit);
+        redisCacheUtils.setForValueTtl(key, value, timeout, timeUnit);
     }
 
     /**
@@ -194,7 +194,7 @@ public class BaseRedisService {
      * @return   Long  自增后的数值
      */
     public Long incrementForValue(String key, Long delta){
-        return redisCacheUtil.incrementForValue(key, delta);
+        return redisCacheUtils.incrementForValue(key, delta);
     }
 
     /**
@@ -205,7 +205,7 @@ public class BaseRedisService {
      * @return   Long  自增后的值
      */
     public Long incrementForValue(String key, Integer delta){
-        return redisCacheUtil.incrementForValue(key, delta);
+        return redisCacheUtils.incrementForValue(key, delta);
     }
 
     /**
@@ -214,7 +214,7 @@ public class BaseRedisService {
      * @param key
      */
     public String getForValue(String key) {
-        return redisCacheUtil.getForValue(key);
+        return redisCacheUtils.getForValue(key);
     }
 
     /**
@@ -224,7 +224,7 @@ public class BaseRedisService {
      * @param target
      */
     public <T> T getForValue(String key, Class<T> target) {
-        return strToObject(redisCacheUtil.getForValue(key), target);
+        return strToObject(redisCacheUtils.getForValue(key), target);
     }
 
     /**
@@ -234,7 +234,7 @@ public class BaseRedisService {
      * @param target
      */
     public <T> List<T> listForValue(String key, Class<T> target) {
-        return strToList(redisCacheUtil.getForValue(key), target);
+        return strToList(redisCacheUtils.getForValue(key), target);
     }
 
     /**
@@ -244,7 +244,7 @@ public class BaseRedisService {
      * @param hashKey
      */
     public String getForHash(String key, String hashKey) {
-        return redisCacheUtil.getForHash(key, hashKey);
+        return redisCacheUtils.getForHash(key, hashKey);
     }
 
     /**
@@ -255,7 +255,7 @@ public class BaseRedisService {
      * @param target
      */
     public <T> T getForHash(String key, String hashKey, Class<T> target) {
-        return strToObject(redisCacheUtil.getForHash(key, hashKey), target);
+        return strToObject(redisCacheUtils.getForHash(key, hashKey), target);
     }
 
     /**
@@ -265,7 +265,7 @@ public class BaseRedisService {
      * @param hashKeySet
      */
     public List<String> multiGetForHash(String key, Set<String> hashKeySet) {
-        return redisCacheUtil.multiGetForHash(key, hashKeySet);
+        return redisCacheUtils.multiGetForHash(key, hashKeySet);
     }
 
     /**
@@ -276,7 +276,7 @@ public class BaseRedisService {
      * @param target
      */
     public <T> List<T> multiGetForHash(String key, Set<String> hashKeySet, Class<T> target) {
-        return listStrToList(redisCacheUtil.multiGetForHash(key, hashKeySet), target);
+        return listStrToList(redisCacheUtils.multiGetForHash(key, hashKeySet), target);
     }
 
     /**
@@ -285,7 +285,7 @@ public class BaseRedisService {
      * @param key
      */
     public Set<String> keysForHash(String key) {
-        return redisCacheUtil.keysForHash(key);
+        return redisCacheUtils.keysForHash(key);
     }
 
     /**
@@ -294,7 +294,7 @@ public class BaseRedisService {
      * @param key
      */
     public List<String> valuesForHash(String key) {
-        return redisCacheUtil.valuesForHash(key);
+        return redisCacheUtils.valuesForHash(key);
     }
 
     /**
@@ -304,7 +304,7 @@ public class BaseRedisService {
      * @param target
      */
     public <T> List<T> valuesForHash(String key, Class<T> target) {
-        return listStrToList(redisCacheUtil.valuesForHash(key), target);
+        return listStrToList(redisCacheUtils.valuesForHash(key), target);
     }
 
     /**
@@ -313,7 +313,7 @@ public class BaseRedisService {
      * @param key
      */
     public Map<String, String> entriesForHash(String key) {
-        return redisCacheUtil.entriesForHash(key);
+        return redisCacheUtils.entriesForHash(key);
     }
 
     /**
@@ -323,7 +323,7 @@ public class BaseRedisService {
      * @param target
      */
     public <T> Map<String, T> entriesForHash(String key, Class<T> target) {
-        return conversionMap(redisCacheUtil.entriesForHash(key), target);
+        return conversionMap(redisCacheUtils.entriesForHash(key), target);
     }
 
     /**
@@ -332,7 +332,7 @@ public class BaseRedisService {
      * @param key
      */
     public String leftPopForList(String key) {
-        return redisCacheUtil.leftPopForList(key);
+        return redisCacheUtils.leftPopForList(key);
     }
 
     /**
@@ -342,7 +342,7 @@ public class BaseRedisService {
      * @param target
      */
     public <T> T leftPopForList(String key, Class<T> target) {
-        return strToObject(redisCacheUtil.leftPopForList(key), target);
+        return strToObject(redisCacheUtils.leftPopForList(key), target);
     }
 
     /**
@@ -351,7 +351,7 @@ public class BaseRedisService {
      * @param key
      */
     public String rightPopForList(String key) {
-        return redisCacheUtil.rightPopForList(key);
+        return redisCacheUtils.rightPopForList(key);
     }
 
     /**
@@ -361,7 +361,7 @@ public class BaseRedisService {
      * @param target
      */
     public <T> T rightPopForList(String key, Class<T> target) {
-        return strToObject(redisCacheUtil.rightPopForList(key), target);
+        return strToObject(redisCacheUtils.rightPopForList(key), target);
     }
 
     /**
@@ -372,7 +372,7 @@ public class BaseRedisService {
      * @param end
      */
     public List<String> rangeForList(String key, long start, long end) {
-        return redisCacheUtil.rangeForList(key, start, end);
+        return redisCacheUtils.rangeForList(key, start, end);
     }
 
     /**
@@ -384,7 +384,7 @@ public class BaseRedisService {
      * @param target
      */
     public <T> List<T> rangeForList(String key, long start, long end, Class<T> target) {
-        return listStrToList(redisCacheUtil.rangeForList(key, start, end), target);
+        return listStrToList(redisCacheUtils.rangeForList(key, start, end), target);
     }
 
     /**
@@ -393,7 +393,7 @@ public class BaseRedisService {
      * @param key
      */
     public String popForSet(String key) {
-        return redisCacheUtil.popForSet(key);
+        return redisCacheUtils.popForSet(key);
     }
 
     /**
@@ -403,7 +403,7 @@ public class BaseRedisService {
      * @param target
      */
     public <T> T popForSet(String key, Class<T> target) {
-        return strToObject(redisCacheUtil.popForSet(key), target);
+        return strToObject(redisCacheUtils.popForSet(key), target);
     }
 
     /**
@@ -413,7 +413,7 @@ public class BaseRedisService {
      * @param count
      */
     public List<String> popForSet(String key, long count) {
-        return redisCacheUtil.popForSet(key, count);
+        return redisCacheUtils.popForSet(key, count);
     }
 
     /**
@@ -424,7 +424,7 @@ public class BaseRedisService {
      * @param target
      */
     public <T> List<T> popForSet(String key, long count, Class<T> target) {
-        return listStrToList(redisCacheUtil.popForSet(key, count), target);
+        return listStrToList(redisCacheUtils.popForSet(key, count), target);
     }
 
     /**
@@ -433,7 +433,7 @@ public class BaseRedisService {
      * @param key
      */
     public Set<String> membersForSet(String key) {
-        return redisCacheUtil.membersForSet(key);
+        return redisCacheUtils.membersForSet(key);
     }
 
     /**
@@ -443,7 +443,7 @@ public class BaseRedisService {
      * @param target
      */
     public <T> Set<T> membersForSet(String key, Class<T> target) {
-        return setStrToSet(redisCacheUtil.membersForSet(key), target);
+        return setStrToSet(redisCacheUtils.membersForSet(key), target);
     }
 
 }

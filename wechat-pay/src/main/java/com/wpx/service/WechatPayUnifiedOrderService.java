@@ -104,8 +104,7 @@ public class WechatPayUnifiedOrderService {
             String paySignCode = generatePaySignCode(appid, timestamp, nonceStr, appPayOrder.getPrepayid());
             String paySign = paySign(paySignCode, filePath);
             appPayOrder.setSign(paySign);
-        } catch (NoSuchAlgorithmException | InvalidKeyException | SignatureException | IOException
-                | InvalidKeySpecException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new CustomizeException(ExceptionMessage.APP_PAY_SIGN_ERROR);
         }

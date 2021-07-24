@@ -16,12 +16,14 @@ import java.util.stream.Collectors;
  **/
 @Component
 @Slf4j
-public class RedisCacheUtil {
+public class RedisCacheUtils {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
-    //缓存3天
+    /**
+     *  缓存3天
+     */
     private static final Long TTL = 3L * 24 * 60 * 60;
 
     /**
