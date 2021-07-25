@@ -2,20 +2,20 @@ package com.wpx.service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.wpx.common.constant.CharacterConstants;
-import com.wpx.common.constant.StringConstants;
-import com.wpx.common.exception.CustomizeException;
-import com.wpx.common.exception.ExceptionMessage;
-import com.wpx.common.util.StringUtils;
+import com.wpx.constant.CharacterConstants;
+import com.wpx.constant.StringConstants;
+import com.wpx.exception.CustomizeException;
+import com.wpx.okhttp.util.StringUtils;
 import com.wpx.constant.WechatPayConstants;
 import com.wpx.constant.WechatUrl;
+import com.wpx.exception.WechatPayExceptionMessage;
 import com.wpx.model.apppay.AppPayOrder;
 import com.wpx.model.apppay.AppPayUnifiedOrder;
 import com.wpx.model.h5pay.H5PayOrder;
 import com.wpx.model.h5pay.H5PayUnifiedOrder;
 import com.wpx.model.jsapi.JsApiPayOrder;
 import com.wpx.model.jsapi.JsApiUnifiedOrder;
-import com.wpx.util.HttpClientUtils;
+import com.wpx.okhttp.util.OkHttpClientUtils;
 import okhttp3.MediaType;
 import sun.misc.BASE64Decoder;
 
@@ -52,7 +52,7 @@ public class WechatPayUnifiedOrderService {
         String nonceStr = StringUtils.randomStringByUUID();
         jsApiPayOrder.setNonceStr(nonceStr);
         try {
-            String result = HttpClientUtils.doPost(WechatUrl.JS_API_UNIFIED_URL, body, mediaType);
+            String result = OkHttpClientUtils.doPost(WechatUrl.JS_API_UNIFIED_URL, body, mediaType);
             JSONObject object = JSON.parseObject(result);
             StringBuilder builder = new StringBuilder();
             object.forEach((key, value) -> builder.append(key).append(StringConstants.EQUAL_SIGN).append(value));
@@ -60,7 +60,7 @@ public class WechatPayUnifiedOrderService {
             jsApiPayOrder.setPackaged(packaged);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new CustomizeException(ExceptionMessage.JSAPI_UNIFIED_ORDER_ERROR);
+            throw new CustomizeException(WechatPayExceptionMessage.JSAPI_UNIFIED_ORDER_ERROR);
         }
         try {
             String paySignCode = generatePaySignCode(appid, timestamp, nonceStr, jsApiPayOrder.getPackaged());
@@ -69,7 +69,7 @@ public class WechatPayUnifiedOrderService {
         } catch (NoSuchAlgorithmException | InvalidKeyException | SignatureException | IOException
                 | InvalidKeySpecException e) {
             e.printStackTrace();
-            throw new CustomizeException(ExceptionMessage.JSAPI_PAY_SIGN_ERROR);
+            throw new CustomizeException(WechatPayExceptionMessage.JSAPI_PAY_SIGN_ERROR);
         }
         return jsApiPayOrder;
     }
@@ -90,7 +90,7 @@ public class WechatPayUnifiedOrderService {
         appPayOrder.setNoncestr(nonceStr);
         appPayOrder.setPackaged(WechatPayConstants.PACKAGE);
         try {
-            String result = HttpClientUtils.doPost(WechatUrl.APP_PAY_UNIFIED_URL, body, mediaType);
+            String result = OkHttpClientUtils.doPost(WechatUrl.APP_PAY_UNIFIED_URL, body, mediaType);
             JSONObject object = JSON.parseObject(result);
             StringBuilder builder = new StringBuilder();
             object.forEach((key, value) -> builder.append(value));
@@ -98,7 +98,7 @@ public class WechatPayUnifiedOrderService {
             appPayOrder.setPrepayid(prepayid);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new CustomizeException(ExceptionMessage.APP_PAY_UNIFIED_ORDER_ERROR);
+            throw CustomizeException.error(WechatPayExceptionMessage.APP_PAY_UNIFIED_ORDER_ERROR);
         }
         try {
             String paySignCode = generatePaySignCode(appid, timestamp, nonceStr, appPayOrder.getPrepayid());
@@ -106,7 +106,7 @@ public class WechatPayUnifiedOrderService {
             appPayOrder.setSign(paySign);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new CustomizeException(ExceptionMessage.APP_PAY_SIGN_ERROR);
+            throw CustomizeException.error(WechatPayExceptionMessage.APP_PAY_SIGN_ERROR);
         }
         return appPayOrder;
     }
@@ -118,11 +118,11 @@ public class WechatPayUnifiedOrderService {
         String body = JSON.toJSONString(unifiedOrder);
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         try {
-            String result = HttpClientUtils.doPost(WechatUrl.H5_PAY_UNIFIED_URL, body, mediaType);
+            String result = OkHttpClientUtils.doPost(WechatUrl.H5_PAY_UNIFIED_URL, body, mediaType);
             return JSON.parseObject(result, H5PayOrder.class);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new CustomizeException(ExceptionMessage.H5_PAY_UNIFIED_ORDER_ERROR);
+            throw new CustomizeException(WechatPayExceptionMessage.H5_PAY_UNIFIED_ORDER_ERROR);
         }
     }
 

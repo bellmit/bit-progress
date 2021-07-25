@@ -1,10 +1,10 @@
 package com.wpx.aspect;
 
 import com.alibaba.fastjson.JSON;
-import com.wpx.common.util.NumberUtils;
+import com.wpx.okhttp.util.NumberUtils;
 import com.wpx.model.system.managerlog.ManagerLog;
 import com.wpx.model.system.managerlog.ManagerLogMapper;
-import com.wpx.util.UserHelper;
+import com.wpx.okhttp.util.UserHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;

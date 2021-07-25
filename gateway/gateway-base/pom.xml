@@ -15,7 +15,7 @@
 
         <dependency>
             <groupId>com.wpx</groupId>
-            <artifactId>common</artifactId>
+            <artifactId>common-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

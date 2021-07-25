@@ -1,9 +1,9 @@
 package com.wpx.interceptor;
 
-import com.wpx.common.constant.VerifyConstant;
-import com.wpx.common.exception.CustomizeException;
-import com.wpx.common.exception.ExceptionMessage;
-import com.wpx.common.util.StringUtils;
+import com.wpx.constant.VerifyConstant;
+import com.wpx.exception.CustomizeException;
+import com.wpx.exception.ExceptionMessage;
+import com.wpx.okhttp.util.StringUtils;
 import com.wpx.property.ServerBaseProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.wpx.controller.user.manager;
 
-import com.wpx.common.model.ResultVO;
+import com.wpx.model.ResultVO;
 import com.wpx.model.user.manager.pojo.cms.LoginSuccessVO;
 import com.wpx.model.user.manager.pojo.cms.ManagerLoginDTO;
 import com.wpx.service.user.manager.LoginService;

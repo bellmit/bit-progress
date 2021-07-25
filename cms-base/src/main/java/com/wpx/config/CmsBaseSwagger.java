@@ -1,7 +1,7 @@
 package com.wpx.config;
 
 import com.fasterxml.classmate.TypeResolver;
-import com.wpx.common.model.ResultVO;
+import com.wpx.model.ResultVO;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

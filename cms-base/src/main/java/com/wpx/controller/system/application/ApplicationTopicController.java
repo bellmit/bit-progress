@@ -2,7 +2,7 @@ package com.wpx.controller.system.application;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wpx.common.model.ResultVO;
+import com.wpx.model.ResultVO;
 import com.wpx.model.system.applicationtopic.pojo.cms.ApplicationTopicCmsAddDTO;
 import com.wpx.model.system.applicationtopic.pojo.cms.ApplicationTopicCmsQueryDTO;
 import com.wpx.model.system.applicationtopic.pojo.cms.ApplicationTopicCmsUpdateDTO;

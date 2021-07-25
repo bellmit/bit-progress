@@ -1,6 +1,6 @@
 package com.wpx.nacos.service;
 
-import com.wpx.common.util.StringUtils;
+import com.wpx.okhttp.util.StringUtils;
 import com.wpx.exception.envm.AuthException;
 import com.wpx.model.result.AuthResult;
 import com.wpx.nacos.route.GatewayRoute;
@@ -24,7 +24,7 @@ public class NacosRouteMatchService {
     public void checkRole(AuthResult authResult, String method, String url) {
         String key = method.toUpperCase() + StringUtils.SPACE + url;
         List<String> rouses = GatewayRoute.getRouteRouseList(key);
-        if (com.wpx.common.util.CollectionUtils.nonEmpty(rouses)) {
+        if (com.wpx.okhttp.util.CollectionUtils.nonEmpty(rouses)) {
             String role = authResult.getRole();
             boolean hasRole = rouses.contains(role);
             authResult.setResult(hasRole);

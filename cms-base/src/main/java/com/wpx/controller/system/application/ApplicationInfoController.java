@@ -1,6 +1,6 @@
 package com.wpx.controller.system.application;
 
-import com.wpx.common.model.ResultVO;
+import com.wpx.model.ResultVO;
 import com.wpx.model.system.applicationinfo.pojo.cms.ApplicationInfoCmsAddDTO;
 import com.wpx.model.system.applicationinfo.pojo.cms.ApplicationInfoCmsQueryDTO;
 import com.wpx.model.system.applicationinfo.pojo.cms.ApplicationInfoCmsUpdateDTO;

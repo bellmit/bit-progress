@@ -8,17 +8,17 @@ import com.wpx.model.system.applicationinfo.pojo.cms.ApplicationInfoCmsAddDTO;
 import com.wpx.model.system.applicationinfo.pojo.cms.ApplicationInfoCmsQueryDTO;
 import com.wpx.model.system.applicationinfo.pojo.cms.ApplicationInfoCmsUpdateDTO;
 import com.wpx.model.system.applicationinfo.pojo.cms.ApplicationInfoCmsVO;
-import com.wpx.util.BeanUtils;
+import com.wpx.okhttp.util.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import com.wpx.common.exception.ExceptionMessage;
+import com.wpx.exception.ExceptionMessage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import java.util.Set;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wpx.util.ConversionBeanUtils;
+import com.wpx.okhttp.util.ConversionBeanUtils;
 import java.time.LocalDateTime;
 import org.springframework.transaction.annotation.Transactional;
-import com.wpx.util.Assert;
+import com.wpx.okhttp.util.Assert;
 /**
 * <p>
     * 应用配置信息 服务类

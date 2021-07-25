@@ -1,6 +1,6 @@
 package com.wpx.service;
 
-import com.wpx.common.util.StringUtils;
+import com.wpx.okhttp.util.StringUtils;
 import com.wpx.exception.envm.AuthException;
 import com.wpx.model.result.AuthResult;
 import com.wpx.shiro.service.ShiroTokenService;

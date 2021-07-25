@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.wpx.constant.WechatPayConstants;
 import com.wpx.constant.WechatUrl;
-import com.wpx.util.HttpClientUtils;
+import com.wpx.okhttp.util.OkHttpClientUtils;
 import okhttp3.MediaType;
 
 import java.io.IOException;
@@ -28,7 +28,7 @@ public class WechatPayCloseService {
         JSONObject object = new JSONObject();
         object.put("mchid", mchid);
         try {
-            HttpClientUtils.doPost(url, JSON.toJSONString(object), mediaType);
+            OkHttpClientUtils.doPost(url, JSON.toJSONString(object), mediaType);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -4,7 +4,7 @@ import com.wpx.constant.RabbitMQConstant;
 import com.wpx.constant.RedisKeyPrefix;
 import com.wpx.rabbitmq.config.RabbitMQDefaultConfig;
 import com.wpx.rabbitmq.property.RabbitMQProperties;
-import com.wpx.util.RedisCacheUtils;
+import com.wpx.okhttp.util.RedisCacheUtils;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,9 +2,9 @@ package com.wpx.redis;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.wpx.common.util.CollectionUtils;
-import com.wpx.common.util.StringUtils;
-import com.wpx.util.RedisCacheUtils;
+import com.wpx.okhttp.util.CollectionUtils;
+import com.wpx.okhttp.util.StringUtils;
+import com.wpx.okhttp.util.RedisCacheUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

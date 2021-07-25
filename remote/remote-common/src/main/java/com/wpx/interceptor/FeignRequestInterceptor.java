@@ -1,6 +1,6 @@
 package com.wpx.interceptor;
 
-import com.wpx.common.constant.VerifyConstant;
+import com.wpx.constant.VerifyConstant;
 import com.wpx.property.NacosServerProperties;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;

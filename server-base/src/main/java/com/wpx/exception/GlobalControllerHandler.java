@@ -1,10 +1,7 @@
 package com.wpx.exception;
 
-import com.wpx.common.exception.CustomizeException;
-import com.wpx.common.exception.ExceptionMessage;
-import com.wpx.common.exception.ValidationException;
-import com.wpx.common.util.StringUtils;
-import com.wpx.common.model.ResultVO;
+import com.wpx.okhttp.util.StringUtils;
+import com.wpx.model.ResultVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

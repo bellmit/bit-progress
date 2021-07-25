@@ -2,10 +2,10 @@ package com.wpx.controller.user.manager;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wpx.common.model.ResultVO;
+import com.wpx.model.ResultVO;
 import com.wpx.model.user.manager.pojo.cms.*;
 import com.wpx.service.user.manager.ManagerService;
-import com.wpx.util.UserHelper;
+import com.wpx.okhttp.util.UserHelper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

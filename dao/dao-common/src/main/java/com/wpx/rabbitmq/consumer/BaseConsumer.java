@@ -5,7 +5,7 @@ import com.rabbitmq.client.Channel;
 import com.wpx.constant.RabbitMQConstant;
 import com.wpx.constant.RedisKeyPrefix;
 import com.wpx.rabbitmq.property.RabbitMQProperties;
-import com.wpx.util.RedisCacheUtils;
+import com.wpx.okhttp.util.RedisCacheUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
