@@ -22,6 +22,7 @@
         <module>server-base</module>
         <module>web-base</module>
         <module>wechat-pay</module>
+        <module>login</module>
     </modules>
 
     <properties>

@@ -89,3 +89,4 @@ buildNumber.properties
 /remote-gateway-web/target/
 /cms-base/src/test/java/
 /web-base/src/test/java/
+*/test/java/
