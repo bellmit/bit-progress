@@ -66,6 +66,8 @@ spring:
       max-request-size: 8MB
       location: ${user.dir}/tmp
 feign:
+  sentinel:
+    enabled: true
   client:
     config:
       default:

@@ -20,6 +20,8 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
+        <!-- Alibaba assembly -->
+
         <!-- spring-cloud-alibaba-nacos -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -35,6 +37,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>

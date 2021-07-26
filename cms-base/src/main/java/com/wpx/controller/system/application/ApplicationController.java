@@ -31,13 +31,13 @@ public class ApplicationController {
     @GetMapping
     @ApiOperation("查询详情")
     public ResultVO<ApplicationCmsVO> findById(@RequestParam @ApiParam("applicationId") Long applicationId) {
-        return ResultVO.success(applicationService.findById(applicationId));
+        return ResultVO.successData(applicationService.findById(applicationId));
     }
 
     @PostMapping
     @ApiOperation("添加")
     public ResultVO<ApplicationCmsVO> save(@RequestBody @Valid ApplicationCmsAddDTO applicationAddDTO) {
-        return ResultVO.success(applicationService.saveApplication(applicationAddDTO));
+        return ResultVO.successData(applicationService.saveApplication(applicationAddDTO));
     }
 
     @DeleteMapping
@@ -50,25 +50,25 @@ public class ApplicationController {
     @PutMapping
     @ApiOperation("修改")
     public ResultVO<ApplicationCmsVO> update(@RequestBody @Valid ApplicationCmsUpdateDTO applicationUpdateDTO) {
-        return ResultVO.success(applicationService.updateApplication(applicationUpdateDTO));
+        return ResultVO.successData(applicationService.updateApplication(applicationUpdateDTO));
     }
 
     @PutMapping("disabled")
     @ApiOperation("禁用和启用应用信息")
     public ResultVO<ApplicationCmsVO> disabled(@RequestBody @Valid ApplicationCmsDisabledDTO disabledDTO) {
-        return ResultVO.success(applicationService.disabled(disabledDTO));
+        return ResultVO.successData(applicationService.disabled(disabledDTO));
     }
 
     @GetMapping("page")
     @ApiOperation("分页")
     public ResultVO<IPage<ApplicationCmsVO>> page(@ModelAttribute ApplicationCmsQueryDTO applicationQueryDTO, Page page) {
-        return ResultVO.success(applicationService.findApplicationPage(applicationQueryDTO, page));
+        return ResultVO.successData(applicationService.findApplicationPage(applicationQueryDTO, page));
     }
 
     @GetMapping("list")
     @ApiOperation("应用列表")
     public ResultVO<List<ApplicationMessageVO>> list() {
-        return ResultVO.success(applicationService.listApplicationMessage());
+        return ResultVO.successData(applicationService.listApplicationMessage());
     }
 
 }

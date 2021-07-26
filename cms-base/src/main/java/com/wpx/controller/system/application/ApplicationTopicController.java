@@ -32,13 +32,13 @@ public class ApplicationTopicController {
     @GetMapping
     @ApiOperation("查询详情")
     public ResultVO<ApplicationTopicCmsVO> findById(@RequestParam @ApiParam("applicationTopicId") Long applicationTopicId) {
-        return ResultVO.success(applicationTopicService.findById(applicationTopicId));
+        return ResultVO.successData(applicationTopicService.findById(applicationTopicId));
     }
 
     @PostMapping
     @ApiOperation("添加")
     public ResultVO<ApplicationTopicCmsVO> save(@RequestBody @Valid ApplicationTopicCmsAddDTO applicationTopicAddDTO) {
-        return ResultVO.success(applicationTopicService.saveApplicationTopic(applicationTopicAddDTO));
+        return ResultVO.successData(applicationTopicService.saveApplicationTopic(applicationTopicAddDTO));
     }
 
     @DeleteMapping
@@ -51,13 +51,13 @@ public class ApplicationTopicController {
     @PutMapping
     @ApiOperation("修改")
     public ResultVO<ApplicationTopicCmsVO> update(@RequestBody @Valid ApplicationTopicCmsUpdateDTO applicationTopicUpdateDTO) {
-        return ResultVO.success(applicationTopicService.updateApplicationTopic(applicationTopicUpdateDTO));
+        return ResultVO.successData(applicationTopicService.updateApplicationTopic(applicationTopicUpdateDTO));
     }
 
     @GetMapping("page")
     @ApiOperation("分页")
     public ResultVO<IPage<ApplicationTopicCmsVO>> page(@ModelAttribute ApplicationTopicCmsQueryDTO queryDTO, Page page) {
-        return ResultVO.success(applicationTopicService.findApplicationTopicPage(queryDTO, page));
+        return ResultVO.successData(applicationTopicService.findApplicationTopicPage(queryDTO, page));
     }
 
 }

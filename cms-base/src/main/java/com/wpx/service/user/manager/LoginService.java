@@ -97,7 +97,7 @@ public class LoginService {
      */
     public String generateToken(String userId, String role) {
         LoginDTO loginDTO = new LoginDTO(userId, role);
-        return gatewayCmsRemoteService.login(loginDTO);
+        return gatewayCmsRemoteService.login(loginDTO).getData();
     }
 
     /**

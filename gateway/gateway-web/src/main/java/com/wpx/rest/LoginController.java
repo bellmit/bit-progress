@@ -1,5 +1,6 @@
 package com.wpx.rest;
 
+import com.wpx.model.ResultVO;
 import com.wpx.model.login.TokenCheckDTO;
 import com.wpx.model.login.UserLoginDTO;
 import com.wpx.model.login.UserLogoutDTO;
@@ -25,8 +26,8 @@ public class LoginController {
      * @param dto
      */
     @PostMapping("login")
-    public String login(@RequestBody UserLoginDTO dto) {
-        return loginService.login(dto.getUserId(), dto.getRole());
+    public ResultVO<String> login(@RequestBody UserLoginDTO dto) {
+        return ResultVO.successData(loginService.login(dto.getUserId(), dto.getRole()));
     }
 
     /**
@@ -35,8 +36,9 @@ public class LoginController {
      * @param dto
      */
     @PostMapping("logout")
-    public void logout(@RequestBody UserLogoutDTO dto) {
+    public ResultVO logout(@RequestBody UserLogoutDTO dto) {
         loginService.logout(dto.getUserId());
+        return ResultVO.success();
     }
 
     /**
@@ -45,8 +47,8 @@ public class LoginController {
      * @param token
      */
     @GetMapping("userId")
-    public String getUserIdInToken(@RequestParam String token) {
-        return loginService.getUserIdInToken(token);
+    public ResultVO<String> getUserIdInToken(@RequestParam String token) {
+        return ResultVO.successData(loginService.getUserIdInToken(token));
     }
 
     /**
@@ -55,8 +57,8 @@ public class LoginController {
      * @param checkDTO
      */
     @PostMapping("checkToken")
-    public Boolean checkToken(@RequestBody TokenCheckDTO checkDTO) {
-        return loginService.checkToken(checkDTO.getToken());
+    public ResultVO<Boolean> checkToken(@RequestBody TokenCheckDTO checkDTO) {
+        return ResultVO.successData(loginService.checkToken(checkDTO.getToken()));
     }
 
 }

@@ -29,19 +29,19 @@ public class ManagerController {
     @GetMapping
     @ApiOperation("获取管理员信息")
     public ResultVO<ManagerCmsVO> findById(@RequestParam("managerId") Integer managerId) {
-        return ResultVO.success(managerService.findById(managerId, UserHelper.getUserId()));
+        return ResultVO.successData(managerService.findById(managerId, UserHelper.getUserId()));
     }
 
     @PostMapping
     @ApiOperation("添加")
     public ResultVO<ManagerCmsVO> add(@RequestBody @Valid ManagerCmsAddDTO addDTO) {
-        return ResultVO.success(managerService.add(addDTO));
+        return ResultVO.successData(managerService.add(addDTO));
     }
 
     @PutMapping
     @ApiOperation("修改")
     public ResultVO<ManagerCmsVO> update(@RequestBody @Valid ManagerCmsUpdateDTO managerUpdateDTO) {
-        return ResultVO.success(managerService.update(managerUpdateDTO));
+        return ResultVO.successData(managerService.update(managerUpdateDTO));
     }
 
     @DeleteMapping
@@ -54,25 +54,25 @@ public class ManagerController {
     @GetMapping("page")
     @ApiOperation("分页列表")
     public ResultVO<IPage<ManagerCmsVO>> findPage(@ModelAttribute ManagerCmsQueryDTO managerQueryVO, Page page) {
-        return ResultVO.success(managerService.findPage(managerQueryVO, page));
+        return ResultVO.successData(managerService.findPage(managerQueryVO, page));
     }
 
     @PutMapping("password")
     @ApiOperation("重置密码")
     public ResultVO<ManagerCmsVO> resetPassword(@RequestBody @Valid ManagerResetPasswordDTO managerResetPasswordVO) {
-        return ResultVO.success(managerService.resetPassword(managerResetPasswordVO, UserHelper.getUserId()));
+        return ResultVO.successData(managerService.resetPassword(managerResetPasswordVO, UserHelper.getUserId()));
     }
 
     @PutMapping("state")
     @ApiOperation("禁用|开启")
     public ResultVO<ManagerCmsVO> handleDisabled(@RequestBody @Valid ManagerStateDTO managerStateVO) {
-        return ResultVO.success(managerService.handleDisabled(managerStateVO, UserHelper.getUserId()));
+        return ResultVO.successData(managerService.handleDisabled(managerStateVO, UserHelper.getUserId()));
     }
 
     @PutMapping("role")
     @ApiOperation("禁用|开启")
     public ResultVO<ManagerCmsVO> handleRole(@RequestBody @Valid ManagerRoleDTO managerRoleVO) {
-        return ResultVO.success(managerService.handleRole(managerRoleVO));
+        return ResultVO.successData(managerService.handleRole(managerRoleVO));
     }
 
 }

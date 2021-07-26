@@ -30,7 +30,7 @@ public class LoginController {
     @ApiOperation("登录")
     @PostMapping
     public ResultVO<LoginSuccessVO> login(@RequestBody @Valid ManagerLoginDTO loginDTO) {
-        return ResultVO.success(loginService.login(loginDTO));
+        return ResultVO.successData(loginService.login(loginDTO));
     }
 
 }

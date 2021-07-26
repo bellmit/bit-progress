@@ -35,13 +35,13 @@ public class ApplicationInfoController {
     @GetMapping
     @ApiOperation("查询详情")
     public ResultVO<ApplicationInfoCmsVO> findById(@RequestParam @ApiParam("applicationInfoId") Long applicationInfoId) {
-        return ResultVO.success(applicationInfoService.findById(applicationInfoId));
+        return ResultVO.successData(applicationInfoService.findById(applicationInfoId));
     }
 
     @PostMapping
     @ApiOperation("添加")
     public ResultVO<ApplicationInfoCmsVO> save(@RequestBody @Valid ApplicationInfoCmsAddDTO applicationInfoAddDTO) {
-        return ResultVO.success(applicationInfoService.saveApplicationInfo(applicationInfoAddDTO));
+        return ResultVO.successData(applicationInfoService.saveApplicationInfo(applicationInfoAddDTO));
     }
 
     @DeleteMapping
@@ -54,13 +54,13 @@ public class ApplicationInfoController {
     @PutMapping
     @ApiOperation("修改")
     public ResultVO<ApplicationInfoCmsVO> update(@RequestBody @Valid ApplicationInfoCmsUpdateDTO applicationInfoUpdateDTO) {
-        return ResultVO.success(applicationInfoService.updateApplicationInfo(applicationInfoUpdateDTO));
+        return ResultVO.successData(applicationInfoService.updateApplicationInfo(applicationInfoUpdateDTO));
     }
 
     @GetMapping("page")
     @ApiOperation("分页")
     public ResultVO<IPage<ApplicationInfoCmsVO>> page(@ModelAttribute ApplicationInfoCmsQueryDTO queryDTO, Page page) {
-        return ResultVO.success(applicationInfoService.findApplicationInfoPage(queryDTO, page));
+        return ResultVO.successData(applicationInfoService.findApplicationInfoPage(queryDTO, page));
     }
 }
 

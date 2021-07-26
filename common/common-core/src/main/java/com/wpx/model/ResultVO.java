@@ -99,7 +99,7 @@ public class ResultVO<T> {
      *
      * @param data
      */
-    public static <T> ResultVO<T> success(T data) {
+    public static <T> ResultVO<T> successData(T data) {
         return success(ResultConstants.SUCCESS_CODE, ResultConstants.SUCCESS_MESSAGE, data);
     }
 
