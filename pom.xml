@@ -23,6 +23,7 @@
         <module>web-base</module>
         <module>wechat-pay</module>
         <module>login</module>
+        <module>scheduler</module>
     </modules>
 
     <properties>
@@ -155,6 +156,13 @@
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>
                 <version>${okhttp.version}</version>
+            </dependency>
+
+            <!-- quartz -->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>2.3.0</version>
             </dependency>
 
         </dependencies>
