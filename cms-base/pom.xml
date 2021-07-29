@@ -25,17 +25,22 @@
         </dependency>
         <dependency>
             <groupId>com.wpx</groupId>
-            <artifactId>dao-base</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.wpx</groupId>
             <artifactId>remote-gateway-cms</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.wpx</groupId>
             <artifactId>remote-web-base</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wpx</groupId>
+            <artifactId>dao-base-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wpx</groupId>
+            <artifactId>dao-base-mapper</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

@@ -1,6 +1,6 @@
 package com.wpx.exception;
 
-import com.wpx.okhttp.util.StringUtils;
+import com.wpx.util.StringUtils;
 import com.wpx.model.ResultVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

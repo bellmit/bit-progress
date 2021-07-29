@@ -2,7 +2,7 @@ package com.wpx.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.wpx.constant.VerifyConstant;
-import com.wpx.okhttp.util.StringUtils;
+import com.wpx.util.StringUtils;
 import com.wpx.exception.envm.AuthException;
 import com.wpx.model.result.AuthResult;
 import com.wpx.model.result.Result;

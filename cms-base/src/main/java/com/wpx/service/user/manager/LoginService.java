@@ -2,8 +2,8 @@ package com.wpx.service.user.manager;
 
 import com.wpx.exception.MessageCodes;
 import com.wpx.exception.ValidationException;
-import com.wpx.okhttp.util.BcryptUtils;
-import com.wpx.okhttp.util.StringUtils;
+import com.wpx.util.BcryptUtils;
+import com.wpx.util.StringUtils;
 import com.wpx.gatewaycms.GatewayCmsRemoteService;
 import com.wpx.model.login.LoginDTO;
 import com.wpx.model.login.LogoutDTO;

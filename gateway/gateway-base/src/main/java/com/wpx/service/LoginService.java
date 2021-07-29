@@ -1,6 +1,6 @@
 package com.wpx.service;
 
-import com.wpx.okhttp.util.StringUtils;
+import com.wpx.util.StringUtils;
 import com.wpx.shiro.service.ShiroTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

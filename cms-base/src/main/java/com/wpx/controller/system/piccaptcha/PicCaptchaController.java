@@ -1,6 +1,6 @@
 package com.wpx.controller.system.piccaptcha;
 
-import com.wpx.service.system.piccaptcha.PicCaptchaService;
+import com.wpx.service.piccaptcha.PicCaptchaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

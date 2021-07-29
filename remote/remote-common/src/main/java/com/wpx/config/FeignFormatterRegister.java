@@ -1,6 +1,6 @@
 package com.wpx.config;
 
-import com.wpx.okhttp.util.LocalDateTimeUtils;
+import com.wpx.util.LocalDateTimeUtils;
 import org.springframework.cloud.openfeign.FeignFormatterRegistrar;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.Formatter;

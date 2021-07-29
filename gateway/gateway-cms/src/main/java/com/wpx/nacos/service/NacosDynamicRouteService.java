@@ -9,7 +9,7 @@ import com.alibaba.nacos.api.PropertyKeyConst;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
-import com.wpx.okhttp.util.StringUtils;
+import com.wpx.util.StringUtils;
 import com.wpx.nacos.bean.RouteRouse;
 import com.wpx.nacos.property.NacosGatewayProperties;
 import com.wpx.nacos.route.GatewayRoute;

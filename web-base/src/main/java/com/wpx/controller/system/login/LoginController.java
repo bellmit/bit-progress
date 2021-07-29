@@ -1,7 +1,7 @@
 package com.wpx.controller.system.login;
 
 import com.wpx.model.login.LoginDTO;
-import com.wpx.model.system.login.LoginVO;
+import com.wpx.model.user.login.LoginVO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

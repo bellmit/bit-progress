@@ -1,6 +1,6 @@
 package com.wpx.property;
 
-import com.wpx.okhttp.util.StringUtils;
+import com.wpx.util.StringUtils;
 import com.wpx.constant.NacosConstant;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

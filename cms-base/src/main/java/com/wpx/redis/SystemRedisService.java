@@ -1,10 +1,10 @@
 package com.wpx.redis;
 
 import com.alibaba.fastjson.JSON;
-import com.wpx.okhttp.util.CollectionUtils;
+import com.wpx.util.CollectionUtils;
 import com.wpx.constant.RedisKeyPrefix;
-import com.wpx.model.system.applicationtopic.pojo.ApplicationTopicItem;
-import com.wpx.okhttp.util.RedisCacheUtils;
+import com.wpx.model.application.applicationtopic.pojo.ApplicationTopicItem;
+import com.wpx.util.RedisCacheUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

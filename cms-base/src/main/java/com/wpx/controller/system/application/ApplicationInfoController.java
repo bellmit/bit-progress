@@ -1,11 +1,11 @@
 package com.wpx.controller.system.application;
 
 import com.wpx.model.ResultVO;
-import com.wpx.model.system.applicationinfo.pojo.cms.ApplicationInfoCmsAddDTO;
-import com.wpx.model.system.applicationinfo.pojo.cms.ApplicationInfoCmsQueryDTO;
-import com.wpx.model.system.applicationinfo.pojo.cms.ApplicationInfoCmsUpdateDTO;
-import com.wpx.model.system.applicationinfo.pojo.cms.ApplicationInfoCmsVO;
-import com.wpx.service.system.application.ApplicationInfoService;
+import com.wpx.model.application.applicationinfo.pojo.cms.ApplicationInfoCmsAddDTO;
+import com.wpx.model.application.applicationinfo.pojo.cms.ApplicationInfoCmsQueryDTO;
+import com.wpx.model.application.applicationinfo.pojo.cms.ApplicationInfoCmsUpdateDTO;
+import com.wpx.model.application.applicationinfo.pojo.cms.ApplicationInfoCmsVO;
+import com.wpx.service.application.ApplicationInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

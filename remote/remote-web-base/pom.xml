@@ -20,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>com.wpx</groupId>
-            <artifactId>dao-base</artifactId>
+            <artifactId>dao-base-model</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

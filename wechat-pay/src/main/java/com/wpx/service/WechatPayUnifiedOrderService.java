@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.wpx.constant.CharacterConstants;
 import com.wpx.constant.StringConstants;
 import com.wpx.exception.CustomizeException;
-import com.wpx.okhttp.util.StringUtils;
+import com.wpx.util.StringUtils;
 import com.wpx.constant.WechatPayConstants;
 import com.wpx.constant.WechatUrl;
 import com.wpx.exception.WechatPayExceptionMessage;
