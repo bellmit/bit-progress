@@ -24,6 +24,7 @@
         <module>wechat-pay</module>
         <module>login</module>
         <module>scheduler</module>
+        <module>manager</module>
     </modules>
 
     <properties>

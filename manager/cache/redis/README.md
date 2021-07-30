@@ -1,0 +1,1 @@
+### 当前仅支持创建StringRedisTemplate
