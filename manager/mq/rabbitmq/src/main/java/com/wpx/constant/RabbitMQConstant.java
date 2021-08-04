@@ -3,6 +3,21 @@ package com.wpx.constant;
 public class RabbitMQConstant {
 
     /**
+     * 交换机beanName
+     */
+    public static final String EXCHANGE_BEAN_NAME = "Exchange";
+
+    /**
+     * 队列beanName
+     */
+    public static final String QUEUE_BEAN_NAME = "Queue";
+
+    /**
+     * Binding beanName
+     */
+    public static final String BINDING_BEAN_NAME = "Binding";
+
+    /**
      * 重试次数
      */
     public static final String RETRY_TIMES = "retryTimes";

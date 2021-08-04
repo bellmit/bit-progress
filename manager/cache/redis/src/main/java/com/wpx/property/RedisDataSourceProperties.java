@@ -11,7 +11,7 @@ import java.util.Map;
 @ConfigurationProperties(prefix = RedisDataSourceProperties.PREFIX)
 public class RedisDataSourceProperties {
 
-    public static final String PREFIX = "wpx.redis";
+    public static final String PREFIX = "spring.redis";
 
     private Map<String, RedisMessageProperties> redisDataSource;
 

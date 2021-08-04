@@ -1,6 +1,6 @@
-package com.wpx.rabbitmq.property;
+package com.wpx.property;
 
-public interface RabbitMQProperties {
+public interface RabbitMQC {
 
     //设置队列中消息ttl参数，时间单位毫秒，Number
     String QUEUE_MESSAGE_TTL = "x-message-ttl";
