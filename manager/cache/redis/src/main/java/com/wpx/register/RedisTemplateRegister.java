@@ -3,6 +3,7 @@ package com.wpx.register;
 import com.wpx.property.RedisDataSourceProperties;
 import com.wpx.property.RedisMessageProperties;
 import com.wpx.util.CollectionUtils;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -13,6 +14,7 @@ import org.springframework.data.redis.connection.RedisPassword;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettucePoolingClientConfiguration;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -55,13 +57,12 @@ public class RedisTemplateRegister implements BeanFactoryAware {
      */
     private RedisConnectionFactory getRedisConnection(RedisMessageProperties dataSource) {
         RedisMessageProperties.ClientType clientType = dataSource.getClientType();
-        RedisStandaloneConfiguration redisConfig = getRedisConfig(dataSource);
         switch (clientType) {
             case JEDIS: {
-                return getJedisConnectionFactory(redisConfig);
+                return getJedisConnectionFactory(dataSource);
             }
             default: {
-                return getLettuceConnectionFactory(redisConfig);
+                return getLettuceConnectionFactory(dataSource);
             }
         }
     }
@@ -69,19 +70,44 @@ public class RedisTemplateRegister implements BeanFactoryAware {
     /**
      * 获取LettuceConnection
      *
-     * @param redisConfig
+     * @param dataSource
      */
-    private RedisConnectionFactory getLettuceConnectionFactory(RedisStandaloneConfiguration redisConfig) {
-        return new LettuceConnectionFactory(redisConfig);
+    private RedisConnectionFactory getLettuceConnectionFactory(RedisMessageProperties dataSource) {
+        RedisStandaloneConfiguration redisConfig = getRedisConfig(dataSource);
+        RedisMessageProperties.Pool pool = dataSource.getLettuce().getPool();
+        GenericObjectPoolConfig poolConfig = getPoolConfig(pool);
+        LettucePoolingClientConfiguration clientConfiguration = LettucePoolingClientConfiguration.builder()
+                .poolConfig(poolConfig).build();
+        return new LettuceConnectionFactory(redisConfig, clientConfiguration);
     }
 
     /**
      * 获取JedisConnectionFactory
      *
-     * @param redisConfig
+     * @param dataSource
      */
-    public JedisConnectionFactory getJedisConnectionFactory(RedisStandaloneConfiguration redisConfig) {
+    public JedisConnectionFactory getJedisConnectionFactory(RedisMessageProperties dataSource) {
+        RedisStandaloneConfiguration redisConfig = getRedisConfig(dataSource);
         return new JedisConnectionFactory(redisConfig);
+    }
+
+    /**
+     * 获取连接池配置
+     *
+     * @param pool
+     */
+    private GenericObjectPoolConfig getPoolConfig(RedisMessageProperties.Pool pool) {
+        GenericObjectPoolConfig<?> poolConfig = new GenericObjectPoolConfig<>();
+        poolConfig.setMaxTotal(pool.getMaxActive());
+        poolConfig.setMaxIdle(pool.getMaxIdle());
+        poolConfig.setMinIdle(pool.getMinIdle());
+        if (pool.getTimeBetweenEvictionRuns() != null) {
+            poolConfig.setTimeBetweenEvictionRunsMillis(pool.getTimeBetweenEvictionRuns().toMillis());
+        }
+        if (pool.getMaxWait() != null) {
+            poolConfig.setMaxWaitMillis(pool.getMaxWait().toMillis());
+        }
+        return poolConfig;
     }
 
     /**
