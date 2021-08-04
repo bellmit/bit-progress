@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * create on 2021/6/14 19:53
  * @Description: Gateway模块的对外提供的授权和鉴权接口
  */
-@FeignClient(name = "gateway-web", fallbackFactory = GatewayCmsRemoteServiceFallback.class)
+@FeignClient(name = "gateway-cms")
 public interface GatewayCmsRemoteService {
 
     /**

@@ -12,4 +12,4 @@ import com.wpx.model.user.managerlog.ManagerLog;
  * @since 2021-04-26
  */
 public interface ManagerLogMapper extends BaseMapper<ManagerLog> {
-        }
+}

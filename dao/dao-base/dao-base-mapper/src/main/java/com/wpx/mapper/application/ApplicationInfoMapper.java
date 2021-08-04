@@ -12,4 +12,4 @@ import com.wpx.model.application.applicationinfo.ApplicationInfo;
  * @since 2021-06-27
  */
 public interface ApplicationInfoMapper extends BaseMapper<ApplicationInfo> {
-        }
+}

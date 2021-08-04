@@ -11,12 +11,13 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.schema.ModelRef;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Parameter;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import static springfox.documentation.builders.RequestHandlerSelectors.withClassAnnotation;
 
@@ -53,7 +54,9 @@ public class CmsBaseSwagger {
                 .select()
                 .apis(withClassAnnotation(Api.class))
                 .paths(PathSelectors.any())
-                .build().additionalModels(typeResolver.resolve(ResultVO.class));
+                .build()
+                .securitySchemes(securitySchemes())
+                .additionalModels(typeResolver.resolve(ResultVO.class));
     }
 
     private ApiInfo apiInfo() {
@@ -62,6 +65,20 @@ public class CmsBaseSwagger {
                 .description("接口")
                 .version("1.0")
                 .build();
+    }
+
+    private List<ApiKey> securitySchemes() {
+        List<VendorExtension> list = new ArrayList<>();
+        StringVendorExtension extension = new StringVendorExtension("token", "token ");
+        list.add(extension);
+        ApiKey authorization = new ApiKey("Authorization", "Authorization", "header", list);
+        ApiKey routeApiToken = new ApiKey("route_api_token", "route_api_token", "header");
+        ApiKey routeRestToken = new ApiKey("route_rest_token", "route_rest_token", "header");
+        List<ApiKey> apiKeys = new ArrayList<>();
+        apiKeys.add(authorization);
+        apiKeys.add(routeApiToken);
+        apiKeys.add(routeRestToken);
+        return apiKeys;
     }
 
 }

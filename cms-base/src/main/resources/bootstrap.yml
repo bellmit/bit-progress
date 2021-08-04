@@ -20,4 +20,5 @@ spring:
         gateway-cms: default
     sentinel:
       transport:
-        dashboard: 127.0.0.1:8850
+        dashboard: localhost:8718
+      eager: true

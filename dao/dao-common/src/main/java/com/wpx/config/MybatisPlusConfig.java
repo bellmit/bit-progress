@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@MapperScan("com.wpx.model")
+@MapperScan("com.wpx.mapper")
 @EnableTransactionManagement
 public class MybatisPlusConfig {
     /**
