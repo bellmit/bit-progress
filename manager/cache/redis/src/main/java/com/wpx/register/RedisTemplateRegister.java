@@ -8,6 +8,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisPassword;
@@ -22,9 +23,10 @@ import java.util.Map;
 /**
  * @Author: 不会飞的小鹏
  * @Deprecated: 初始化RedisTemplate并交给Spring管理
+ * 装载bean之前会扫描 InstantiationAwareBeanPostProcessor ，以此达到先加载此类的目的
  */
 @Component
-public class RedisTemplateRegister implements BeanFactoryAware {
+public class RedisTemplateRegister implements BeanFactoryAware, InstantiationAwareBeanPostProcessor {
 
     @Autowired
     private RedisDataSourceProperties redisDataSourceProperties;
