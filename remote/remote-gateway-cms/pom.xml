@@ -20,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>com.wpx</groupId>
-            <artifactId>dao-common</artifactId>
+            <artifactId>dao-common-model</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

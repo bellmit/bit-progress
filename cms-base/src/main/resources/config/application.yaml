@@ -67,15 +67,6 @@ spring:
             # 最小空闲连接数 默认0
             min-idle: 0
 
-  jackson:
-    default-property-inclusion: always
-    serialization:
-      write-dates-as-timestamps: true
-
-  http:
-    encoding:
-      charset: UTF-8
-
   servlet:
     multipart:
       max-file-size: 8MB
@@ -98,4 +89,6 @@ wpx:
   config:
     salt: ufg48UH849Yhngf4
 swagger:
-  show: true
+  enable: true
+  application-name: ${spring.application.name}
+  group: cms

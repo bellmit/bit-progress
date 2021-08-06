@@ -13,6 +13,16 @@ public class VerifyConstant {
     public static final String USER_ID = "User-Id";
 
     /**
+     * 请求头header
+     */
+    public static final String HEADER = "header";
+
+    /**
+     * 授权前缀
+     */
+    public static final String AUTHORIZATION = "Authorization";
+
+    /**
      * 对于Api接口的token追加
      */
     public static final String ROUTE_API_TOKEN = "route_api_token";

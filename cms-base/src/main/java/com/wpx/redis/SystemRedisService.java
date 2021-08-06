@@ -2,7 +2,7 @@ package com.wpx.redis;
 
 import com.alibaba.fastjson.JSON;
 import com.wpx.util.CollectionUtils;
-import com.wpx.constant.RedisKeyPrefix;
+import com.wpx.constant.BaseRedisKeyPrefix;
 import com.wpx.model.application.applicationtopic.pojo.ApplicationTopicItem;
 import com.wpx.util.RedisCacheUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class SystemRedisService {
      * @param uuid
      */
     public String getCapText(String uuid) {
-        String key = RedisKeyPrefix.captcha(uuid);
+        String key = BaseRedisKeyPrefix.captcha(uuid);
         return redisCacheUtils.getForValue(key);
     }
 
@@ -34,7 +34,7 @@ public class SystemRedisService {
      * @param capText
      */
     public void setCapText(String uuid, String capText) {
-        String key = RedisKeyPrefix.captcha(uuid);
+        String key = BaseRedisKeyPrefix.captcha(uuid);
         redisCacheUtils.setForValueTtl(key, capText, 5L, TimeUnit.MINUTES);
     }
 
@@ -44,7 +44,7 @@ public class SystemRedisService {
      * @param uuid
      */
     public void deleteCaptcha(String uuid) {
-        String key = RedisKeyPrefix.captcha(uuid);
+        String key = BaseRedisKeyPrefix.captcha(uuid);
         redisCacheUtils.delete(key);
     }
 
@@ -58,7 +58,7 @@ public class SystemRedisService {
             return;
         }
         // 删除缓存中的应用信息
-        String key = RedisKeyPrefix.applicationMessage();
+        String key = BaseRedisKeyPrefix.applicationMessage();
         redisCacheUtils.deleteForHash(key, appSigns.toArray());
     }
 
@@ -68,7 +68,7 @@ public class SystemRedisService {
      * @param item
      */
     public void putApplicationTopicMessageToRedis(ApplicationTopicItem item) {
-        String key = RedisKeyPrefix.applicationTopicMessage();
+        String key = BaseRedisKeyPrefix.applicationTopicMessage();
         redisCacheUtils.putForHash(key, item.getTopic(), JSON.toJSONString(item));
     }
 
@@ -81,7 +81,7 @@ public class SystemRedisService {
         if (CollectionUtils.isEmpty(topics)) {
             return;
         }
-        String key = RedisKeyPrefix.applicationTopicMessage();
+        String key = BaseRedisKeyPrefix.applicationTopicMessage();
         redisCacheUtils.deleteForHash(key, topics.toArray());
     }
 }

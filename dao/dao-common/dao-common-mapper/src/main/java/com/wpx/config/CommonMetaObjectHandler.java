@@ -1,7 +1,6 @@
 package com.wpx.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
@@ -13,12 +12,10 @@ import java.time.LocalDateTime;
  * @author wpx
  */
 @Component
-@Slf4j
 public class CommonMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        log.info("/*------- 【新增记录】自动填充字段 -------*/");
 
         LocalDateTime now = LocalDateTime.now();
         this.setFieldValByName("createTime", now, metaObject);
@@ -31,7 +28,6 @@ public class CommonMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        log.info("/*------- 【修改记录】自动填充字段 -------*/");
         this.setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
     }
 }

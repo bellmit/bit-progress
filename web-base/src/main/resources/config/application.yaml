@@ -85,4 +85,6 @@ wpx:
         gateway-web: gateway-web-rest-token
         main-cms-base: main-cms-base-rest-token
 swagger:
-  show: true
+  enable: true
+  group: web
+  application-name: ${spring.application.name}

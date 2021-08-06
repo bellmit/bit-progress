@@ -3,8 +3,6 @@ package com.wpx.model.application.applicationinfo.pojo.cms;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.alibaba.fastjson.JSONObject;
-
 import java.io.Serializable;
 
 import com.wpx.model.application.applicationinfo.envm.AppTypeEnum;
@@ -12,6 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 
 /**
  * @author wupengxiao

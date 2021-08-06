@@ -3,7 +3,7 @@ package com.wpx.constant;
 /**
  * @author wpx
  */
-public class RedisKeyPrefix {
+public class BaseRedisKeyPrefix {
 
 
     /** ************************************************************************************************************** */
