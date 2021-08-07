@@ -23,6 +23,21 @@ public class VerifyConstant {
     public static final String AUTHORIZATION = "Authorization";
 
     /**
+     * token
+     */
+    public static final String TOKEN = "token";
+
+    /**
+     * global
+     */
+    public static final String GLOBAL = "global";
+
+    /**
+     * global
+     */
+    public static final String ACCESS_EVERY_THING = "accessEverything";
+
+    /**
      * 对于Api接口的token追加
      */
     public static final String ROUTE_API_TOKEN = "route_api_token";
