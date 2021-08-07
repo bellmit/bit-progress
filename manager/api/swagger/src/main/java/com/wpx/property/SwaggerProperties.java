@@ -20,6 +20,16 @@ public class SwaggerProperties {
     private String group = "default";
 
     /**
+     * 说明
+     */
+    private String description = "接口信息";
+
+    /**
+     * 版本
+     */
+    private String version = "v1.0.0";
+
+    /**
      * 应用名称
      */
     private String applicationName = "default";
@@ -38,6 +48,22 @@ public class SwaggerProperties {
 
     public void setGroup(String group) {
         this.group = group;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public String getApplicationName() {

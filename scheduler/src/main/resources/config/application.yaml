@@ -7,7 +7,7 @@ server:
       enabled: true
   compression:
     enabled: true
-  port: 9016
+  port: 9021
 
 spring:
   redis:
@@ -51,12 +51,5 @@ ribbon:
 wpx:
   config:
     salt: ufg48UH849Yhngf4
-  server:
-    base:
-      api-token: main-web-base-api-token
-      rest-token: main-web-base-rest-token
-      server-token:
-        gateway-web: gateway-web-rest-token
-        main-cms-base: main-cms-base-rest-token
 swagger:
   show: true
