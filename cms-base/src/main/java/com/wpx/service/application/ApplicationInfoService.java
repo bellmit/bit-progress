@@ -20,17 +20,18 @@ import java.time.LocalDateTime;
 import org.springframework.transaction.annotation.Transactional;
 import com.wpx.util.Assert;
 /**
-* <p>
-    * 应用配置信息 服务类
-    * </p>
-*
-* @author wupengxiao
-* @since 2021-06-27
-*/
+ * @Author: 不会飞的小鹏
+ * @Deprecated: 应用配置
+ */
 @Service
 @Slf4j
 public class ApplicationInfoService extends ServiceImpl<ApplicationInfoMapper, ApplicationInfo> {
 
+    /**
+     * 查询应用配置
+     *
+     * @param applicationInfoId
+     */
     public ApplicationInfoCmsVO findById(Long applicationInfoId) {
         ApplicationInfo applicationInfo = getById(applicationInfoId);
         Assert.notNull(applicationInfo, ExceptionMessage.APPLICATIONINFO_NOT_EXIST);
@@ -46,7 +47,7 @@ public class ApplicationInfoService extends ServiceImpl<ApplicationInfoMapper, A
      *
      * @param addDTO
      */
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public ApplicationInfoCmsVO saveApplicationInfo(ApplicationInfoCmsAddDTO addDTO) {
         ApplicationInfo applicationInfo = BeanUtils.copyNonNullProperties(addDTO, ApplicationInfo.class);
         LocalDateTime time=LocalDateTime.now();
@@ -55,25 +56,40 @@ public class ApplicationInfoService extends ServiceImpl<ApplicationInfoMapper, A
         return toApplicationInfoCmsVO(applicationInfo);
     }
 
-    @Transactional
+    /**
+     * 删除应用配置
+     *
+     * @param applicationInfoIds
+     */
+    @Transactional(rollbackFor = RuntimeException.class)
     public void deleteApplicationInfos(Set<Long> applicationInfoIds) {
         int count = baseMapper.deleteBatchIds(applicationInfoIds);
         Assert.isTrue(count == applicationInfoIds.size(), ExceptionMessage.APPLICATIONINFO_DELETE_ERROR);
-        log.info("删除数据:ids{}", applicationInfoIds);
     }
 
-    @Transactional
-    public ApplicationInfoCmsVO updateApplicationInfo(ApplicationInfoCmsUpdateDTO applicationInfoUpdateDTO) {
-        ApplicationInfo applicationInfo = BeanUtils.copyNonNullProperties(applicationInfoUpdateDTO, ApplicationInfo.class);
+    /**
+     * 更新应用配置
+     *
+     * @param updateDTO
+     */
+    @Transactional(rollbackFor = RuntimeException.class)
+    public ApplicationInfoCmsVO updateApplicationInfo(ApplicationInfoCmsUpdateDTO updateDTO) {
+        ApplicationInfo applicationInfo = BeanUtils.copyNonNullProperties(updateDTO, ApplicationInfo.class);
         applicationInfo.setUpdateTime(LocalDateTime.now());
         Assert.isTrue(updateById(applicationInfo), ExceptionMessage.APPLICATIONINFO_UPDATE_ERROR);
-        log.info("修改数据：bean:{}", applicationInfoUpdateDTO);
+        log.info("修改数据：bean:{}", updateDTO);
         return findById(applicationInfo.getApplicationInfoId());
     }
 
-    public IPage<ApplicationInfoCmsVO> findApplicationInfoPage (ApplicationInfoCmsQueryDTO applicationInfoQueryDTO, Page page) {
+    /**
+     * 分页查询应用配置
+     *
+     * @param queryDTO
+     * @param page
+     */
+    public IPage<ApplicationInfoCmsVO> findApplicationInfoPage (ApplicationInfoCmsQueryDTO queryDTO, Page page) {
         QueryWrapper<ApplicationInfo> queryWrapper = new QueryWrapper<>();
-        //queryWrapper.lambda().eq(ApplicationInfo::getApplicationInfoId, applicationInfoQueryDTO.getApplicationInfoId);
         return ConversionBeanUtils.conversionBean(page(page, queryWrapper), this::toApplicationInfoCmsVO);
     }
+
 }

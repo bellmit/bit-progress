@@ -8,7 +8,7 @@ import com.wpx.model.application.applicationtopic.ApplicationTopic;
  * 应用信息 Mapper 接口
  * </p>
  *
- * @author wupengxiao
+ * @Author: 不会飞的小鹏 
  * @since 2021-06-07
  */
 public interface ApplicationTopicMapper extends BaseMapper<ApplicationTopic> {

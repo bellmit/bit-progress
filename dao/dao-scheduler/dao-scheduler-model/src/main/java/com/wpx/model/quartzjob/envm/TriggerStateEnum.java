@@ -10,12 +10,36 @@ import java.util.Objects;
  */
 public enum TriggerStateEnum implements IEnum<Integer> {
 
-    NONE(0, "状态"),
-    NORMAL(1, ""),
-    PAUSED(2, ""),
-    COMPLETE(3, ""),
-    ERROR(4, ""),
-    BLOCKED(5, ""),
+    /**
+     * 不存在
+     */
+    NONE(0, "不存在"),
+
+    /**
+     * 正常状态
+     */
+    NORMAL(1, "正常"),
+
+    /**
+     * 暂停
+     */
+    PAUSED(2, "暂停"),
+
+    /**
+     * 完成
+     */
+    COMPLETE(3, "完成"),
+
+    /**
+     * 错误
+     */
+    ERROR(4, "错误"),
+
+    /**
+     * 阻塞
+     */
+    BLOCKED(5, "阻塞"),
+
     ;
 
     private Integer value;
@@ -26,6 +50,7 @@ public enum TriggerStateEnum implements IEnum<Integer> {
         this.name = name;
     }
 
+    @Override
     public Integer getValue() {
         return this.value;
     }

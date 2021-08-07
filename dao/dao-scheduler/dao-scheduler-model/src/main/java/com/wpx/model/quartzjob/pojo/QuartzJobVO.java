@@ -88,32 +88,4 @@ public class QuartzJobVO implements Serializable {
     @ApiModelProperty(value = "触发器状态，NONE：触发器不存在，NORMAL：正常，PAUSED：暂停，COMPLETE：完成，ERROR：错误,BLOCKED：阻塞")
     private TriggerStateEnum triggerState;
 
-    public Integer getTriggerType() {
-        return Objects.nonNull(triggerType) ? triggerType.getValue() : null;
-    }
-
-    public TriggerType getTriggerTypeEnum() {
-        return this.triggerType;
-    }
-
-    public void setTriggerType(Integer triggerType) {
-        this.triggerType = TriggerType.valueOf(triggerType);
-    }
-
-    public Integer getTriggerState() {
-        return Objects.nonNull(triggerState) ? triggerState.getValue() : null;
-    }
-
-    public TriggerStateEnum getTriggerStateEnum() {
-        return this.triggerState;
-    }
-
-    public void setTriggerState(Integer triggerState) {
-        this.triggerState = TriggerStateEnum.valueOf(triggerState);
-    }
-
-    public void setTriggerState(TriggerStateEnum triggerState) {
-        this.triggerState = triggerState;
-    }
-
 }

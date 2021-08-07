@@ -21,7 +21,7 @@ import java.util.Set;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author wupengxiao
+ * @Author: 不会飞的小鹏 
  * @since 2021-06-27
  */
 @Api(tags = {"系统 -- 应用配置信息"})

@@ -25,12 +25,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * <p>
- * 应用信息 服务类
- * </p>
- *
- * @author wupengxiao
- * @since 2021-06-07
+ * @Author: 不会飞的小鹏
+ * @Deprecated: 应用信息
  */
 @Service
 @Slf4j
@@ -42,6 +38,11 @@ public class ApplicationService extends ServiceImpl<ApplicationMapper, Applicati
     @Autowired
     private SystemRedisService systemRedisService;
 
+    /**
+     * 查询应用信息
+     *
+     * @param applicationId
+     */
     public ApplicationCmsVO findById(Long applicationId) {
         Application application = getById(applicationId);
         Assert.notNull(application, ExceptionMessage.APPLICATION_NOT_EXIST);
@@ -57,7 +58,7 @@ public class ApplicationService extends ServiceImpl<ApplicationMapper, Applicati
      *
      * @param applicationAddDTO
      */
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public ApplicationCmsVO saveApplication(ApplicationCmsAddDTO applicationAddDTO) {
         Application application = BeanUtils.copyNonNullProperties(applicationAddDTO, Application.class);
         LocalDateTime time = LocalDateTime.now();
@@ -71,7 +72,7 @@ public class ApplicationService extends ServiceImpl<ApplicationMapper, Applicati
      *
      * @param applicationIds
      */
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public void deleteApplications(Set<Long> applicationIds) {
         if (CollectionUtils.isEmpty(applicationIds)) {
             return;
@@ -92,7 +93,7 @@ public class ApplicationService extends ServiceImpl<ApplicationMapper, Applicati
      *
      * @param applicationUpdateDTO
      */
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public ApplicationCmsVO updateApplication(ApplicationCmsUpdateDTO applicationUpdateDTO) {
         Application application = BeanUtils.copyNonNullProperties(applicationUpdateDTO, Application.class);
         application.setUpdateTime(LocalDateTime.now());

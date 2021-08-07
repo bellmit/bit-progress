@@ -8,7 +8,7 @@ import com.wpx.model.user.managerlog.ManagerLog;
  * 管理员操作日志 Mapper 接口
  * </p>
  *
- * @author wupengxiao
+ * @Author: 不会飞的小鹏 
  * @since 2021-04-26
  */
 public interface ManagerLogMapper extends BaseMapper<ManagerLog> {

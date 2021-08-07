@@ -7,6 +7,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+/**
+ * @Author: 不会飞的小鹏
+ */
 @SuppressWarnings("Convert2Lambda")
 @Configuration
 public class CommonConfig {
@@ -23,7 +26,8 @@ public class CommonConfig {
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
         FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
-        bean.setOrder(0);//配置CorsFilter优先级
+        //配置CorsFilter优先级
+        bean.setOrder(0);
         return bean;
     }
 

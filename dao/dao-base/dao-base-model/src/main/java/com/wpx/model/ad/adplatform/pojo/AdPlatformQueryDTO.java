@@ -7,8 +7,8 @@ import lombok.EqualsAndHashCode;
 import java.io.Serializable;
 
 /**
- * @author wupengxiao
- * @since 2021-06-04
+ * @Author: 不会飞的小鹏
+ * @Deprecated: 广告平台查询DTO
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

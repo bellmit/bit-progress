@@ -23,7 +23,6 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @Author: 不会飞的小鹏
@@ -113,7 +112,7 @@ public class QuartzJobService {
 
         String groupName = queryDTO.getGroupName();
         TriggerType type = queryDTO.getTriggerType();
-        TriggerStateEnum stateEnum = queryDTO.getTriggerStateEnum();
+        TriggerStateEnum stateEnum = queryDTO.getTriggerState();
         Trigger.TriggerState triggerState = Trigger.TriggerState.valueOf(stateEnum.name());
         List<QuartzJobVO> jobList = listJob(triggerState, type, groupName);
         List<QuartzJobVO> records = limitJobList(jobList, offset, size);
@@ -170,7 +169,7 @@ public class QuartzJobService {
      * @param state
      */
     private boolean filterQuartzJob(QuartzJobVO job, Trigger.TriggerState state) {
-        TriggerStateEnum stateEnum = job.getTriggerStateEnum();
+        TriggerStateEnum stateEnum = job.getTriggerState();
         return Objects.equals(state, Trigger.TriggerState.valueOf(stateEnum.name()));
     }
 
@@ -181,7 +180,7 @@ public class QuartzJobService {
      * @param type
      */
     private boolean filterQuartzJob(QuartzJobVO job, TriggerType type) {
-        return Objects.equals(type, job.getTriggerTypeEnum());
+        return Objects.equals(type, job.getTriggerType());
     }
 
     /**
@@ -192,9 +191,9 @@ public class QuartzJobService {
      * @param type
      */
     private boolean filterQuartzJob(QuartzJobVO job, Trigger.TriggerState state, TriggerType type) {
-        TriggerStateEnum stateEnum = job.getTriggerStateEnum();
+        TriggerStateEnum stateEnum = job.getTriggerState();
         return Objects.equals(state, Trigger.TriggerState.valueOf(stateEnum.name()))
-                && Objects.equals(type, job.getTriggerTypeEnum());
+                && Objects.equals(type, job.getTriggerType());
     }
 
     /**

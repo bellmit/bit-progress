@@ -63,12 +63,4 @@ public class QuartzJobAddDTO implements Serializable {
      */
     private String applicationName;
 
-    public Integer getTriggerType() {
-        return Objects.nonNull(triggerType) ? triggerType.getValue() : null;
-    }
-
-    public void setTriggerType(Integer triggerType) {
-        this.triggerType = TriggerType.valueOf(triggerType);
-    }
-
 }

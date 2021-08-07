@@ -8,7 +8,7 @@ import com.wpx.model.application.applicationinfo.ApplicationInfo;
  * 应用配置信息 Mapper 接口
  * </p>
  *
- * @author wupengxiao
+ * @Author: 不会飞的小鹏 
  * @since 2021-06-27
  */
 public interface ApplicationInfoMapper extends BaseMapper<ApplicationInfo> {

@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * @author wupengxiao
+ * @Author: 不会飞的小鹏 
  * @since 2021-06-27
  */
 @ApiModel(value = "应用配置信息")

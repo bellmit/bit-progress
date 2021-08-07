@@ -31,20 +31,4 @@ public class QuartzJobQueryDTO implements Serializable {
     @ApiModelProperty(value = "触发器状态")
     private TriggerStateEnum triggerState;
 
-    public Integer getTriggerState() {
-        return triggerState.getValue();
-    }
-
-    public TriggerStateEnum getTriggerStateEnum() {
-        return triggerState;
-    }
-
-    public void setTriggerState(Integer triggerState) {
-        this.triggerState = TriggerStateEnum.valueOf(triggerState);
-    }
-
-    public void setTriggerState(TriggerStateEnum triggerState) {
-        this.triggerState = triggerState;
-    }
-
 }

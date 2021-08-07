@@ -31,7 +31,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * @author wpx
+ * @Author: 不会飞的小鹏
  */
 @Slf4j
 @Service
@@ -121,7 +121,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
      * @param addDTO
      * @return ManagerCmsVO
      */
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public ManagerCmsVO add(ManagerCmsAddDTO addDTO) {
         String account = addDTO.getAccount();
         if (!Objects.equals(rootManagerName, account) && addDTO.getRole().equals(RoleEnum.ROOT)) {
@@ -149,7 +149,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
      *
      * @param updateDTO
      */
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public ManagerCmsVO update(ManagerCmsUpdateDTO updateDTO) {
         Long managerId = updateDTO.getManagerId();
         RoleEnum role = updateDTO.getRole();
@@ -173,7 +173,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
      *
      * @param managerStateDTO
      */
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public ManagerCmsVO handleDisabled(ManagerStateDTO managerStateDTO, Long userId) {
         Manager manager = getById(userId);
         Assert.isTrue(Objects.equals(RoleEnum.ROOT, manager.getRole()), ExceptionMessage.NOT_ROOT_CANNOT_DISABLED);
@@ -195,7 +195,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
      *
      * @param managerIds
      */
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public void delete(Set<Long> managerIds, Long userId) {
         if (CollectionUtils.isEmpty(managerIds)) {
             return;
@@ -210,7 +210,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
      *
      * @param managerId
      */
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public void deleteManager(Long managerId) {
         Manager manager = getById(managerId);
         if (Objects.nonNull(manager)) {
@@ -226,7 +226,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
      *
      * @param managerResetPasswordDTO
      */
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public ManagerCmsVO resetPassword(ManagerResetPasswordDTO managerResetPasswordDTO, Long userId) {
         Long managerId = managerResetPasswordDTO.getManagerId();
         Manager manager = getById(managerId);
@@ -252,7 +252,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
      *
      * @param managerRoleDTO
      */
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public ManagerCmsVO handleRole(ManagerRoleDTO managerRoleDTO) {
         Manager manager = getById(managerRoleDTO.getManagerId());
         Assert.notNull(manager, ExceptionMessage.MANAGER_NOT_EXIST);

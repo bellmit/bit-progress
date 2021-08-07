@@ -29,12 +29,8 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
- * <p>
- * 应用信息 服务类
- * </p>
- *
- * @author wupengxiao
- * @since 2021-06-07
+ * @Author: 不会飞的小鹏
+ * @Deprecated: 应用主题订阅
  */
 @Service
 @Slf4j
@@ -46,12 +42,22 @@ public class ApplicationTopicService extends ServiceImpl<ApplicationTopicMapper,
     @Autowired
     private SystemRedisService systemRedisService;
 
+    /**
+     * 查询主题内容
+     *
+     * @param applicationTopicId
+     */
     public ApplicationTopicCmsVO findById(Long applicationTopicId) {
         ApplicationTopic applicationTopic = getById(applicationTopicId);
         Assert.notNull(applicationTopic, ExceptionMessage.APPLICATIONTOPIC_NOT_EXIST);
         return toApplicationTopicCmsVO(applicationTopic);
     }
 
+    /**
+     * 转换主题信息
+     *
+     * @param applicationTopic
+     */
     private ApplicationTopicCmsVO toApplicationTopicCmsVO(ApplicationTopic applicationTopic) {
         return BeanUtils.copyNonNullProperties(applicationTopic, ApplicationTopicCmsVO.class);
     }
@@ -61,7 +67,7 @@ public class ApplicationTopicService extends ServiceImpl<ApplicationTopicMapper,
      *
      * @param addDTO
      */
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public ApplicationTopicCmsVO saveApplicationTopic(ApplicationTopicCmsAddDTO addDTO) {
         boolean disabled = applicationService.checkApplication(addDTO.getApplicationId());
         ApplicationTopic applicationTopic = BeanUtils.copyNonNullProperties(addDTO, ApplicationTopic.class);
@@ -85,7 +91,7 @@ public class ApplicationTopicService extends ServiceImpl<ApplicationTopicMapper,
      *
      * @param applicationTopicIds
      */
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public void deleteApplicationTopics(Set<Long> applicationTopicIds) {
         if (CollectionUtils.isEmpty(applicationTopicIds)) {
             return;
@@ -105,7 +111,7 @@ public class ApplicationTopicService extends ServiceImpl<ApplicationTopicMapper,
      *
      * @param updateDTO
      */
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public ApplicationTopicCmsVO updateApplicationTopic(ApplicationTopicCmsUpdateDTO updateDTO) {
         boolean disabled = applicationService.checkApplication(updateDTO.getApplicationId());
         ApplicationTopic applicationTopic = BeanUtils.copyNonNullProperties(updateDTO, ApplicationTopic.class);
@@ -134,14 +140,11 @@ public class ApplicationTopicService extends ServiceImpl<ApplicationTopicMapper,
             LambdaQueryWrapper<ApplicationTopic> wrapper = new QueryWrapper<ApplicationTopic>().lambda();
             wrapper.select(ApplicationTopic::getTopic).in(ApplicationTopic::getApplicationId, applicationIds);
             Set<String> topics = CollectionUtils.conversionSet(list(wrapper), ApplicationTopic::getTopic);
-
             LambdaUpdateWrapper<ApplicationTopic> lambda = new UpdateWrapper<ApplicationTopic>().lambda();
             lambda.set(ApplicationTopic::getDeleted, true).in(ApplicationTopic::getApplicationId, applicationIds);
             update(lambda);
-
             systemRedisService.deleteApplicationTopicMessageForRedis(topics);
         }
-
     }
 
 }

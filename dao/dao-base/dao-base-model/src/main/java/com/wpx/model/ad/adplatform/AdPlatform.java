@@ -14,10 +14,10 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * @author wupengxiao
+ * @Author: 不会飞的小鹏
  * @since 2021-06-04
  */
-@ApiModel(value = "")
+@ApiModel(value = "广告平台")
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)

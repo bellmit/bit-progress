@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * @author wupengxiao
+ * @Author: 不会飞的小鹏 
  * @since 2021-06-07
  */
 @ApiModel(value = "应用信息")

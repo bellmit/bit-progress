@@ -8,7 +8,7 @@ import com.wpx.model.ad.adplatform.AdPlatform;
  * Mapper 接口
  * </p>
  *
- * @author wupengxiao
+ * @Author: 不会飞的小鹏 
  * @since 2021-06-04
  */
 public interface AdPlatformMapper extends BaseMapper<AdPlatform> {
