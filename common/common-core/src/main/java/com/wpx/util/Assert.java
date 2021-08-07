@@ -1,6 +1,6 @@
 package com.wpx.util;
 
-import com.wpx.exception.CustomizeException;
+import com.wpx.exception.CommonException;
 import com.wpx.exception.IExceptionMessage;
 
 import java.util.Collection;
@@ -19,7 +19,7 @@ public class Assert {
      * @param exception
      */
     public static void isTrue(boolean expression, IExceptionMessage exception) {
-        isTrue(expression, CustomizeException.error(exception));
+        isTrue(expression, CommonException.error(exception));
     }
 
     /**
@@ -28,7 +28,7 @@ public class Assert {
      * @param expression
      * @param exception
      */
-    public static void isTrue(boolean expression, CustomizeException exception) {
+    public static void isTrue(boolean expression, CommonException exception) {
         if (!expression) {
             throw exception;
         }
@@ -41,7 +41,7 @@ public class Assert {
      * @param exception
      */
     public static void isNull(Object object, IExceptionMessage exception) {
-        isNull(object, CustomizeException.error(exception));
+        isNull(object, CommonException.error(exception));
     }
 
     /**
@@ -50,7 +50,7 @@ public class Assert {
      * @param object
      * @param exception
      */
-    public static void isNull(Object object, CustomizeException exception) {
+    public static void isNull(Object object, CommonException exception) {
         if (object != null) {
             throw exception;
         }
@@ -63,7 +63,7 @@ public class Assert {
      * @param exception
      */
     public static void notNull(Object object, IExceptionMessage exception) {
-        notNull(object, CustomizeException.error(exception));
+        notNull(object, CommonException.error(exception));
     }
 
     /**
@@ -72,7 +72,7 @@ public class Assert {
      * @param object
      * @param exception
      */
-    public static void notNull(Object object, CustomizeException exception) {
+    public static void notNull(Object object, CommonException exception) {
         if (object == null) {
             throw exception;
         }
@@ -85,7 +85,7 @@ public class Assert {
      * @param exception
      */
     public static void isEmpty(String str, IExceptionMessage exception) {
-        isEmpty(str, CustomizeException.error(exception));
+        isEmpty(str, CommonException.error(exception));
     }
 
     /**
@@ -94,7 +94,7 @@ public class Assert {
      * @param str
      * @param exception
      */
-    public static void isEmpty(String str, CustomizeException exception) {
+    public static void isEmpty(String str, CommonException exception) {
         if (str != null && !str.isEmpty()) {
             throw exception;
         }
@@ -107,7 +107,7 @@ public class Assert {
      * @param exception
      */
     public static void isNotEmpty(String str, IExceptionMessage exception) {
-        isNotEmpty(str, CustomizeException.error(exception));
+        isNotEmpty(str, CommonException.error(exception));
     }
 
     /**
@@ -116,7 +116,7 @@ public class Assert {
      * @param str
      * @param exception
      */
-    public static void isNotEmpty(String str, CustomizeException exception) {
+    public static void isNotEmpty(String str, CommonException exception) {
         if (str == null || str.isEmpty()) {
             throw exception;
         }
@@ -129,7 +129,7 @@ public class Assert {
      * @param exception
      */
     public static void isEmpty(Collection collection, IExceptionMessage exception) {
-        isEmpty(collection, CustomizeException.error(exception));
+        isEmpty(collection, CommonException.error(exception));
     }
 
     /**
@@ -138,7 +138,7 @@ public class Assert {
      * @param collection
      * @param exception
      */
-    public static void isEmpty(Collection collection, CustomizeException exception) {
+    public static void isEmpty(Collection collection, CommonException exception) {
         if (collection != null && !collection.isEmpty()) {
             throw exception;
         }
@@ -151,7 +151,7 @@ public class Assert {
      * @param exception
      */
     public static void isNotEmpty(Collection collection, IExceptionMessage exception) {
-        isNotEmpty(collection, CustomizeException.error(exception));
+        isNotEmpty(collection, CommonException.error(exception));
     }
 
     /**
@@ -160,7 +160,7 @@ public class Assert {
      * @param collection
      * @param exception
      */
-    public static void isNotEmpty(Collection collection, CustomizeException exception) {
+    public static void isNotEmpty(Collection collection, CommonException exception) {
         if (collection == null || collection.isEmpty()) {
             throw exception;
         }

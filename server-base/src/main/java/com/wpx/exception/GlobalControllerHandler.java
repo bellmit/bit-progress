@@ -26,8 +26,8 @@ public class GlobalControllerHandler {
     private ApplicationContext applicationContext;
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(CustomizeException.class)
-    public ResultVO handleCustomizeException(CustomizeException e) {
+    @ExceptionHandler(CommonException.class)
+    public ResultVO handleCustomizeException(CommonException e) {
         logger.error("", e);
         return ResultVO.errorOf(e);
     }

@@ -4,6 +4,7 @@ import com.wpx.constant.NumberConstants;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -119,6 +120,28 @@ public class CollectionUtils {
      */
     public static <T, C> Set<C> conversionSet(Collection<T> collection, Function<T, C> function) {
         return collection.stream().map(function).collect(Collectors.toSet());
+    }
+
+    /**
+     * 筛选集合后，返回list
+     *
+     * @param    collection 传入的list
+     * @param    predicate <T> T传入类型
+     * @return   Set<C> 转换后的set
+     */
+    public static <T> List<T> filterList(Collection<T> collection, Predicate<? super T> predicate) {
+        return collection.stream().filter(predicate).collect(Collectors.toList());
+    }
+
+    /**
+     * 筛选集合后，返回set
+     *
+     * @param    collection 传入的list
+     * @param    predicate <T> T传入类型
+     * @return   Set<C> 转换后的set
+     */
+    public static <T> Set<T> filterSet(Collection<T> collection, Predicate<? super T> predicate) {
+        return collection.stream().filter(predicate).collect(Collectors.toSet());
     }
 
     /**

@@ -178,7 +178,7 @@ public enum ExceptionMessage implements IExceptionMessage {
 
     @Override
     public String getError() {
-        return null;
+        return this.error;
     }
 
     /**
@@ -191,6 +191,10 @@ public enum ExceptionMessage implements IExceptionMessage {
 
     public void setCode(Integer code) {
         this.code = code;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 
     public void setMessage(String message) {

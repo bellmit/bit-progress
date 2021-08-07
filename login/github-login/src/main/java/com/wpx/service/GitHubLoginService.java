@@ -2,8 +2,7 @@ package com.wpx.service;
 
 import com.alibaba.fastjson.JSON;
 import com.wpx.constant.StringConstants;
-import com.wpx.exception.CustomizeException;
-import com.wpx.exception.ExceptionMessage;
+import com.wpx.exception.CommonException;
 import com.wpx.constant.GitHubLoginUrl;
 import com.wpx.exception.GitHubLoginExceptionMessage;
 import com.wpx.model.AuthorizationParams;
@@ -32,7 +31,7 @@ public class GitHubLoginService {
             return result.split(StringConstants.AND)[0].split(StringConstants.EQUAL_SIGN)[1];
         }catch (Exception e){
             e.printStackTrace();
-            throw new CustomizeException(GitHubLoginExceptionMessage.GITHUB_ACCESS_TOKEN_REQUEST_ERROR);
+            throw new CommonException(GitHubLoginExceptionMessage.GITHUB_ACCESS_TOKEN_REQUEST_ERROR);
         }
     }
 
@@ -52,7 +51,7 @@ public class GitHubLoginService {
             return JSON.parseObject(string, GitHubUser.class);
         }catch (IOException e){
             e.printStackTrace();
-            throw CustomizeException.error(GitHubLoginExceptionMessage.GITHUB_USER_REQUEST_ERROR);
+            throw CommonException.error(GitHubLoginExceptionMessage.GITHUB_USER_REQUEST_ERROR);
         }
     }
 

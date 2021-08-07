@@ -2,7 +2,7 @@ package com.wpx.service;
 
 import com.alibaba.fastjson.JSON;
 import com.wpx.constant.StringConstants;
-import com.wpx.exception.CustomizeException;
+import com.wpx.exception.CommonException;
 import com.wpx.constant.WechatUrl;
 import com.wpx.exception.WechatPayExceptionMessage;
 import com.wpx.model.transactionquery.TransactionQueryResult;
@@ -47,7 +47,7 @@ public class WechatPayQueryService {
             return JSON.parseObject(result, TransactionQueryResult.class);
         } catch (IOException e) {
             e.printStackTrace();
-            throw new CustomizeException(WechatPayExceptionMessage.TRANSACTION_QUERY_ERROR);
+            throw new CommonException(WechatPayExceptionMessage.TRANSACTION_QUERY_ERROR);
         }
     }
 

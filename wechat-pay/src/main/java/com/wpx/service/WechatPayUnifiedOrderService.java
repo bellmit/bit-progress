@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.wpx.constant.CharacterConstants;
 import com.wpx.constant.StringConstants;
-import com.wpx.exception.CustomizeException;
+import com.wpx.exception.CommonException;
 import com.wpx.util.StringUtils;
 import com.wpx.constant.WechatPayConstants;
 import com.wpx.constant.WechatUrl;
@@ -60,7 +60,7 @@ public class WechatPayUnifiedOrderService {
             jsApiPayOrder.setPackaged(packaged);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new CustomizeException(WechatPayExceptionMessage.JSAPI_UNIFIED_ORDER_ERROR);
+            throw new CommonException(WechatPayExceptionMessage.JSAPI_UNIFIED_ORDER_ERROR);
         }
         try {
             String paySignCode = generatePaySignCode(appid, timestamp, nonceStr, jsApiPayOrder.getPackaged());
@@ -69,7 +69,7 @@ public class WechatPayUnifiedOrderService {
         } catch (NoSuchAlgorithmException | InvalidKeyException | SignatureException | IOException
                 | InvalidKeySpecException e) {
             e.printStackTrace();
-            throw new CustomizeException(WechatPayExceptionMessage.JSAPI_PAY_SIGN_ERROR);
+            throw new CommonException(WechatPayExceptionMessage.JSAPI_PAY_SIGN_ERROR);
         }
         return jsApiPayOrder;
     }
@@ -98,7 +98,7 @@ public class WechatPayUnifiedOrderService {
             appPayOrder.setPrepayid(prepayid);
         } catch (Exception e) {
             e.printStackTrace();
-            throw CustomizeException.error(WechatPayExceptionMessage.APP_PAY_UNIFIED_ORDER_ERROR);
+            throw CommonException.error(WechatPayExceptionMessage.APP_PAY_UNIFIED_ORDER_ERROR);
         }
         try {
             String paySignCode = generatePaySignCode(appid, timestamp, nonceStr, appPayOrder.getPrepayid());
@@ -106,7 +106,7 @@ public class WechatPayUnifiedOrderService {
             appPayOrder.setSign(paySign);
         } catch (Exception e) {
             e.printStackTrace();
-            throw CustomizeException.error(WechatPayExceptionMessage.APP_PAY_SIGN_ERROR);
+            throw CommonException.error(WechatPayExceptionMessage.APP_PAY_SIGN_ERROR);
         }
         return appPayOrder;
     }
@@ -122,7 +122,7 @@ public class WechatPayUnifiedOrderService {
             return JSON.parseObject(result, H5PayOrder.class);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new CustomizeException(WechatPayExceptionMessage.H5_PAY_UNIFIED_ORDER_ERROR);
+            throw new CommonException(WechatPayExceptionMessage.H5_PAY_UNIFIED_ORDER_ERROR);
         }
     }
 

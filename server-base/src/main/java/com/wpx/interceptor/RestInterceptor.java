@@ -1,7 +1,7 @@
 package com.wpx.interceptor;
 
 import com.wpx.constant.VerifyConstant;
-import com.wpx.exception.CustomizeException;
+import com.wpx.exception.CommonException;
 import com.wpx.exception.ExceptionMessage;
 import com.wpx.util.StringUtils;
 import com.wpx.property.ServerBaseProperties;
@@ -30,7 +30,7 @@ public class RestInterceptor implements HandlerInterceptor {
         if (StringUtils.equals(routeRestToken, restToken)) {
             return true;
         }
-        throw new CustomizeException(ExceptionMessage.AUTH_TOKEN_WRONG);
+        throw new CommonException(ExceptionMessage.AUTH_TOKEN_WRONG);
     }
 
 }

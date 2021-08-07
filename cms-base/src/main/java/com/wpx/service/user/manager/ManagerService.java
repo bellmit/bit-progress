@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.wpx.exception.CustomizeException;
+import com.wpx.exception.CommonException;
 import com.wpx.exception.ExceptionMessage;
 import com.wpx.mapper.user.ManagerMapper;
 import com.wpx.util.BcryptUtils;
@@ -125,7 +125,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
     public ManagerCmsVO add(ManagerCmsAddDTO addDTO) {
         String account = addDTO.getAccount();
         if (!Objects.equals(rootManagerName, account) && addDTO.getRole().equals(RoleEnum.ROOT)) {
-            throw new CustomizeException(ExceptionMessage.NOT_ALLOW_ADD_WPX_EXCEPT_ROOT);
+            throw new CommonException(ExceptionMessage.NOT_ALLOW_ADD_WPX_EXCEPT_ROOT);
         }
 
         String password;
@@ -133,7 +133,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
             password = DigestUtils.md5DigestAsHex((BcryptUtils.decrypt(addDTO.getPassword()) + salt).getBytes());
         } catch (Exception e) {
             log.error("RSAUtil.decrypt exception", e);
-            throw new CustomizeException(ExceptionMessage.RSAUtil_DECRYPT_ERROR);
+            throw new CommonException(ExceptionMessage.RSAUtil_DECRYPT_ERROR);
         }
         LambdaQueryWrapper<Manager> lambda = new QueryWrapper<Manager>().lambda();
         lambda.eq(Manager::getAccount, account);
@@ -157,11 +157,11 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
         Assert.notNull(manager, ExceptionMessage.MANAGER_NOT_EXIST);
         // 非超管只能编辑自己的信息
         if (!Objects.equals(manager.getRole(), RoleEnum.ROOT) && !Objects.equals(managerId, UserHelper.getUserId())) {
-            throw new CustomizeException(ExceptionMessage.NOT_ROOT_ONLY_CAN_EDIT_SELF_INFO);
+            throw new CommonException(ExceptionMessage.NOT_ROOT_ONLY_CAN_EDIT_SELF_INFO);
         }
         // 检查角色权限
         if (!Objects.equals(rootManagerName, manager.getAccount()) && Objects.equals(RoleEnum.ROOT, role)) {
-            throw new CustomizeException(ExceptionMessage.NOT_ALLOW_ADD_WPX_EXCEPT_ROOT);
+            throw new CommonException(ExceptionMessage.NOT_ALLOW_ADD_WPX_EXCEPT_ROOT);
         }
         manager.setRole(role);
         manager.setUsername(updateDTO.getUsername());
@@ -232,7 +232,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
         Manager manager = getById(managerId);
         Assert.notNull(manager, ExceptionMessage.MANAGER_NOT_EXIST);
         if (!Objects.equals(manager.getRole(), RoleEnum.ROOT) && !Objects.equals(managerId, userId)) {
-            throw new CustomizeException(ExceptionMessage.NOT_ROOT_ONLY_CAN_EDIT_SELF_INFO);
+            throw new CommonException(ExceptionMessage.NOT_ROOT_ONLY_CAN_EDIT_SELF_INFO);
         }
         String unencryptedPassword = managerResetPasswordDTO.getPassword();
         String md5Password;
@@ -240,7 +240,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
             md5Password = DigestUtils.md5DigestAsHex((BcryptUtils.decrypt(unencryptedPassword) + salt).getBytes());
         } catch (Exception e) {
             log.error("RSAUtil.decrypt exception", e);
-            throw new CustomizeException(ExceptionMessage.RSAUtil_DECRYPT_ERROR);
+            throw new CommonException(ExceptionMessage.RSAUtil_DECRYPT_ERROR);
         }
         manager.setPassword(md5Password);
         Assert.isTrue(updateById(manager), ExceptionMessage.MANAGER_UPDATE_ERROR);

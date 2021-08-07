@@ -6,11 +6,11 @@ package com.wpx.exception;
  */
 public class WechatPayErrorCode {
 
-    public static final String JSAPI_UNIFIED_ORDER_ERROR = "JSAPI_UNIFIED_ORDER_ERROR";
-    public static final String APP_PAY_UNIFIED_ORDER_ERROR = "APP_PAY_UNIFIED_ORDER_ERROR";
-    public static final String H5_PAY_UNIFIED_ORDER_ERROR = "H5_PAY_UNIFIED_ORDER_ERROR";
-    public static final String JSAPI_PAY_SIGN_ERROR = "JSAPI_PAY_SIGN_ERROR";
-    public static final String TRANSACTION_QUERY_ERROR = "TRANSACTION_QUERY_ERROR";
+    public static final String JSAPI_UNIFIED_ORDER_CODE = "JSAPI_UNIFIED_ORDER_CODE";
+    public static final String APP_PAY_UNIFIED_ORDER_CODE = "APP_PAY_UNIFIED_ORDER_CODE";
+    public static final String H5_PAY_UNIFIED_ORDER_CODE = "H5_PAY_UNIFIED_ORDER_CODE";
+    public static final String JSAPI_PAY_SIGN_CODE = "JSAPI_PAY_SIGN_CODE";
+    public static final String TRANSACTION_QUERY_CODE = "TRANSACTION_QUERY_CODE";
 
 
 }

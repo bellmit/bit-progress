@@ -6,11 +6,11 @@ package com.wpx.exception;
  */
 public class WechatPayMessageCode {
 
-    public static final String JSAPI_UNIFIED_ORDER_ERROR = "JSAPI支付统一下单失败";
-    public static final String APP_PAY_UNIFIED_ORDER_ERROR = "APP支付统一下单失败";
-    public static final String H5_PAY_UNIFIED_ORDER_ERROR = "H5支付统一下单失败";
-    public static final String JSAPI_PAY_SIGN_ERROR = "JSAPI支付信息签名失败";
-    public static final String TRANSACTION_QUERY_ERROR = "微信支付订单查询失败";
+    public static final String JSAPI_UNIFIED_ORDER_MESSAGE = "JSAPI支付统一下单失败";
+    public static final String APP_PAY_UNIFIED_ORDER_MESSAGE = "APP支付统一下单失败";
+    public static final String H5_PAY_UNIFIED_ORDER_MESSAGE = "H5支付统一下单失败";
+    public static final String JSAPI_PAY_SIGN_MESSAGE = "JSAPI支付信息签名失败";
+    public static final String TRANSACTION_QUERY_MESSAGE = "微信支付订单查询失败";
 
 
 }

@@ -5,7 +5,7 @@ package com.wpx.exception;
  * create on 2021/6/26 20:13
  * @Description 自定义异常
  */
-public class CustomizeException extends RuntimeException {
+public class CommonException extends RuntimeException {
 
     /**
      * 错误码
@@ -56,14 +56,14 @@ public class CustomizeException extends RuntimeException {
         this.message = message;
     }
 
-    public CustomizeException(IExceptionMessage requestException) {
+    public CommonException(IExceptionMessage requestException) {
         this.code = requestException.getCode();
         this.error = requestException.getError();
         this.message = requestException.getMessage();
     }
 
-    public static CustomizeException error(IExceptionMessage requestException) {
-        return new CustomizeException(requestException);
+    public static CommonException error(IExceptionMessage requestException) {
+        return new CommonException(requestException);
     }
 
 }
