@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.wpx.exception.ExceptionMessage;
+import com.wpx.exception.BaseExceptionMessage;
 import com.wpx.mapper.application.ApplicationMapper;
 import com.wpx.model.application.application.Application;
 import com.wpx.model.application.application.pojo.ApplicationMessageVO;
@@ -45,7 +45,7 @@ public class ApplicationService extends ServiceImpl<ApplicationMapper, Applicati
      */
     public ApplicationCmsVO findById(Long applicationId) {
         Application application = getById(applicationId);
-        Assert.notNull(application, ExceptionMessage.APPLICATION_NOT_EXIST);
+        Assert.notNull(application, BaseExceptionMessage.APPLICATION_NOT_EXIST_EXCEPTION);
         return toApplicationCmsVO(application);
     }
 
@@ -63,7 +63,7 @@ public class ApplicationService extends ServiceImpl<ApplicationMapper, Applicati
         Application application = BeanUtils.copyNonNullProperties(applicationAddDTO, Application.class);
         LocalDateTime time = LocalDateTime.now();
         application.setDisabled(false).setUpdateTime(time).setCreateTime(time).setDeleted(false);
-        Assert.isTrue(save(application), ExceptionMessage.APPLICATION_SAVE_ERROR);
+        Assert.isTrue(save(application), BaseExceptionMessage.APPLICATION_SAVE_EXCEPTION);
         return toApplicationCmsVO(application);
     }
 
@@ -81,7 +81,7 @@ public class ApplicationService extends ServiceImpl<ApplicationMapper, Applicati
         lambda.select(Application::getAppSign).in(Application::getApplicationId, applicationIds);
         Set<String> appSigns = CollectionUtils.conversionSet(list(lambda), Application::getAppSign);
         int count = baseMapper.deleteBatchIds(applicationIds);
-        Assert.isTrue(count == applicationIds.size(), ExceptionMessage.APPLICATION_DELETE_ERROR);
+        Assert.isTrue(count == applicationIds.size(), BaseExceptionMessage.APPLICATION_DELETE_EXCEPTION);
         // 删除应用的主题消息信息
         applicationTopicService.deleteByApplicationIds(applicationIds);
         // 从缓存中删除应用信息
@@ -97,7 +97,7 @@ public class ApplicationService extends ServiceImpl<ApplicationMapper, Applicati
     public ApplicationCmsVO updateApplication(ApplicationCmsUpdateDTO applicationUpdateDTO) {
         Application application = BeanUtils.copyNonNullProperties(applicationUpdateDTO, Application.class);
         application.setUpdateTime(LocalDateTime.now());
-        Assert.isTrue(updateById(application), ExceptionMessage.APPLICATION_UPDATE_ERROR);
+        Assert.isTrue(updateById(application), BaseExceptionMessage.APPLICATION_UPDATE_EXCEPTION);
         Application app = getById(application.getApplicationId());
         return toApplicationCmsVO(app);
     }
@@ -115,10 +115,10 @@ public class ApplicationService extends ServiceImpl<ApplicationMapper, Applicati
     public ApplicationCmsVO disabled(ApplicationCmsDisabledDTO disabledDTO) {
         Long applicationId = disabledDTO.getApplicationId();
         Application application = getById(applicationId);
-        Assert.notNull(application, ExceptionMessage.APPLICATION_NOT_EXIST);
+        Assert.notNull(application, BaseExceptionMessage.APPLICATION_NOT_EXIST_EXCEPTION);
         Boolean disabled = application.getDisabled();
         application.setDisabled(!disabled);
-        Assert.isTrue(updateById(application), ExceptionMessage.APPLICATION_UPDATE_ERROR);
+        Assert.isTrue(updateById(application), BaseExceptionMessage.APPLICATION_UPDATE_EXCEPTION);
         return toApplicationCmsVO(application);
     }
 
@@ -142,7 +142,7 @@ public class ApplicationService extends ServiceImpl<ApplicationMapper, Applicati
         LambdaQueryWrapper<Application> lambda = new QueryWrapper<Application>().lambda();
         lambda.select(Application::getDisabled).eq(Application::getApplicationId, applicationId);
         Application application = getOne(lambda);
-        Assert.notNull(application, ExceptionMessage.APPLICATION_NOT_EXIST);
+        Assert.notNull(application, BaseExceptionMessage.APPLICATION_NOT_EXIST_EXCEPTION);
         return application.getDisabled();
     }
 

@@ -15,8 +15,7 @@ mybatis-plus:
 
 logging:
   level:
-    com.luwei.model: debug
-    com.alibaba.nacos.client.config.impl: WARN
+    com.wpx.mapper: debug
 spring:
   output:
     ansi:

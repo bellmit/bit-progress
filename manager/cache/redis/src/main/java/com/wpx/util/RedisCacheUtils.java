@@ -1,8 +1,6 @@
 package com.wpx.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -11,13 +9,15 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
- * @author wpx
- **/
-@Component
+ * @Author: 不会飞的小鹏
+ */
 public class RedisCacheUtils {
 
-    @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
+    public RedisCacheUtils(StringRedisTemplate stringRedisTemplate) {
+        this.stringRedisTemplate = stringRedisTemplate;
+    }
 
     /**
      *  缓存3天

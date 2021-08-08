@@ -1,5 +1,6 @@
 package com.wpx.rest;
 
+import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
 import com.wpx.model.login.TokenCheckDTO;
 import com.wpx.model.login.UserLoginDTO;
@@ -23,7 +24,7 @@ public class LoginController {
     /**
      * 用户登录获取token
      *
-     * @param dto
+     * @param dto 参数
      */
     @PostMapping("login")
     public ResultVO<String> login(@RequestBody UserLoginDTO dto) {
@@ -33,18 +34,18 @@ public class LoginController {
     /**
      * 退出登录
      *
-     * @param dto
+     * @param dto  参数
      */
     @PostMapping("logout")
-    public ResultVO logout(@RequestBody UserLogoutDTO dto) {
+    public ResultVO<BooleanVO> logout(@RequestBody UserLogoutDTO dto) {
         loginService.logout(dto.getUserId());
-        return ResultVO.success();
+        return ResultVO.successData(BooleanVO.result(true));
     }
 
     /**
      * 从token中解析userId
      *
-     * @param token
+     * @param token  需要解析的token
      */
     @GetMapping("userId")
     public ResultVO<String> getUserIdInToken(@RequestParam String token) {
@@ -54,7 +55,7 @@ public class LoginController {
     /**
      * 检验token是否有效
      *
-     * @param checkDTO
+     * @param checkDTO  检查的token
      */
     @PostMapping("checkToken")
     public ResultVO<Boolean> checkToken(@RequestBody TokenCheckDTO checkDTO) {

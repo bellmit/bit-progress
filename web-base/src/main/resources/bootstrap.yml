@@ -9,15 +9,13 @@ spring:
           version: default
           default: true
           server-name: ${spring.application.name}
-      api-token: main-web-base-api-token
-      rest-token: main-web-base-rest-token
-      server-token:
-        gateway-web: gateway-web-rest-token
-      server-version:
-        gateway-web: default
       config:
         server-addr: 127.0.0.1:8848
         file-extension: yml
+    server-token:
+      gateway-web: gateway-web-rest-token
+    server-version:
+      gateway-web: default
     sentinel:
       transport:
         dashboard: 127.0.0.1:8850

@@ -10,3 +10,5 @@ module:
     white-route-data-id: cms-white-route
     route-rouse-data-id: cms-route-rouse
     route-api-token-data-id: cms-route-api-token
+swagger:
+  group: cms

@@ -2,7 +2,9 @@ package com.wpx.register;
 
 import com.wpx.property.RedisDataSourceProperties;
 import com.wpx.property.RedisMessageProperties;
+import com.wpx.service.RedisBaseService;
 import com.wpx.util.CollectionUtils;
+import com.wpx.util.RedisCacheUtils;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
@@ -32,6 +34,21 @@ public class RedisTemplateRegister implements BeanFactoryAware, InstantiationAwa
     private RedisDataSourceProperties redisDataSourceProperties;
 
     /**
+     * StringRedisTemplate的beanName后缀
+     */
+    public static final String TEMPLATE_NAME = "Template";
+
+    /**
+     * RedisCacheUtils的beanName后缀
+     */
+    public static final String UTIL_NAME = "CacheUtils";
+
+    /**
+     * RedisBaseService的beanName后缀
+     */
+    public static final String SERVICE_NAME = "BaseService";
+
+    /**
      * 读取redis配置并创建对应的StringRedisTemplate
      *
      * @param beanFactory
@@ -47,7 +64,17 @@ public class RedisTemplateRegister implements BeanFactoryAware, InstantiationAwa
                 RedisConnectionFactory redisConnection = getRedisConnection(dataSource);
                 stringRedisTemplate.setConnectionFactory(redisConnection);
                 stringRedisTemplate.afterPropertiesSet();
-                listableBeanFactory.registerSingleton(name, stringRedisTemplate);
+                // 向ioc容器中注入StringRedisTemplate
+                String templateName = name + TEMPLATE_NAME;
+                listableBeanFactory.registerSingleton(templateName, stringRedisTemplate);
+                // 向ioc容器中注入RedisCacheUtils
+                RedisCacheUtils redisCacheUtils = new RedisCacheUtils(stringRedisTemplate);
+                String utilName = name + UTIL_NAME;
+                listableBeanFactory.registerSingleton(utilName, redisCacheUtils);
+                // 向ioc容器中注入RedisBaseService
+                RedisBaseService redisBaseService = new RedisBaseService(redisCacheUtils);
+                String serviceName = name + SERVICE_NAME;
+                listableBeanFactory.registerSingleton(serviceName, redisBaseService);
             });
         }
     }

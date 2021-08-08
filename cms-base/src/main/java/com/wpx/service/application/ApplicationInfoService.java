@@ -11,7 +11,7 @@ import com.wpx.model.application.applicationinfo.pojo.cms.ApplicationInfoCmsVO;
 import com.wpx.util.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import com.wpx.exception.ExceptionMessage;
+import com.wpx.exception.BaseExceptionMessage;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import java.util.Set;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -34,7 +34,7 @@ public class ApplicationInfoService extends ServiceImpl<ApplicationInfoMapper, A
      */
     public ApplicationInfoCmsVO findById(Long applicationInfoId) {
         ApplicationInfo applicationInfo = getById(applicationInfoId);
-        Assert.notNull(applicationInfo, ExceptionMessage.APPLICATIONINFO_NOT_EXIST);
+        Assert.notNull(applicationInfo, BaseExceptionMessage.APPLICATIONINFO_NOT_EXIST_EXCEPTION);
         return toApplicationInfoCmsVO(applicationInfo);
     }
 
@@ -52,7 +52,7 @@ public class ApplicationInfoService extends ServiceImpl<ApplicationInfoMapper, A
         ApplicationInfo applicationInfo = BeanUtils.copyNonNullProperties(addDTO, ApplicationInfo.class);
         LocalDateTime time=LocalDateTime.now();
         applicationInfo.setUpdateTime(time).setCreateTime(time).setDeleted(false);
-        Assert.isTrue(save(applicationInfo), ExceptionMessage.APPLICATIONINFO_SAVE_ERROR);
+        Assert.isTrue(save(applicationInfo), BaseExceptionMessage.APPLICATIONINFO_SAVE_EXCEPTION);
         return toApplicationInfoCmsVO(applicationInfo);
     }
 
@@ -64,7 +64,7 @@ public class ApplicationInfoService extends ServiceImpl<ApplicationInfoMapper, A
     @Transactional(rollbackFor = RuntimeException.class)
     public void deleteApplicationInfos(Set<Long> applicationInfoIds) {
         int count = baseMapper.deleteBatchIds(applicationInfoIds);
-        Assert.isTrue(count == applicationInfoIds.size(), ExceptionMessage.APPLICATIONINFO_DELETE_ERROR);
+        Assert.isTrue(count == applicationInfoIds.size(), BaseExceptionMessage.APPLICATIONINFO_DELETE_EXCEPTION);
     }
 
     /**
@@ -76,7 +76,7 @@ public class ApplicationInfoService extends ServiceImpl<ApplicationInfoMapper, A
     public ApplicationInfoCmsVO updateApplicationInfo(ApplicationInfoCmsUpdateDTO updateDTO) {
         ApplicationInfo applicationInfo = BeanUtils.copyNonNullProperties(updateDTO, ApplicationInfo.class);
         applicationInfo.setUpdateTime(LocalDateTime.now());
-        Assert.isTrue(updateById(applicationInfo), ExceptionMessage.APPLICATIONINFO_UPDATE_ERROR);
+        Assert.isTrue(updateById(applicationInfo), BaseExceptionMessage.APPLICATIONINFO_UPDATE_EXCEPTION);
         log.info("修改数据：bean:{}", updateDTO);
         return findById(applicationInfo.getApplicationInfoId());
     }

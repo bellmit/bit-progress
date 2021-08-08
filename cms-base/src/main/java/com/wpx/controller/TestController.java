@@ -5,8 +5,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wpx.mapper.user.ManagerLogMapper;
+import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
 import com.wpx.model.user.managerlog.ManagerLog;
+import com.wpx.service.RedisBaseService;
+import com.wpx.util.RedisCacheUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,28 +35,36 @@ public class TestController {
     private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    @Qualifier("redis1")
-    private StringRedisTemplate stringRedisTemplate1;
+    @Qualifier("redis1Template")
+    private StringRedisTemplate redis1Template;
+
+    @Autowired
+    private RedisCacheUtils redisCacheUtils;
+
+    @Autowired
+    @Qualifier("redis1CacheUtils")
+    private RedisCacheUtils redis1CacheUtils;
+
+    @Autowired
+    private RedisBaseService redisBaseService;
+
+    @Autowired
+    @Qualifier("redis1BaseService")
+    private RedisBaseService redis1BaseService;
 
     @Autowired
     private ManagerLogMapper managerLogMapper;
 
     @GetMapping
     @ApiOperation("测试")
-    public ResultVO<List<ManagerLog>> getTest() {
-        stringRedisTemplate1.opsForValue().set("aaa", "fahjkfsha");
-        stringRedisTemplate.opsForValue().set("aaa", "12131231");
-        ManagerLog managerLog = new ManagerLog();
-        JSONObject object = new JSONObject();
-        object.put("a", "a");
-        managerLog.setManagerId(1L)
-                .setArgs(object.toJSONString())
-                .setMethod("ss")
-                .setUri("aaa");
-        managerLogMapper.insert(managerLog);
-        managerLog.setManagerId(2L);
-        managerLogMapper.updateById(managerLog);
-        return ResultVO.successData(managerLogMapper.selectList(new QueryWrapper<>()));
+    public ResultVO<BooleanVO> getTest() {
+        stringRedisTemplate.opsForValue().set("stringRedisTemplate", "stringRedisTemplate");
+        redis1Template.opsForValue().set("redis1Template", "redis1Template");
+        redisCacheUtils.setForValue("redisCacheUtils", "redisCacheUtils");
+        redis1CacheUtils.setForValue("redisCacheUtils", "redisCacheUtils");
+        redisBaseService.setForValue("redisBaseService", "redisBaseService");
+        redis1BaseService.setForValue("redis1BaseService", "redis1BaseService");
+        return ResultVO.successData(new BooleanVO(true));
     }
 
     @GetMapping("page")

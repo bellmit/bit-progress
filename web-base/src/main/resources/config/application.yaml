@@ -77,14 +77,12 @@ ribbon:
 wpx:
   config:
     salt: ufg48UH849Yhngf4
-  server:
-    base:
-      api-token: main-web-base-api-token
-      rest-token: main-web-base-rest-token
-      server-token:
-        gateway-web: gateway-web-rest-token
-        main-cms-base: main-cms-base-rest-token
 swagger:
   enable: true
   group: web
   application-name: ${spring.application.name}
+application:
+  server:
+    token:
+      api: main-web-base-api-token
+      rest: main-web-base-rest-token

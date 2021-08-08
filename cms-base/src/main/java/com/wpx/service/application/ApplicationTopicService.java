@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.wpx.exception.ExceptionMessage;
+import com.wpx.exception.BaseExceptionMessage;
 import com.wpx.mapper.application.ApplicationTopicMapper;
 import com.wpx.util.CollectionUtils;
 import com.wpx.model.application.applicationtopic.ApplicationTopic;
@@ -49,7 +49,7 @@ public class ApplicationTopicService extends ServiceImpl<ApplicationTopicMapper,
      */
     public ApplicationTopicCmsVO findById(Long applicationTopicId) {
         ApplicationTopic applicationTopic = getById(applicationTopicId);
-        Assert.notNull(applicationTopic, ExceptionMessage.APPLICATIONTOPIC_NOT_EXIST);
+        Assert.notNull(applicationTopic, BaseExceptionMessage.APPLICATIONTOPIC_NOT_EXIST_EXCEPTION);
         return toApplicationTopicCmsVO(applicationTopic);
     }
 
@@ -73,7 +73,7 @@ public class ApplicationTopicService extends ServiceImpl<ApplicationTopicMapper,
         ApplicationTopic applicationTopic = BeanUtils.copyNonNullProperties(addDTO, ApplicationTopic.class);
         LocalDateTime time = LocalDateTime.now();
         applicationTopic.setUpdateTime(time).setCreateTime(time).setDeleted(false);
-        Assert.isTrue(save(applicationTopic), ExceptionMessage.APPLICATIONTOPIC_SAVE_ERROR);
+        Assert.isTrue(save(applicationTopic), BaseExceptionMessage.APPLICATIONTOPIC_SAVE_EXCEPTION);
         if (!disabled) {
             ApplicationTopicItem item = toApplicationTopicItem(applicationTopic);
             systemRedisService.putApplicationTopicMessageToRedis(item);
@@ -102,7 +102,7 @@ public class ApplicationTopicService extends ServiceImpl<ApplicationTopicMapper,
                 .in(ApplicationTopic::getApplicationTopicId, applicationTopicIds);
         Set<String> topics = CollectionUtils.conversionSet(list(lambda), ApplicationTopic::getTopic);
         int count = baseMapper.deleteBatchIds(applicationTopicIds);
-        Assert.isTrue(count == applicationTopicIds.size(), ExceptionMessage.APPLICATIONTOPIC_DELETE_ERROR);
+        Assert.isTrue(count == applicationTopicIds.size(), BaseExceptionMessage.APPLICATIONTOPIC_DELETE_EXCEPTION);
         systemRedisService.deleteApplicationTopicMessageForRedis(topics);
     }
 
@@ -116,7 +116,7 @@ public class ApplicationTopicService extends ServiceImpl<ApplicationTopicMapper,
         boolean disabled = applicationService.checkApplication(updateDTO.getApplicationId());
         ApplicationTopic applicationTopic = BeanUtils.copyNonNullProperties(updateDTO, ApplicationTopic.class);
         applicationTopic.setUpdateTime(LocalDateTime.now());
-        Assert.isTrue(updateById(applicationTopic), ExceptionMessage.APPLICATIONTOPIC_UPDATE_ERROR);
+        Assert.isTrue(updateById(applicationTopic), BaseExceptionMessage.APPLICATIONTOPIC_UPDATE_EXCEPTION);
         ApplicationTopic topic = getById(applicationTopic.getApplicationTopicId());
         if (!disabled) {
             ApplicationTopicItem item = toApplicationTopicItem(applicationTopic);

@@ -88,6 +88,12 @@ ribbon:
 wpx:
   config:
     salt: ufg48UH849Yhngf4
+application:
+  server:
+    token:
+      api: main-cms-base-api-token
+      rest: main-cms-base-rest-token
+
 swagger:
   enable: true
   application-name: ${spring.application.name}

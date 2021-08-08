@@ -9,6 +9,9 @@ import org.springframework.format.FormatterRegistry;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
+/**
+ * @Author: 不会飞的小鹏
+ */
 @Configuration
 public class FeignFormatterRegister implements FeignFormatterRegistrar {
 

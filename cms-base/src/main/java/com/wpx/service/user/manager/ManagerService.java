@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wpx.exception.CommonException;
+import com.wpx.exception.BaseExceptionMessage;
 import com.wpx.exception.ExceptionMessage;
 import com.wpx.mapper.user.ManagerMapper;
 import com.wpx.util.BcryptUtils;
@@ -81,9 +82,9 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
     public ManagerCmsVO findById(Integer managerId, Long userId) {
         Manager manager = getById(userId);
         Assert.isTrue(Objects.equals(RoleEnum.ROOT, manager.getRole()) || Objects.equals(managerId, userId),
-                ExceptionMessage.NOT_ROOT_ONLY_CAN_CHECK_SELF_INFO);
+                BaseExceptionMessage.NOT_ROOT_CHECK_OTHER_INFO_EXCEPTION);
         Manager checkManager = getById(managerId);
-        Assert.notNull(checkManager, ExceptionMessage.MANAGER_NOT_EXIST);
+        Assert.notNull(checkManager, BaseExceptionMessage.MANAGER_NOT_EXIST_EXCEPTION);
         return toManagerPageVO(manager);
     }
 
@@ -125,7 +126,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
     public ManagerCmsVO add(ManagerCmsAddDTO addDTO) {
         String account = addDTO.getAccount();
         if (!Objects.equals(rootManagerName, account) && addDTO.getRole().equals(RoleEnum.ROOT)) {
-            throw new CommonException(ExceptionMessage.NOT_ALLOW_ADD_WPX_EXCEPT_ROOT);
+            throw new CommonException(BaseExceptionMessage.ALLOW_ADD_WPX_EXCEPT_ROOT_EXCEPTION);
         }
 
         String password;
@@ -140,7 +141,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
         Assert.isTrue(count(lambda) == 0, ExceptionMessage.ACCOUNT_ALREADY_EXIST);
         Manager manager = BeanUtils.copyNonNullProperties(addDTO, Manager.class);
         manager.setPassword(password);
-        Assert.isTrue(save(manager), ExceptionMessage.MANAGER_SAVE_ERROR);
+        Assert.isTrue(save(manager), BaseExceptionMessage.MANAGER_SAVE_EXCEPTION);
         return toManagerPageVO(manager);
     }
 
@@ -154,14 +155,14 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
         Long managerId = updateDTO.getManagerId();
         RoleEnum role = updateDTO.getRole();
         Manager manager = getById(managerId);
-        Assert.notNull(manager, ExceptionMessage.MANAGER_NOT_EXIST);
+        Assert.notNull(manager, BaseExceptionMessage.MANAGER_NOT_EXIST_EXCEPTION);
         // 非超管只能编辑自己的信息
         if (!Objects.equals(manager.getRole(), RoleEnum.ROOT) && !Objects.equals(managerId, UserHelper.getUserId())) {
-            throw new CommonException(ExceptionMessage.NOT_ROOT_ONLY_CAN_EDIT_SELF_INFO);
+            throw new CommonException(BaseExceptionMessage.NOT_ROOT_EDIT_OTHER_INFO_EXCEPTION);
         }
         // 检查角色权限
         if (!Objects.equals(rootManagerName, manager.getAccount()) && Objects.equals(RoleEnum.ROOT, role)) {
-            throw new CommonException(ExceptionMessage.NOT_ALLOW_ADD_WPX_EXCEPT_ROOT);
+            throw new CommonException(BaseExceptionMessage.ALLOW_ADD_WPX_EXCEPT_ROOT_EXCEPTION);
         }
         manager.setRole(role);
         manager.setUsername(updateDTO.getUsername());
@@ -176,17 +177,17 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
     @Transactional(rollbackFor = RuntimeException.class)
     public ManagerCmsVO handleDisabled(ManagerStateDTO managerStateDTO, Long userId) {
         Manager manager = getById(userId);
-        Assert.isTrue(Objects.equals(RoleEnum.ROOT, manager.getRole()), ExceptionMessage.NOT_ROOT_CANNOT_DISABLED);
+        Assert.isTrue(Objects.equals(RoleEnum.ROOT, manager.getRole()), BaseExceptionMessage.NOT_ROOT_DISABLED_EXCEPTION);
 
         Long managerId = managerStateDTO.getManagerId();
         Manager handleManager = getById(managerId);
-        Assert.notNull(handleManager, ExceptionMessage.MANAGER_NOT_EXIST);
-        Assert.isTrue(!Objects.equals(RoleEnum.ROOT, handleManager.getRole()), ExceptionMessage.ROOT_CANNOT_DISABLED);
+        Assert.notNull(handleManager, BaseExceptionMessage.MANAGER_NOT_EXIST_EXCEPTION);
+        Assert.isTrue(!Objects.equals(RoleEnum.ROOT, handleManager.getRole()), BaseExceptionMessage.ROOT_DISABLED_EXCEPTION);
         handleManager.setDisabled(!handleManager.getDisabled());
         if (handleManager.getDisabled()) {
 
         }
-        Assert.isTrue(updateById(handleManager), ExceptionMessage.MANAGER_UPDATE_ERROR);
+        Assert.isTrue(updateById(handleManager), BaseExceptionMessage.MANAGER_UPDATE_EXCEPTION);
         return toManagerPageVO(handleManager);
     }
 
@@ -201,7 +202,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
             return;
         }
         Manager manager = getById(userId);
-        Assert.isTrue(Objects.equals(RoleEnum.ROOT, manager.getRole()), ExceptionMessage.NOT_ROOT_CANNOT_DELETE);
+        Assert.isTrue(Objects.equals(RoleEnum.ROOT, manager.getRole()), BaseExceptionMessage.NOT_ROOT_DELETE_ACCOUNT_EXCEPTION);
         managerIds.forEach(this::deleteManager);
     }
 
@@ -214,10 +215,10 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
     public void deleteManager(Long managerId) {
         Manager manager = getById(managerId);
         if (Objects.nonNull(manager)) {
-            Assert.isTrue(!Objects.equals(RoleEnum.ROOT, manager.getRole()), ExceptionMessage.ROOT_CANNOT_DELETE);
+            Assert.isTrue(!Objects.equals(RoleEnum.ROOT, manager.getRole()), BaseExceptionMessage.ROOT_DELETE_EXCEPTION);
             loginService.removeToken(String.valueOf(managerId));
             manager.setDeleted(true);
-            Assert.isTrue(updateById(manager), ExceptionMessage.MANAGER_UPDATE_ERROR);
+            Assert.isTrue(updateById(manager), BaseExceptionMessage.MANAGER_UPDATE_EXCEPTION);
         }
     }
 
@@ -230,9 +231,9 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
     public ManagerCmsVO resetPassword(ManagerResetPasswordDTO managerResetPasswordDTO, Long userId) {
         Long managerId = managerResetPasswordDTO.getManagerId();
         Manager manager = getById(managerId);
-        Assert.notNull(manager, ExceptionMessage.MANAGER_NOT_EXIST);
+        Assert.notNull(manager, BaseExceptionMessage.MANAGER_NOT_EXIST_EXCEPTION);
         if (!Objects.equals(manager.getRole(), RoleEnum.ROOT) && !Objects.equals(managerId, userId)) {
-            throw new CommonException(ExceptionMessage.NOT_ROOT_ONLY_CAN_EDIT_SELF_INFO);
+            throw new CommonException(BaseExceptionMessage.NOT_ROOT_EDIT_OTHER_INFO_EXCEPTION);
         }
         String unencryptedPassword = managerResetPasswordDTO.getPassword();
         String md5Password;
@@ -243,7 +244,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
             throw new CommonException(ExceptionMessage.RSAUtil_DECRYPT_ERROR);
         }
         manager.setPassword(md5Password);
-        Assert.isTrue(updateById(manager), ExceptionMessage.MANAGER_UPDATE_ERROR);
+        Assert.isTrue(updateById(manager), BaseExceptionMessage.MANAGER_UPDATE_EXCEPTION);
         return toManagerPageVO(manager);
     }
 
@@ -255,14 +256,14 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
     @Transactional(rollbackFor = RuntimeException.class)
     public ManagerCmsVO handleRole(ManagerRoleDTO managerRoleDTO) {
         Manager manager = getById(managerRoleDTO.getManagerId());
-        Assert.notNull(manager, ExceptionMessage.MANAGER_NOT_EXIST);
+        Assert.notNull(manager, BaseExceptionMessage.MANAGER_NOT_EXIST_EXCEPTION);
 
         Manager currentManager = getById(UserHelper.getUserId());
-        Assert.notNull(currentManager, ExceptionMessage.MANAGER_NOT_EXIST);
+        Assert.notNull(currentManager, BaseExceptionMessage.MANAGER_NOT_EXIST_EXCEPTION);
 
-        Assert.isTrue(currentManager.getRole().ordinal() < manager.getRole().ordinal(), ExceptionMessage.NOT_ALLOW_SUPERIOR_ROLE);
+        Assert.isTrue(currentManager.getRole().ordinal() < manager.getRole().ordinal(), BaseExceptionMessage.ALLOW_SUPERIOR_ROLE_EXCEPTION);
         manager.setRole(managerRoleDTO.getRole());
-        Assert.isTrue(updateById(manager), ExceptionMessage.MANAGER_UPDATE_ERROR);
+        Assert.isTrue(updateById(manager), BaseExceptionMessage.MANAGER_UPDATE_EXCEPTION);
 
         return toManagerPageVO(manager);
     }

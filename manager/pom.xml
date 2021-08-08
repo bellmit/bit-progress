@@ -15,6 +15,7 @@
         <module>cache</module>
         <module>mq</module>
         <module>api</module>
+        <module>cloud</module>
     </modules>
     <dependencies>
         <dependency>
