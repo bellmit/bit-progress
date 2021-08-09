@@ -1,5 +1,9 @@
 package com.wpx.constant;
 
+/**
+ * @Author: 不会飞的小鹏
+ * @Description: RabbitMQ常量
+ */
 public class RabbitMQConstant {
 
     /**

@@ -11,7 +11,7 @@ import com.wpx.model.application.application.Application;
 import com.wpx.model.application.application.pojo.ApplicationMessageVO;
 import com.wpx.util.CollectionUtils;
 import com.wpx.model.application.application.pojo.cms.*;
-import com.wpx.redis.SystemRedisService;
+import com.wpx.manager.redis.SystemRedisService;
 import com.wpx.util.Assert;
 import com.wpx.util.BeanUtils;
 import com.wpx.util.ConversionBeanUtils;

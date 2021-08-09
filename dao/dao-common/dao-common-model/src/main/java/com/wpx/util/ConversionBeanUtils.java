@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * @Author: 不会飞的小鹏
+ * @Description: Bean转换工具
+ */
 public class ConversionBeanUtils {
 
     /**

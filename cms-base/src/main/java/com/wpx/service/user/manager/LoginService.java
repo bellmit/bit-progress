@@ -10,7 +10,7 @@ import com.wpx.model.login.LogoutDTO;
 import com.wpx.model.user.manager.Manager;
 import com.wpx.model.user.manager.pojo.cms.LoginSuccessVO;
 import com.wpx.model.user.manager.pojo.cms.ManagerLoginDTO;
-import com.wpx.redis.SystemRedisService;
+import com.wpx.manager.redis.SystemRedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

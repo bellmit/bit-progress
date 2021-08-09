@@ -9,6 +9,10 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+/**
+ * @Author: 不会飞的小鹏
+ * @Description: 生产者基础类
+ */
 @Component
 public abstract class BaseProducer {
 

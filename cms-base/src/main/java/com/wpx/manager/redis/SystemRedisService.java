@@ -1,4 +1,4 @@
-package com.wpx.redis;
+package com.wpx.manager.redis;
 
 import com.alibaba.fastjson.JSON;
 import com.wpx.util.CollectionUtils;

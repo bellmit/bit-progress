@@ -59,7 +59,7 @@ public class RedisMessageProperties {
     /**
      * Type of client to use. By default, auto-detected according to the classpath.
      */
-    private RedisMessageProperties.ClientType clientType;
+    private ClientType clientType;
 
     private RedisMessageProperties.Sentinel sentinel;
 
@@ -149,7 +149,7 @@ public class RedisMessageProperties {
         this.clientName = clientName;
     }
 
-    public RedisMessageProperties.ClientType getClientType() {
+    public ClientType getClientType() {
         return this.clientType;
     }
 

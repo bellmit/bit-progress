@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * @Author: 不会飞的小鹏
+ * @Description: 基础消费者
+ */
 @Service
 public abstract class BaseConsumer {
 

@@ -16,7 +16,7 @@ import com.wpx.model.application.applicationtopic.pojo.cms.ApplicationTopicCmsAd
 import com.wpx.model.application.applicationtopic.pojo.cms.ApplicationTopicCmsQueryDTO;
 import com.wpx.model.application.applicationtopic.pojo.cms.ApplicationTopicCmsUpdateDTO;
 import com.wpx.model.application.applicationtopic.pojo.cms.ApplicationTopicCmsVO;
-import com.wpx.redis.SystemRedisService;
+import com.wpx.manager.redis.SystemRedisService;
 import com.wpx.util.Assert;
 import com.wpx.util.BeanUtils;
 import com.wpx.util.ConversionBeanUtils;

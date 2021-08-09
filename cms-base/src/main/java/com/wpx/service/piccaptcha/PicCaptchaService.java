@@ -2,7 +2,7 @@ package com.wpx.service.piccaptcha;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.wpx.util.StringUtils;
-import com.wpx.redis.SystemRedisService;
+import com.wpx.manager.redis.SystemRedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
