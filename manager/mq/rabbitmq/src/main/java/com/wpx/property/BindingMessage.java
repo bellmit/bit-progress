@@ -6,7 +6,7 @@ import java.util.Map;
  * @Author: 不会飞的小鹏
  * @Description: 绑定配置
  */
-public class BindingProperties {
+public class BindingMessage {
 
     /**
      * 目标名称（可以是队列 也可以是交换机）

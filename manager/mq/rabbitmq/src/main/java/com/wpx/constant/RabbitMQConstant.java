@@ -7,6 +7,21 @@ package com.wpx.constant;
 public class RabbitMQConstant {
 
     /**
+     * CollectionFactory的beanName
+     */
+    public static final String CONNECTION_BEAN_NAME = "Connection";
+
+    /**
+     * RabbitTemplate的beanName
+     */
+    public static final String TEMPLATE_BEAN_NAME = "RabbitTemplate";
+
+    /**
+     * RabbitTemplate的beanName
+     */
+    public static final String LISTENER_CONTAINER_BEAN_NAME = "ListenerContainer";
+
+    /**
      * 交换机beanName
      */
     public static final String EXCHANGE_BEAN_NAME = "Exchange";

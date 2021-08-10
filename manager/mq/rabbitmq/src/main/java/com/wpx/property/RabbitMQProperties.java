@@ -15,42 +15,52 @@ public class RabbitMQProperties {
 
     public static final String PREFIX = "spring.rabbitmq";
 
+    private Map<String, ConnectionMessage> connection;
+
     /**
      * 交换机配置
      */
-    private Map<String, ExchangeProperties> exchange;
+    private Map<String, ExchangeMessage> exchange;
 
     /**
      * 队列配置
      */
-    private Map<String, QueueProperties> queue;
+    private Map<String, QueueMessage> queue;
 
     /**
      * 绑定配置
      */
-    private Map<String, BindingProperties> binding;
+    private Map<String, BindingMessage> binding;
 
-    public Map<String, ExchangeProperties> getExchange() {
+    public Map<String, ConnectionMessage> getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Map<String, ConnectionMessage> connection) {
+        this.connection = connection;
+    }
+
+    public Map<String, ExchangeMessage> getExchange() {
         return exchange;
     }
 
-    public void setExchange(Map<String, ExchangeProperties> exchange) {
+    public void setExchange(Map<String, ExchangeMessage> exchange) {
         this.exchange = exchange;
     }
 
-    public Map<String, QueueProperties> getQueue() {
+    public Map<String, QueueMessage> getQueue() {
         return queue;
     }
 
-    public void setQueue(Map<String, QueueProperties> queue) {
+    public void setQueue(Map<String, QueueMessage> queue) {
         this.queue = queue;
     }
 
-    public Map<String, BindingProperties> getBinding() {
+    public Map<String, BindingMessage> getBinding() {
         return binding;
     }
 
-    public void setBinding(Map<String, BindingProperties> binding) {
+    public void setBinding(Map<String, BindingMessage> binding) {
         this.binding = binding;
     }
 

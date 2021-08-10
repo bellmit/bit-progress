@@ -52,7 +52,7 @@ spring:
           min-idle: 0
 ```
 - 在上面的配置中，默认的redis配置将生成默认的 StringRedisTemplate、RedisCacheUtils 和 RedisBaseService
-- 多数据源配置的信息，将生成自定义的 StringRedisTemplate("redis1Template")、RedisCacheUtils("redis1CacheUtils") 和 RedisBaseService("redis1BaseService")
+- 多数据源配置的信息，将生成自定义的 StringRedisTemplate("redis1StringRedisTemplate")、RedisCacheUtils("redis1RedisCacheUtils") 和 RedisBaseService("redis1RedisBaseService")
 - 对redis配置的引用如下
 
 ```java
@@ -74,15 +74,15 @@ public class RedisService {
      * 使用redis1配置的 StringRedisTemplate
      */
     @Autowired
-    @Qualifier("redis1Template")
-    private StringRedisTemplate stringRedisTemplate;
+    @Qualifier("redis1StringRedisTemplate")
+    private StringRedisTemplate redis1StringRedisTemplate;
 
     /**
      * 使用redis2配置的 StringRedisTemplate
      */
     @Autowired
-    @Qualifier("redis2Template")
-    private StringRedisTemplate stringRedisTemplate;
+    @Qualifier("redis2StringRedisTemplate")
+    private StringRedisTemplate redis2StringRedisTemplate;
 
     /**
      * 默认配置的 RedisCacheUtils
@@ -94,15 +94,15 @@ public class RedisService {
      * 使用redis1配置的 StringRedisTemplate
      */
     @Autowired
-    @Qualifier("redis1CacheUtils")
-    private RedisCacheUtils redisCacheUtils;
+    @Qualifier("redis1RedisCacheUtils")
+    private RedisCacheUtils redis1RedisCacheUtils;
 
     /**
      * 使用redis2配置的 StringRedisTemplate
      */
     @Autowired
-    @Qualifier("redis2CacheUtils")
-    private RedisCacheUtils redisCacheUtils;
+    @Qualifier("redis2RedisCacheUtils")
+    private RedisCacheUtils redis2RedisCacheUtils;
 
     /**
      * 默认配置的 RedisBaseService
@@ -114,15 +114,15 @@ public class RedisService {
      * 使用redis1配置的 RedisBaseService
      */
     @Autowired
-    @Qualifier("redis1BaseService")
-    private RedisBaseService redisBaseService;
+    @Qualifier("redis1RedisBaseService")
+    private RedisBaseService redis1RedisBaseService;
 
     /**
      * 使用redis2配置的 RedisBaseService
      */
     @Autowired
-    @Qualifier("redis2BaseService")
-    private RedisBaseService redisBaseService;
+    @Qualifier("redis2RedisBaseService")
+    private RedisBaseService redis2RedisBaseService;
 
 }
 ```

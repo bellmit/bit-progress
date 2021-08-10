@@ -6,7 +6,7 @@ import java.util.Map;
  * @Author: 不会飞的小鹏
  * @Description: 队列配置
  */
-public class QueueProperties {
+public class QueueMessage {
 
     /**
      * 队列名称

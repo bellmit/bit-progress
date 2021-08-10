@@ -36,17 +36,17 @@ public class RedisTemplateRegister implements BeanFactoryAware, InstantiationAwa
     /**
      * StringRedisTemplate的beanName后缀
      */
-    public static final String TEMPLATE_NAME = "Template";
+    public static final String TEMPLATE_NAME = "StringRedisTemplate";
 
     /**
      * RedisCacheUtils的beanName后缀
      */
-    public static final String UTIL_NAME = "CacheUtils";
+    public static final String UTIL_NAME = "RedisCacheUtils";
 
     /**
      * RedisBaseService的beanName后缀
      */
-    public static final String SERVICE_NAME = "BaseService";
+    public static final String SERVICE_NAME = "RedisBaseService";
 
     /**
      * 读取redis配置并创建对应的StringRedisTemplate

@@ -6,7 +6,7 @@ import java.util.Map;
  * @Author: 不会飞的小鹏
  * @Description: 交换机配置
  */
-public class ExchangeProperties {
+public class ExchangeMessage {
 
     /**
      * 交换机名称

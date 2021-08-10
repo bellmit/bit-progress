@@ -85,6 +85,19 @@ spring:
           enabled: true
         prefetch: 1
     requested-heartbeat: 60
+    connection:
+      connection1:
+        host: 193.112.251.82
+        port: 5671
+        username: luweirabbitmq
+        password: 3TI4FevIFfziMo03
+        listener:
+          simple:
+            acknowledge-mode: manual
+            retry:
+              enabled: true
+            prefetch: 1
+          requested-heartbeat: 60
     exchange:
       exchange1:
         exchange-name: testexchange

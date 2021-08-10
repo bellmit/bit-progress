@@ -15,7 +15,7 @@ import java.io.IOException;
 @Component
 public class TestConsumer {
 
-    @RabbitListener(queues = "testqueue")
+    @RabbitListener(queues = "testqueue", containerFactory = "connection1ListenerContainer")
     @RabbitHandler
     public void Process(String s, Channel channel, Message message) throws IOException {
         System.out.println(s);

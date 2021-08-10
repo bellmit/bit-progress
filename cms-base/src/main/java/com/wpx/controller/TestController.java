@@ -35,22 +35,22 @@ public class TestController {
     private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    @Qualifier("redis1Template")
-    private StringRedisTemplate redis1Template;
+    @Qualifier("redis1StringRedisTemplate")
+    private StringRedisTemplate redis1StringRedisTemplate;
 
     @Autowired
     private RedisCacheUtils redisCacheUtils;
 
     @Autowired
-    @Qualifier("redis1CacheUtils")
-    private RedisCacheUtils redis1CacheUtils;
+    @Qualifier("redis1RedisCacheUtils")
+    private RedisCacheUtils redis1RedisCacheUtils;
 
     @Autowired
     private RedisBaseService redisBaseService;
 
     @Autowired
-    @Qualifier("redis1BaseService")
-    private RedisBaseService redis1BaseService;
+    @Qualifier("redis1RedisBaseService")
+    private RedisBaseService redis1RedisBaseService;
 
     @Autowired
     private ManagerLogMapper managerLogMapper;
@@ -59,11 +59,11 @@ public class TestController {
     @ApiOperation("测试")
     public ResultVO<BooleanVO> getTest() {
         stringRedisTemplate.opsForValue().set("stringRedisTemplate", "stringRedisTemplate");
-        redis1Template.opsForValue().set("redis1Template", "redis1Template");
+        redis1StringRedisTemplate.opsForValue().set("redis1Template", "redis1Template");
         redisCacheUtils.setForValue("redisCacheUtils", "redisCacheUtils");
-        redis1CacheUtils.setForValue("redisCacheUtils", "redisCacheUtils");
+        redis1RedisCacheUtils.setForValue("redisCacheUtils", "redisCacheUtils");
         redisBaseService.setForValue("redisBaseService", "redisBaseService");
-        redis1BaseService.setForValue("redis1BaseService", "redis1BaseService");
+        redis1RedisBaseService.setForValue("redis1BaseService", "redis1BaseService");
         return ResultVO.successData(new BooleanVO(true));
     }
 
