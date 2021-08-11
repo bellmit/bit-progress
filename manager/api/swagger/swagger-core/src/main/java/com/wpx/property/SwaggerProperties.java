@@ -3,6 +3,9 @@ package com.wpx.property;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Map;
+import java.util.Set;
+
 /**
  * @Author: 不会飞的小鹏
  * @Description: swagger配置信息
@@ -37,6 +40,16 @@ public class SwaggerProperties {
      * 应用名称
      */
     private String applicationName = "default";
+
+    /**
+     * securityScheme参数
+     */
+    private Map<String, String> securityScheme;
+
+    /**
+     * securityContext参数
+     */
+    private Set<String> securityContext;
 
     public Boolean getEnable() {
         return enable;
@@ -76,6 +89,22 @@ public class SwaggerProperties {
 
     public void setApplicationName(String applicationName) {
         this.applicationName = applicationName;
+    }
+
+    public Map<String, String> getSecurityScheme() {
+        return securityScheme;
+    }
+
+    public void setSecurityScheme(Map<String, String> securityScheme) {
+        this.securityScheme = securityScheme;
+    }
+
+    public Set<String> getSecurityContext() {
+        return securityContext;
+    }
+
+    public void setSecurityContext(Set<String> securityContext) {
+        this.securityContext = securityContext;
     }
 
 }

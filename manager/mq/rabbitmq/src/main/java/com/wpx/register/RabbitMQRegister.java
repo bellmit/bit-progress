@@ -86,7 +86,6 @@ public class RabbitMQRegister implements BeanFactoryAware, InstantiationAwareBea
                 ConnectionMessage.Cache.Connection connection = connectionMessage.getCache().getConnection();
                 property.from(connection::getMode).whenNonNull().to(factory::setCacheMode);
                 property.from(connection::getSize).whenNonNull().to(factory::setConnectionCacheSize);
-                beanFactory.registerSingleton(connectionBeanName, factory);
 
                 // RabbitTemplate
                 String rabbitTemplateBeanName = name + TEMPLATE_BEAN_NAME;

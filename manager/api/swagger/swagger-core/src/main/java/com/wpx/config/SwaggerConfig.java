@@ -1,6 +1,7 @@
 package com.wpx.config;
 
 import com.wpx.property.SwaggerProperties;
+import com.wpx.util.CollectionUtils;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +17,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static com.wpx.constant.VerifyConstant.*;
 import static springfox.documentation.builders.RequestHandlerSelectors.withClassAnnotation;
@@ -54,16 +57,15 @@ public class SwaggerConfig {
     }
 
     private List<SecurityScheme> securitySchemes() {
-        ApiKey authorization = new ApiKey(AUTHORIZATION, AUTHORIZATION, HEADER);
-        ApiKey routeApiToken = new ApiKey(ROUTE_API_TOKEN, ROUTE_API_TOKEN, HEADER);
-        ApiKey routeRestToken = new ApiKey(ROUTE_REST_TOKEN, ROUTE_REST_TOKEN, HEADER);
-        ApiKey userId = new ApiKey(USER_ID, USER_ID, HEADER);
-        List<SecurityScheme> apiKeys = new ArrayList<>();
-        apiKeys.add(authorization);
-        apiKeys.add(routeApiToken);
-        apiKeys.add(routeRestToken);
-        apiKeys.add(userId);
-        return apiKeys;
+        List<SecurityScheme> securitySchemes = new ArrayList<>();
+        Map<String, String> securitySchemeMap = swaggerProperties.getSecurityScheme();
+        if (CollectionUtils.nonEmpty(securitySchemeMap)) {
+            securitySchemeMap.forEach((name, keyName) -> {
+                ApiKey apiKey = new ApiKey(name, keyName, HEADER);
+                securitySchemes.add(apiKey);
+            });
+        }
+        return securitySchemes;
     }
 
     private List<SecurityContext> securityContexts() {
@@ -72,15 +74,14 @@ public class SwaggerConfig {
         AuthorizationScope[] scopes = new AuthorizationScope[1];
         AuthorizationScope scope = new AuthorizationScope(GLOBAL, ACCESS_EVERY_THING);
         scopes[0] = scope;
-        SecurityReference authorization = new SecurityReference(AUTHORIZATION, scopes);
-        SecurityReference routeApiToken = new SecurityReference(ROUTE_API_TOKEN, scopes);
-        SecurityReference routeRestToken = new SecurityReference(ROUTE_REST_TOKEN, scopes);
-        SecurityReference userId = new SecurityReference(USER_ID, scopes);
         List<SecurityReference> references = new ArrayList<>();
-        references.add(authorization);
-        references.add(routeApiToken);
-        references.add(routeRestToken);
-        references.add(userId);
+        Set<String> securityContextSet = swaggerProperties.getSecurityContext();
+        if (CollectionUtils.nonEmpty(securityContextSet)) {
+            securityContextSet.forEach(reference -> {
+                SecurityReference securityReference = new SecurityReference(reference, scopes);
+                references.add(securityReference);
+            });
+        }
         SecurityContext context = contextBuilder.securityReferences(references).build();
         contexts.add(context);
         return contexts;
