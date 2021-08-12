@@ -33,7 +33,7 @@ public class CommonException extends RuntimeException {
      * 获取错误码
      */
     public String getError() {
-        return this.message;
+        return this.error;
     }
 
     /**

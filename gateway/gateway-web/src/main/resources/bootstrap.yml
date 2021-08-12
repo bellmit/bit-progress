@@ -14,3 +14,17 @@ spring:
     sentinel:
       transport:
         dashboard: 127.0.0.1:8850
+dubbo:
+  application:
+    id: ${spring.application.name}
+    name: ${spring.application.name}
+  scan:
+    base-packages: com.wpx.rest.dubbo
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: spring-cloud://127.0.0.1:8848
+    check: true
+  cloud:
+    subscribed-services: ""

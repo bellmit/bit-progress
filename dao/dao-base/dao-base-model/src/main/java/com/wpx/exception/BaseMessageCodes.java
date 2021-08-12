@@ -31,5 +31,9 @@ public class BaseMessageCodes {
     public static final String APPLICATIONTOPIC_SAVE_EXCEPTION_MESSAGE = "应用主题保存失败";
     public static final String APPLICATIONTOPIC_UPDATE_EXCEPTION_MESSAGE = "应用主题更新失败";
     public static final String APPLICATIONTOPIC_DELETE_EXCEPTION_MESSAGE = "应用主题删除失败";
+    public static final String USER_NOT_EXIST = "用户不存在";
+    public static final String USER_SAVE_EXCEPTION_MESSAGE = "用户保存失败";
+    public static final String USER_UPDATE_EXCEPTION_MESSAGE = "用户更新失败";
+    public static final String USER_DELETE_EXCEPTION_MESSAGE = "用户删除失败";
 
 }

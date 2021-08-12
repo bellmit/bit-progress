@@ -17,6 +17,10 @@ import javax.security.auth.login.FailedLoginException;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * @Author: 不会飞的小鹏
+ * @Description: 全局异常处理
+ */
 @RestControllerAdvice
 public class GlobalControllerHandler {
 

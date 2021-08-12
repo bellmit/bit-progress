@@ -1,9 +1,14 @@
 package com.wpx.model.login;
 
+import java.io.Serializable;
+
 /**
- * @author wpx
+ * @Author: 不会飞的小鹏
+ * @Description: 退出登录DTO
  */
-public class LogoutDTO {
+public class LogoutDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 用户ID
@@ -18,11 +23,13 @@ public class LogoutDTO {
         this.userId = userId;
     }
 
-    public LogoutDTO() {
-    }
-
     public LogoutDTO(String userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "{" + "userId=" + userId + "}";
     }
 
 }

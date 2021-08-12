@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>com.wpx</groupId>
-            <artifactId>remote-common</artifactId>
+            <artifactId>feign-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

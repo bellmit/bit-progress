@@ -84,10 +84,11 @@ buildNumber.properties
 /gateway-base/target/
 /gateway-cms/target/
 /gateway-web/target/
-/remote-common/target/
-/remote-base/target/
-/remote-gateway-web/target/
-/cms-base/src/test/java/
-/web-base/src/test/java/
+/feign-common/target/
+/feign-cms-base/target/
+/feign-web-base/target/
+/feign-gateway-web/target/
+/base-cms/src/test/java/
+/base-web/src/test/java/
 /login/github-login/src/test/java/
 */test/java/

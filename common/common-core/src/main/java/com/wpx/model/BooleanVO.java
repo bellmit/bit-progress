@@ -1,10 +1,14 @@
 package com.wpx.model;
 
+import java.io.Serializable;
+
 /**
  * @Author: 不会飞的小鹏
  * @Deprecated: 用于返回查询结果
  */
-public class BooleanVO {
+public class BooleanVO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Boolean result;
 
@@ -30,4 +34,5 @@ public class BooleanVO {
                 "result=" + result +
                 '}';
     }
+
 }

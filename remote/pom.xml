@@ -12,10 +12,8 @@
     <artifactId>remote</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>remote-common</module>
-        <module>remote-gateway-web</module>
-        <module>remote-gateway-cms</module>
-        <module>remote-web-base</module>
+        <module>remote-feign</module>
+        <module>remote-dubbo</module>
     </modules>
 
 </project>

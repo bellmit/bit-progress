@@ -18,9 +18,9 @@
         <module>common</module>
         <module>dao</module>
         <module>remote</module>
-        <module>cms-base</module>
+        <module>base-cms</module>
         <module>server-base</module>
-        <module>web-base</module>
+        <module>base-web</module>
         <module>wechat-pay</module>
         <module>login</module>
         <module>scheduler</module>
@@ -47,6 +47,7 @@
         <fastjson.version>1.2.53</fastjson.version>
         <!-- Javax Servlet Version -->
         <javax.servlet.version>3.1.0</javax.servlet.version>
+        <javax.ws.rs.version>2.1.1</javax.ws.rs.version>
         <!-- Swagger -->
         <swagger.version>3.0.0</swagger.version>
         <!-- Swagger-models -->
@@ -123,12 +124,19 @@
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
+            <!-- Javax -->
             <!-- JavaxServlet -->
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>${javax.servlet.version}</version>
                 <scope>compile</scope>
+            </dependency>
+            <!-- javax.ws.rs dubbo -->
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>${javax.ws.rs.version}</version>
             </dependency>
 
             <!-- swagger -->

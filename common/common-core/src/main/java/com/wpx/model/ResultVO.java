@@ -4,12 +4,16 @@ import com.wpx.constant.ResultConstants;
 import com.wpx.exception.CommonException;
 import com.wpx.exception.ExceptionMessage;
 
+import java.io.Serializable;
+
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/13 17:26
  * @Description 返回请求结果
  */
-public class ResultVO<T> {
+public class ResultVO<T> implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 请求返回的状态码
@@ -175,6 +179,16 @@ public class ResultVO<T> {
      */
     public static ResultVO errorOf(CommonException exception) {
         return errorOf(exception.getCode(), exception.getError(), exception.getMessage());
+    }
+
+    @Override
+    public String toString() {
+        return "ResultVO{" +
+                "code=" + code +
+                ", error='" + error + '\'' +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
     }
 
 }
