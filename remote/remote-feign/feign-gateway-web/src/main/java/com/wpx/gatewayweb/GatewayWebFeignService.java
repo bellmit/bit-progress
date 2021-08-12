@@ -23,25 +23,25 @@ public interface GatewayWebFeignService {
     /**
      * 用户登录 -- 返回token
      *
-     * @param dto
+     * @param loginDTO  登录信息DTO
      * @return: token
      */
     @RequestMapping(value = "rest/auth/login", method = RequestMethod.POST)
-    ResultVO<LoginVO> login(@RequestBody LoginDTO dto);
+    ResultVO<LoginVO> login(@RequestBody LoginDTO loginDTO);
 
     /**
      * 退出登录
      *
-     * @param dto
+     * @param logoutDTO  退出登录信息DTO
      * @return: 状态码
      */
     @RequestMapping(value = "rest/auth/logout", method = RequestMethod.POST)
-    ResultVO<BooleanVO> logout(@RequestBody LogoutDTO dto);
+    ResultVO<BooleanVO> logout(@RequestBody LogoutDTO logoutDTO);
 
     /**
      * 解析token获取用户的userId
      *
-     * @param token
+     * @param token  需要解析的token
      * @return: userId
      */
     @RequestMapping(value = "rest/auth/userId", method = RequestMethod.GET)
@@ -50,10 +50,10 @@ public interface GatewayWebFeignService {
     /**
      * 校验token是否有效
      *
-     * @param checkDTO
+     * @param tokenDTO  需要检查的token
      * @return: 是否通过
      */
     @RequestMapping(value = "rest/auth/checkToken", method = RequestMethod.POST)
-    ResultVO<BooleanVO> checkToken(@RequestBody TokenDTO checkDTO);
+    ResultVO<BooleanVO> checkToken(@RequestBody TokenDTO tokenDTO);
 
 }

@@ -8,22 +8,20 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author 不会飞的小鹏
- * create on 2021/6/22 23:44
- * @Description WebBaseApplication is
+ * create on 2021/6/17 9:03
  */
 @SpringBootApplication
-@EnableSwagger2
-@EnableTransactionManagement(proxyTargetClass = true)
 @EnableDiscoveryClient
 @EnableFeignClients
-public class WebBaseApplication {
+@EnableTransactionManagement(proxyTargetClass = true)
+@EnableDubbo
+public class BaseCmsApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(WebBaseApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(BaseCmsApplication.class, args);
         BeanManager.setApplicationContext(context);
     }
 

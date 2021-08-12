@@ -40,8 +40,8 @@ public class AccessGatewayFilter implements GlobalFilter {
      * 1. 检验是否白名单或非api开头 {@link NacosRouteMatchService#ignoreAuthentication(String)}
      * 2. 检验token是否正确 {@link AuthService#checkToken(String)}
      *
-     * @param exchange
-     * @param chain
+     * @param exchange  exchange信息
+     * @param chain  chain信息
      */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {

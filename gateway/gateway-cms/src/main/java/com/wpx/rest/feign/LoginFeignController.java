@@ -24,7 +24,7 @@ public class LoginFeignController {
     /**
      * 用户登录获取token
      *
-     * @param loginDTO
+     * @param loginDTO  登录信息DTO
      */
     @PostMapping("login")
     public ResultVO<LoginVO> login(@RequestBody LoginDTO loginDTO) {
@@ -34,7 +34,7 @@ public class LoginFeignController {
     /**
      * 退出登录
      *
-     * @param logoutDTO
+     * @param logoutDTO  退出登录信息DTO
      */
     @PostMapping("logout")
     public ResultVO<BooleanVO> logout(@RequestBody LogoutDTO logoutDTO) {
@@ -45,7 +45,7 @@ public class LoginFeignController {
     /**
      * 从token中解析userId
      *
-     * @param tokenDTO
+     * @param tokenDTO  需要解析的token
      */
     @GetMapping("userId")
     public ResultVO<LoginVO> getUserIdInToken(@ModelAttribute TokenDTO tokenDTO) {
@@ -55,7 +55,7 @@ public class LoginFeignController {
     /**
      * 检验token是否有效
      *
-     * @param tokenDTO
+     * @param tokenDTO  需要检查的token
      */
     @PostMapping("checkToken")
     public ResultVO<BooleanVO> checkToken(@RequestBody TokenDTO tokenDTO) {

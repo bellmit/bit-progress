@@ -1,7 +1,7 @@
 package com.wpx.controller.system.login;
 
 import com.wpx.model.login.LoginDTO;
-import com.wpx.model.user.login.LoginVO;
+import com.wpx.model.login.LoginVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;

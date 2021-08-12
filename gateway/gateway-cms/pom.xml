@@ -23,11 +23,6 @@
         </dependency>
         <dependency>
             <groupId>com.wpx</groupId>
-            <artifactId>dao-common-model</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.wpx</groupId>
             <artifactId>dubbo-gateway-cms</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

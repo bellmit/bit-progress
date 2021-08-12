@@ -17,7 +17,7 @@ public interface LoginDubboService {
     /**
      * 用户登录 -- 返回token
      *
-     * @param loginDTO
+     * @param loginDTO  登录信息DTO
      * @return: 返回token
      */
     ResultVO<LoginVO> login(LoginDTO loginDTO);
@@ -25,7 +25,7 @@ public interface LoginDubboService {
     /**
      * 退出登录
      *
-     * @param logoutDTO
+     * @param logoutDTO  退出登录信息DTO
      * @return: 返回状态码
      */
     ResultVO<BooleanVO> logout(LogoutDTO logoutDTO);
@@ -33,7 +33,7 @@ public interface LoginDubboService {
     /**
      * 解析token获取用户的userId
      *
-     * @param tokenDTO
+     * @param tokenDTO  需要解析的token
      * @return: 返回userId
      */
     ResultVO<LoginVO> getUserIdInToken(TokenDTO tokenDTO);

@@ -23,26 +23,26 @@ public interface GatewayCmsFeignService {
     /**
      * 用户登录 -- 返回token
      *
-     * @param dto
+     * @param loginDTO  登录信息DTO
      * @return: 返回token
      */
     @RequestMapping(value = "rest/auth/login", method = RequestMethod.POST)
-    ResultVO<LoginVO> login(@RequestBody LoginDTO dto);
+    ResultVO<LoginVO> login(@RequestBody LoginDTO loginDTO);
 
     /**
      * 退出登录
      *
-     * @param dto
+     * @param logoutDTO  退出登录信息DTO
      * @return: 返回状态码
      */
     @RequestMapping(value = "rest/auth/logout", method = RequestMethod.POST)
-    ResultVO<BooleanVO> logout(@RequestBody LogoutDTO dto);
+    ResultVO<BooleanVO> logout(@RequestBody LogoutDTO logoutDTO);
 
     /**
      * 解析token获取用户的userId
      *
-     * @param token
-     * @return: 返回userId
+     * @param token  需要解析的token
+     * @return: 返回LoginVO
      */
     @RequestMapping(value = "rest/auth/userId", method = RequestMethod.GET)
     ResultVO<LoginVO> getUserIdInToken(@RequestParam String token);
@@ -50,10 +50,10 @@ public interface GatewayCmsFeignService {
     /**
      * 校验token是否有效
      *
-     * @param checkDTO
-     * @return: ResultVO<Boolean>
+     * @param tokenDTO  检查的token
+     * @return: ResultVO<BooleanVO>
      */
     @RequestMapping(value = "rest/auth/checkToken", method = RequestMethod.POST)
-    ResultVO<BooleanVO> checkToken(@RequestBody TokenDTO checkDTO);
+    ResultVO<BooleanVO> checkToken(@RequestBody TokenDTO tokenDTO);
 
 }

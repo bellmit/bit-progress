@@ -6,7 +6,6 @@ import com.wpx.model.login.LoginDTO;
 import com.wpx.model.login.LoginVO;
 import com.wpx.model.login.LogoutDTO;
 import com.wpx.model.login.TokenDTO;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 
@@ -15,19 +14,18 @@ import org.springframework.stereotype.Component;
  * @Description: GatewayWebRemoteService的服务降级类
  */
 @Component
-@Slf4j
 public class GatewayWebFeignServiceFallback implements FallbackFactory<GatewayWebFeignService> {
 
     @Override
     public GatewayWebFeignService create(Throwable throwable) {
         return new GatewayWebFeignService() {
             @Override
-            public ResultVO<LoginVO> login(LoginDTO dto) {
+            public ResultVO<LoginVO> login(LoginDTO loginDTO) {
                 return null;
             }
 
             @Override
-            public ResultVO<BooleanVO> logout(LogoutDTO dto) {
+            public ResultVO<BooleanVO> logout(LogoutDTO logoutDTO) {
                 return null;
             }
 
@@ -37,7 +35,7 @@ public class GatewayWebFeignServiceFallback implements FallbackFactory<GatewayWe
             }
 
             @Override
-            public ResultVO<BooleanVO> checkToken(TokenDTO checkDTO) {
+            public ResultVO<BooleanVO> checkToken(TokenDTO tokenDTO) {
                 return null;
             }
         };

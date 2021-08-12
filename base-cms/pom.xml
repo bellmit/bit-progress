@@ -12,7 +12,7 @@
     <artifactId>base-cms</artifactId>
 
     <properties>
-        <start-class>com.wpx.CmsBaseApplication</start-class>
+        <start-class>com.wpx.BaseCmsApplication</start-class>
     </properties>
 
     <dependencies>

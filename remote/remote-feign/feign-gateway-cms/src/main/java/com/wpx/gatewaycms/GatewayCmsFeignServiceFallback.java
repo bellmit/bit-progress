@@ -6,7 +6,6 @@ import com.wpx.model.login.LoginDTO;
 import com.wpx.model.login.LoginVO;
 import com.wpx.model.login.LogoutDTO;
 import com.wpx.model.login.TokenDTO;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.springframework.stereotype.Component;
 
@@ -15,22 +14,19 @@ import org.springframework.stereotype.Component;
  * @Description: GatewayCmsRemoteService的fallback
  */
 @Component
-@Slf4j
 public class GatewayCmsFeignServiceFallback implements FallbackFactory<GatewayCmsFeignService> {
 
     @Override
     public GatewayCmsFeignService create(Throwable throwable) {
 
-        log.error(GatewayCmsFeignService.class.getSimpleName() + "error ", throwable);
-
         return new GatewayCmsFeignService() {
             @Override
-            public ResultVO<LoginVO> login(LoginDTO dto) {
+            public ResultVO<LoginVO> login(LoginDTO loginDTO) {
                 return null;
             }
 
             @Override
-            public ResultVO<BooleanVO> logout(LogoutDTO dto) {
+            public ResultVO<BooleanVO> logout(LogoutDTO logoutDTO) {
                 return null;
             }
 
@@ -40,7 +36,7 @@ public class GatewayCmsFeignServiceFallback implements FallbackFactory<GatewayCm
             }
 
             @Override
-            public ResultVO<BooleanVO> checkToken(TokenDTO checkDTO) {
+            public ResultVO<BooleanVO> checkToken(TokenDTO tokenDTO) {
                 return null;
             }
         };
