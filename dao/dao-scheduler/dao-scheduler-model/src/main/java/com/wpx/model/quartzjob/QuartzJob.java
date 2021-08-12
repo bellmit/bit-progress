@@ -37,9 +37,9 @@ public class QuartzJob implements Serializable {
      */
     private String methodName;
 
-    private Object[] argsList;
+    private String argsList;
 
-    private Class[] argsClassList;
+    private String argsClassList;
 
     /**
      * 定时器分组，例：main-cms-kitty-cron，main-cms-kitty-simple

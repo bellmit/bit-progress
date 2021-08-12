@@ -44,10 +44,10 @@ public class QuartzJobVO implements Serializable {
     private String methodName;
 
     @ApiModelProperty(value = "任务参数列表")
-    private Object[] argsList;
+    private String argsList;
 
     @ApiModelProperty(value = "任务参数类型列表")
-    private Class[] argsClassList;
+    private String argsClassList;
 
     /**
      * 定时任务分组

@@ -47,10 +47,10 @@ public class QuartzJobAddDTO implements Serializable {
     private String methodName;
 
     @ApiModelProperty(value = "参数列表")
-    private Object[] argsList;
+    private String argsList;
 
     @ApiModelProperty(value = "参数类型列表，仅支持jdk的类")
-    private Class[] argsClassList;
+    private String argsClassList;
 
     /**
      * 定时任务分组
