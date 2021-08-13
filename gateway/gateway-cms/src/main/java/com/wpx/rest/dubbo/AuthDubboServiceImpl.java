@@ -63,7 +63,7 @@ public class AuthDubboServiceImpl implements AuthDubboService {
      */
     @Override
     public ResultVO<BooleanVO> checkToken(TokenDTO tokenDTO) {
-        return ResultVO.successData(authService.checkToken(tokenDTO.getToken()));
+        return ResultVO.successData(BooleanVO.result(authService.checkToken(tokenDTO.getToken()).getResult()));
     }
 
 }

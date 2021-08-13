@@ -59,7 +59,7 @@ public class AuthFeignController {
      */
     @PostMapping("checkToken")
     public ResultVO<BooleanVO> checkToken(@RequestBody TokenDTO tokenDTO) {
-        return ResultVO.successData(authService.checkToken(tokenDTO.getToken()));
+        return ResultVO.successData(BooleanVO.result(authService.checkToken(tokenDTO.getToken()).getResult()));
     }
 
 }

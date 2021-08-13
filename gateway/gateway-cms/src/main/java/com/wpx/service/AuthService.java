@@ -3,6 +3,7 @@ package com.wpx.service;
 import com.wpx.manager.shiro.service.ShiroTokenService;
 import com.wpx.model.BooleanVO;
 import com.wpx.model.login.LoginVO;
+import com.wpx.model.result.AuthResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,7 +78,7 @@ public class AuthService {
      *
      * @param token
      */
-    public BooleanVO checkToken(String token) {
-        return BooleanVO.result(shiroTokenService.checkToken(token).getResult());
+    public AuthResult checkToken(String token) {
+        return shiroTokenService.checkToken(token);
     }
 }
