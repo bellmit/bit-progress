@@ -9,7 +9,7 @@ import com.wpx.model.user.managerlog.ManagerLog;
  * </p>
  *
  * @author 不会飞的小鹏 
- * @since 2021-04-26
+ * created on 2021-04-26
  */
 public interface ManagerLogMapper extends BaseMapper<ManagerLog> {
 }

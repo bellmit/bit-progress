@@ -220,7 +220,7 @@ public class FileUtils {
      * @throws IOException if <code>destination</code> cannot be written
      * @throws IOException if <code>destination</code> needs creating but can't be
      * @throws IOException if an IO error occurs during copying
-     * @since 2.0
+     * created on 2.0
      */
     public static void copyInputStreamToFile(final InputStream source, final File destination) throws IOException {
         try (InputStream in = source) {
@@ -243,7 +243,7 @@ public class FileUtils {
      * @throws IOException if <code>destination</code> cannot be written
      * @throws IOException if <code>destination</code> needs creating but can't be
      * @throws IOException if an IO error occurs during copying
-     * @since 2.5
+     * created on 2.5
      */
     public static void copyToFile(final InputStream source, final File destination) throws IOException {
         try (InputStream in = source;
@@ -270,7 +270,7 @@ public class FileUtils {
      * @throws IOException if the file object is a directory
      * @throws IOException if the file cannot be written to
      * @throws IOException if a parent directory needs creating but that fails
-     * @since 1.3
+     * created on 1.3
      */
     public static FileOutputStream openOutputStream(final File file) throws IOException {
         return openOutputStream(file, false);
@@ -296,7 +296,7 @@ public class FileUtils {
      * @throws IOException if the file object is a directory
      * @throws IOException if the file cannot be written to
      * @throws IOException if a parent directory needs creating but that fails
-     * @since 2.1
+     * created on 2.1
      */
     public static FileOutputStream openOutputStream(final File file, final boolean append) throws IOException {
         if (file.exists()) {

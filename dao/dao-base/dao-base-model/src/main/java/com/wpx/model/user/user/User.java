@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @author 不会飞的小鹏
- * @since 2021-08-13
+ * created on 2021-08-13
  */
 @ApiModel(value = "用户信息")
 @Data

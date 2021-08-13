@@ -10,6 +10,7 @@ public class BaseErrorCodes {
     public static final String USER_SAVE_EXCEPTION_CODE = "USER_SAVE_EXCEPTION";
     public static final String USER_UPDATE_EXCEPTION_CODE = "USER_UPDATE_EXCEPTION";
     public static final String USER_DELETE_EXCEPTION_CODE = "USER_DELETE_EXCEPTION";
+
     public static final String NOT_ROOT_EDIT_OTHER_INFO_CODE = "NOT_ROOT_EDIT_OTHER_INFO";
     public static final String NOT_ROOT_CHECK_OTHER_INFO_CODE = "NOT_ROOT_CHECK_OTHER_INFO";
     public static final String ALLOW_ADD_WPX_EXCEPT_ROOT_CODE = "NOT_ALLOW_ADD_WPX_EXCEPT_ROOT";
@@ -22,5 +23,10 @@ public class BaseErrorCodes {
     public static final String ROOT_CANNOT_DISABLED_CODE = "ROOT_CANNOT_DISABLED";
     public static final String NOT_ROOT_CANNOT_DISABLED_CODE = "NOT_ROOT_CANNOT_DISABLED";
     public static final String NOT_ALLOW_SUPERIOR_ROLE_CODE = "NOT_ALLOW_SUPERIOR_ROLE";
+
+    public static final String WECHATUSER_NOT_EXIST_EXCEPTION_CODE = "WECHATUSER_NOT_EXIST";
+    public static final String WECHATUSER_SAVE_EXCEPTION_CODE = "WECHATUSER_SAVE_EXCEPTION_CODE";
+    public static final String WECHATUSER_UPDATE_EXCEPTION_CODE = "WECHATUSER_UPDATE_EXCEPTION";
+    public static final String WECHATUSER_DELETE_EXCEPTION_CODE = "WECHATUSER_DELETE_EXCEPTION";
 
 }

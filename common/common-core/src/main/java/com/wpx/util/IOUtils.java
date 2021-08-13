@@ -17,7 +17,7 @@ public class IOUtils {
 
     /**
      * Represents the end-of-file (or stream).
-     * @since 2.5 (made public)
+     * created on 2.5 (made public)
      */
     public static final int EOF = -1;
 
@@ -38,7 +38,7 @@ public class IOUtils {
      * @return the number of bytes copied, or -1 if &gt; Integer.MAX_VALUE
      * @throws NullPointerException if the input or output is null
      * @throws IOException          if an I/O error occurs
-     * @since 1.1
+     * created on 1.1
      */
     public static int copy(final InputStream input, final OutputStream output) throws IOException {
         final long count = copyLarge(input, output);
@@ -62,7 +62,7 @@ public class IOUtils {
      * @return the number of bytes copied
      * @throws NullPointerException if the input or output is null
      * @throws IOException          if an I/O error occurs
-     * @since 1.3
+     * created on 1.3
      */
     public static long copyLarge(final InputStream input, final OutputStream output)
             throws IOException {
@@ -82,7 +82,7 @@ public class IOUtils {
      * @return the number of bytes copied
      * @throws NullPointerException if the input or output is null
      * @throws IOException          if an I/O error occurs
-     * @since 2.5
+     * created on 2.5
      */
     public static long copy(final InputStream input, final OutputStream output, final int bufferSize)
             throws IOException {
@@ -103,7 +103,7 @@ public class IOUtils {
      * @return the number of bytes copied
      * @throws NullPointerException if the input or output is null
      * @throws IOException          if an I/O error occurs
-     * @since 2.2
+     * created on 2.2
      */
     public static long copyLarge(final InputStream input, final OutputStream output, final byte[] buffer)
             throws IOException {
