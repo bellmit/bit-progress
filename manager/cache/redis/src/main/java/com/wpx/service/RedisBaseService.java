@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: 在RedisCacheUtils的基础上封装，将数据序列化
  */
 public class RedisBaseService {

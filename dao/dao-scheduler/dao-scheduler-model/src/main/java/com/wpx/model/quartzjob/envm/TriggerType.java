@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.enums.IEnum;
 import java.util.Objects;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: 触发器类型
  **/
 public enum TriggerType implements IEnum<Integer> {

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wpx.model.ResultVO;
 import com.wpx.model.user.manager.pojo.cms.*;
-import com.wpx.service.user.manager.ManagerService;
+import com.wpx.service.user.ManagerService;
 import com.wpx.util.UserHelper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

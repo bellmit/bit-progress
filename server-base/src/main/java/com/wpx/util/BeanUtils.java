@@ -14,7 +14,7 @@ import java.util.Set;
 
 /**
  * @author 不会飞的小鹏
- * @Deprecated: 该类继承了 Spring BeanUtils, 对部分方法进行了增强与补充.
+ *  该类继承了 Spring BeanUtils, 对部分方法进行了增强与补充.
  */
 public class BeanUtils extends org.springframework.beans.BeanUtils {
 

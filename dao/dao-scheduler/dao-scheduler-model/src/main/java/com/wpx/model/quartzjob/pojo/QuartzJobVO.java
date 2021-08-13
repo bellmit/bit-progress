@@ -11,8 +11,8 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * @Author: 不会飞的小鹏
- * @Deprecated: 任务详情展示类
+ * @author 不会飞的小鹏
+ *  任务详情展示类
  */
 @Data
 public class QuartzJobVO implements Serializable {

@@ -16,6 +16,8 @@
         <module>dubbo-gateway-cms</module>
         <module>dubbo-gateway-web</module>
         <module>dubbo-base-web</module>
+        <module>dubbo-scheduler</module>
+        <module>dubbo-base-cms</module>
     </modules>
 
 </project>

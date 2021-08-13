@@ -8,7 +8,7 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import org.springframework.web.util.pattern.PathPatternParser;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: 跨域配置
  */
 @Configuration

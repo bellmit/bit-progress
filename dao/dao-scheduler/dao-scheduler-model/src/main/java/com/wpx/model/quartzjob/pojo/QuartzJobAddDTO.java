@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * @Author: wpx
+ * @author wpx
  * @Description:
  **/
 @Data

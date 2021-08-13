@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  */
 @Service
 @Slf4j

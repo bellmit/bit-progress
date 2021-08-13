@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * 应用信息 服务类
  * </p>
  *
- * @Author: 不会飞的小鹏 
+ * @author 不会飞的小鹏 
  * @since 2021-06-07
  */
 @Service

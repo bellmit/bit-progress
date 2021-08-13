@@ -17,7 +17,7 @@ import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 import javax.sql.DataSource;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: Quartz配置
  **/
 @Configuration

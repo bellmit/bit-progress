@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.core.enums.IEnum;
 import java.util.Objects;
 
 /**
- * @Author: 不会飞的小鹏
- * @Deprecated: 触发器状态
+ * @author 不会飞的小鹏
+ *  触发器状态
  */
 public enum TriggerStateEnum implements IEnum<Integer> {
 

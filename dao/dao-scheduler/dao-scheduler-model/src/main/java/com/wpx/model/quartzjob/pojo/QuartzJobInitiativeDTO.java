@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: 手动触发任务
  **/
 @Data

@@ -12,7 +12,7 @@ import springfox.documentation.swagger.web.*;
 import java.util.List;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: swagger-ui访问资源controller
  */
 @RestController

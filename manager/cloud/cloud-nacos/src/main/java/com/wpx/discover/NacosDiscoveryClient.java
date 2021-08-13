@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  */
 public class NacosDiscoveryClient implements DiscoveryClient {
 

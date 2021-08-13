@@ -3,8 +3,8 @@ package com.wpx.model;
 import java.io.Serializable;
 
 /**
- * @Author: 不会飞的小鹏
- * @Deprecated: 用于返回查询结果
+ * @author 不会飞的小鹏
+ *  用于返回查询结果
  */
 public class BooleanVO implements Serializable {
 

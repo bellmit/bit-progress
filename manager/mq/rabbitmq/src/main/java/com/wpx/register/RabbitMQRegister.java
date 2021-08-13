@@ -24,7 +24,7 @@ import java.util.Map;
 import static com.wpx.constant.RabbitMQConstant.*;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: RabbitMQ注册
  */
 @Component

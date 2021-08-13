@@ -3,7 +3,7 @@ package com.wpx.model.login;
 import java.io.Serializable;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: 检查token的DTO
  */
 public class TokenDTO implements Serializable {

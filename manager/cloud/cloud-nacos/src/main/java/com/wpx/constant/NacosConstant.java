@@ -1,7 +1,7 @@
 package com.wpx.constant;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: Nacos常量
  */
 public class NacosConstant {

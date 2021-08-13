@@ -3,7 +3,7 @@ package com.wpx.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wpx.gatewaycms.LoginDubboService;
+import com.wpx.gatewaycms.auth.AuthDubboService;
 import com.wpx.mapper.user.ManagerLogMapper;
 import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @Author: 不会飞的小鹏
- * @Deprecated: 测试接口
+ * @author 不会飞的小鹏
+ *  测试接口
  */
 @Api(tags = "测试")
 @RestController
@@ -56,7 +56,7 @@ public class TestController {
     @Autowired
     private ManagerLogMapper managerLogMapper;
     @Reference
-    private LoginDubboService loginDubboService;
+    private AuthDubboService authDubboService;
 
     @GetMapping
     @ApiOperation("测试")
@@ -81,7 +81,7 @@ public class TestController {
     public ResultVO<LoginVO> getUser(@RequestParam("userId") Long userId) {
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setUserId(String.valueOf(userId));
-        ResultVO<LoginVO> result = loginDubboService.login(loginDTO);
+        ResultVO<LoginVO> result = authDubboService.login(loginDTO);
         LoginVO loginVO = result.getData();
         return ResultVO.successData(loginVO);
     }

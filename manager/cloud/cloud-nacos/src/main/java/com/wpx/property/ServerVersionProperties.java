@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: 服务版本配置
  */
 @ConfigurationProperties(prefix = ServerVersionProperties.PREFIX)

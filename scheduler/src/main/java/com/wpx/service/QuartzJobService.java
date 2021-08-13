@@ -25,8 +25,8 @@ import java.time.ZoneId;
 import java.util.*;
 
 /**
- * @Author: 不会飞的小鹏
- * @Deprecated: 定时任务服务类
+ * @author 不会飞的小鹏
+ *  定时任务服务类
  */
 @Service
 @Slf4j
@@ -48,7 +48,7 @@ public class QuartzJobService {
             return getJobByKey(jobKey);
         } catch (Exception e) {
             log.error("quartzJobCreate error: ", e);
-            throw new ScheduleException(ScheduleExceptionMessage.QUARTZJOB_CREATE_ERROR);
+            throw new ScheduleException(ScheduleExceptionMessage.QUARTZJOB_CREATE_EXCEPTION);
         }
     }
 
@@ -94,7 +94,7 @@ public class QuartzJobService {
             quartzFactory.removeJob(triggerKey, jobKey);
         } catch (SchedulerException e) {
             log.error("quartzJobRemove error ", e);
-            throw new ScheduleException(ScheduleExceptionMessage.QUARTZJOB_REMOVE_ERROR);
+            throw new ScheduleException(ScheduleExceptionMessage.QUARTZJOB_REMOVE_EXCEPTION);
         }
     }
 
@@ -137,7 +137,7 @@ public class QuartzJobService {
             return filterJob(jobList, triggerState, type);
         } catch (SchedulerException e) {
             log.error("quartzJobQueryList error ", e);
-            throw new ScheduleException(ScheduleExceptionMessage.QUARTZJOB_QUERY_ERROR);
+            throw new ScheduleException(ScheduleExceptionMessage.QUARTZJOB_QUERY_EXCEPTION);
         }
     }
 
@@ -226,7 +226,7 @@ public class QuartzJobService {
             return quartzFactory.getJobKeys(GroupMatcher.anyGroup());
         } catch (SchedulerException e) {
             log.error("jobKeyQuery error ", e);
-            throw new ScheduleException(ScheduleExceptionMessage.JOBKEY_QUERY_ERROR);
+            throw new ScheduleException(ScheduleExceptionMessage.JOBKEY_QUERY_EXCEPTION);
         }
     }
 
@@ -240,7 +240,7 @@ public class QuartzJobService {
             return quartzFactory.getJobKeys(GroupMatcher.groupEquals(groupName));
         } catch (SchedulerException e) {
             log.error("jobKeyQuery error ", e);
-            throw new ScheduleException(ScheduleExceptionMessage.JOBKEY_QUERY_ERROR);
+            throw new ScheduleException(ScheduleExceptionMessage.JOBKEY_QUERY_EXCEPTION);
         }
 
     }
@@ -294,7 +294,7 @@ public class QuartzJobService {
             return jobVO;
         }catch (SchedulerException e) {
             log.error("quartzJobQuery error ", e);
-            throw new ScheduleException(ScheduleExceptionMessage.QUARTZJOB_QUERY_ERROR);
+            throw new ScheduleException(ScheduleExceptionMessage.QUARTZJOB_QUERY_EXCEPTION);
         }
     }
 
@@ -326,7 +326,7 @@ public class QuartzJobService {
             return getJobByTriggerKey(triggerKey);
         } catch (SchedulerException e) {
             log.error("triggerPause error ", e);
-            throw new ScheduleException(ScheduleExceptionMessage.TRIGGER_PAUSE_ERROR);
+            throw new ScheduleException(ScheduleExceptionMessage.TRIGGER_PAUSE_EXCEPTION);
         }
     }
 
@@ -344,7 +344,7 @@ public class QuartzJobService {
             return getJobByTriggerKey(triggerKey);
         } catch (SchedulerException e) {
             log.error("triggerReschedule error ", e);
-            throw new ScheduleException(ScheduleExceptionMessage.TRIGGER_RESCHEDULE_ERROR);
+            throw new ScheduleException(ScheduleExceptionMessage.TRIGGER_RESCHEDULE_EXCEPTION);
         }
     }
 
@@ -378,7 +378,7 @@ public class QuartzJobService {
             return BooleanVO.result(quartzFactory.checkExists(jobKey));
         } catch (SchedulerException e) {
             log.error("jobCheckExists error ", e);
-            throw new ScheduleException(ScheduleExceptionMessage.QUARTZJOB_CHECK_EXISTS_ERROR);
+            throw new ScheduleException(ScheduleExceptionMessage.QUARTZJOB_CHECK_EXISTS_EXCEPTION);
         }
     }
 
@@ -393,7 +393,7 @@ public class QuartzJobService {
             return quartzFactory.getJobGroupNames();
         } catch (SchedulerException e) {
             log.error("jobGroupQuery error ", e);
-            throw new ScheduleException(ScheduleExceptionMessage.JOBGROUP_QUERY_ERROR);
+            throw new ScheduleException(ScheduleExceptionMessage.JOBGROUP_QUERY_EXCEPTION);
         }
     }
 

@@ -7,8 +7,8 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * @Author: 不会飞的小鹏
- * @Deprecated: 批量添加定时任务
+ * @author 不会飞的小鹏
+ *  批量添加定时任务
  */
 @Data
 public class QuartzJobListAddDTO implements Serializable {

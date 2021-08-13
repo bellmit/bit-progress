@@ -3,7 +3,7 @@ package com.wpx.controller.user.manager;
 import com.wpx.model.ResultVO;
 import com.wpx.model.user.manager.pojo.cms.LoginSuccessVO;
 import com.wpx.model.user.manager.pojo.cms.ManagerLoginDTO;
-import com.wpx.service.user.manager.LoginService;
+import com.wpx.service.user.LoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;

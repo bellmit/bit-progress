@@ -24,8 +24,8 @@ import static com.wpx.constant.VerifyConstant.*;
 import static springfox.documentation.builders.RequestHandlerSelectors.withClassAnnotation;
 
 /**
- * @Author: 不会飞的小鹏
- * @Deprecated: swagger配置
+ * @author 不会飞的小鹏
+ *  swagger配置
  */
 @EnableSwagger2
 @Configuration

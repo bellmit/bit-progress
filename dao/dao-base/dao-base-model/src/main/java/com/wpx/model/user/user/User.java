@@ -1,23 +1,27 @@
 package com.wpx.model.user.user;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.Version;
+import com.baomidou.mybatisplus.annotation.TableId;
+
+import java.time.LocalDateTime;
+
+import com.baomidou.mybatisplus.annotation.TableLogic;
+
+import java.io.Serializable;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
 /**
- * @Author: 不会飞的小鹏 
- * @since 2021-06-04
+ * @author 不会飞的小鹏
+ * @since 2021-08-13
  */
-@ApiModel(value = "")
+@ApiModel(value = "用户信息")
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
@@ -26,17 +30,18 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "用户ID")
     @TableId(value = "user_id", type = IdType.AUTO)
     private Long userId;
 
-    @ApiModelProperty(value = "app_sign")
+    @ApiModelProperty(value = "用户所属应用类型")
+    private Integer appType;
+
+    @ApiModelProperty(value = "用户所属应用标识")
     private String appSign;
 
-    @ApiModelProperty(value = "fcm token")
-    private String fcmToken;
-
-    @ApiModelProperty(value = "0：禁用，1：启用")
-    private Integer flag;
+    @ApiModelProperty(value = "是否禁用，0：false，不禁言；1：true，禁用")
+    private Boolean flag;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
@@ -44,8 +49,9 @@ public class User implements Serializable {
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
 
-    @ApiModelProperty(value = "删除状态true:已删除,false:未删除")
+    @ApiModelProperty(value = "是否删除，0：false，未删除；1：true，已删除")
     @TableLogic
     private Boolean deleted;
+
 
 }

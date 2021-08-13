@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
- * @Author: 不会飞的小鹏 
+ * @author 不会飞的小鹏 
  * @since 2021-06-10
  */
 @Data

@@ -6,7 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: 定时任务
  **/
 @Data
@@ -50,6 +50,7 @@ public class QuartzJob implements Serializable {
      * 调用的服务
      */
     private String applicationName;
+
     /**
      * 定时器的服务调用地址
      */

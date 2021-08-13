@@ -3,7 +3,7 @@ package com.wpx.property;
 import java.util.Map;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: 绑定配置
  */
 public class BindingMessage {

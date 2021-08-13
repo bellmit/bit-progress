@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * 获取Nacos服务
  */
 public class NacosServiceDiscovery {

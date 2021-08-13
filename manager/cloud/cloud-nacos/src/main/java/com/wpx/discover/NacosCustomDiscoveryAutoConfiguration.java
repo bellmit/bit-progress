@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * 使用重写的获取Nacos服务的类
  */
 @Configuration(proxyBeanMethods = false)

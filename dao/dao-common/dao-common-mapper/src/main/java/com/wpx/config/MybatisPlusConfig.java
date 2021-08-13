@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  */
 @Configuration
 @MapperScan("com.wpx.mapper")

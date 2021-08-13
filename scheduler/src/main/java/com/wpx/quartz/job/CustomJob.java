@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import java.net.URI;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: 任务触发
  **/
 @Component

@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: 配置swagger资源
  */
 @Component

@@ -23,8 +23,8 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * @Author: 不会飞的小鹏
- * @Deprecated: 初始化RedisTemplate并交给Spring管理
+ * @author 不会飞的小鹏
+ *  初始化RedisTemplate并交给Spring管理
  * 装载bean之前会扫描 InstantiationAwareBeanPostProcessor ，以此达到先加载此类的目的
  */
 @Component

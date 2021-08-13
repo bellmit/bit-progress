@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Map;
 
 /**
- * @Author: 不会飞的小鹏
- * @Deprecated: redis多数据源配置
+ * @author 不会飞的小鹏
+ *  redis多数据源配置
  */
 @Configuration
 @ConfigurationProperties(prefix = RedisDataSourceProperties.PREFIX)

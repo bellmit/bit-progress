@@ -4,7 +4,7 @@ import java.time.Duration;
 import java.util.List;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: Redis配置信息
  */
 public class RedisMessageProperties {

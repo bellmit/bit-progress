@@ -5,8 +5,8 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @Author: 不会飞的小鹏
- * @Deprecated: 任务删除
+ * @author 不会飞的小鹏
+ *  任务删除
  */
 @Data
 public class QuartzJobDeleteDTO implements Serializable {

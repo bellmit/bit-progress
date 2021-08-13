@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @Author: wpx
+ * @author wpx
  * @Description:
  **/
 @Data

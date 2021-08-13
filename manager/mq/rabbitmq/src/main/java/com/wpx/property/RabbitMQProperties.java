@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Map;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: RabbitMQ配置
  */
 @Configuration

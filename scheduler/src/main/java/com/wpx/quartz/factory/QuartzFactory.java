@@ -5,6 +5,7 @@ import com.wpx.exception.ScheduleExceptionMessage;
 import com.wpx.model.quartzjob.QuartzJob;
 import com.wpx.model.quartzjob.envm.TriggerType;
 import com.wpx.quartz.job.CustomJob;
+import com.wpx.util.Assert;
 import com.wpx.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
@@ -19,7 +20,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: Quartz
  */
 @Component
@@ -31,9 +32,7 @@ public class QuartzFactory {
 
     public JobKey createQuartzJob(QuartzJob job) throws SchedulerException {
         String name = job.getJobName();
-        if (Objects.isNull(name)) {
-            return null;
-        }
+        Assert.isNotEmpty(name, ScheduleExceptionMessage.QUARTZJOB_NAME_EMPTY_EXCEPTION);
 
         String groupName = job.getGroupName();
         if (StringUtils.isEmpty(groupName)) {
@@ -53,39 +52,38 @@ public class QuartzFactory {
             switch (type) {
                 case SIMPLE: {
                     Long duration = job.getDuration();
-                    Long startAtTime;
-                    if (Objects.nonNull(duration)) {
-                        startAtTime = millis + duration;
-                    } else {
-                        startAtTime = millis;
-                    }
-                    JobDetail jobDetail = JobBuilder.newJob(CustomJob.class).withIdentity(jobKey)
+                    long startAtTime = Objects.nonNull(duration) ? millis + duration : millis;
+                    JobDetail jobDetail = JobBuilder
+                            .newJob(CustomJob.class)
+                            .withIdentity(jobKey)
                             .build();
                     jobDetail.getJobDataMap().put("quartzJob", job);
-                    Trigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerKey)
-                            .startAt(new Date(startAtTime)).build();
+                    Trigger trigger = TriggerBuilder
+                            .newTrigger()
+                            .withIdentity(triggerKey)
+                            .startAt(new Date(startAtTime))
+                            .build();
                     scheduler.scheduleJob(jobDetail, trigger);
-
                     return jobKey;
                 }
                 case CRON: {
                     String cronExpression = job.getCronExpression();
-                    if (Objects.nonNull(cronExpression)) {
-                        JobDetail jobDetail = JobBuilder.newJob(CustomJob.class).withIdentity(jobKey).build();
-                        jobDetail.getJobDataMap().put("quartzJob", job);
-                        CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression)
-                                .withMisfireHandlingInstructionDoNothing();
-                        Trigger scheduleTrigger = TriggerBuilder.newTrigger().withIdentity(triggerKey)
-                                .withSchedule(scheduleBuilder).startAt(new Date(millis)).build();
-                        scheduler.scheduleJob(jobDetail, scheduleTrigger);
-
-                        return jobKey;
-                    } else {
-                        return null;
-                    }
+                    Assert.isNotEmpty(cronExpression, ScheduleExceptionMessage.QUARTZJOB_CRON_EMPTY_EXCEPTION);
+                    JobDetail jobDetail = JobBuilder.newJob(CustomJob.class).withIdentity(jobKey).build();
+                    jobDetail.getJobDataMap().put("quartzJob", job);
+                    CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression)
+                            .withMisfireHandlingInstructionDoNothing();
+                    Trigger scheduleTrigger = TriggerBuilder
+                            .newTrigger()
+                            .withIdentity(triggerKey)
+                            .withSchedule(scheduleBuilder)
+                            .startAt(new Date(millis))
+                            .build();
+                    scheduler.scheduleJob(jobDetail, scheduleTrigger);
+                    return jobKey;
                 }
                 default: {
-                    return null;
+                    throw new ScheduleException(ScheduleExceptionMessage.JOBGROUP_QUERY_EXCEPTION);
                 }
             }
         }

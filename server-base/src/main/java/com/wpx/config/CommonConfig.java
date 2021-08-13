@@ -8,7 +8,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  */
 @SuppressWarnings("Convert2Lambda")
 @Configuration

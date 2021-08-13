@@ -7,8 +7,11 @@ import com.wpx.service.user.UserService;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+import java.util.Set;
+
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  * @Description: dubbo获取用户信息实现类
  */
 @Service
@@ -24,10 +27,18 @@ public class UserDubboServiceImpl implements UserDubboService {
      */
     @Override
     public ResultVO<User> getUser(Long userId) {
-//        User user = userService.getUserById(userId);
-        User user = new User();
-        user.setUserId(userId);
-        return ResultVO.successData(user);
+        return ResultVO.successData(userService.getUserById(userId));
+    }
+
+    /**
+     * 获取用户信息
+     *
+     * @param userIds 用户ID集合
+     * @return: ResultVO<List < User>>
+     */
+    @Override
+    public ResultVO<List<User>> listUser(Set<Long> userIds) {
+        return ResultVO.successData(userService.listUser(userIds));
     }
 
 }

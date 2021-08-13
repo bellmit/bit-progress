@@ -1,8 +1,8 @@
 package com.wpx.exception;
 
 /**
- * @Author: 不会飞的小鹏
- * @Deprecated: 定时任务异常
+ * @author 不会飞的小鹏
+ *  定时任务异常
  */
 public class ScheduleException extends CommonException {
 

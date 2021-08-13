@@ -8,7 +8,7 @@ import com.wpx.model.user.user.User;
  * Mapper 接口
  * </p>
  *
- * @Author: 不会飞的小鹏 
+ * @author 不会飞的小鹏 
  * @since 2021-06-04
  */
 public interface UserMapper extends BaseMapper<User> {

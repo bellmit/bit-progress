@@ -16,6 +16,8 @@
         <module>feign-gateway-web</module>
         <module>feign-gateway-cms</module>
         <module>feign-base-web</module>
+        <module>feign-scheduler</module>
+        <module>feign-base-cms</module>
     </modules>
 
 </project>

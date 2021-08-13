@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.TaskScheduler;
 
 /**
- * @Author: 不会飞的小鹏
+ * @author 不会飞的小鹏
  */
 @Configuration(proxyBeanMethods = false)
 @ConditionalOnDiscoveryEnabled

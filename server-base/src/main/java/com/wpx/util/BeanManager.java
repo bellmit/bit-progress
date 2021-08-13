@@ -3,7 +3,7 @@ package com.wpx.util;
 import org.springframework.context.ApplicationContext;
 
 /**
- * @Author: wpx
+ * @author wpx
  **/
 public class BeanManager {
 
