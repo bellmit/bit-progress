@@ -1,9 +1,7 @@
 package com.wpx.manager.redis;
 
-import com.alibaba.fastjson.JSON;
 import com.wpx.util.CollectionUtils;
 import com.wpx.constant.BaseRedisKeyPrefix;
-import com.wpx.model.application.applicationtopic.pojo.ApplicationTopicItem;
 import com.wpx.util.RedisCacheUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,16 +58,6 @@ public class SystemRedisService {
         // 删除缓存中的应用信息
         String key = BaseRedisKeyPrefix.applicationMessage();
         redisCacheUtils.deleteForHash(key, appSigns.toArray());
-    }
-
-    /**
-     * 将主题消息信息存放到redis中
-     *
-     * @param item
-     */
-    public void putApplicationTopicMessageToRedis(ApplicationTopicItem item) {
-        String key = BaseRedisKeyPrefix.applicationTopicMessage();
-        redisCacheUtils.putForHash(key, item.getTopic(), JSON.toJSONString(item));
     }
 
     /**
