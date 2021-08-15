@@ -32,6 +32,6 @@ public interface WechatUserFeignService {
      * @return: ResultVO<List<WechatUser>>
      */
     @GetMapping("list")
-    ResultVO<List<WechatUser>> listWechatUser(Set<Long> wechatUserIds);
+    ResultVO<List<WechatUser>> listWechatUser(@RequestParam Set<Long> wechatUserIds);
 
 }

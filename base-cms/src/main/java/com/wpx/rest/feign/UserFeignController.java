@@ -42,7 +42,7 @@ public class UserFeignController {
      * @return: ResultVO<List<User>>
      */
     @GetMapping("list")
-    public ResultVO<List<User>> listUser(Set<Long> userIds) {
+    public ResultVO<List<User>> listUser(@RequestParam Set<Long> userIds) {
         return ResultVO.successData(userService.listUser(userIds));
     }
 

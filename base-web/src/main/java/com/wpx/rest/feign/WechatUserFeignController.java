@@ -41,7 +41,7 @@ public class WechatUserFeignController {
      * @return: ResultVO<List<WechatUser>>
      */
     @GetMapping("list")
-    public ResultVO<List<WechatUser>> listWechatUser(Set<Long> wechatUserIds) {
+    public ResultVO<List<WechatUser>> listWechatUser(@RequestParam Set<Long> wechatUserIds) {
         return ResultVO.successData(wechatUserService.listWechatUser(wechatUserIds));
     }
 

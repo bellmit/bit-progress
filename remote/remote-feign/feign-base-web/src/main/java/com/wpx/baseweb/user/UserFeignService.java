@@ -31,6 +31,6 @@ public interface UserFeignService {
      * @return: ResultVO<List<User>>
      */
     @GetMapping("list")
-    ResultVO<List<User>> listUser(Set<Long> userIds);
+    ResultVO<List<User>> listUser(@RequestParam Set<Long> userIds);
 
 }

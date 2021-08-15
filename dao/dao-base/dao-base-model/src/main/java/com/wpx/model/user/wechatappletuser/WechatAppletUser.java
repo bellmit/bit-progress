@@ -32,7 +32,7 @@ public class WechatAppletUser implements Serializable {
     @TableId(value = "wechat_applet_user_id", type = IdType.AUTO)
     private Long wechatAppletUserId;
 
-    @ApiModelProperty(value = "微信用户ID")
+    @ApiModelProperty(value = "用户ID")
     private Long userId;
 
     @ApiModelProperty(value = "微信用户ID")
