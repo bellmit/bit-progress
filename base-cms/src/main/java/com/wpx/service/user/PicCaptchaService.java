@@ -1,4 +1,4 @@
-package com.wpx.service.piccaptcha;
+package com.wpx.service.user;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.wpx.util.StringUtils;

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.wpx.model.user.managerlog.envm.MethodEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -34,7 +35,7 @@ public class ManagerLog implements Serializable {
     private Long managerId;
 
     @ApiModelProperty(value = "请求方法类型")
-    private String method;
+    private MethodEnum method;
 
     @ApiModelProperty(value = "请求uri")
     private String uri;

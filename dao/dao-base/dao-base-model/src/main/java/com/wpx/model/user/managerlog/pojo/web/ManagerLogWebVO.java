@@ -1,5 +1,6 @@
 package com.wpx.model.user.managerlog.pojo.web;
 
+import com.wpx.model.user.managerlog.envm.MethodEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,7 +28,7 @@ public class ManagerLogWebVO implements Serializable {
     private Long managerId;
 
     @ApiModelProperty(value = "请求方法类型")
-    private String method;
+    private MethodEnum method;
 
     @ApiModelProperty(value = "请求uri")
     private String uri;

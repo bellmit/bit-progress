@@ -1,4 +1,4 @@
-package com.wpx.controller.user.user;
+package com.wpx.controller.user;
 
 import com.wpx.model.BooleanVO;
 import com.wpx.model.user.user.pojo.cms.UserCmsAddDTO;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 */
 @Api(tags = {"用户信息"})
 @RestController
-@RequestMapping("/api/base/system/user")
+@RequestMapping("/api/base/user/user")
 public class UserController {
 
     @Autowired

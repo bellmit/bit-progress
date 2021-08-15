@@ -1,8 +1,7 @@
-package com.wpx.model.user.user;
+package com.wpx.model.app.app;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.time.LocalDateTime;
@@ -19,32 +18,28 @@ import lombok.experimental.Accessors;
 
 /**
  * @author 不会飞的小鹏
- * created on 2021-08-13
  */
-@ApiModel(value = "用户信息")
+@ApiModel(value = "应用信息")
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("tb_user")
-public class User implements Serializable {
+@TableName("tb_app")
+public class App implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "用户ID")
-    @TableId(value = "user_id", type = IdType.AUTO)
-    private Long userId;
-
-    @ApiModelProperty(value = "用户所属应用ID")
+    @ApiModelProperty(value = "应用ID")
+    @TableId(value = "app_id", type = IdType.AUTO)
     private Long appId;
 
-    @ApiModelProperty(value = "用户所属应用类型")
+    @ApiModelProperty(value = "应用类型")
     private Integer appType;
 
-    @ApiModelProperty(value = "用户所属应用标识")
+    @ApiModelProperty(value = "应用标识")
     private String appSign;
 
-    @ApiModelProperty(value = "是否禁用，0：false，不禁言；1：true，禁用")
-    private Boolean flag;
+    @ApiModelProperty(value = "应用名称")
+    private String appName;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
@@ -55,6 +50,5 @@ public class User implements Serializable {
     @ApiModelProperty(value = "是否删除，0：false，未删除；1：true，已删除")
     @TableLogic
     private Boolean deleted;
-
 
 }

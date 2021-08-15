@@ -1,6 +1,6 @@
-package com.wpx.controller.system.piccaptcha;
+package com.wpx.controller.user;
 
-import com.wpx.service.piccaptcha.PicCaptchaService;
+import com.wpx.service.user.PicCaptchaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  **/
 @RestController
 @Api(tags = "系统 -- 验证码模块")
-@RequestMapping("/api/base/system/picCaptcha")
+@RequestMapping("/api/base/login/picCaptcha")
 public class PicCaptchaController {
 
     @Autowired

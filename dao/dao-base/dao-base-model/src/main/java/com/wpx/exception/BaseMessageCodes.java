@@ -24,9 +24,22 @@ public class BaseMessageCodes {
     public static final String NOT_ROOT_CANNOT_DISABLED_MESSAGE = "非超管不可禁用账号";
     public static final String NOT_ALLOW_SUPERIOR_ROLE_MESSAGE = "不能给同级或上级设权限";
 
+    public static final String APP_NOT_EXIST_EXCEPTION_MESSAGE = "应用信息不存在";
+    public static final String APP_SAVE_EXCEPTION_MESSAGE = "应用信息保存失败";
+    public static final String APP_UPDATE_EXCEPTION_MESSAGE = "应用信息更新失败";
+    public static final String APP_DELETE_EXCEPTION_MESSAGE = "应用信息删除失败";
+
     public static final String WECHATUSER_NOT_EXIST_EXCEPTION_MESSAGE = "用户信息不存在";
     public static final String WECHATUSER_SAVE_EXCEPTION_MESSAGE = "用户信息保存失败";
     public static final String WECHATUSER_UPDATE_EXCEPTION_MESSAGE = "用户信息更新失败";
     public static final String WECHATUSER_DELETE_EXCEPTION_MESSAGE = "用户信息删除失败";
+    public static final String WECHATAPPLETUSER_NOT_EXIST_EXCEPTION_MESSAGE = "微信小程序用户信息不存在";
+    public static final String WECHATAPPLETUSER_SAVE_EXCEPTION_MESSAGE = "微信小程序用户信息保存失败";
+    public static final String WECHATAPPLETUSER_UPDATE_EXCEPTION_MESSAGE = "微信小程序用户信息更新失败";
+    public static final String WECHATAPPLETUSER_DELETE_EXCEPTION_MESSAGE = "微信小程序用户信息删除失败";
+    public static final String WECHATOAUSER_NOT_EXIST_EXCEPTION_MESSAGE = "微信公众号用户信息不存在";
+    public static final String WECHATOAUSER_SAVE_EXCEPTION_MESSAGE = "微信公众号用户信息保存失败";
+    public static final String WECHATOAUSER_UPDATE_EXCEPTION_MESSAGE = "微信公众号用户信息更新失败";
+    public static final String WECHATOAUSER_DELETE_EXCEPTION_MESSAGE = "微信公众号用户信息删除失败";
 
 }

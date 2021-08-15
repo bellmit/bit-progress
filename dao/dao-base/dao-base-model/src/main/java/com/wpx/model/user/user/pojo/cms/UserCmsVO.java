@@ -1,7 +1,5 @@
 package com.wpx.model.user.user.pojo.cms;
 
-import java.time.LocalDateTime;
-
 import java.io.Serializable;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -22,6 +20,9 @@ public class UserCmsVO implements Serializable {
 
     @ApiModelProperty(value = "用户ID")
     private Long userId;
+
+    @ApiModelProperty(value = "用户所属应用ID")
+    private Long appId;
 
     @ApiModelProperty(value = "用户所属应用类型")
     private Integer appType;

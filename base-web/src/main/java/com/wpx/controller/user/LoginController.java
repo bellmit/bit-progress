@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Api(tags = "系统 -- 登录模块")
 @RestController
-@RequestMapping("api/base/system/login")
+@RequestMapping("api/base/login")
 public class LoginController {
 
     @PostMapping("android")

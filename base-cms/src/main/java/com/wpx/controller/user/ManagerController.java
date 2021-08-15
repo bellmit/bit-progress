@@ -1,4 +1,4 @@
-package com.wpx.controller.user.manager;
+package com.wpx.controller.user;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -20,7 +20,7 @@ import java.util.Set;
  **/
 @RestController
 @Api(tags = "系统 -- 管理员模块")
-@RequestMapping("/api/base/system/manager")
+@RequestMapping("/api/base/user/manager")
 public class ManagerController {
 
     @Autowired

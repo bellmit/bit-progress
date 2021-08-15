@@ -1,4 +1,4 @@
-package com.wpx.controller.user.user;
+package com.wpx.controller.user;
 
 import com.wpx.model.BooleanVO;
 import com.wpx.model.user.wechatuser.pojo.cms.WechatUserCmsAddDTO;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 */
 @Api(tags = {"用户信息"})
 @RestController
-@RequestMapping("/api/base/system/wechatUser")
+@RequestMapping("/api/base/user/wechatUser")
 public class WechatUserController {
 
     @Autowired

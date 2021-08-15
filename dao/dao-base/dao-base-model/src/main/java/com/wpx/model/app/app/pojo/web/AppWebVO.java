@@ -1,6 +1,4 @@
-package com.wpx.model.user.user.pojo.cms;
-
-import javax.validation.constraints.NotNull;
+package com.wpx.model.app.app.pojo.web;
 
 import java.io.Serializable;
 
@@ -11,20 +9,24 @@ import lombok.experimental.Accessors;
 
 /**
  * @author 不会飞的小鹏
- * created on 2021-08-13
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class UserCmsUpdateDTO implements Serializable {
+public class AppWebVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "用户ID")
-    private Long userId;
+    @ApiModelProperty(value = "应用ID")
+    private Long appId;
 
-    @ApiModelProperty(value = "用户所属应用类型")
-    @NotNull(message = "用户所属应用类型不能为空")
+    @ApiModelProperty(value = "应用类型")
     private Integer appType;
+
+    @ApiModelProperty(value = "应用标识")
+    private String appSign;
+
+    @ApiModelProperty(value = "应用名称")
+    private String appName;
 
 }

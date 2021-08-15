@@ -1,4 +1,4 @@
-package com.wpx.controller.user.manager;
+package com.wpx.controller.user;
 
 import com.wpx.model.ResultVO;
 import com.wpx.model.user.manager.pojo.cms.LoginSuccessVO;
@@ -21,7 +21,7 @@ import javax.validation.Valid;
  **/
 @RestController
 @Api(tags = "系统 -- 登录模块")
-@RequestMapping("/api/base/system/login")
+@RequestMapping("/api/base/login")
 public class LoginController {
 
     @Resource

@@ -18,6 +18,9 @@ public class UserCmsQueryDTO implements Serializable {
     @ApiModelProperty(value = "用户ID")
     private Long userId;
 
+    @ApiModelProperty(value = "用户所属应用ID")
+    private Long appId;
+
     @ApiModelProperty(value = "用户所属应用类型")
     private Integer appType;
 
