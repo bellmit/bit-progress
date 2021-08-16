@@ -179,18 +179,6 @@ public enum BaseExceptionMessage implements IExceptionMessage {
         return this.message;
     }
 
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     BaseExceptionMessage(Integer code, String error, String message) {
         this.code = code;
         this.error = error;

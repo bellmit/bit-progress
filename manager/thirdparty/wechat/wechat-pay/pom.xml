@@ -3,20 +3,20 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>spring-cloud-study</artifactId>
+        <artifactId>wechat</artifactId>
         <groupId>com.wpx</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>manager</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>cache</module>
-        <module>mq</module>
-        <module>api</module>
-        <module>cloud</module>
-        <module>thirdparty</module>
-    </modules>
+    <artifactId>wechat-pay</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.wpx</groupId>
+            <artifactId>wechat-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

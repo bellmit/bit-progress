@@ -21,7 +21,6 @@
         <module>base-cms</module>
         <module>server-base</module>
         <module>base-web</module>
-        <module>wechat-pay</module>
         <module>login</module>
         <module>scheduler</module>
         <module>manager</module>

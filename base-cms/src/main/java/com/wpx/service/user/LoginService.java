@@ -54,12 +54,12 @@ public class LoginService {
         systemRedisService.deleteCaptcha(uuid);
         if (StringUtils.isEmpty(rightCaptcha)) {
             //验证码已失效
-            throw new ValidationException(MessageCodes.AUTH_PICCAPTCHA_LOST);
+            throw new ValidationException(MessageCodes.AUTH_PICCAPTCHA_LOST_MESSAGE);
         } else {
             //判断验证码是否正确
             if (!rightCaptcha.equals(loginDTO.getCaptcha())) {
                 //验证码错误
-                throw new ValidationException(MessageCodes.AUTH_PICCAPTCHA_WRONG);
+                throw new ValidationException(MessageCodes.AUTH_PICCAPTCHA_WRONG_MESSAGE);
             } else {
                 //判断账号密码是否正确
                 String md5Password;
@@ -72,12 +72,12 @@ public class LoginService {
                     log.info("md5Password:[{}]", md5Password);
                 } catch (Exception e) {
                     log.error("RSAUtil.decrypt exception", e);
-                    throw new IllegalArgumentException(MessageCodes.RSAUTIL_DECRYPT_ERROR);
+                    throw new IllegalArgumentException(MessageCodes.RSAUTIL_DECRYPT_ERROR_MESSAGE);
                 }
                 Manager manager = managerService.getByAccountWithPassword(loginDTO.getAccount(), md5Password);
                 log.info("manager:[{}]", manager);
-                Assert.notNull(manager, MessageCodes.AUTH_ACCOUNT_PASSWORD_WRONG);
-                Assert.isTrue(!manager.getDisabled(), MessageCodes.ACCOUNT_HAS_DISABLED);
+                Assert.notNull(manager, MessageCodes.AUTH_ACCOUNT_PASSWORD_WRONG_MESSAGE);
+                Assert.isTrue(!manager.getDisabled(), MessageCodes.ACCOUNT_HAS_DISABLED_MESSAGE);
                 Long managerId = manager.getManagerId();
                 int role = manager.getRole().ordinal();
                 // 登录获取token
