@@ -15,7 +15,7 @@
         <module>wechat-common</module>
         <module>wechat-login</module>
         <module>wechat-pay</module>
-        <module>wechat-oa-module</module>
+        <module>wechat-oa</module>
     </modules>
 
 </project>

@@ -1,7 +1,8 @@
 package com.wpx.okhttp.util;
 
+import com.wpx.okhttp.constant.OkHttpConstants;
 import com.wpx.util.CollectionUtils;
-import com.wpx.util.UrlJoinUtils;
+import com.wpx.util.UrlUtils;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -14,6 +15,10 @@ import java.util.Objects;
  * @Description: okhttp请求工具类
  */
 public class OkHttpClientUtils {
+
+    public enum RequestBodyType {
+
+    }
 
     /**
      * 发起POST请求
@@ -36,10 +41,10 @@ public class OkHttpClientUtils {
     public static String doPost(String url, String body, MediaType mediaType, Map<String, String> params,
                                 Map<String, String> headers) throws IOException {
         if (Objects.isNull(mediaType)) {
-            mediaType = MediaType.get("application/json; charset=utf-8");
+            mediaType = OkHttpConstants.MEDIA_TYPE_JSON;
         }
         if (CollectionUtils.nonEmpty(params)) {
-            url = UrlJoinUtils.urlJoinParam(url, params);
+            url = UrlUtils.urlJoinParam(url, params);
         }
         OkHttpClient client = new OkHttpClient();
         RequestBody requestBody = RequestBody.create(mediaType, body);
@@ -89,7 +94,7 @@ public class OkHttpClientUtils {
      */
     public static String doGet(String url, Map<String, String> params, Map<String, String> headers) throws IOException {
         OkHttpClient client = new OkHttpClient();
-        url = UrlJoinUtils.urlJoinParam(url, params);
+        url = UrlUtils.urlJoinParam(url, params);
         Request.Builder builder = new Request.Builder()
                 .get()
                 .url(url);

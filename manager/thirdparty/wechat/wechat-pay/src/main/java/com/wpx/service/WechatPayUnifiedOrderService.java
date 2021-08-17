@@ -38,9 +38,9 @@ public class WechatPayUnifiedOrderService {
      * JSAPI下单
      *
      * @param unifiedOrder
-     * @param filePath
+     * @param filePath  ssl证书路径
      */
-    public JsApiPayOrder jsApiUnifiedOrder(JsApiUnifiedOrder unifiedOrder, String filePath) {
+    public static JsApiPayOrder jsApiUnifiedOrder(JsApiUnifiedOrder unifiedOrder, String filePath) {
         String body = JSON.toJSONString(unifiedOrder);
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         JsApiPayOrder jsApiPayOrder = new JsApiPayOrder();
@@ -76,8 +76,10 @@ public class WechatPayUnifiedOrderService {
 
     /**
      * APP支付统一下单
+     * @param unifiedOrder
+     * @param filePath  ssl证书路径
      */
-    public AppPayOrder appPayUnifiedOrder(AppPayUnifiedOrder unifiedOrder, String filePath) {
+    public static AppPayOrder appPayUnifiedOrder(AppPayUnifiedOrder unifiedOrder, String filePath) {
         String body = JSON.toJSONString(unifiedOrder);
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         AppPayOrder appPayOrder = new AppPayOrder();
@@ -114,7 +116,7 @@ public class WechatPayUnifiedOrderService {
     /**
      * H5支付统一下单
      */
-    public H5PayOrder appPayUnifiedOrder(H5PayUnifiedOrder unifiedOrder) {
+    public static H5PayOrder appPayUnifiedOrder(H5PayUnifiedOrder unifiedOrder) {
         String body = JSON.toJSONString(unifiedOrder);
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         try {
@@ -131,7 +133,7 @@ public class WechatPayUnifiedOrderService {
      *
      * @param values
      */
-    public String generatePaySignCode(String... values) {
+    public static String generatePaySignCode(String... values) {
         StringBuilder builder = new StringBuilder();
         for (String value : values) {
             builder.append(value).append("\\n");
@@ -145,7 +147,7 @@ public class WechatPayUnifiedOrderService {
      * @param paySignCode
      * @param filePath
      */
-    public String paySign(String paySignCode, String filePath) throws InvalidKeyException,
+    public static String paySign(String paySignCode, String filePath) throws InvalidKeyException,
             NoSuchAlgorithmException, SignatureException,
             IOException, InvalidKeySpecException {
         Signature privateSignature = Signature.getInstance("SHA256withRSA");
@@ -164,7 +166,7 @@ public class WechatPayUnifiedOrderService {
      * @throws NoSuchAlgorithmException
      * @throws IOException
      */
-    public PrivateKey generatePrivateKey(String filePath) throws InvalidKeySpecException, NoSuchAlgorithmException, IOException {
+    public static PrivateKey generatePrivateKey(String filePath) throws InvalidKeySpecException, NoSuchAlgorithmException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         StringBuilder str = new StringBuilder();
         String s = br.readLine();

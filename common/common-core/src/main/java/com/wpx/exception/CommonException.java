@@ -56,6 +56,12 @@ public class CommonException extends RuntimeException {
         this.message = message;
     }
 
+    public CommonException(Integer code, String error, String message) {
+        this.code = code;
+        this.error = error;
+        this.message = message;
+    }
+
     public CommonException(IExceptionMessage requestException) {
         this.code = requestException.getCode();
         this.error = requestException.getError();
