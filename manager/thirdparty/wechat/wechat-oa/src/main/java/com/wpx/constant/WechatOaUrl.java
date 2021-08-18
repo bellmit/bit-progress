@@ -94,5 +94,10 @@ public class WechatOaUrl {
      * POST
      */
     public static final String CREATE_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/create";
+    /**
+     * 获取菜单url
+     * GET
+     */
+    public static final String GET_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/get";
 
 }

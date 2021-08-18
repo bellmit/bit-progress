@@ -1,6 +1,7 @@
-package com.wpx.model.menu;
+package com.wpx.model.menu.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.wpx.model.menu.ButtonTypeEnum;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * @desc 菜单按钮
  * @data 2021/4/8
  */
-public class Button {
+public class ButtonDTO {
     /**
      * 菜单类型
      */
@@ -52,6 +53,6 @@ public class Button {
      * 子菜单
      */
     @JSONField(name = "sub_button")
-    private List<Button> subButton;
+    private List<ButtonDTO> subButtonDTO;
 
 }
