@@ -6,7 +6,7 @@ import com.alibaba.fastjson.annotation.JSONField;
  * @author 不会飞的小鹏
  * @description： 微信接口调用凭证
  */
-public class AccessToken {
+public class AccessToken extends WechatResult {
 
     /**
      * 微信接口调用凭证 access_token

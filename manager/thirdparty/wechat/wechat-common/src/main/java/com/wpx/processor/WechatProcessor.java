@@ -30,8 +30,7 @@ public class WechatProcessor {
         params.put(APP_ID, appId);
         params.put(APP_SECRET, appSecret);
         String result = OkHttpClientUtils.doGetWithParam(WechatUrl.ACCESS_TOKEN_URL, params);
-        WechatResultUtils.wechatResultCheck(result);
-        return JSON.parseObject(result, AccessToken.class);
+        return WechatResultUtils.wechatResultCheck(result, AccessToken.class);
     }
 
 }

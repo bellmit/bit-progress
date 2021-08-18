@@ -1,17 +1,13 @@
 package com.wpx.manager;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.wpx.constant.WechatConstant;
 import com.wpx.constant.WechatOaConstants;
-import com.wpx.constant.WechatOaUrl;
 import com.wpx.exception.WechatExceptionMessage;
 import com.wpx.excetion.WechatOaException;
 import com.wpx.excetion.WechatOaExceptionMessage;
 import com.wpx.model.WechatResult;
 import com.wpx.model.kfsession.*;
 import com.wpx.util.Assert;
-import com.wpx.util.StringUtils;
 import com.wpx.util.WechatRequestUtils;
 import com.wpx.util.WechatResultUtils;
 
@@ -70,7 +66,7 @@ public class WechatOaKfSessionManager {
         Map<String, String> params = new HashMap<>(8);
         params.put(OPEN_ID, openId);
         String result = WechatRequestUtils.doGetWithAccessToken(GET_KF_SESSION_URL, accessToken, params);
-        return StringUtils.isEmpty(result) ? new KfSession() : JSON.parseObject(result, KfSession.class);
+        return WechatResultUtils.wechatResultCheck(result, KfSession.class);
     }
 
     /**
@@ -85,7 +81,7 @@ public class WechatOaKfSessionManager {
         Map<String, String> params = new HashMap<>(8);
         params.put(WechatOaConstants.KF_ACCOUNT, kfAccount);
         String result = WechatRequestUtils.doGetWithAccessToken(GET_KF_SESSION_LIST_URL, accessToken, params);
-        return StringUtils.isEmpty(result) ? new KfSessionVO() : JSON.parseObject(result, KfSessionVO.class);
+        return WechatResultUtils.wechatResultCheck(result, KfSessionVO.class);
     }
 
     /**
@@ -96,7 +92,7 @@ public class WechatOaKfSessionManager {
      */
     public KfWaitCaseSessionVO getWaitCaseList(String accessToken) {
         String result = WechatRequestUtils.doGetWithAccessToken(GET_WAIT_CASE_KF_SESSION_LIST_URL, accessToken);
-        return StringUtils.isEmpty(result) ? new KfWaitCaseSessionVO() : JSON.parseObject(result, KfWaitCaseSessionVO.class);
+        return WechatResultUtils.wechatResultCheck(result, KfWaitCaseSessionVO.class);
     }
 
     /**
@@ -108,7 +104,7 @@ public class WechatOaKfSessionManager {
     public static MessageRecordVO getMsgRecord(String accessToken, MessageRecordQueryDTO queryDTO) {
         String body = handlerMessageRecordQuery(queryDTO);
         String result = WechatRequestUtils.doPostWithAccessToken(GET_MSG_LIST_URL, accessToken, body);
-        return StringUtils.isEmpty(result) ? new MessageRecordVO() : JSON.parseObject(result, MessageRecordVO.class);
+        return WechatResultUtils.wechatResultCheck(result, MessageRecordVO.class);
     }
 
     /**

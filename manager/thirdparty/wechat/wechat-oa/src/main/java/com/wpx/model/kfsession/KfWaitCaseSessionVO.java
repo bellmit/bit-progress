@@ -1,6 +1,7 @@
 package com.wpx.model.kfsession;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.wpx.model.WechatResult;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  * @author 不会飞的小鹏
  * @description： 未接入客服会话列表
  */
-public class KfWaitCaseSessionVO {
+public class KfWaitCaseSessionVO extends WechatResult {
 
     /**
      * 未接入会话数量

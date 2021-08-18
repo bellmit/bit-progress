@@ -46,4 +46,9 @@ public class WechatOaConstants {
      */
     public static final String COMMAND = "command";
 
+    /**
+     * type
+     */
+    public static final String TYPE = "type";
+
 }

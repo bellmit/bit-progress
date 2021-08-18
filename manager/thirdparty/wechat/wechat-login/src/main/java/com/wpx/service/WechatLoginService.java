@@ -42,8 +42,7 @@ public class WechatLoginService {
         params.put(JS_CODE, jsCode);
         params.put(GRANT_TYPE, AUTHORIZATION_CODE);
         String result = OkHttpClientUtils.doGetWithParam(WechatLoginUrl.JS_CODE_TO_SESSION_URL, params);
-        WechatResultUtils.wechatResultCheck(result);
-        return JSON.parseObject(result, JsCode2SessionResult.class);
+        return WechatResultUtils.wechatResultCheck(result, JsCode2SessionResult.class);
     }
 
 }

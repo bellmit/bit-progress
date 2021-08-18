@@ -1,13 +1,14 @@
 package com.wpx.model.kfsession;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.wpx.model.WechatResult;
 
 import java.util.List;
 
 /**
  * @author 不会飞的小鹏
  */
-public class MessageRecordVO {
+public class MessageRecordVO extends WechatResult {
 
     /**
      * 每次获取条数，最多10000条

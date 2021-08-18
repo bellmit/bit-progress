@@ -6,7 +6,7 @@ import com.alibaba.fastjson.annotation.JSONField;
  * @author 不会飞的小鹏
  * @description： 微信登录信息结果
  */
-public class JsCode2SessionResult {
+public class JsCode2SessionResult extends WechatResult {
 
     /**
      * openId

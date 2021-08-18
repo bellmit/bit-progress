@@ -38,7 +38,7 @@ public class WechatOaKfManager {
      */
     public static WechatResult addKf(String accessToken, KfDTO kfDTO) {
         String result = doPostWithAccessToken(ADD_KF_URL, accessToken, JSON.toJSONString(kfDTO));
-        return WechatResultUtils.wechatResultCheck(result);
+        return WechatResultUtils.wechatResultCheck(result, WechatResult.class);
     }
 
     /**
@@ -93,7 +93,7 @@ public class WechatOaKfManager {
      */
     public static KfList getKfList(String accessToken) {
         String result = doGetWithAccessToken(GET_KF_LIST_URL, accessToken);
-        return JSON.parseObject(result, KfList.class);
+        return WechatResultUtils.wechatResultCheck(result, KfList.class);
     }
 
     /**

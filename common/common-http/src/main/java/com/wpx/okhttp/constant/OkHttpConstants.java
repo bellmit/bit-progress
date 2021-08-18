@@ -18,4 +18,9 @@ public class OkHttpConstants {
      */
     public static final MediaType MEDIA_TYPE_IMAGE = MediaType.get("image");
 
+    /**
+     * file类型的MediaType
+     */
+    public static final MediaType MEDIA_TYPE_FILE = MediaType.get("file/*");
+
 }
