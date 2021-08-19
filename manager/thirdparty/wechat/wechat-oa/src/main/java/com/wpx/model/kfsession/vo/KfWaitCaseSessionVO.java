@@ -1,7 +1,8 @@
-package com.wpx.model.kfsession;
+package com.wpx.model.kfsession.vo;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.wpx.model.WechatResult;
+import com.wpx.model.kfsession.KfWaitCaseSession;
 
 import java.util.List;
 

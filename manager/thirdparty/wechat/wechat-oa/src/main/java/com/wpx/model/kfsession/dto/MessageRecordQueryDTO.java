@@ -1,4 +1,4 @@
-package com.wpx.model.kfsession;
+package com.wpx.model.kfsession.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
@@ -61,6 +61,16 @@ public class MessageRecordQueryDTO {
 
     public void setNumber(Integer number) {
         this.number = number;
+    }
+
+    @Override
+    public String toString() {
+        return "MessageRecordQueryDTO{" +
+                "starTime=" + starTime +
+                ", endTime=" + endTime +
+                ", msgId=" + msgId +
+                ", number=" + number +
+                '}';
     }
 
 }

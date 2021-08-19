@@ -119,5 +119,10 @@ public class WechatOaUrl {
      * POST
      */
     public static final String TRY_MATCH_CONDITIONAL_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/trymatch";
+    /**
+     * 获取自定义菜单配置url
+     * GET
+     */
+    public static final String GET_SELF_MENU_INFO_URL = "https://api.weixin.qq.com/cgi-bin/get_current_selfmenu_info";
 
 }

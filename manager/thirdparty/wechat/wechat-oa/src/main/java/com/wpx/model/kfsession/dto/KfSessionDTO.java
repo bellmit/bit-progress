@@ -1,4 +1,4 @@
-package com.wpx.model.kfsession;
+package com.wpx.model.kfsession.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
 

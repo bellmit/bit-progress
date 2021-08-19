@@ -9,6 +9,7 @@ import com.wpx.model.menu.dto.MenuDeleteDTO;
 import com.wpx.model.menu.dto.MenuQueryDTO;
 import com.wpx.model.menu.vo.ButtonTryMatchVO;
 import com.wpx.model.menu.vo.MenuVO;
+import com.wpx.model.menu.vo.selfmenuinfo.SelfMenuInfoVO;
 import com.wpx.util.WechatRequestUtils;
 import com.wpx.util.WechatResultUtils;
 
@@ -21,6 +22,7 @@ public class WechatOaMenuManager {
     /**
      * 创建菜单
      *
+     * @param accessToken
      * @param menuDTO
      * @return WechatResult
      */
@@ -35,6 +37,7 @@ public class WechatOaMenuManager {
      * 使用接口创建自定义菜单后，开发者还可使用接口查询自定义菜单的结构。另外请注意，在设置了个性化菜单后
      * 使用本自定义菜单查询接口可以获取默认菜单和全部个性化菜单信息
      *
+     * @param accessToken
      * @return MenuVO
      */
     public MenuVO getMenu(String accessToken) {
@@ -45,6 +48,7 @@ public class WechatOaMenuManager {
     /**
      * 删除菜单
      *
+     * @param accessToken
      * @return MenuVO
      */
     public WechatResult deleteMenu(String accessToken) {
@@ -55,6 +59,7 @@ public class WechatOaMenuManager {
     /**
      * 创建个性化菜单
      *
+     * @param accessToken
      * @param menuDTO
      * @return WechatResult
      */
@@ -67,6 +72,7 @@ public class WechatOaMenuManager {
     /**
      * 删除个性化菜单
      *
+     * @param accessToken
      * @param deleteDTO
      * @return WechatResult
      */
@@ -79,13 +85,29 @@ public class WechatOaMenuManager {
     /**
      * 测试个性化菜单匹配结果
      *
+     * @param accessToken
      * @param queryDTO
      * @return WechatResult
      */
-    public ButtonTryMatchVO deleteConditionalMenu(String accessToken, MenuQueryDTO queryDTO) {
+    public ButtonTryMatchVO tryMatchConditionalMenu(String accessToken, MenuQueryDTO queryDTO) {
         String body = JSON.toJSONString(queryDTO);
         String result = WechatRequestUtils.doPostWithAccessToken(WechatOaUrl.TRY_MATCH_CONDITIONAL_MENU_URL, accessToken, body);
         return WechatResultUtils.wechatResultCheck(result, ButtonTryMatchVO.class);
+    }
+
+    /**
+     * 获取自定义菜单配置
+     * 本接口将会提供公众号当前使用的自定义菜单的配置，
+     * 如果公众号是通过API调用设置的菜单，则返回菜单的开发配置，
+     * 而如果公众号是在公众平台官网通过网站功能发布菜单，
+     * 则本接口返回运营者设置的菜单配置。
+     *
+     * @param accessToken
+     * @return WechatResult
+     */
+    public SelfMenuInfoVO getSelfMenuInfo(String accessToken) {
+        String result = WechatRequestUtils.doGetWithAccessToken(WechatOaUrl.TRY_MATCH_CONDITIONAL_MENU_URL, accessToken);
+        return WechatResultUtils.wechatResultCheck(result, SelfMenuInfoVO.class);
     }
 
 }

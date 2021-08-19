@@ -1,7 +1,8 @@
-package com.wpx.model.kfsession;
+package com.wpx.model.kfsession.vo;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.wpx.model.WechatResult;
+import com.wpx.model.kfsession.MessageRecord;
 
 import java.util.List;
 
@@ -46,6 +47,15 @@ public class MessageRecordVO extends WechatResult {
 
     public void setRecordList(List<MessageRecord> recordList) {
         this.recordList = recordList;
+    }
+
+    @Override
+    public String toString() {
+        return "MessageRecordVO{" +
+                "number='" + number + '\'' +
+                ", msgId='" + msgId + '\'' +
+                ", recordList=" + recordList +
+                '}';
     }
 
 }

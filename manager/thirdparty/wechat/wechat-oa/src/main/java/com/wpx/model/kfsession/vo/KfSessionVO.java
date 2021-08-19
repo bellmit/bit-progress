@@ -1,7 +1,8 @@
-package com.wpx.model.kfsession;
+package com.wpx.model.kfsession.vo;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.wpx.model.WechatResult;
+import com.wpx.model.kfsession.KfSession;
 
 import java.util.List;
 
@@ -20,6 +21,13 @@ public class KfSessionVO extends WechatResult {
 
     public void setSessionList(List<KfSession> sessionList) {
         this.sessionList = sessionList;
+    }
+
+    @Override
+    public String toString() {
+        return "KfSessionVO{" +
+                "sessionList=" + sessionList +
+                '}';
     }
 
 }
