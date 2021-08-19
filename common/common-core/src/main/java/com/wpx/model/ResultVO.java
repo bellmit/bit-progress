@@ -67,6 +67,9 @@ public class ResultVO<T> implements Serializable {
         this.data = data;
     }
 
+    public ResultVO() {
+    }
+
     public ResultVO(Integer code) {
         this(code, null, null, null);
     }

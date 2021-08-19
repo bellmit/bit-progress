@@ -2,6 +2,7 @@ package com.wpx.aspect;
 
 import com.alibaba.fastjson.JSON;
 import com.wpx.mapper.user.ManagerLogMapper;
+import com.wpx.model.user.managerlog.envm.MethodEnum;
 import com.wpx.util.NumberUtils;
 import com.wpx.model.user.managerlog.ManagerLog;
 import com.wpx.util.UserHelper;
@@ -60,7 +61,8 @@ public class ControllerAspect {
                 case DELETE: {
                     LocalDateTime now = LocalDateTime.now();
                     ManagerLog managerLog = new ManagerLog();
-                    managerLog.setManagerId(userId).setArgs(JSON.toJSONString(joinPoint.getArgs())).setMethod(method)
+                    MethodEnum methodEnum = MethodEnum.valueOf(httpMethod.name());
+                    managerLog.setManagerId(userId).setArgs(JSON.toJSONString(joinPoint.getArgs())).setMethod(methodEnum)
                             .setUri(request.getRequestURI()).setCreateTime(now).setUpdateTime(now).setDeleted(false);
                     managerLogMapper.insert(managerLog);
                     break;

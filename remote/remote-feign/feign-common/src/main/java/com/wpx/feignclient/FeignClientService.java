@@ -1,52 +1,57 @@
 package com.wpx.feignclient;
 
+import com.wpx.model.ResultVO;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.cloud.openfeign.SpringQueryMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
 /**
  * 基础的feign调用方法，从URI中解析服务名
+ * @author 不会飞的小鹏
  */
 @FeignClient(name = "feign")
 public interface FeignClientService {
-
-    /**
-     * 创建自定义的feignClient -- PUT
-     *
-     * @param uri
-     * @param data
-     */
-    @RequestMapping(method = RequestMethod.PUT)
-    String createPUTFeignClient(URI uri, @RequestBody Object data);
-
-    /**
-     * 创建自定义的feignClient -- POST
-     *
-     * @param uri
-     * @param data
-     */
-    @RequestMapping(method = RequestMethod.POST)
-    String createPOSTFeignClient(URI uri, @RequestBody Object data);
-
-    /**
-     * 创建自定义的feignClient -- DELETE
-     *
-     * @param uri
-     * @param data
-     */
-    @RequestMapping(method = RequestMethod.DELETE)
-    String createDELETEFeignClient(URI uri, @RequestBody Object data);
 
     /**
      * 创建自定义的feignClient -- GET
      *
      * @param uri
      * @param data
+     * @return ResultVO<String>
      */
-    @RequestMapping(method = RequestMethod.GET)
-    String createGETFeignClient(URI uri, @RequestBody Object data);
+    @GetMapping
+    ResultVO<String> createGetFeignClient(URI uri, @SpringQueryMap Object data);
+
+    /**
+     * 创建自定义的feignClient -- POST
+     *
+     * @param uri
+     * @param data
+     * @return ResultVO<String>
+     */
+    @PostMapping
+    ResultVO<String> createPostFeignClient(URI uri, @RequestBody Object data);
+
+    /**
+     * 创建自定义的feignClient -- PUT
+     *
+     * @param uri
+     * @param data
+     * @return ResultVO<String>
+     */
+    @PutMapping
+    ResultVO<String> createPutFeignClient(URI uri, @RequestBody Object data);
+
+    /**
+     * 创建自定义的feignClient -- DELETE
+     *
+     * @param uri
+     * @param data
+     * @return ResultVO<String>
+     */
+    @DeleteMapping
+    ResultVO<String> createDeleteFeignClient(URI uri, @SpringQueryMap Object data);
 
 }

@@ -73,54 +73,9 @@ spring:
       max-request-size: 8MB
       location: ${user.dir}/tmp
 
-  rabbitmq:
-    host: 193.112.251.82
-    port: 5671
-    username: luweirabbitmq
-    password: 3TI4FevIFfziMo03
-    listener:
-      simple:
-        acknowledge-mode: manual
-        retry:
-          enabled: true
-        prefetch: 1
-    requested-heartbeat: 60
-    connection:
-      connection1:
-        host: 193.112.251.82
-        port: 5671
-        username: luweirabbitmq
-        password: 3TI4FevIFfziMo03
-        listener:
-          simple:
-            acknowledge-mode: manual
-            retry:
-              enabled: true
-            prefetch: 1
-          requested-heartbeat: 60
-    exchange:
-      exchange1:
-        exchange-name: testexchange
-        exchange-type: direct
-        argument:
-          argument1: argument1
-        durable: true
-        autoDelete: false
-    queue:
-      queue1:
-        queue-name: testqueue
-        argument:
-          argument1: argument1
-    binding:
-      binding1:
-        destination-name: testqueue
-        destination-type: queue
-        exchange-name: testexchange
-        routing-key: testroutingKey
-
 feign:
   sentinel:
-    enabled: true
+    enabled: false
   okhttp:
     enabled: true
   client:
