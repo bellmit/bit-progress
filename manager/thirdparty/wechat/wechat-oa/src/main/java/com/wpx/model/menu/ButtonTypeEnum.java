@@ -1,5 +1,7 @@
 package com.wpx.model.menu;
 
+import com.wpx.util.StringUtils;
+
 import java.io.Serializable;
 
 /**
@@ -64,8 +66,6 @@ public enum ButtonTypeEnum implements Serializable {
 
     ;
 
-
-
     private String value;
     private String name;
 
@@ -74,11 +74,17 @@ public enum ButtonTypeEnum implements Serializable {
         this.name = name;
     }
 
+    public static ButtonTypeEnum typeValueOf(String value) {
+        for (ButtonTypeEnum buttonType : values()) {
+            if (buttonType.getValue().equals(value)) {
+                return buttonType;
+            }
+        }
+        return null;
+    }
+
     public String getValue() {
         return this.value;
     }
 
-    public String getDisplayName() {
-        return this.name;
-    }
 }

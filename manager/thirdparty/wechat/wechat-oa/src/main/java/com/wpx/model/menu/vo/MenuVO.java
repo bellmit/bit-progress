@@ -1,5 +1,6 @@
 package com.wpx.model.menu.vo;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.wpx.model.WechatResult;
 
 import java.util.List;
@@ -10,13 +11,38 @@ import java.util.List;
 public class MenuVO extends WechatResult {
 
     /**
-     * 显示菜单
+     * 普通菜单
      */
     private ButtonVO menu;
 
     /**
-     * 一级菜单数组（1-3个）
+     * 自定义菜单
      */
-    private List<ButtonVO> conditionalmenu;
+    @JSONField(name = "conditionalmenu")
+    private List<ButtonVO> conditionalMenu;
+
+    public ButtonVO getMenu() {
+        return menu;
+    }
+
+    public void setMenu(ButtonVO menu) {
+        this.menu = menu;
+    }
+
+    public List<ButtonVO> getConditionalMenu() {
+        return conditionalMenu;
+    }
+
+    public void setConditionalMenu(List<ButtonVO> conditionalMenu) {
+        this.conditionalMenu = conditionalMenu;
+    }
+
+    @Override
+    public String toString() {
+        return "MenuVO{" +
+                "menu=" + menu +
+                ", conditionalMenu=" + conditionalMenu +
+                '}';
+    }
 
 }

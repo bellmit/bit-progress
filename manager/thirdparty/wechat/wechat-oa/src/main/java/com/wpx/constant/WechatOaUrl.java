@@ -99,5 +99,25 @@ public class WechatOaUrl {
      * GET
      */
     public static final String GET_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/get";
+    /**
+     * 删除菜单url
+     * GET
+     */
+    public static final String DELETE_MENU_URL = " https://api.weixin.qq.com/cgi-bin/menu/delete";
+    /**
+     * 创建个性化菜单url
+     * POST
+     */
+    public static final String ADD_CONDITIONAL_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/addconditional";
+    /**
+     * 删除个性化菜单url
+     * POST
+     */
+    public static final String DELETE_CONDITIONAL_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/delconditional";
+    /**
+     * 测试个性化菜单匹配结果url
+     * POST
+     */
+    public static final String TRY_MATCH_CONDITIONAL_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/trymatch";
 
 }
