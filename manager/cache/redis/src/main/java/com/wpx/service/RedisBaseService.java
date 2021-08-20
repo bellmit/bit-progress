@@ -1,11 +1,12 @@
 package com.wpx.service;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.wpx.util.CollectionUtils;
+import com.wpx.util.JsonUtils;
 import com.wpx.util.RedisCacheUtils;
 import com.wpx.util.StringUtils;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -35,7 +36,7 @@ public class RedisBaseService {
      */
     private <T> T strToObject(String str, Class<T> target) {
         try {
-            return StringUtils.isEmpty(str) ? target.newInstance() : JSON.parseObject(str, target);
+            return StringUtils.isEmpty(str) ? target.newInstance() : JsonUtils.deserializeObject(str, target);
         } catch (IllegalAccessException | InstantiationException e) {
             throw new RuntimeException(e);
         }
@@ -47,8 +48,8 @@ public class RedisBaseService {
      * @param str
      * @param target
      */
-    private <T> List<T> strToList(String str, Class<T> target) {
-        return StringUtils.isEmpty(str) ? new ArrayList<>() : JSONArray.parseArray(str, target);
+    private <T> List<T> strToList(String str, Class<T> target) throws JsonProcessingException {
+        return StringUtils.isEmpty(str) ? new ArrayList<>() : JsonUtils.deserializeList(str, target);
     }
 
     /**
@@ -139,7 +140,7 @@ public class RedisBaseService {
      * @param data
      */
     public <T> void setForValue(String key, T data) {
-        String value = Objects.isNull(data) ? "" : JSON.toJSONString(data);
+        String value = Objects.isNull(data) ? "" : JsonUtils.serializeObject(data);
         redisCacheUtils.setForValue(key, value);
     }
 
@@ -235,7 +236,7 @@ public class RedisBaseService {
      * @param key
      * @param target
      */
-    public <T> List<T> listForValue(String key, Class<T> target) {
+    public <T> List<T> listForValue(String key, Class<T> target) throws JsonProcessingException {
         return strToList(redisCacheUtils.getForValue(key), target);
     }
 

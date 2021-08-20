@@ -1,6 +1,6 @@
 package com.wpx.model.kf.message;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -21,7 +21,7 @@ public class Video implements KfBaseMessage {
     /**
      * 媒体ID
      */
-    @JSONField(name = "media_id")
+    @JsonProperty("media_id")
     private String mediaId;
 
     /**

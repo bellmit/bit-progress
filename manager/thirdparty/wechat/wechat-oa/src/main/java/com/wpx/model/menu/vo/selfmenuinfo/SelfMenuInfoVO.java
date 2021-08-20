@@ -1,6 +1,6 @@
 package com.wpx.model.menu.vo.selfmenuinfo;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.WechatResult;
 
 /**
@@ -11,12 +11,12 @@ public class SelfMenuInfoVO extends WechatResult {
     /**
      * 菜单是否开启，0代表未开启，1代表开启
      */
-    @JSONField(name = "is_menu_open")
+    @JsonProperty("is_menu_open")
     private Integer isMenuOpen;
     /**
      * 菜单信息
      */
-    @JSONField(name = "selfmenu_info")
+    @JsonProperty("selfmenu_info")
     private SelfMenuInfo selfMenuInfo;
 
     public Integer getIsMenuOpen() {

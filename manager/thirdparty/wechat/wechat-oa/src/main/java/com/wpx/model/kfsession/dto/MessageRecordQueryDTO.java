@@ -1,6 +1,6 @@
 package com.wpx.model.kfsession.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -11,19 +11,19 @@ public class MessageRecordQueryDTO {
     /**
      * 起始时间，unix时间戳，秒级时间戳
      */
-    @JSONField(name = "starttime")
+    @JsonProperty("starttime")
     private Long starTime;
 
     /**
      * 结束时间，unix时间戳，秒级时间戳，每次查询时段不能超过24小时
      */
-    @JSONField(name = "endtime")
+    @JsonProperty("endtime")
     private Long endTime;
 
     /**
      * 消息id顺序从小到大，从1开始
      */
-    @JSONField(name = "msgid")
+    @JsonProperty("msgid")
     private Integer msgId;
 
     /**

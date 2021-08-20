@@ -1,6 +1,6 @@
 package com.wpx.processor;
 
-import com.alibaba.fastjson.JSON;
+import com.wpx.util.JsonUtils;
 import com.wpx.constant.WechatUrl;
 import com.wpx.model.AccessToken;
 import com.wpx.okhttp.util.OkHttpClientUtils;

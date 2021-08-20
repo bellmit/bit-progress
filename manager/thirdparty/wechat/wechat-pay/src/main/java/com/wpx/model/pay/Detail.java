@@ -1,6 +1,6 @@
 package com.wpx.model.pay;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class Detail {
      * 3、该字段主要用于防止同一张小票分多次支付，以享受多次优惠的情况，正常支付订单不必上传此参数
      * int
      */
-    @JSONField(name = "cost_price")
+    @JsonProperty("cost_price")
     private Integer costPrice;
 
     /**
@@ -26,7 +26,7 @@ public class Detail {
      * 商品小票ID
      * string[1,32]
      */
-    @JSONField(name = "invoice_id")
+    @JsonProperty("invoice_id")
     private String invoiceId;
 
     /**
@@ -34,7 +34,7 @@ public class Detail {
      * 单品列表信息
      * 条目个数限制：【1，6000】
      */
-    @JSONField(name = "goods_detail")
+    @JsonProperty("goods_detail")
     private List<GoodsDetail> goodsDetail;
 
     public Integer getCostPrice() {

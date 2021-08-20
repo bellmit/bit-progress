@@ -1,6 +1,6 @@
 package com.wpx.model.menu.vo.selfmenuinfo;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.menu.ButtonTypeEnum;
 
 import java.util.List;
@@ -44,19 +44,19 @@ public class SelfButton {
     /**
      *
      */
-    @JSONField(name = "news_info")
+    @JsonProperty("news_info")
     private NewsInfo newsInfo;
 
     /**
      * 小程序的appid
      */
-    @JSONField(name = "appid")
+    @JsonProperty("appid")
     private String appId;
 
     /**
      * 小程序的页面路径
      */
-    @JSONField(name = "pagepath")
+    @JsonProperty("pagepath")
     private String pagePath;
 
     /**
@@ -64,7 +64,7 @@ public class SelfButton {
      */
     private List<SelfButton> list;
 
-    @JSONField(name = "sub_button")
+    @JsonProperty("sub_button")
     private SelfButton subButton;
 
     public String getName() {

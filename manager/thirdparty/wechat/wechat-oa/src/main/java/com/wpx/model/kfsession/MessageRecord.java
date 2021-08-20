@@ -1,6 +1,6 @@
 package com.wpx.model.kfsession;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -13,19 +13,19 @@ public class MessageRecord {
     /**
      * 用户的openid
      */
-    @JSONField(name = "openid")
+    @JsonProperty("openid")
     private String openId;
 
     /**
      * 操作ID（会话状态）
      */
-    @JSONField(name = "opercode")
+    @JsonProperty("opercode")
     private String operCode;
 
     /**
      * 聊天记录
      */
-    @JSONField(name = "text")
+    @JsonProperty("text")
     private String text;
 
     /**
@@ -66,7 +66,7 @@ public class MessageRecord {
         return time;
     }
 
-    @JSONField(name = "time")
+    @JsonProperty("time")
     public void setTime(Integer time) {
         this.time = LocalDateTime.ofEpochSecond(time, 0, ZoneOffset.ofHours(8));
     }

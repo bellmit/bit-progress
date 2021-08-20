@@ -1,13 +1,13 @@
 package com.wpx.model.menu.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
  */
 public class MenuDeleteDTO {
 
-    @JSONField(name = "menuid")
+    @JsonProperty("menuid")
     private String menuId;
 
     public String getMenuId() {

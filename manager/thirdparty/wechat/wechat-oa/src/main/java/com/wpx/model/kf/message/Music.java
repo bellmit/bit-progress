@@ -1,6 +1,6 @@
 package com.wpx.model.kf.message;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -21,19 +21,19 @@ public class Music implements KfBaseMessage {
     /**
      * 音乐链接
      */
-    @JSONField(name = "musicurl")
+    @JsonProperty("musicurl")
     private String musicUrl;
 
     /**
      * 高品质音乐链接，wifi环境优先使用该链接播放音乐
      */
-    @JSONField(name = "hqmusicurl")
+    @JsonProperty("hqmusicurl")
     private String hqMusicUrl;
 
     /**
      * 缩略图/小程序卡片图片的媒体ID
      */
-    @JSONField(name = "thumb_media_id")
+    @JsonProperty("thumb_media_id")
     private String thumbMediaId;
 
     public String getTitle() {

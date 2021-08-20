@@ -1,6 +1,6 @@
 package com.wpx.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -11,13 +11,13 @@ public class AccessToken extends WechatResult {
     /**
      * 微信接口调用凭证 access_token
      */
-    @JSONField(name = "access_token")
+    @JsonProperty("access_token")
     private String accessToken;
 
     /**
      * 微信接口调用凭证有效时间，单位秒
      */
-    @JSONField(name = "expires_in")
+    @JsonProperty("expires_in")
     private Long expiresIn;
 
     public String getAccessToken() {

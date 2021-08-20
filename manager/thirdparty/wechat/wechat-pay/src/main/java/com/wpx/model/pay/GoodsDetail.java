@@ -1,6 +1,6 @@
 package com.wpx.model.pay;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -16,7 +16,7 @@ public class GoodsDetail {
      * 由半角的大小写字母、数字、中划线、下划线中的一种或几种组成
      * string[1,32]
      */
-    @JSONField(name = "merchant_goods_id")
+    @JsonProperty("merchant_goods_id")
     private String merchantGoodsId;
 
     /**
@@ -25,7 +25,7 @@ public class GoodsDetail {
      * 微信支付定义的统一商品编号（没有可不传）
      * string[1,32]
      */
-    @JSONField(name = "wechatpay_goods_id")
+    @JsonProperty("wechatpay_goods_id")
     private String wechatpayGoodsId;
 
     /**
@@ -33,7 +33,7 @@ public class GoodsDetail {
      * 商品的实际名称
      * string[1,256]
      */
-    @JSONField(name = "goods_name")
+    @JsonProperty("goods_name")
     private String goodsName;
 
     /**
@@ -47,7 +47,7 @@ public class GoodsDetail {
      * 必填
      * 商品单价，单位为分
      */
-    @JSONField(name = "unit_price")
+    @JsonProperty("unit_price")
     private Integer unitPrice;
 
     public String getMerchantGoodsId() {

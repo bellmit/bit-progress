@@ -1,9 +1,6 @@
 package com.wpx.util;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.wpx.exception.CommonException;
-import com.wpx.exception.WechatException;
 import com.wpx.okhttp.constant.OkHttpConstants;
 import com.wpx.okhttp.util.OkHttpClientUtils;
 import okhttp3.MediaType;
@@ -88,6 +85,16 @@ public class WechatRequestUtils {
         }
         try {
             return OkHttpClientUtils.doPost(url, body, mediaType, params, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new CommonException(500, e.getMessage(), "POST 微信接口 [" + url + "] 请求异常");
+        }
+    }
+
+    public static String doPost(String url, String body) {
+        try {
+            MediaType mediaType = OkHttpConstants.MEDIA_TYPE_JSON;
+            return OkHttpClientUtils.doPost(url, body, mediaType);
         } catch (IOException e) {
             e.printStackTrace();
             throw new CommonException(500, e.getMessage(), "POST 微信接口 [" + url + "] 请求异常");

@@ -1,12 +1,8 @@
 package com.wpx.manager;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.sun.deploy.net.HttpResponse;
-import com.wpx.constant.WechatOaUrl;
+import com.wpx.util.JsonUtils;
 import com.wpx.model.media.MediaTypeEnum;
 import com.wpx.model.media.MediaVO;
-import com.wpx.okhttp.constant.OkHttpConstants;
 import com.wpx.util.WechatRequestUtils;
 import com.wpx.util.WechatResultUtils;
 
@@ -35,11 +31,11 @@ public class WechatOaMediaManager {
      * @return MediaVO
      */
     public static MediaVO uploadMedia(String accessToken, MediaTypeEnum mediaType, File media) {
-        JSONObject mediaBody = new JSONObject();
+        Map<String, Object> mediaBody = new HashMap<>(4);
         mediaBody.put(MEDIA, media);
-        Map<String, String> params = new HashMap<>(8);
+        Map<String, String> params = new HashMap<>(4);
         params.put(TYPE, mediaType.getName());
-        String body = JSON.toJSONString(mediaBody);
+        String body = JsonUtils.serializeObject(mediaBody);
         String result = WechatRequestUtils.doPostWithAccessToken(UPLOAD_MEDIA_URL, MEDIA_TYPE_FILE, accessToken, body, params);
         return WechatResultUtils.wechatResultCheck(result, MediaVO.class);
     }

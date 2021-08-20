@@ -1,6 +1,6 @@
 package com.wpx.manager;
 
-import com.alibaba.fastjson.JSON;
+import com.wpx.util.JsonUtils;
 import com.wpx.constant.WechatOaConstants;
 import com.wpx.exception.WechatExceptionMessage;
 import com.wpx.excetion.WechatOaException;
@@ -124,7 +124,7 @@ public class WechatOaKfSessionManager {
         Map<String, String> body = new HashMap<>(8);
         body.put(OPEN_ID, openId);
         body.put(COMMAND, typingEnum.getName());
-        String result = WechatRequestUtils.doPostWithAccessToken(KF_SESSION_TYPING_URL, accessToken, JSON.toJSONString(body));
+        String result = WechatRequestUtils.doPostWithAccessToken(KF_SESSION_TYPING_URL, accessToken, JsonUtils.serializeObject(body));
         return WechatResultUtils.wechatResultCheck(result);
     }
 
@@ -139,7 +139,7 @@ public class WechatOaKfSessionManager {
             throw new WechatOaException(KF_SESSION_KF_ACCOUNT_EMPTY_EXCEPTION);
         }
         Assert.isNotEmpty(kfSessionDTO.getOpenId(), WechatOaExceptionMessage.KF_SESSION_OPEN_ID_EMPTY_EXCEPTION);
-        return JSON.toJSONString(kfSessionDTO);
+        return JsonUtils.serializeObject(kfSessionDTO);
     }
 
     /**
@@ -155,7 +155,7 @@ public class WechatOaKfSessionManager {
         Assert.isTrue(nonNull, WechatOaExceptionMessage.MESSAGE_RECORD_TIME_EMPTY_EXCEPTION);
         boolean checkTime = (endTime - starTime) > 0 && (endTime - starTime) < 86400;
         Assert.isTrue(checkTime, MESSAGE_RECORD_TIME_EXCEPTION);
-        return JSON.toJSONString(queryDTO);
+        return JsonUtils.serializeObject(queryDTO);
     }
 
 }

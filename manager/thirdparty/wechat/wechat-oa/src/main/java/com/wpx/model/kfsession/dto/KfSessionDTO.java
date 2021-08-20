@@ -1,6 +1,6 @@
 package com.wpx.model.kfsession.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -11,13 +11,13 @@ public class KfSessionDTO {
     /**
      * 客服账号
      */
-    @JSONField(name = "kf_account")
+    @JsonProperty("kf_account")
     private String kfAccount;
 
     /**
      * 用户openId
      */
-    @JSONField(name = "openid")
+    @JsonProperty("openid")
     private String openId;
 
     public String getKfAccount() {

@@ -1,6 +1,6 @@
 package com.wpx.model.transactionquery;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -13,7 +13,7 @@ public class TransactionQueryGoodsDetail {
      * 商品编码
      * string[1,32]
      */
-    @JSONField(name = "goods_id")
+    @JsonProperty("goods_id")
     private String goodsId;
 
     /**
@@ -26,21 +26,21 @@ public class TransactionQueryGoodsDetail {
      * 必返回
      * 商品单价，单位为分
      */
-    @JSONField(name = "unit_price")
+    @JsonProperty("unit_price")
     private Integer unitPrice;
 
     /**
      * 必返回
      * 商品优惠金额（傻逼，单位是谜）
      */
-    @JSONField(name = "discount_amount")
+    @JsonProperty("discount_amount")
     private Integer discountAmount;
 
     /**
      * 非必返回
      * 商品备注信息
      */
-    @JSONField(name = "goods_remark")
+    @JsonProperty("goods_remark")
     private Integer goodsRemark;
 
     public String getGoodsId() {

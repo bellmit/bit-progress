@@ -1,6 +1,6 @@
 package com.wpx.model.pay;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -28,7 +28,7 @@ public class StoreInfo {
      * 地区编码，详细请见省市区编号对照表
      * string[1,32]
      */
-    @JSONField(name = "area_code")
+    @JsonProperty("area_code")
     private String areaCode;
 
     /**

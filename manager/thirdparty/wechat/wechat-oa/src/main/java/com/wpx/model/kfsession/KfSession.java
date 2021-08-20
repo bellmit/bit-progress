@@ -1,6 +1,6 @@
 package com.wpx.model.kfsession;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.WechatResult;
 
 import java.time.LocalDateTime;
@@ -16,13 +16,13 @@ public class KfSession extends WechatResult {
      * 客服账号
      * 此接口获取一个客户的会话，如果不存在，则kf_account为空
      */
-    @JSONField(name = "kf_account")
+    @JsonProperty("kf_account")
     private String kfAccount;
 
     /**
      * 用户openId
      */
-    @JSONField(name = "openid")
+    @JsonProperty("openid")
     private String openId;
 
     private LocalDateTime createTime;
@@ -47,7 +47,7 @@ public class KfSession extends WechatResult {
         return createTime;
     }
 
-    @JSONField(name = "createtime")
+    @JsonProperty("createtime")
     public void setCreateTime(Integer createTime) {
         this.createTime = LocalDateTime.ofEpochSecond(createTime, 0, ZoneOffset.ofHours(8));
     }

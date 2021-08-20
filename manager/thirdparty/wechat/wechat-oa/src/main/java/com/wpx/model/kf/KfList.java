@@ -1,6 +1,6 @@
 package com.wpx.model.kf;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.WechatResult;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class KfList extends WechatResult {
 
-    @JSONField(name = "kf_list")
+    @JsonProperty("kf_list")
     private List<Kf> kfList;
 
     public List<Kf> getKfList() {

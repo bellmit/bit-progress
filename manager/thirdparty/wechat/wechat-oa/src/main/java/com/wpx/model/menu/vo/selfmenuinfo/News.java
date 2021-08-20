@@ -1,6 +1,6 @@
 package com.wpx.model.menu.vo.selfmenuinfo;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -25,25 +25,25 @@ public class News {
     /**
      * 是否显示封面，0为不显示，1为显示
      */
-    @JSONField(name = "show_cover")
+    @JsonProperty("show_cover")
     private Integer showCover;
 
     /**
      * 封面图片的URL
      */
-    @JSONField(name = "cover_url")
+    @JsonProperty("cover_url")
     private String coverUrl;
 
     /**
      * 正文的URL
      */
-    @JSONField(name = "content_url")
+    @JsonProperty("content_url")
     private String contentUrl;
 
     /**
      * 原文的URL，若置空则无查看原文入口
      */
-    @JSONField(name = "source_url")
+    @JsonProperty("source_url")
     private String sourceUrl;
 
     public String getTitle() {

@@ -1,6 +1,6 @@
 package com.wpx.model.menu.vo;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.menu.Button;
 import com.wpx.model.menu.MatchRule;
 
@@ -19,13 +19,13 @@ public class ButtonVO {
     /**
      * 匹配规则
      */
-    @JSONField(name = "matchrule")
+    @JsonProperty("matchrule")
     private MatchRule matchRule;
 
     /**
      * 菜单ID
      */
-    @JSONField(name = "menuid")
+    @JsonProperty("menuid")
     private String menuId;
 
     public List<Button> getButton() {

@@ -1,6 +1,6 @@
 package com.wpx.model.menu;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.WechatResult;
 
 /**
@@ -9,7 +9,7 @@ import com.wpx.model.WechatResult;
  */
 public class MenuResult extends WechatResult {
 
-    @JSONField(name = "menuid")
+    @JsonProperty("menuid")
     private String menuId;
 
     public String getMenuId() {

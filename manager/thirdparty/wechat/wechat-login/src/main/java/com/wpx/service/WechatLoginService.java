@@ -1,18 +1,9 @@
 package com.wpx.service;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.wpx.constant.NumberConstants;
-import com.wpx.constant.StringConstants;
 import com.wpx.constant.WechatLoginUrl;
-import com.wpx.exception.CommonException;
 import com.wpx.model.JsCode2SessionResult;
 import com.wpx.okhttp.util.OkHttpClientUtils;
-import com.wpx.util.StringUtils;
 import com.wpx.util.WechatResultUtils;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 import java.io.IOException;
 import java.util.HashMap;

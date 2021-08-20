@@ -1,6 +1,5 @@
 package com.wpx.service;
 
-import com.alibaba.fastjson.JSON;
 import com.wpx.constant.StringConstants;
 import com.wpx.exception.CommonException;
 import com.wpx.constant.GitHubLoginUrl;
@@ -8,6 +7,7 @@ import com.wpx.exception.GitHubLoginExceptionMessage;
 import com.wpx.model.AuthorizationParams;
 import com.wpx.model.GitHubUser;
 import com.wpx.okhttp.util.OkHttpClientUtils;
+import com.wpx.util.JsonUtils;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class GitHubLoginService {
      */
     public String getAccessToken(AuthorizationParams params) {
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
-        String body = JSON.toJSONString(params);
+        String body = JsonUtils.serializeObject(params);
         try {
             String result = OkHttpClientUtils.doPost(GitHubLoginUrl.GITHUB_ACCESS_TOKEN_URL, body, mediaType);
             return result.split(StringConstants.AND)[0].split(StringConstants.EQUAL_SIGN)[1];
@@ -40,7 +40,7 @@ public class GitHubLoginService {
      *
      * @param accessToken
      */
-    public GitHubUser getGitHubUser(String accessToken){
+    public GitHubUser getGitHubUser(String accessToken) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(GitHubLoginUrl.GITHUB_USER_URL + "?access_token=" + accessToken)
@@ -48,9 +48,8 @@ public class GitHubLoginService {
         try{
             Response response = client.newCall(request).execute();
             String string = response.body().string();
-            return JSON.parseObject(string, GitHubUser.class);
+            return JsonUtils.deserializeObject(string, GitHubUser.class);
         }catch (IOException e){
-            e.printStackTrace();
             throw CommonException.error(GitHubLoginExceptionMessage.GITHUB_USER_REQUEST_ERROR);
         }
     }

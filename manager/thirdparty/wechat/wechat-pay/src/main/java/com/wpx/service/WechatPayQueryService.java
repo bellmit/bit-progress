@@ -1,6 +1,6 @@
 package com.wpx.service;
 
-import com.alibaba.fastjson.JSON;
+import com.wpx.util.JsonUtils;
 import com.wpx.constant.StringConstants;
 import com.wpx.exception.CommonException;
 import com.wpx.constant.WechatPayUrl;
@@ -44,7 +44,7 @@ public class WechatPayQueryService {
     public TransactionQueryResult queryTransaction(String url, String pathParam, String mchid) {
         try {
             String result = OkHttpClientUtils.doGet(url + pathParam + StringConstants.QUESTION_MARK + "mchid=" + mchid);
-            return JSON.parseObject(result, TransactionQueryResult.class);
+            return JsonUtils.deserializeObject(result, TransactionQueryResult.class);
         } catch (IOException e) {
             e.printStackTrace();
             throw new CommonException(WechatPayExceptionMessage.TRANSACTION_QUERY_ERROR);

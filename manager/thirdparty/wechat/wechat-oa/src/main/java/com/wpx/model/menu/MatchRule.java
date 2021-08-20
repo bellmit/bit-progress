@@ -1,6 +1,6 @@
 package com.wpx.model.menu;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -10,13 +10,13 @@ public class MatchRule {
     /**
      * 用户标签的id，可通过用户标签管理接口获取
      */
-    @JSONField(name = "tag_id")
+    @JsonProperty("tag_id")
     private String tagId;
 
     /**
      *
      */
-    @JSONField(name = "group_id")
+    @JsonProperty("group_id")
     private Integer groupId;
     /**
      * 性别：男（1）女（2），不填则不做匹配
@@ -40,7 +40,7 @@ public class MatchRule {
     /**
      * 客户端版本，当前只具体到系统型号：IOS(1), Android(2),Others(3)，不填则不做匹配
      */
-    @JSONField(name = "client_platform_type")
+    @JsonProperty("client_platform_type")
     private String clientPlatformType;
 
     /**

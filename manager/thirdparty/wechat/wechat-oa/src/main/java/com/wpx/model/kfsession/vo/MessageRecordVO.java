@@ -1,6 +1,6 @@
 package com.wpx.model.kfsession.vo;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.WechatResult;
 import com.wpx.model.kfsession.MessageRecord;
 
@@ -19,10 +19,10 @@ public class MessageRecordVO extends WechatResult {
     /**
      * 消息id顺序从小到大，从1开始
      */
-    @JSONField(name = "msgid")
+    @JsonProperty("msgid")
     private String msgId;
 
-    @JSONField(name = "recordlist")
+    @JsonProperty("recordlist")
     private List<MessageRecord> recordList;
 
     public String getNumber() {

@@ -1,6 +1,5 @@
 package com.wpx.util;
 
-import com.alibaba.fastjson.JSON;
 import com.wpx.constant.NumberConstants;
 import com.wpx.exception.CommonException;
 import com.wpx.model.WechatResult;
@@ -28,7 +27,7 @@ public class WechatResultUtils {
      * @param result
      */
     public static <T extends WechatResult> T wechatResultCheck(String result, Class<T> target) {
-        T data = JSON.parseObject(result, target);
+        T data = JsonUtils.deserializeObject(result, target);
         String errCode = data.getErrCode();
         if (Objects.nonNull(errCode) && !StringUtils.equals(NumberConstants.STRING_ZERO, errCode)) {
             throw new CommonException(Integer.parseInt(errCode), data.getErrMsg(), "微信接口返回异常");

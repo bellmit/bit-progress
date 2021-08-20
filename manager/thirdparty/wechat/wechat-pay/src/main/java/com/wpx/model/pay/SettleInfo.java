@@ -1,6 +1,6 @@
 package com.wpx.model.pay;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -12,7 +12,7 @@ public class SettleInfo {
      * 非必填
      * 是否指定分账
      */
-    @JSONField(name = "profit_sharing")
+    @JsonProperty("profit_sharing")
     private Boolean profitSharing;
 
     public Boolean getProfitSharing() {

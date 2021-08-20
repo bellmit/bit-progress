@@ -1,6 +1,6 @@
 package com.wpx.model.transactionquery;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.pay.Payer;
 import com.wpx.model.pay.SceneInfo;
 
@@ -31,7 +31,7 @@ public class TransactionQueryResult {
      * 商户系统内部订单号，只能是数字、大小写字母_-*且在同一个商户号下唯一
      * string[6,32]
      */
-    @JSONField(name = "out_trade_no")
+    @JsonProperty("out_trade_no")
     private String outTradeNo;
 
     /**
@@ -40,7 +40,7 @@ public class TransactionQueryResult {
      * 微信支付系统生成的订单号
      * string[1,32]
      */
-    @JSONField(name = "transaction_id")
+    @JsonProperty("transaction_id")
     private String transactionId;
 
     /**
@@ -48,7 +48,7 @@ public class TransactionQueryResult {
      * 交易类型，枚举值：JSAPI：公众号支付，NATIVE：扫码支付，APP：APP支付，MICROPAY：付款码支付，MWEB：H5支付，FACEPAY：刷脸支付
      * string[1,16]
      */
-    @JSONField(name = "trade_type")
+    @JsonProperty("trade_type")
     private String tradeType;
 
     /**
@@ -57,7 +57,7 @@ public class TransactionQueryResult {
      * USERPAYING：用户支付中（付款码支付），PAYERROR：支付失败(其他原因，如银行返回失败)，ACCEPT：已接收，等待扣款
      * string[1,32]
      */
-    @JSONField(name = "trade_state")
+    @JsonProperty("trade_state")
     private String tradeState;
 
     /**
@@ -65,7 +65,7 @@ public class TransactionQueryResult {
      * 交易状态描述，示例值：支付成功
      * string[1,256]
      */
-    @JSONField(name = "trade_state_desc")
+    @JsonProperty("trade_state_desc")
     private String tradeStateDesc;
 
     /**
@@ -73,7 +73,7 @@ public class TransactionQueryResult {
      * 付款银行
      * string[1,16]
      */
-    @JSONField(name = "bank_type")
+    @JsonProperty("bank_type")
     private String bankType;
 
     /**
@@ -90,7 +90,7 @@ public class TransactionQueryResult {
      * 例如：2015-05-20T13:29:35+08:00表示，北京时间2015年5月20日 13点29分35秒。
      * string[1,64]
      */
-    @JSONField(name = "success_time")
+    @JsonProperty("success_time")
     private String successTime;
 
     /**
@@ -109,14 +109,14 @@ public class TransactionQueryResult {
      * 非必返回
      * 支付场景描述，这里只返回终端设备号
      */
-    @JSONField(name = "scene_info")
+    @JsonProperty("scene_info")
     private SceneInfo sceneInfo;
 
     /**
      * 非必返回
      * 优惠功能，享受优惠时返回该字段
      */
-    @JSONField(name = "promotion_detail")
+    @JsonProperty("promotion_detail")
     private List<PromotionDetail> promotionDetail;
 
     public String getAppid() {

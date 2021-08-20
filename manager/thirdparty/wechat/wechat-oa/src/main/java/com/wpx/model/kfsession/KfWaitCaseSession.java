@@ -1,6 +1,6 @@
 package com.wpx.model.kfsession;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -11,13 +11,13 @@ public class KfWaitCaseSession {
     /**
      * 最后一条消息的时间
      */
-    @JSONField(name = "latest_time")
+    @JsonProperty("latest_time")
     private String latestTime;
 
     /**
      * 用户openid
      */
-    @JSONField(name = "openid")
+    @JsonProperty("openid")
     private String openId;
 
     public String getLatestTime() {

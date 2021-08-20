@@ -1,6 +1,6 @@
 package com.wpx.model.apppay;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.pay.Amount;
 import com.wpx.model.pay.Detail;
 import com.wpx.model.pay.SceneInfo;
@@ -38,7 +38,7 @@ public class AppPayUnifiedOrder {
      * 商户系统内部订单号，只能是数字、大小写字母_-*且在同一个商户号下唯一
      * string[6,32]
      */
-    @JSONField(name = "out_trade_no")
+    @JsonProperty("out_trade_no")
     private String outTradeNo;
 
     /**
@@ -50,7 +50,7 @@ public class AppPayUnifiedOrder {
      * string[1,64]
      * LocalDateTime.toString()
      */
-    @JSONField(name = "time_expire")
+    @JsonProperty("time_expire")
     private String timeExpire;
 
     /**
@@ -65,7 +65,7 @@ public class AppPayUnifiedOrder {
      * 即支付结果的回调地址
      * string[1,256]
      */
-    @JSONField(name = "notify_url")
+    @JsonProperty("notify_url")
     private String notifyUrl;
 
     /**
@@ -91,13 +91,13 @@ public class AppPayUnifiedOrder {
      * 非必填
      * 支付场景描述
      */
-    @JSONField(name = "scene_info")
+    @JsonProperty("scene_info")
     private SceneInfo sceneInfo;
 
     /**
      * 结算信息
      */
-    @JSONField(name = "settle_info")
+    @JsonProperty("settle_info")
     private SettleInfo settleInfo;
 
     public String getAppid() {

@@ -1,6 +1,6 @@
 package com.wpx.aspect;
 
-import com.alibaba.fastjson.JSON;
+import com.wpx.util.JsonUtils;
 import com.wpx.mapper.user.ManagerLogMapper;
 import com.wpx.model.user.managerlog.envm.MethodEnum;
 import com.wpx.util.NumberUtils;
@@ -62,7 +62,7 @@ public class ControllerAspect {
                     LocalDateTime now = LocalDateTime.now();
                     ManagerLog managerLog = new ManagerLog();
                     MethodEnum methodEnum = MethodEnum.valueOf(httpMethod.name());
-                    managerLog.setManagerId(userId).setArgs(JSON.toJSONString(joinPoint.getArgs())).setMethod(methodEnum)
+                    managerLog.setManagerId(userId).setArgs(JsonUtils.serializeObject(joinPoint.getArgs())).setMethod(methodEnum)
                             .setUri(request.getRequestURI()).setCreateTime(now).setUpdateTime(now).setDeleted(false);
                     managerLogMapper.insert(managerLog);
                     break;

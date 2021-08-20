@@ -1,6 +1,6 @@
 package com.wpx.model.kf.message;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class MsgMenu implements KfBaseMessage {
 
-    @JSONField(name = "head_content")
+    @JsonProperty("head_content")
     private String headContent;
 
     /**
@@ -21,7 +21,7 @@ public class MsgMenu implements KfBaseMessage {
     /**
      * 点击后提示文本
      */
-    @JSONField(name = "tail_content")
+    @JsonProperty("tail_content")
     private String tailContent;
 
     public String getHeadContent() {

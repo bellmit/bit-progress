@@ -1,7 +1,6 @@
 package com.wpx.service;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.wpx.util.JsonUtils;
 import com.wpx.constant.CharacterConstants;
 import com.wpx.constant.StringConstants;
 import com.wpx.exception.CommonException;
@@ -16,6 +15,8 @@ import com.wpx.model.h5pay.H5PayUnifiedOrder;
 import com.wpx.model.jsapi.JsApiPayOrder;
 import com.wpx.model.jsapi.JsApiUnifiedOrder;
 import com.wpx.okhttp.util.OkHttpClientUtils;
+import com.wpx.util.WechatRequestUtils;
+import com.wpx.util.WechatResultUtils;
 import okhttp3.MediaType;
 import sun.misc.BASE64Decoder;
 
@@ -26,6 +27,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.time.Instant;
 import java.util.Base64;
+import java.util.Map;
 
 /**
  * @author 不会飞的小鹏
@@ -41,7 +43,7 @@ public class WechatPayUnifiedOrderService {
      * @param filePath  ssl证书路径
      */
     public static JsApiPayOrder jsApiUnifiedOrder(JsApiUnifiedOrder unifiedOrder, String filePath) {
-        String body = JSON.toJSONString(unifiedOrder);
+        String body = JsonUtils.serializeObject(unifiedOrder);
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         JsApiPayOrder jsApiPayOrder = new JsApiPayOrder();
         String appid = unifiedOrder.getAppid();
@@ -53,9 +55,9 @@ public class WechatPayUnifiedOrderService {
         jsApiPayOrder.setNonceStr(nonceStr);
         try {
             String result = OkHttpClientUtils.doPost(WechatPayUrl.JS_API_UNIFIED_URL, body, mediaType);
-            JSONObject object = JSON.parseObject(result);
+            Map<String, String> map = JsonUtils.deserializeMap(result, String.class);
             StringBuilder builder = new StringBuilder();
-            object.forEach((key, value) -> builder.append(key).append(StringConstants.EQUAL_SIGN).append(value));
+            map.forEach((key, value) -> builder.append(key).append(StringConstants.EQUAL_SIGN).append(value));
             String packaged = builder.toString();
             jsApiPayOrder.setPackaged(packaged);
         } catch (Exception e) {
@@ -80,7 +82,7 @@ public class WechatPayUnifiedOrderService {
      * @param filePath  ssl证书路径
      */
     public static AppPayOrder appPayUnifiedOrder(AppPayUnifiedOrder unifiedOrder, String filePath) {
-        String body = JSON.toJSONString(unifiedOrder);
+        String body = JsonUtils.serializeObject(unifiedOrder);
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         AppPayOrder appPayOrder = new AppPayOrder();
         String appid = unifiedOrder.getAppid();
@@ -93,9 +95,9 @@ public class WechatPayUnifiedOrderService {
         appPayOrder.setPackaged(WechatPayConstants.PACKAGE);
         try {
             String result = OkHttpClientUtils.doPost(WechatPayUrl.APP_PAY_UNIFIED_URL, body, mediaType);
-            JSONObject object = JSON.parseObject(result);
+            Map<String, String> map = JsonUtils.deserializeMap(result, String.class);
             StringBuilder builder = new StringBuilder();
-            object.forEach((key, value) -> builder.append(value));
+            map.forEach((key, value) -> builder.append(value));
             String prepayid = builder.toString();
             appPayOrder.setPrepayid(prepayid);
         } catch (Exception e) {
@@ -117,11 +119,10 @@ public class WechatPayUnifiedOrderService {
      * H5支付统一下单
      */
     public static H5PayOrder appPayUnifiedOrder(H5PayUnifiedOrder unifiedOrder) {
-        String body = JSON.toJSONString(unifiedOrder);
-        MediaType mediaType = MediaType.get("application/json; charset=utf-8");
+        String body = JsonUtils.serializeObject(unifiedOrder);
         try {
-            String result = OkHttpClientUtils.doPost(WechatPayUrl.H5_PAY_UNIFIED_URL, body, mediaType);
-            return JSON.parseObject(result, H5PayOrder.class);
+            String result = WechatRequestUtils.doPost(WechatPayUrl.H5_PAY_UNIFIED_URL, body);
+            return WechatResultUtils.wechatResultCheck(result, H5PayOrder.class);
         } catch (Exception e) {
             e.printStackTrace();
             throw new CommonException(WechatPayExceptionMessage.H5_PAY_UNIFIED_ORDER_ERROR);

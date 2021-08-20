@@ -1,6 +1,6 @@
 package com.wpx.model.pay;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -13,7 +13,7 @@ public class SceneInfo {
      * 用户的客户端IP，支持IPv4和IPv6两种格式的IP地址
      * string[1,45]
      */
-    @JSONField(name = "payer_client_ip")
+    @JsonProperty("payer_client_ip")
     private String payerClientIp;
 
     /**
@@ -21,14 +21,14 @@ public class SceneInfo {
      * 商户端设备号（门店号或收银设备ID）
      * string[1,32]
      */
-    @JSONField(name = "device_id")
+    @JsonProperty("device_id")
     private String deviceId;
 
     /**
      * 非必填
      * 商户门店信息
      */
-    @JSONField(name = "store_info")
+    @JsonProperty("store_info")
     private StoreInfo storeInfo;
 
     public String getPayerClientIp() {

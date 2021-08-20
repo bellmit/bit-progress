@@ -1,6 +1,6 @@
 package com.wpx.model.kfsession.vo;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.WechatResult;
 import com.wpx.model.kfsession.KfWaitCaseSession;
 
@@ -20,7 +20,7 @@ public class KfWaitCaseSessionVO extends WechatResult {
     /**
      * 未接入会话列表，最多返回100条数据，按照来访顺序
      */
-    @JSONField(name = "waitcaselist")
+    @JsonProperty("waitcaselist")
     private List<KfWaitCaseSession> waitCaseList;
 
     public Integer getCount() {

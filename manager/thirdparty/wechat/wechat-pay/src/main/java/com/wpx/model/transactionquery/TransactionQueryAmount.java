@@ -1,6 +1,6 @@
 package com.wpx.model.transactionquery;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -18,7 +18,7 @@ public class TransactionQueryAmount {
      * 非必返回
      * 用户支付金额，单位为分
      */
-    @JSONField(name = "payer_total")
+    @JsonProperty("payer_total")
     private Integer payerTotal;
 
     /**
@@ -31,7 +31,7 @@ public class TransactionQueryAmount {
      * 非必返回
      * 用户支付币种
      */
-    @JSONField(name = "payer_currency")
+    @JsonProperty("payer_currency")
     private Integer payerCurrency;
 
     public Integer getTotal() {

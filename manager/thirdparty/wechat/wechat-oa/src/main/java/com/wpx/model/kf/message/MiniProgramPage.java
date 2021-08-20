@@ -1,6 +1,6 @@
 package com.wpx.model.kf.message;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -16,19 +16,19 @@ public class MiniProgramPage implements KfBaseMessage {
     /**
      * 小程序的appid，要求小程序的appid需要与公众号有关联关系
      */
-    @JSONField(name = "appid")
+    @JsonProperty("appid")
     private String appId;
 
     /**
      * 小程序的页面路径，跟app.json对齐，支持参数，比如pages/index/index?foo=bar
      */
-    @JSONField(name = "pagepath")
+    @JsonProperty("pagepath")
     private String pagePath;
 
     /**
      * 缩略图/小程序卡片图片的媒体ID，小程序卡片图片建议大小为520*416
      */
-    @JSONField(name = "thumb_media_id")
+    @JsonProperty("thumb_media_id")
     private String thumbMediaId;
 
     public String getTitle() {

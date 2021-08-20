@@ -1,6 +1,6 @@
 package com.wpx.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -20,7 +20,7 @@ public class GitHubUser {
     /**
      * 头像地址
      */
-    @JSONField(name = "avatar_url")
+    @JsonProperty("avatar_url")
     private String avatarUrl;
 
     /**

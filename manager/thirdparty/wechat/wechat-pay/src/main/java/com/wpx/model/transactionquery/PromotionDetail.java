@@ -1,6 +1,6 @@
 package com.wpx.model.transactionquery;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class PromotionDetail {
      * 券ID
      * string[1,32]
      */
-    @JSONField(name = "coupon_id")
+    @JsonProperty("coupon_id")
     private String couponId;
 
     /**
@@ -51,28 +51,28 @@ public class PromotionDetail {
      * 活动ID
      * string[1,32]
      */
-    @JSONField(name = "stock_id")
+    @JsonProperty("stock_id")
     private String stockId;
 
     /**
      * 非必返回
      * 微信出资，单位为分
      */
-    @JSONField(name = "wechatpay_contribute")
+    @JsonProperty("wechatpay_contribute")
     private Integer wechatpayContribute;
 
     /**
      * 非必返回
      * 商户出资，单位为分
      */
-    @JSONField(name = "merchant_contribute")
+    @JsonProperty("merchant_contribute")
     private Integer merchantContribute;
 
     /**
      * 非必返回
      * 其他出资，单位为分
      */
-    @JSONField(name = "other_contribute")
+    @JsonProperty("other_contribute")
     private Integer otherContribute;
 
     /**
@@ -86,7 +86,7 @@ public class PromotionDetail {
      * 非必返回
      * 单品列表
      */
-    @JSONField(name = "goods_detail")
+    @JsonProperty("goods_detail")
     private List<TransactionQueryGoodsDetail> goodsDetail;
 
     public String getCouponId() {

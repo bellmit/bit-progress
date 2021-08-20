@@ -1,6 +1,6 @@
 package com.wpx.model.menu.vo;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.WechatResult;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class MenuVO extends WechatResult {
     /**
      * 自定义菜单
      */
-    @JSONField(name = "conditionalmenu")
+    @JsonProperty("conditionalmenu")
     private List<ButtonVO> conditionalMenu;
 
     public ButtonVO getMenu() {

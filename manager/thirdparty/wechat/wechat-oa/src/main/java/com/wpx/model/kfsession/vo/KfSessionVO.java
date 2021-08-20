@@ -1,6 +1,6 @@
 package com.wpx.model.kfsession.vo;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.WechatResult;
 import com.wpx.model.kfsession.KfSession;
 
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class KfSessionVO extends WechatResult {
 
-    @JSONField(name = "sessionlist")
+    @JsonProperty("sessionlist")
     private List<KfSession> sessionList;
 
     public List<KfSession> getSessionList() {

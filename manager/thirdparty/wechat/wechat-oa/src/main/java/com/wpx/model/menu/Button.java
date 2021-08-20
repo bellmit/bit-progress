@@ -1,6 +1,6 @@
 package com.wpx.model.menu;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 import java.util.Objects;
@@ -33,25 +33,25 @@ public class Button {
     /**
      *  媒体id
      */
-    @JSONField(name = "media_id")
+    @JsonProperty("media_id")
     private String mediaId;
 
     /**
      * 小程序的appid
      */
-    @JSONField(name = "appid")
+    @JsonProperty("appid")
     private String appId;
 
     /**
      * 小程序的页面路径
      */
-    @JSONField(name = "pagepath")
+    @JsonProperty("pagepath")
     private String pagePath;
 
     /**
      * 子菜单
      */
-    @JSONField(name = "sub_button")
+    @JsonProperty("sub_button")
     private List<Button> subButton;
 
     public ButtonTypeEnum getType() {
@@ -62,12 +62,12 @@ public class Button {
         this.type = type;
     }
 
-    @JSONField(name = "type")
+    @JsonProperty("type")
     public String getTypeValue() {
         return Objects.nonNull(type) ? type.getValue() : null;
     }
 
-    @JSONField(name = "type")
+    @JsonProperty("type")
     public void setTypeByValue(String type) {
         this.type = ButtonTypeEnum.typeValueOf(type);
     }

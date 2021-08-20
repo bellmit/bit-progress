@@ -1,6 +1,6 @@
 package com.wpx.model.media;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.WechatResult;
 
 /**
@@ -10,10 +10,10 @@ public class MediaVO extends WechatResult {
 
     private String type;
 
-    @JSONField(name = "media_id")
+    @JsonProperty("media_id")
     private String mediaId;
 
-    @JSONField(name = "created_at")
+    @JsonProperty("created_at")
     private Integer createdAt;
 
     private String url;

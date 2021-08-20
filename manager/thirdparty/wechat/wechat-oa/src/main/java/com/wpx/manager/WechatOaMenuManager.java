@@ -1,6 +1,5 @@
 package com.wpx.manager;
 
-import com.alibaba.fastjson.JSON;
 import com.wpx.constant.WechatOaUrl;
 import com.wpx.model.WechatResult;
 import com.wpx.model.menu.MenuResult;
@@ -10,6 +9,7 @@ import com.wpx.model.menu.dto.MenuQueryDTO;
 import com.wpx.model.menu.vo.ButtonTryMatchVO;
 import com.wpx.model.menu.vo.MenuVO;
 import com.wpx.model.menu.vo.selfmenuinfo.SelfMenuInfoVO;
+import com.wpx.util.JsonUtils;
 import com.wpx.util.WechatRequestUtils;
 import com.wpx.util.WechatResultUtils;
 
@@ -27,7 +27,7 @@ public class WechatOaMenuManager {
      * @return WechatResult
      */
     public MenuResult createMenu(String accessToken, MenuDTO menuDTO) {
-        String body = JSON.toJSONString(menuDTO);
+        String body = JsonUtils.serializeObject(menuDTO);
         String result = WechatRequestUtils.doPostWithAccessToken(WechatOaUrl.CREATE_MENU_URL, accessToken, body);
         return WechatResultUtils.wechatResultCheck(result, MenuResult.class);
     }
@@ -64,7 +64,7 @@ public class WechatOaMenuManager {
      * @return WechatResult
      */
     public MenuResult createConditionalMenu(String accessToken, MenuDTO menuDTO) {
-        String body = JSON.toJSONString(menuDTO);
+        String body = JsonUtils.serializeObject(menuDTO);
         String result = WechatRequestUtils.doPostWithAccessToken(WechatOaUrl.ADD_CONDITIONAL_MENU_URL, accessToken, body);
         return WechatResultUtils.wechatResultCheck(result, MenuResult.class);
     }
@@ -77,7 +77,7 @@ public class WechatOaMenuManager {
      * @return WechatResult
      */
     public WechatResult deleteConditionalMenu(String accessToken, MenuDeleteDTO deleteDTO) {
-        String body = JSON.toJSONString(deleteDTO);
+        String body = JsonUtils.serializeObject(deleteDTO);
         String result = WechatRequestUtils.doPostWithAccessToken(WechatOaUrl.DELETE_CONDITIONAL_MENU_URL, accessToken, body);
         return WechatResultUtils.wechatResultCheck(result);
     }
@@ -90,7 +90,7 @@ public class WechatOaMenuManager {
      * @return WechatResult
      */
     public ButtonTryMatchVO tryMatchConditionalMenu(String accessToken, MenuQueryDTO queryDTO) {
-        String body = JSON.toJSONString(queryDTO);
+        String body = JsonUtils.serializeObject(queryDTO);
         String result = WechatRequestUtils.doPostWithAccessToken(WechatOaUrl.TRY_MATCH_CONDITIONAL_MENU_URL, accessToken, body);
         return WechatResultUtils.wechatResultCheck(result, ButtonTryMatchVO.class);
     }

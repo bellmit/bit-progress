@@ -1,6 +1,6 @@
 package com.wpx.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -11,19 +11,19 @@ public class JsCode2SessionResult extends WechatResult {
     /**
      * openId
      */
-    @JSONField(name = "openid")
+    @JsonProperty("openid")
     private String openId;
 
     /**
      * unionId(符合条件才会下发)
      */
-    @JSONField(name = "unionid")
+    @JsonProperty("unionid")
     private String unionId;
 
     /**
      * sessionKey
      */
-    @JSONField(name = "session_key")
+    @JsonProperty("session_key")
     private String sessionKey;
 
     public String getOpenId() {

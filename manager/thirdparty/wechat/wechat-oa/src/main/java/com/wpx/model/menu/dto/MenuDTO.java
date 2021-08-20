@@ -1,6 +1,6 @@
 package com.wpx.model.menu.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.menu.Button;
 import com.wpx.model.menu.MatchRule;
 
@@ -19,7 +19,7 @@ public class MenuDTO {
     /**
      * 菜单匹配规则
      */
-    @JSONField(name = "matchrule")
+    @JsonProperty("matchrule")
     private MatchRule matchRule;
 
     public List<Button> getButton() {

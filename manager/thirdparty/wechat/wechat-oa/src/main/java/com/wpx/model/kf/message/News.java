@@ -1,6 +1,6 @@
 package com.wpx.model.kf.message;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -26,7 +26,7 @@ public class News implements KfBaseMessage {
     /**
      * 图文消息的图片链接，支持JPG、PNG格式，较好的效果为大图640*320，小图80*80
      */
-    @JSONField(name = "picurl")
+    @JsonProperty("picurl")
     private String picUrl;
 
     public String getTitle() {

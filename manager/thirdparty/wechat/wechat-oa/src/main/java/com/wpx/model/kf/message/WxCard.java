@@ -1,6 +1,6 @@
 package com.wpx.model.kf.message;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -11,7 +11,7 @@ public class WxCard implements KfBaseMessage {
     /**
      * 卡券ID
      */
-    @JSONField(name = "card_id")
+    @JsonProperty("card_id")
     private String cardId;
 
     public String getCardId() {

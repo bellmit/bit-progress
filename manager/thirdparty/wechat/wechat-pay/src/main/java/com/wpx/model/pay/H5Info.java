@@ -1,6 +1,6 @@
 package com.wpx.model.pay;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -20,7 +20,7 @@ public class H5Info {
      * 应用名称
      * string[1,64]
      */
-    @JSONField(name = "app_name")
+    @JsonProperty("app_name")
     private String appName;
 
     /**
@@ -28,7 +28,7 @@ public class H5Info {
      * 网站URL
      * string[1,128]
      */
-    @JSONField(name = "app_url")
+    @JsonProperty("app_url")
     private String appUrl;
 
     /**
@@ -36,7 +36,7 @@ public class H5Info {
      * iOS平台BundleID 示例值：com.tencent.wzryiOS
      * string[1,128]
      */
-    @JSONField(name = "bundle_id")
+    @JsonProperty("bundle_id")
     private String bundleId;
 
     /**
@@ -44,7 +44,7 @@ public class H5Info {
      * Android平台PackageName 示例值：com.tencent.tmgp.sgame
      * string[1,128]
      */
-    @JSONField(name = "package_name")
+    @JsonProperty("package_name")
     private String packageName;
 
     public String getType() {

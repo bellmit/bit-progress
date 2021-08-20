@@ -1,6 +1,6 @@
 package com.wpx.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -10,13 +10,13 @@ public class WechatResult {
     /**
      * 状态码
      */
-    @JSONField(name = "errcode")
+    @JsonProperty("errcode")
     private String errCode;
 
     /**
      * 异常信息
      */
-    @JSONField(name = "errmsg")
+    @JsonProperty("errmsg")
     private String errMsg;
 
     public String getErrCode() {

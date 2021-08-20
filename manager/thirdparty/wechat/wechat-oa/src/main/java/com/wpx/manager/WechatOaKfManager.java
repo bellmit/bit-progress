@@ -1,13 +1,12 @@
 package com.wpx.manager;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.wpx.model.kf.KfAccount;
 import com.wpx.model.kf.KfDTO;
 import com.wpx.model.kf.KfList;
 import com.wpx.model.WechatResult;
 import com.wpx.model.kf.message.*;
 import com.wpx.util.Assert;
+import com.wpx.util.JsonUtils;
 import com.wpx.util.WechatResultUtils;
 
 import java.io.File;
@@ -37,7 +36,7 @@ public class WechatOaKfManager {
      * @return WechatResult
      */
     public static WechatResult addKf(String accessToken, KfDTO kfDTO) {
-        String result = doPostWithAccessToken(ADD_KF_URL, accessToken, JSON.toJSONString(kfDTO));
+        String result = doPostWithAccessToken(ADD_KF_URL, accessToken, JsonUtils.serializeObject(kfDTO));
         return WechatResultUtils.wechatResultCheck(result, WechatResult.class);
     }
 
@@ -49,7 +48,7 @@ public class WechatOaKfManager {
      * @return WechatResult
      */
     public WechatResult updateKf(String accessToken, KfDTO kfDTO) {
-        String result = doPostWithAccessToken(UPDATE_KF_URL, accessToken, JSON.toJSONString(kfDTO));
+        String result = doPostWithAccessToken(UPDATE_KF_URL, accessToken, JsonUtils.serializeObject(kfDTO));
         return WechatResultUtils.wechatResultCheck(result);
     }
 
@@ -79,9 +78,9 @@ public class WechatOaKfManager {
     public WechatResult uploadKfHeadImgUrl(String accessToken, String kfAccount, File media) {
         Map<String, String> params = new HashMap<>(8);
         params.put(KF_ACCOUNT, kfAccount);
-        JSONObject body = new JSONObject();
+        Map<String, Object> body = new HashMap<>(8);
         body.put(MEDIA, media);
-        String result = doPostWithAccessToken(UPLOAD_HEAD_IMG_URL, MEDIA_TYPE_IMAGE, accessToken, JSON.toJSONString(body), params);
+        String result = doPostWithAccessToken(UPLOAD_HEAD_IMG_URL, MEDIA_TYPE_IMAGE, accessToken, JsonUtils.serializeObject(body), params);
         return WechatResultUtils.wechatResultCheck(result);
     }
 
@@ -105,10 +104,10 @@ public class WechatOaKfManager {
      * @return WechatResult
      */
     public WechatResult inviteWorkerKf(String accessToken, String kfAccount, String inviteWx) {
-        JSONObject body = new JSONObject();
+        Map<String, Object> body = new HashMap<>(8);
         body.put(KF_ACCOUNT, kfAccount);
         body.put(INVITE_WX, inviteWx);
-        String result = doPostWithAccessToken(INVITE_WORKER_KF_URL, accessToken, JSON.toJSONString(body));
+        String result = doPostWithAccessToken(INVITE_WORKER_KF_URL, accessToken, JsonUtils.serializeObject(body));
         return WechatResultUtils.wechatResultCheck(result);
     }
 
@@ -138,15 +137,15 @@ public class WechatOaKfManager {
         Assert.notNull(message, KF_MESSAGE_EMPTY_EXCEPTION);
         Assert.isTrue(msgType.getMessageClass().isInstance(message), KF_MESSAGE_TYPE_MISMATCH_WITH_CONTENT_EXCEPTION);
         String typeName = msgType.getName();
-        JSONObject body = new JSONObject();
+        Map<String, Object> body = new HashMap<>(8);
         body.put(TO_USER, openId);
         body.put(MSG_TYPE, typeName);
-        body.put(typeName, JSON.toJSONString(message));
+        body.put(typeName, JsonUtils.serializeObject(message));
         KfAccount kfAccount = kfMessage.getKfAccount();
         if (Objects.nonNull(kfAccount)) {
-            body.put(CUSTOM_SERVICE, JSON.toJSONString(kfAccount));
+            body.put(CUSTOM_SERVICE, JsonUtils.serializeObject(kfAccount));
         }
-        return body.toJSONString();
+        return JsonUtils.serializeObject(body);
     }
 
 }

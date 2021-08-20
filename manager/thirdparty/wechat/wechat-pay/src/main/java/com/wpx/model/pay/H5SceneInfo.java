@@ -1,6 +1,6 @@
 package com.wpx.model.pay;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -11,7 +11,7 @@ public class H5SceneInfo extends SceneInfo {
     /**
      * H5场景信息
      */
-    @JSONField(name = "h5_info")
+    @JsonProperty("h5_info")
     private H5Info h5Info;
 
     public H5Info getH5Info() {

@@ -1,6 +1,6 @@
 package com.wpx.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
@@ -10,7 +10,7 @@ public  class AuthorizationParams {
     /**
      * GitHub申请的client_id
      */
-    @JSONField(name = "client_id")
+    @JsonProperty("client_id")
     private String clientId;
 
     /**
@@ -21,13 +21,13 @@ public  class AuthorizationParams {
     /**
      * redirect_uri
      */
-    @JSONField(name = "redirect_uri")
+    @JsonProperty("redirect_uri")
     private String redirectUri;
 
     /**
      * client_secret
      */
-    @JSONField(name = "client_secret")
+    @JsonProperty("client_secret")
     private String clientSecret;
 
 }
