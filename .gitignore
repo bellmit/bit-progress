@@ -78,17 +78,4 @@ buildNumber.properties
 .mvn/timing.properties
 *.log
 
-/cms-base/target/
-/common/target/
-/dao/target/
-/gateway-base/target/
-/gateway-cms/target/
-/gateway-web/target/
-/feign-common/target/
-/feign-cms-base/target/
-/feign-web-base/target/
-/feign-gateway-web/target/
-/base-cms/src/test/java/
-/base-web/src/test/java/
-/login/github-login/src/test/java/
-*/test/java/
+test/
