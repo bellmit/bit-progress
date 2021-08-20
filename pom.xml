@@ -18,12 +18,9 @@
         <module>common</module>
         <module>dao</module>
         <module>remote</module>
-        <module>base-cms</module>
-        <module>server-base</module>
-        <module>base-web</module>
         <module>login</module>
-        <module>scheduler</module>
         <module>manager</module>
+        <module>server</module>
     </modules>
 
     <properties>

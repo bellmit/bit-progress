@@ -8,13 +8,14 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <artifactId>gateway</artifactId>
     <packaging>pom</packaging>
+    <artifactId>server</artifactId>
+
     <modules>
-        <module>gateway-common</module>
-        <module>gateway-web</module>
-        <module>gateway-cms</module>
+        <module>server-common</module>
+        <module>base-cms</module>
+        <module>base-web</module>
+        <module>scheduler</module>
     </modules>
 
 </project>
