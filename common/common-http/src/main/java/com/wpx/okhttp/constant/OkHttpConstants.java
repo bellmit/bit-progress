@@ -23,4 +23,14 @@ public class OkHttpConstants {
      */
     public static final MediaType MEDIA_TYPE_FILE = MediaType.get("file/*");
 
+    /**
+     * form-data类型的MediaType
+     */
+    public static final MediaType MEDIA_TYPE_FORM_DATA = MediaType.parse("multipart/form-data");
+
+    /**
+     * octet-stream类型的MediaType
+     */
+    public static final MediaType MEDIA_TYPE_OCTET_STREAM = MediaType.parse("application/octet-stream");
+
 }

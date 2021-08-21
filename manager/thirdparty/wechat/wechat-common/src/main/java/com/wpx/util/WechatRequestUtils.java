@@ -6,6 +6,7 @@ import com.wpx.okhttp.util.OkHttpClientUtils;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,6 +47,28 @@ public class WechatRequestUtils {
         }
         try {
             return OkHttpClientUtils.doGetWithParam(url, params);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new CommonException(500, e.getMessage(), "GET 微信接口 [" + url + "] 请求异常");
+        }
+    }
+
+    /**
+     * 统一get请求入口
+     *
+     * @param url         请求url
+     * @param accessToken 微信接口调用凭证
+     * @return 请求结果
+     * @throws IOException
+     */
+    public static File doGetWithAccessToken(String url, String accessToken, Map<String, String> addParams, File file) {
+        HashMap<String, String> params = new HashMap<>(8);
+        params.put(ACCESS_TOKEN, accessToken);
+        if (CollectionUtils.nonEmpty(addParams)) {
+            params.putAll(addParams);
+        }
+        try {
+            return OkHttpClientUtils.doGetDownFile(url, params, null, file);
         } catch (IOException e) {
             e.printStackTrace();
             throw new CommonException(500, e.getMessage(), "GET 微信接口 [" + url + "] 请求异常");

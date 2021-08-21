@@ -1,21 +1,22 @@
 package com.wpx.manager;
 
-import com.wpx.model.media.ArticleDTO;
-import com.wpx.model.media.MediaVO;
+import com.wpx.model.media.*;
 import com.wpx.util.JsonUtils;
-import com.wpx.model.media.MediaTypeEnum;
-import com.wpx.model.media.MediaUploadVO;
 import com.wpx.util.WechatRequestUtils;
 import com.wpx.util.WechatResultUtils;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static com.wpx.constant.WechatOaConstants.*;
 import static com.wpx.constant.WechatOaUrl.*;
-import static com.wpx.okhttp.constant.OkHttpConstants.MEDIA_TYPE_FILE;
+import static com.wpx.okhttp.constant.OkHttpConstants.*;
 
 /**
  * @author 不会飞的小鹏
@@ -48,11 +49,18 @@ public class WechatOaMediaManager {
      * @param mediaId
      * @return MediaVO
      */
-    public MediaVO getMedia(String accessToken, String mediaId, MediaTypeEnum mediaType) {
+    public MediaVO getMedia(String accessToken, String mediaId, MediaTypeEnum mediaType) throws IOException {
         Map<String, String> params = new HashMap<>(4);
         params.put(MEDIA_ID, mediaId);
-        String result = WechatRequestUtils.doGetWithAccessToken(GET_MEDIA_URL, accessToken, params);
-        return WechatResultUtils.wechatResultCheck(result, MediaVO.class);
+        if (MediaTypeEnum.IMAGE == mediaType) {
+            String result = WechatRequestUtils.doGetWithAccessToken(GET_MEDIA_URL, accessToken, params);
+            return WechatResultUtils.wechatResultCheck(result, MediaVO.class);
+        }
+        File directory = Files.createTempDirectory("media").toFile();
+        File file = WechatRequestUtils.doGetWithAccessToken(GET_MEDIA_URL, accessToken, params, directory);
+        MediaVO mediaVO = new MediaVO();
+        mediaVO.setMedia(file);
+        return mediaVO;
     }
 
     /**
@@ -82,6 +90,28 @@ public class WechatOaMediaManager {
         mediaBody.put(MEDIA, media);
         String body = JsonUtils.serializeObject(mediaBody);
         String result = WechatRequestUtils.doPostWithAccessToken(UPLOAD_IMG_MEDIA_URL, MEDIA_TYPE_FILE, accessToken, body);
+        return WechatResultUtils.wechatResultCheck(result, MediaUploadVO.class);
+    }
+
+    /**
+     * 添加其他永久素材
+     *
+     * @param accessToken
+     * @param mediaUploadDTO
+     * @return MediaVO
+     */
+    public MediaUploadVO uploadOtherMedia(String accessToken, MediaUploadDTO mediaUploadDTO) {
+        MediaTypeEnum mediaType = mediaUploadDTO.getMediaType();
+        Map<String, String> params = new HashMap<>(4);
+        params.put(TYPE, mediaType.getName());
+        File media = mediaUploadDTO.getMedia();
+        String body = JsonUtils.serializeObject(mediaUploadDTO);
+        MultipartBody multipartBody = new MultipartBody.Builder()
+                .setType(MEDIA_TYPE_FORM_DATA)
+                .addFormDataPart("media", media.getName(), RequestBody.create(MEDIA_TYPE_OCTET_STREAM, media))
+                .addFormDataPart("description", body)
+                .build();
+        String result = WechatRequestUtils.doPostWithAccessToken(UPLOAD_OTHER_MEDIA_URL, accessToken, multipartBody, params);
         return WechatResultUtils.wechatResultCheck(result, MediaUploadVO.class);
     }
 

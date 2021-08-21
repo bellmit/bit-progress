@@ -2,10 +2,16 @@ package com.wpx.okhttp.util;
 
 import com.wpx.okhttp.constant.OkHttpConstants;
 import com.wpx.util.CollectionUtils;
+import com.wpx.util.FilenameUtils;
+import com.wpx.util.StringUtils;
 import com.wpx.util.UrlUtils;
 import okhttp3.*;
+import okio.BufferedSink;
+import okio.Okio;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Map;
 import java.util.Objects;
 
@@ -110,6 +116,47 @@ public class OkHttpClientUtils {
         }
         Request request = builder.build();
         return client.newCall(request).execute().body().string();
+    }
+
+    /**
+     * 发起GET请求
+     *
+     * @param url  请求url
+     * @param params  请求参数
+     * @param headers  请求头
+     */
+    public static File doGetDownFile(String url, Map<String, String> params, Map<String, String> headers,
+                                     File directory) throws IOException {
+        OkHttpClient client = new OkHttpClient();
+        url = UrlUtils.urlJoinParam(url, params);
+        Request.Builder builder = new Request.Builder()
+                .get()
+                .url(url);
+        if (CollectionUtils.nonEmpty(headers)) {
+            builder.headers(Headers.of(headers));
+        }
+        Request request = builder.build();
+        Response response = client.newCall(request).execute();
+        String contentType = response.header("Content-Type");
+        if (contentType != null && contentType.startsWith("application/json")) {
+            // application/json; encoding=utf-8 下载媒体文件出错
+            throw new RuntimeException("下载媒体文件出错");
+        }
+        String fileName = OkHttpResponseProxy.getFileName(response);
+        if (StringUtils.isEmpty(fileName)) {
+            return null;
+        }
+
+        String baseName = FilenameUtils.getBaseName(fileName);
+        if (StringUtils.isEmpty(fileName) || baseName.length() < 3) {
+            baseName = String.valueOf(System.currentTimeMillis());
+        }
+        File file = File.createTempFile(baseName, "." + FilenameUtils.getExtension(fileName), directory);
+        try (BufferedSink sink = Okio.buffer(Okio.sink(file))) {
+            sink.writeAll(response.body().source());
+        }
+        file.deleteOnExit();
+        return file;
     }
 
 }
