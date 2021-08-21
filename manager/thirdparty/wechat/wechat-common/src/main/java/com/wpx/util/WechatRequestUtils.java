@@ -4,6 +4,7 @@ import com.wpx.exception.CommonException;
 import com.wpx.okhttp.constant.OkHttpConstants;
 import com.wpx.okhttp.util.OkHttpClientUtils;
 import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -69,6 +70,19 @@ public class WechatRequestUtils {
      * 统一post请求入口
      *
      * @param url         请求url
+     * @param accessToken 微信接口调用凭证
+     * @param body        请求数据
+     * @return 请求结果
+     * @throws IOException
+     */
+    public static String doPostWithAccessToken(String url, MediaType mediaType, String accessToken, String body) {
+        return doPostWithAccessToken(url, mediaType, accessToken, body, null);
+    }
+
+    /**
+     * 统一post请求入口
+     *
+     * @param url         请求url
      * @param mediaType   数据提交方式
      * @param accessToken 微信接口调用凭证
      * @param body        请求数据
@@ -78,23 +92,47 @@ public class WechatRequestUtils {
      */
     public static String doPostWithAccessToken(String url, MediaType mediaType, String accessToken, String body,
                                                Map<String, String> addParams) {
+        RequestBody requestBody = RequestBody.create(mediaType, body);
+        return doPostWithAccessToken(url, accessToken, requestBody, addParams);
+    }
+
+    /**
+     * 统一post请求入口
+     *
+     * @param url         请求url
+     * @param accessToken 微信接口调用凭证
+     * @param body        请求数据
+     * @param addParams   补充参数
+     * @return 请求结果
+     * @throws IOException
+     */
+    public static String doPostWithAccessToken(String url, String accessToken, RequestBody body,
+                                               Map<String, String> addParams) {
         HashMap<String, String> params = new HashMap<>(8);
         params.put(ACCESS_TOKEN, accessToken);
         if (CollectionUtils.nonEmpty(addParams)) {
             params.putAll(addParams);
         }
-        try {
-            return OkHttpClientUtils.doPost(url, body, mediaType, params, null);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new CommonException(500, e.getMessage(), "POST 微信接口 [" + url + "] 请求异常");
-        }
+        return doPost(url, body, params);
     }
 
     public static String doPost(String url, String body) {
+        MediaType mediaType = OkHttpConstants.MEDIA_TYPE_JSON;
+        RequestBody requestBody = RequestBody.create(mediaType, body);
+        return doPost(url, requestBody, null);
+    }
+
+    /**
+     * 统一post请求入口
+     *
+     * @param url         请求url
+     * @param body        请求数据
+     * @return 请求结果
+     * @throws IOException
+     */
+    public static String doPost(String url, RequestBody body, Map<String, String> params) {
         try {
-            MediaType mediaType = OkHttpConstants.MEDIA_TYPE_JSON;
-            return OkHttpClientUtils.doPost(url, body, mediaType);
+            return OkHttpClientUtils.doPost(url, body, params, null);
         } catch (IOException e) {
             e.printStackTrace();
             throw new CommonException(500, e.getMessage(), "POST 微信接口 [" + url + "] 请求异常");

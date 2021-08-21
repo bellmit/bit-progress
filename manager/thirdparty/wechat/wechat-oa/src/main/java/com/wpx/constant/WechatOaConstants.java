@@ -52,8 +52,13 @@ public class WechatOaConstants {
     public static final String TYPE = "type";
 
     /**
-     * type
+     * media_id
      */
     public static final String MEDIA_ID = "media_id";
+
+    /**
+     * articles
+     */
+    public static final String ARTICLES = "articles";
 
 }

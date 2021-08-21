@@ -88,6 +88,21 @@ public class WechatOaUrl {
      * GET
      */
     public static final String GET_MEDIA_URL = "https://api.weixin.qq.com/cgi-bin/media/get";
+    /**
+     * 添加永久素材url
+     * POST
+     */
+    public static final String ADD_NEWS_MEDIA_URL = "https://api.weixin.qq.com/cgi-bin/material/add_news";
+    /**
+     * 添加图文消息的图片素材url
+     * POST
+     */
+    public static final String UPLOAD_IMG_MEDIA_URL = "https://api.weixin.qq.com/cgi-bin/media/uploadimg";
+    /**
+     * 添加图文消息的图片素材url
+     * POST
+     */
+    public static final String UPLOAD_OTHER_MEDIA_URL = "https://api.weixin.qq.com/cgi-bin/material/add_material";
 
     /**
      * 创建菜单url

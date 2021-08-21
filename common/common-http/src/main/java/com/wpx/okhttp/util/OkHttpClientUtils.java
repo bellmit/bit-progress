@@ -16,10 +16,6 @@ import java.util.Objects;
  */
 public class OkHttpClientUtils {
 
-    public enum RequestBodyType {
-
-    }
-
     /**
      * 发起POST请求
      *
@@ -43,12 +39,23 @@ public class OkHttpClientUtils {
         if (Objects.isNull(mediaType)) {
             mediaType = OkHttpConstants.MEDIA_TYPE_JSON;
         }
+        RequestBody requestBody = RequestBody.create(mediaType, body);
+        return doPost(url, requestBody, params, headers);
+    }
+
+    /**
+     * 发起POST请求
+     *
+     * @param url  请求url
+     * @param body  请求内容
+     */
+    public static String doPost(String url, RequestBody body, Map<String, String> params,
+                                Map<String, String> headers) throws IOException {
         if (CollectionUtils.nonEmpty(params)) {
             url = UrlUtils.urlJoinParam(url, params);
         }
         OkHttpClient client = new OkHttpClient();
-        RequestBody requestBody = RequestBody.create(mediaType, body);
-        Request.Builder builder = new Request.Builder().url(url).post(requestBody);
+        Request.Builder builder = new Request.Builder().url(url).post(body);
         if (CollectionUtils.nonEmpty(headers)) {
             builder.headers(Headers.of(headers));
         }

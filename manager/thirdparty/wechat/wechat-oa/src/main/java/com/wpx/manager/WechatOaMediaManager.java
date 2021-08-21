@@ -1,5 +1,6 @@
 package com.wpx.manager;
 
+import com.wpx.model.media.ArticleDTO;
 import com.wpx.model.media.MediaVO;
 import com.wpx.util.JsonUtils;
 import com.wpx.model.media.MediaTypeEnum;
@@ -9,11 +10,11 @@ import com.wpx.util.WechatResultUtils;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.wpx.constant.WechatOaConstants.*;
-import static com.wpx.constant.WechatOaUrl.GET_MEDIA_URL;
-import static com.wpx.constant.WechatOaUrl.UPLOAD_MEDIA_URL;
+import static com.wpx.constant.WechatOaUrl.*;
 import static com.wpx.okhttp.constant.OkHttpConstants.MEDIA_TYPE_FILE;
 
 /**
@@ -45,13 +46,43 @@ public class WechatOaMediaManager {
      * 获取临时素材
      *
      * @param mediaId
-     * @return
+     * @return MediaVO
      */
-    public MediaVO getTemporaryMaterial(String accessToken, String mediaId, MediaTypeEnum mediaType) {
+    public MediaVO getMedia(String accessToken, String mediaId, MediaTypeEnum mediaType) {
         Map<String, String> params = new HashMap<>(4);
         params.put(MEDIA_ID, mediaId);
         String result = WechatRequestUtils.doGetWithAccessToken(GET_MEDIA_URL, accessToken, params);
         return WechatResultUtils.wechatResultCheck(result, MediaVO.class);
+    }
+
+    /**
+     * 添加永久图文消息素材
+     *
+     * @param accessToken
+     * @param articles
+     * @return MediaVO
+     */
+    public MediaUploadVO addNewsMediaUrl(String accessToken, List<ArticleDTO> articles) {
+        Map<String, String> params = new HashMap<>(4);
+        params.put(ARTICLES, JsonUtils.serializeObject(articles));
+        String body = JsonUtils.serializeObject(params);
+        String result = WechatRequestUtils.doPostWithAccessToken(ADD_NEWS_MEDIA_URL, accessToken, body);
+        return WechatResultUtils.wechatResultCheck(result, MediaUploadVO.class);
+    }
+
+    /**
+     * 添加永久图文消息里的图片
+     *
+     * @param accessToken
+     * @param media
+     * @return MediaVO
+     */
+    public MediaUploadVO uploadImgMedia(String accessToken, File media) {
+        Map<String, Object> mediaBody = new HashMap<>(4);
+        mediaBody.put(MEDIA, media);
+        String body = JsonUtils.serializeObject(mediaBody);
+        String result = WechatRequestUtils.doPostWithAccessToken(UPLOAD_IMG_MEDIA_URL, MEDIA_TYPE_FILE, accessToken, body);
+        return WechatResultUtils.wechatResultCheck(result, MediaUploadVO.class);
     }
 
 }
