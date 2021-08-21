@@ -3,19 +3,40 @@ package com.wpx.model.media;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.WechatResult;
 
+import java.io.File;
+
 /**
  * @author 不会飞的小鹏
  */
 public class MediaVO extends WechatResult {
 
-    private String type;
+    private File media;
 
-    @JsonProperty("media_id")
-    private String mediaId;
+    @JsonProperty("video_url")
+    private String videoUrl;
 
-    @JsonProperty("created_at")
-    private Integer createdAt;
+    public File getMedia() {
+        return media;
+    }
 
-    private String url;
+    public void setMedia(File media) {
+        this.media = media;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "MediaVO{" +
+                "media=" + media +
+                ", videoUrl='" + videoUrl + '\'' +
+                '}';
+    }
 
 }

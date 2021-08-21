@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationContext;
 
 /**
  * @author wpx
- **/
+ */
 public class BeanManager {
 
     private static ApplicationContext applicationContext = null;
