@@ -1,6 +1,7 @@
-package com.wpx.model.media;
+package com.wpx.model.media.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.wpx.model.media.MediaTypeEnum;
 
 import java.io.File;
 

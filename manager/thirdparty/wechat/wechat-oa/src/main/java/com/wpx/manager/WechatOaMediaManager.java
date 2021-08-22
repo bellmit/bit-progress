@@ -1,6 +1,12 @@
 package com.wpx.manager;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.wpx.model.WechatResult;
 import com.wpx.model.media.*;
+import com.wpx.model.media.dto.ArticleDTO;
+import com.wpx.model.media.dto.MediaQueryDTO;
+import com.wpx.model.media.dto.UpdateArticleDTO;
+import com.wpx.model.media.vo.*;
 import com.wpx.util.JsonUtils;
 import com.wpx.util.WechatRequestUtils;
 import com.wpx.util.WechatResultUtils;
@@ -113,6 +119,58 @@ public class WechatOaMediaManager {
                 .build();
         String result = WechatRequestUtils.doPostWithAccessToken(UPLOAD_OTHER_MEDIA_URL, accessToken, multipartBody, params);
         return WechatResultUtils.wechatResultCheck(result, MediaUploadVO.class);
+    }
+
+    /**
+     * 删除永久素材
+     *
+     * @param accessToken
+     * @param mediaId     要获取的素材的media_id
+     * @return WechatResult
+     */
+    public WechatResult deleteMedia(String accessToken, String mediaId) {
+        HashMap<String, Object> params = new HashMap<>(4);
+        params.put(MEDIA_ID, mediaId);
+        String body = JsonUtils.serializeObject(params);
+        String result = WechatRequestUtils.doPostWithAccessToken(DELETE_MEDIA_URL, accessToken, body);
+        return WechatResultUtils.wechatResultCheck(result);
+    }
+
+    /**
+     * 修改图文素材
+     *
+     * @param accessToken
+     * @param updateArticleDTO 修改图文素材的DTO
+     * @return WechatResult
+     */
+    public WechatResult updateMedia(String accessToken, UpdateArticleDTO updateArticleDTO) {
+        String body = JsonUtils.serializeObject(updateArticleDTO);
+        String result = WechatRequestUtils.doPostWithAccessToken(UPDATE_MEDIA_URL, accessToken, body);
+        return WechatResultUtils.wechatResultCheck(result);
+    }
+
+    /**
+     * 修改图文素材
+     *
+     * @param accessToken
+     * @return WechatResult
+     */
+    public MediaCountVO countMedia(String accessToken) {
+        String result = WechatRequestUtils.doGetWithAccessToken(COUNT_MEDIA_URL, accessToken);
+        return WechatResultUtils.wechatResultCheck(result, MediaCountVO.class);
+    }
+
+    /**
+     * 获取素材列表
+     *
+     * @param accessToken
+     * @param mediaQueryDTO
+     * @return MediaListVO
+     */
+    public MediaListVO getPermanentPicMaterials(String accessToken, MediaQueryDTO mediaQueryDTO) {
+        String body = JsonUtils.serializeObject(mediaQueryDTO);
+        String result = WechatRequestUtils.doPostWithAccessToken(LIST_MEDIA_URL, accessToken, body);
+        return WechatResultUtils.wechatResultCheck(result, MediaListVO.class);
     }
 
 }

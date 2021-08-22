@@ -1,7 +1,8 @@
-package com.wpx.model.media;
+package com.wpx.model.media.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.WechatResult;
+import com.wpx.model.media.MediaTypeEnum;
 
 /**
  * @author 不会飞的小鹏

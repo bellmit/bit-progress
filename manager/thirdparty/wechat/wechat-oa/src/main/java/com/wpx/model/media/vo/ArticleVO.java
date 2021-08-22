@@ -1,11 +1,11 @@
-package com.wpx.model.media;
+package com.wpx.model.media.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏 
  */
-public class ArticleDTO {
+public class ArticleVO {
 
     /**
      * 图文消息的标题
@@ -19,6 +19,18 @@ public class ArticleDTO {
     private String thumbMediaId;
 
     /**
+     * 是否显示封面，0为false，即不显示，1为true，即显示
+     */
+    @JsonProperty("show_cover_pic")
+    private String showCoverPic;
+
+    /**
+     * 封面图片地址
+     */
+    @JsonProperty("thumb_url")
+    private String thumbUrl;
+
+    /**
      * 作者
      */
     private String author;
@@ -29,44 +41,20 @@ public class ArticleDTO {
     private String digest;
 
     /**
-     * 是否显示封面，0为false，即不显示，1为true，即显示
-     */
-    @JsonProperty("show_cover_pic")
-    private String showCoverPic;
-
-    /**
      * 图文消息的具体内容，支持HTML标签，必须少于2万字符，小于1M，且此处会去除JS
      */
     private String content;
+
+    /**
+     * 图文页的URL(高级群发不可用外链)
+     */
+    private String url;
 
     /**
      * 图文消息的原文地址，即点击“阅读原文”后的URL
      */
     @JsonProperty("content_source_url")
     private String contentSourceUrl;
-
-    /**
-     * 封面图片地址
-     */
-    @JsonProperty("thumb_url")
-    private String thumbUrl;
-
-    /**
-     * Uint32 是否打开评论，0不打开，1打开
-     */
-    @JsonProperty("need_open_comment")
-    private Integer needOpenComment;
-
-    /**
-     * Uint32 是否粉丝才可评论，0所有人可评论，1粉丝才可评论
-     */
-    @JsonProperty("only_fans_can_comment")
-    private Integer onlyFansCanComment;
-
-    /**
-     * 图文页的URL(高级群发不可用外链)
-     */
-    private String url;
 
     public String getTitle() {
         return title;
@@ -142,7 +130,7 @@ public class ArticleDTO {
 
     @Override
     public String toString() {
-        return "ArticleDTO{" +
+        return "ArticleVO{" +
                 "title='" + title + '\'' +
                 ", thumbMediaId='" + thumbMediaId + '\'' +
                 ", showCoverPic='" + showCoverPic + '\'' +

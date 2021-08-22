@@ -103,6 +103,26 @@ public class WechatOaUrl {
      * POST
      */
     public static final String UPLOAD_OTHER_MEDIA_URL = "https://api.weixin.qq.com/cgi-bin/material/add_material";
+    /**
+     * 删除永久素材url
+     * POST
+     */
+    public static final String DELETE_MEDIA_URL = "https://api.weixin.qq.com/cgi-bin/material/del_material";
+    /**
+     * 修改永久素材url
+     * POST
+     */
+    public static final String UPDATE_MEDIA_URL = "https://api.weixin.qq.com/cgi-bin/material/update_news";
+    /**
+     * 获取永久素材总数url
+     * GET
+     */
+    public static final String COUNT_MEDIA_URL = "https://api.weixin.qq.com/cgi-bin/material/get_materialcount";
+    /**
+     * 获取永久素材列表url
+     * GET
+     */
+    public static final String LIST_MEDIA_URL = "https://api.weixin.qq.com/cgi-bin/material/batchget_material";
 
     /**
      * 创建菜单url
