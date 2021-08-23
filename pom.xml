@@ -131,7 +131,7 @@
                 <version>${javax.ws.rs.version}</version>
             </dependency>
 
-            <!-- swagger -->
+            <!-- Swagger -->
             <!-- swagger-annotations-1.5.20和swagger-models-1.5.20有bug -->
             <dependency>
                 <groupId>io.springfox</groupId>
@@ -165,21 +165,21 @@
                 <version>${swagger.version}</version>
             </dependency>
 
-            <!-- knife4j -->
+            <!-- Knife4j -->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
 
-            <!-- okhttp -->
+            <!-- OkHttp -->
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>
                 <version>${okhttp.version}</version>
             </dependency>
 
-            <!-- quartz -->
+            <!-- Quartz -->
             <dependency>
                 <groupId>org.quartz-scheduler</groupId>
                 <artifactId>quartz</artifactId>

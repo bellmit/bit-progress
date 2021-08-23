@@ -1,6 +1,5 @@
 package com.wpx.manager;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wpx.model.WechatResult;
 import com.wpx.model.media.*;
 import com.wpx.model.media.dto.ArticleDTO;
