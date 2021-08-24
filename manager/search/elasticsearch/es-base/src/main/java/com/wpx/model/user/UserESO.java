@@ -1,5 +1,6 @@
-package com.wpx.model.app;
+package com.wpx.model.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
@@ -8,26 +9,39 @@ import java.time.LocalDateTime;
 
 /**
  * @author 不会飞的小鹏
+ * created on 2021-08-13
  */
-@Document(indexName = "app")
-public class AppEs implements Serializable {
+@Document(indexName = "user")
+public class UserESO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    private Long userId;
+
     private Long appId;
 
     private Integer appType;
 
     private String appSign;
 
-    private String appName;
+    private Boolean flag;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
 
     private Boolean deleted;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public Long getAppId() {
         return appId;
@@ -53,12 +67,12 @@ public class AppEs implements Serializable {
         this.appSign = appSign;
     }
 
-    public String getAppName() {
-        return appName;
+    public Boolean getFlag() {
+        return flag;
     }
 
-    public void setAppName(String appName) {
-        this.appName = appName;
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
     }
 
     public LocalDateTime getCreateTime() {
