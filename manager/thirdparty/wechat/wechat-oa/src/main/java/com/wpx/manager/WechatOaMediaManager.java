@@ -1,7 +1,7 @@
 package com.wpx.manager;
 
 import com.wpx.model.WechatResult;
-import com.wpx.model.media.*;
+import com.wpx.model.media.MediaTypeEnum;
 import com.wpx.model.media.dto.ArticleDTO;
 import com.wpx.model.media.dto.MediaQueryDTO;
 import com.wpx.model.media.dto.UpdateArticleDTO;
