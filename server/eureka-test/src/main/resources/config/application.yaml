@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: eureka-test
+  cloud:
+    server-token:
+      eureka-pro: eureka-pro
 eureka:
   client:
     service-url:

@@ -18,6 +18,7 @@
         <module>feign-base-web</module>
         <module>feign-scheduler</module>
         <module>feign-base-cms</module>
+        <module>feign-eureka-pro</module>
     </modules>
 
 </project>
