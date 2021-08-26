@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * @author 不会飞的小鹏
  */
-@FeignClient(name = "eureka-pro", path = "rest")
+@FeignClient(name = "eureka-pro", path = "rest", fallbackFactory = FeignEurekaProServiceFallback.class)
 public interface FeignEurekaProService {
 
     @GetMapping("test")

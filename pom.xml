@@ -99,6 +99,11 @@
                 <artifactId>spring-cloud-starter-eureka</artifactId>
                 <version>${spring.cloud.netflix.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-hystrix</artifactId>
+                <version>${spring.cloud.netflix.version}</version>
+            </dependency>
 
             <!-- MyBatis Plus -->
             <dependency>
