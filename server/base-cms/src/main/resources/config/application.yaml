@@ -74,8 +74,8 @@ spring:
       location: ${user.dir}/tmp
 
 feign:
-  sentinel:
-    enabled: false
+  circuitbreaker:
+    enabled: true
   okhttp:
     enabled: true
   client:

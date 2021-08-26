@@ -17,6 +17,7 @@ spring:
     sentinel:
       transport:
         dashboard: 127.0.0.1:8850
+      eager: true
 dubbo:
   application:
     id: ${spring.application.name}

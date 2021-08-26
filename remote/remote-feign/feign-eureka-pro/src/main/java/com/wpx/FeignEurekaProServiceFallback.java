@@ -18,6 +18,11 @@ public class FeignEurekaProServiceFallback implements FallbackFactory<FeignEurek
      */
     @Override
     public FeignEurekaProService create(Throwable cause) {
-        return null;
+        return new FeignEurekaProService() {
+            @Override
+            public ResultVO<Long> get(Long id) {
+                return null;
+            }
+        };
     }
 }

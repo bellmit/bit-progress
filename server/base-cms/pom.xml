@@ -51,6 +51,11 @@
             <artifactId>dubbo-gateway-cms</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.wpx</groupId>
+            <artifactId>sentinel</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <!-- 验证码 -->
         <dependency>

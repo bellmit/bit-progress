@@ -29,7 +29,7 @@
         </dependency>
         <dependency>
             <groupId>com.wpx</groupId>
-            <artifactId>hystrix</artifactId>
+            <artifactId>sentinel</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
