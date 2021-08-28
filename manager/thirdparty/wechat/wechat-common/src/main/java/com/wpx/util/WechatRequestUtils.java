@@ -45,6 +45,18 @@ public class WechatRequestUtils {
         if (CollectionUtils.nonEmpty(addParams)) {
             params.putAll(addParams);
         }
+        return doGet(url, params);
+    }
+
+    /**
+     * 统一get请求入口
+     *
+     * @param url    请求url
+     * @param params 请求参数
+     * @return 请求结果
+     * @throws IOException
+     */
+    public static String doGet(String url, Map<String, String> params) {
         try {
             return OkHttpClientUtils.doGetWithParam(url, params);
         } catch (IOException e) {
@@ -148,8 +160,8 @@ public class WechatRequestUtils {
     /**
      * 统一post请求入口
      *
-     * @param url         请求url
-     * @param body        请求数据
+     * @param url  请求url
+     * @param body 请求数据
      * @return 请求结果
      * @throws IOException
      */

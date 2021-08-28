@@ -37,4 +37,14 @@ public class NumberUtils {
      */
     public static final int LONG_MINUS_ONE = -1;
 
+    /**
+     * int类型的200
+     */
+    public static final int INT_TWO_HUNDRED = 200;
+
+    /**
+     * 请求成功的状态码
+     */
+    public static final int REQUEST_SUCCESS = INT_TWO_HUNDRED;
+
 }

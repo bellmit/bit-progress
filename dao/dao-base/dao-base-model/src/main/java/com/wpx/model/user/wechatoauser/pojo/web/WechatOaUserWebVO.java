@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @author 不会飞的小鹏
- * @since 2021-08-14
+ * create on 2021-08-14
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -37,7 +37,7 @@ public class WechatOaUserWebVO implements Serializable {
     private String openId;
 
     @ApiModelProperty(value = "微信用户唯一标识")
-    private String unionIdId;
+    private String unionId;
 
     @ApiModelProperty(value = "手机号码")
     private String phone;

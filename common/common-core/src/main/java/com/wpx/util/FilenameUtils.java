@@ -11,7 +11,7 @@ public class FilenameUtils {
 
     /**
      * The extension separator character.
-     * @since 1.4
+     * create on 1.4
      */
     public static final char EXTENSION_SEPARATOR = '.';
 

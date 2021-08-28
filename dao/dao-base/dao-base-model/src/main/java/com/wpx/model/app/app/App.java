@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 
 import java.io.Serializable;
 
+import com.wpx.model.app.app.envm.AppTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -33,7 +34,7 @@ public class App implements Serializable {
     private Long appId;
 
     @ApiModelProperty(value = "应用类型")
-    private Integer appType;
+    private AppTypeEnum appType;
 
     @ApiModelProperty(value = "应用标识")
     private String appSign;

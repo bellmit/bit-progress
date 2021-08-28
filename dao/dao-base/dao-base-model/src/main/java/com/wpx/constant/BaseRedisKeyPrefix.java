@@ -58,4 +58,19 @@ public class BaseRedisKeyPrefix {
         return "ApplicationTopicMessage:";
     }
 
+    /**
+     * 获取accessToken的key
+     * value
+     */
+    public static String accessTokenKey(String appSign) {
+        return "AccessTokenKey:" + appSign;
+    }
+
+    /**
+     * 微信应用信息存放key
+     * hash hashKey：appSign
+     */
+    public static String wechatAppKey() {
+        return "WechatAppKey:";
+    }
 }

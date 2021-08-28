@@ -41,5 +41,11 @@ public class BaseMessageCodes {
     public static final String WECHATOAUSER_SAVE_EXCEPTION_MESSAGE = "微信公众号用户信息保存失败";
     public static final String WECHATOAUSER_UPDATE_EXCEPTION_MESSAGE = "微信公众号用户信息更新失败";
     public static final String WECHATOAUSER_DELETE_EXCEPTION_MESSAGE = "微信公众号用户信息删除失败";
+    public static final String WECHATAPP_NOT_EXIST_EXCEPTION_MESSAGE = "微信应用信息不存在";
+    public static final String WECHATAPP_SAVE_EXCEPTION_MESSAGE = "微信应用信息保存失败";
+    public static final String WECHATAPP_UPDATE_EXCEPTION_MESSAGE = "微信应用信息更新失败";
+    public static final String WECHATAPP_DELETE_EXCEPTION_MESSAGE = "微信应用信息删除失败";
+    public static final String UNION_ID_EMPTY_EXCEPTION_MESSAGE = "微信用户unionId为空";
+    public static final String OPENID_ID_EMPTY_EXCEPTION_MESSAGE = "微信用户openId为空";
 
 }

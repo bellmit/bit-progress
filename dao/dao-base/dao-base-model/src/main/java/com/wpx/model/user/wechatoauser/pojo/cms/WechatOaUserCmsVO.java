@@ -36,7 +36,7 @@ public class WechatOaUserCmsVO implements Serializable {
     private String openId;
 
     @ApiModelProperty(value = "微信用户唯一标识")
-    private String unionIdId;
+    private String unionId;
 
     @ApiModelProperty(value = "手机号码")
     private String phone;

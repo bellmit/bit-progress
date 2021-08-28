@@ -12,12 +12,11 @@ feign:
   client:
     config:
       default:
-        connectTimeout: 100
+        connectTimeout: 1000
         readTimeout: 4000
 eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
 hystrix:
-  command.default.execution.isolation.thread.timeoutInMilliseconds: 2000
-  command.FeignEurekaProService#get(Long).execution.isolation.thread.timeoutInMilliseconds: 4000
+  command.default.execution.isolation.thread.timeoutInMilliseconds: 3000

@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 
+import com.wpx.model.app.app.envm.AppTypeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -22,7 +23,7 @@ public class AppCmsAddDTO implements Serializable {
 
     @ApiModelProperty(value = "应用类型")
     @NotNull(message = "应用类型不能为空")
-    private Integer appType;
+    private AppTypeEnum appType;
 
     @ApiModelProperty(value = "应用标识")
     @NotBlank(message = "应用标识不能为空")

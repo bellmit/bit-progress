@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wpx.exception.BaseExceptionMessage;
 import com.wpx.mapper.user.UserMapper;
+import com.wpx.model.app.app.envm.AppTypeEnum;
 import com.wpx.model.user.user.User;
 import com.wpx.model.user.user.pojo.web.UserWebVO;
 import com.wpx.util.BeanUtils;
@@ -73,4 +74,21 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         return list(lambda);
     }
 
+    /**
+     * 新增用户
+     *
+     * @param appId
+     * @param appSign
+     * @param appType
+     */
+    @Transactional(rollbackFor = RuntimeException.class)
+    public Long addUser(Long appId, String appSign, AppTypeEnum appType) {
+        User user = new User();
+        user.setAppId(appId)
+                .setAppSign(appSign)
+                .setAppType(appType)
+                .setFlag(false);
+        Assert.isTrue(save(user), BaseExceptionMessage.USER_SAVE_EXCEPTION);
+        return user.getUserId();
+    }
 }

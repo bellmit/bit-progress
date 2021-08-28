@@ -1,9 +1,9 @@
 package com.wpx.processor;
 
-import com.wpx.util.JsonUtils;
 import com.wpx.constant.WechatUrl;
 import com.wpx.model.AccessToken;
 import com.wpx.okhttp.util.OkHttpClientUtils;
+import com.wpx.util.WechatRequestUtils;
 import com.wpx.util.WechatResultUtils;
 
 import java.io.IOException;
@@ -24,12 +24,12 @@ public class WechatProcessor {
      * @param appId
      * @param appSecret
      */
-    public static AccessToken getAccessToken(String appId, String appSecret) throws IOException {
+    public static AccessToken getAccessToken(String appId, String appSecret) {
         Map<String, String> params = new HashMap<>(8);
         params.put(GRANT_TYPE, ACCESS_TOKEN_CLIENT_CREDENTIAL);
         params.put(APP_ID, appId);
         params.put(APP_SECRET, appSecret);
-        String result = OkHttpClientUtils.doGetWithParam(WechatUrl.ACCESS_TOKEN_URL, params);
+        String result = WechatRequestUtils.doGet(WechatUrl.ACCESS_TOKEN_URL, params);
         return WechatResultUtils.wechatResultCheck(result, AccessToken.class);
     }
 
