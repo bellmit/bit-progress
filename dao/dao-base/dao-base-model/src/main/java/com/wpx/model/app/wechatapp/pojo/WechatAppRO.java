@@ -35,7 +35,7 @@ public class WechatAppRO implements Serializable {
     private String appName;
 
     @ApiModelProperty(value = "微信appid")
-    private String appid;
+    private String wxAppId;
 
     @ApiModelProperty(value = "微信app_secret")
     private String appSecret;

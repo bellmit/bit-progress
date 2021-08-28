@@ -40,7 +40,7 @@ public class WechatAppCmsAddDTO implements Serializable {
 
     @ApiModelProperty(value = "微信appid")
     @NotBlank(message = "微信appid不能为空")
-    private String appid;
+    private String wxAppId;
 
     @ApiModelProperty(value = "微信app_secret")
     @NotBlank(message = "微信app_secret不能为空")

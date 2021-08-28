@@ -2,11 +2,9 @@ package com.wpx.service;
 
 import com.wpx.constant.WechatLoginUrl;
 import com.wpx.model.JsCode2SessionResult;
-import com.wpx.okhttp.util.OkHttpClientUtils;
-import com.wpx.util.WechatRequestUtils;
-import com.wpx.util.WechatResultUtils;
+import com.wpx.model.PhoneResult;
+import com.wpx.util.*;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +33,19 @@ public class WechatLoginService {
         params.put(GRANT_TYPE, AUTHORIZATION_CODE);
         String result = WechatRequestUtils.doGet(WechatLoginUrl.JS_CODE_TO_SESSION_URL, params);
         return WechatResultUtils.wechatResultCheck(result, JsCode2SessionResult.class);
+    }
+
+    /**
+     * 获取微信用户加密的手机信息
+     *
+     * @param encryptedPhoneData 加密后的数据
+     * @param iv                 AES加密的位偏移值
+     * @param sessionKey         code2session中获取的sessionKey
+     * @return 解密后的用户手机数据
+     */
+    public PhoneResult getPhoneData(String encryptedPhoneData, String iv, String sessionKey) {
+        String data = WechatDecryptUtils.decrypt(encryptedPhoneData, sessionKey, iv);
+        return StringUtils.isEmpty(data) ? null : JsonUtils.deserializeObject(data, PhoneResult.class);
     }
 
 }

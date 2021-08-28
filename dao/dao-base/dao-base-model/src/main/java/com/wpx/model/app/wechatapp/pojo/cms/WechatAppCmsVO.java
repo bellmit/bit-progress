@@ -45,15 +45,9 @@ public class WechatAppCmsVO implements Serializable {
     private String appName;
 
     @ApiModelProperty(value = "微信appid")
-    private String appid;
+    private String wxAppId;
 
     @ApiModelProperty(value = "微信app_secret")
     private String appSecret;
-
-    @ApiModelProperty(value = "创建时间", dataType = "java.lang.Long")
-    private LocalDateTime createTime;
-
-    @ApiModelProperty(value = "更新时间", dataType = "java.lang.Long")
-    private LocalDateTime updateTime;
 
 }

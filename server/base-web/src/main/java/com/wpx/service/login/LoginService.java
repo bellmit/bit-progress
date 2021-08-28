@@ -56,7 +56,7 @@ public class LoginService {
         Long appId = wechatApp.getAppId();
         // 解析jsCode
         String jsCode = wechatLoginDTO.getJsCode();
-        JsCode2SessionResult result = WechatLoginService.jsCode2Session(jsCode, wechatApp.getAppid(), wechatApp.getAppSecret());
+        JsCode2SessionResult result = WechatLoginService.jsCode2Session(jsCode, wechatApp.getWxAppId(), wechatApp.getAppSecret());
         String openId = result.getOpenId();
         String unionId = result.getUnionId();
         Assert.isNotEmpty(unionId, BaseExceptionMessage.UNION_ID_EMPTY_EXCEPTION);
