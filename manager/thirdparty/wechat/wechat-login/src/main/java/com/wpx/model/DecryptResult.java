@@ -3,7 +3,7 @@ package com.wpx.model;
 /**
  * @author 不会飞的小鹏
  */
-public class PhoneResult {
+public class DecryptResult {
 
     /**
      * 用户绑定的手机号（国外手机号会有区号）

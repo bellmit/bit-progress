@@ -56,6 +56,11 @@ public enum ExceptionMessage implements IExceptionMessage {
      */
     URL_EMPTY_EXCEPTION(1010, URL_EMPTY_EXCEPTION_CODE, URL_EMPTY_EXCEPTION_MESSAGE),
 
+    /**
+     * 获取锁失败
+     */
+    ACQUIRE_LOCK_EXCEPTION(1011, ACQUIRE_LOCK_EXCEPTION_CODE, ACQUIRE_LOCK_EXCEPTION_MESSAGE),
+
     ;
 
     /**

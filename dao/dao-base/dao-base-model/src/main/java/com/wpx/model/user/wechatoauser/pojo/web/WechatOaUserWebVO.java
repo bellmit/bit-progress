@@ -54,4 +54,7 @@ public class WechatOaUserWebVO implements Serializable {
     @ApiModelProperty(value = "所在地")
     private String location;
 
+    @ApiModelProperty(value = "微信用户登录获取的会话密钥，每次登录会刷新")
+    private String sessionKey;
+
 }

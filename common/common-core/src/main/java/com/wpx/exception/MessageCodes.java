@@ -21,4 +21,6 @@ public class MessageCodes {
 
     public static final String URL_EMPTY_EXCEPTION_MESSAGE = "Url为空";
 
+    public static final String ACQUIRE_LOCK_EXCEPTION_MESSAGE = "获取锁失败";
+
 }

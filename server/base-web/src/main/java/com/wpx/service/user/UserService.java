@@ -2,6 +2,7 @@ package com.wpx.service.user;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.additional.query.impl.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wpx.exception.BaseExceptionMessage;
 import com.wpx.mapper.user.UserMapper;
@@ -91,4 +92,18 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         Assert.isTrue(save(user), BaseExceptionMessage.USER_SAVE_EXCEPTION);
         return user.getUserId();
     }
+
+    /**
+     * 获取用户的应用类型
+     *
+     * @param userId
+     */
+    public AppTypeEnum getUserAppTypeById(Long userId) {
+        LambdaQueryChainWrapper<User> query = lambdaQuery();
+        query.select(User::getAppType).eq(User::getUserId, userId);
+        User user = getOne(query);
+        Assert.notNull(user, BaseExceptionMessage.USER_NOT_EXIST_EXCEPTION);
+        return user.getAppType();
+    }
+
 }

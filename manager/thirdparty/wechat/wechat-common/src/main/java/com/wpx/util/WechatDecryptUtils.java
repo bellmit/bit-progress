@@ -29,8 +29,9 @@ public class WechatDecryptUtils {
     public static String decrypt(String encryptedData, String key, String iv) {
         Assert.isNotEmpty(encryptedData, WechatExceptionMessage.ENCRYPTED_DATA_EMPTY_EXCEPTION);
         //待解密数据,加密秘钥,偏移量
-        byte[] dataByte = Base64Utils.decode(encryptedData.getBytes()), keyByte = Base64Utils.decode(key.getBytes()),
-                ivByte = Base64Utils.decode(iv.getBytes());
+        byte[] dataByte = Base64Utils.decode(encryptedData.getBytes());
+        byte[] keyByte = Base64Utils.decode(key.getBytes());
+        byte[] ivByte = Base64Utils.decode(iv.getBytes());
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             SecretKeySpec spec = new SecretKeySpec(keyByte, "AES");

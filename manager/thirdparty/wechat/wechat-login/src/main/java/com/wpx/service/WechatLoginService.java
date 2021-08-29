@@ -2,7 +2,7 @@ package com.wpx.service;
 
 import com.wpx.constant.WechatLoginUrl;
 import com.wpx.model.JsCode2SessionResult;
-import com.wpx.model.PhoneResult;
+import com.wpx.model.DecryptResult;
 import com.wpx.util.*;
 
 import java.util.HashMap;
@@ -20,9 +20,9 @@ public class WechatLoginService {
     /**
      * 微信登录
      *
-     * @param appId  微信下发的appId
-     * @param appSecret  微信下发的secret
-     * @param jsCode  临时登录凭证 code
+     * @param appId     微信下发的appId
+     * @param appSecret 微信下发的secret
+     * @param jsCode    临时登录凭证 code
      * @return JsCode2SessionResult
      */
     public static JsCode2SessionResult jsCode2Session(String appId, String appSecret, String jsCode) {
@@ -38,14 +38,14 @@ public class WechatLoginService {
     /**
      * 获取微信用户加密的手机信息
      *
-     * @param encryptedPhoneData 加密后的数据
-     * @param iv                 AES加密的位偏移值
-     * @param sessionKey         code2session中获取的sessionKey
+     * @param encryptedData 加密后的数据
+     * @param iv            AES加密的位偏移值
+     * @param sessionKey    code2session中获取的sessionKey
      * @return 解密后的用户手机数据
      */
-    public PhoneResult getPhoneData(String encryptedPhoneData, String iv, String sessionKey) {
-        String data = WechatDecryptUtils.decrypt(encryptedPhoneData, sessionKey, iv);
-        return StringUtils.isEmpty(data) ? null : JsonUtils.deserializeObject(data, PhoneResult.class);
+    public static DecryptResult encryptedWechatData(String encryptedData, String iv, String sessionKey) {
+        String data = WechatDecryptUtils.decrypt(encryptedData, sessionKey, iv);
+        return StringUtils.isEmpty(data) ? null : JsonUtils.deserializeObject(data, DecryptResult.class);
     }
 
 }

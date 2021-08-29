@@ -41,9 +41,6 @@ public class WechatLoginDTO implements Serializable {
     private Boolean authorized;
 
     @ApiModelProperty(value = "用户头像")
-    private String phone;
-
-    @ApiModelProperty(value = "用户头像")
     private String avatarUrl;
 
     @ApiModelProperty(value = "用户昵称")
@@ -60,4 +57,5 @@ public class WechatLoginDTO implements Serializable {
 
     @ApiModelProperty(value = "城市")
     private String city;
+
 }

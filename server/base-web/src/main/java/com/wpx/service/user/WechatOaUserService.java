@@ -8,11 +8,15 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import com.wpx.exception.BaseExceptionMessage;
 import com.wpx.mapper.user.WechatOaUserMapper;
+import com.wpx.model.DecryptResult;
 import com.wpx.model.app.app.envm.AppTypeEnum;
 import com.wpx.model.user.login.WechatLoginDTO;
+import com.wpx.model.user.wechatappletuser.WechatAppletUser;
 import com.wpx.model.user.wechatoauser.WechatOaUser;
+import com.wpx.service.WechatLoginService;
 import com.wpx.util.Assert;
 import com.wpx.util.CollectionUtils;
+import com.wpx.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -89,7 +93,7 @@ public class WechatOaUserService extends ServiceImpl<WechatOaUserMapper, WechatO
      * @return userId
      */
     public Long updateUser(WechatLoginDTO wechatLoginDTO, String openId, String unionId, Long wechatUserId,
-                           String appSign, Long appId) {
+                           String appSign, Long appId, String sessionKey) {
 
         LambdaQueryChainWrapper<WechatOaUser> query = lambdaQuery().eq(WechatOaUser::getOpenId, openId)
                 .eq(WechatOaUser::getUnionId, unionId)
@@ -100,7 +104,6 @@ public class WechatOaUserService extends ServiceImpl<WechatOaUserMapper, WechatO
         String nickname = wechatLoginDTO.getNickname();
         String avatarUrl = wechatLoginDTO.getAvatarUrl();
         Integer gender = wechatLoginDTO.getGender();
-        String phone = wechatLoginDTO.getPhone();
         String location = wechatLoginDTO.getCountry() + wechatLoginDTO.getProvince() + wechatLoginDTO.getCity();
         Boolean authorized = wechatLoginDTO.getAuthorized();
         // 微信公众号用户为空，则在tb_user表也为空
@@ -113,23 +116,45 @@ public class WechatOaUserService extends ServiceImpl<WechatOaUserMapper, WechatO
                     .setAppSign(appSign)
                     .setOpenId(openId)
                     .setUnionId(unionId)
-                    .setPhone(phone)
                     .setNickname(nickname)
                     .setAvatar(avatarUrl)
                     .setGender(gender)
                     .setLocation(location);
             Assert.isTrue(save(wechatOaUser), BaseExceptionMessage.WECHATOAUSER_SAVE_EXCEPTION);
         } else {
+            LambdaUpdateChainWrapper<WechatOaUser> update = lambdaUpdate();
+            update.set(WechatOaUser::getSessionKey, sessionKey);
             if (authorized) {
-                LambdaUpdateChainWrapper<WechatOaUser> update = lambdaUpdate();
                 update.set(WechatOaUser::getLocation, location)
-                        .set(WechatOaUser::getPhone, phone)
                         .set(WechatOaUser::getNickname, nickname)
                         .set(WechatOaUser::getAvatar, avatarUrl)
                         .set(WechatOaUser::getGender, gender);
-                update(update);
             }
+            update(update);
         }
         return wechatOaUser.getUserId();
     }
+
+    /**
+     * 更新用户的手机号码
+     *
+     * @param encryptedData
+     * @param iv
+     * @param userId
+     */
+    public void updatePhone(String encryptedData, String iv, Long userId) {
+        LambdaQueryChainWrapper<WechatOaUser> query = lambdaQuery().select(WechatOaUser::getSessionKey)
+                .eq(WechatOaUser::getUserId, userId);
+        WechatOaUser wechatOaUser = getOne(query);
+        Assert.notNull(wechatOaUser, BaseExceptionMessage.WECHATAPPLETUSER_NOT_EXIST_EXCEPTION);
+        String sessionKey = wechatOaUser.getSessionKey();
+        DecryptResult decryptResult = WechatLoginService.encryptedWechatData(encryptedData, iv, sessionKey);
+        if (Objects.nonNull(decryptResult) && StringUtils.nonEmpty(decryptResult.getPhoneNumber())) {
+            LambdaUpdateChainWrapper<WechatOaUser> update = lambdaUpdate();
+            update.set(WechatOaUser::getPhone, decryptResult.getPhoneNumber())
+                    .eq(WechatOaUser::getUserId, userId);
+            update(update);
+        }
+    }
+
 }

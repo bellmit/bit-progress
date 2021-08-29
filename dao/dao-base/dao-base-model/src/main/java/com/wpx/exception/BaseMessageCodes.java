@@ -47,5 +47,7 @@ public class BaseMessageCodes {
     public static final String WECHATAPP_DELETE_EXCEPTION_MESSAGE = "微信应用信息删除失败";
     public static final String UNION_ID_EMPTY_EXCEPTION_MESSAGE = "微信用户unionId为空";
     public static final String OPENID_ID_EMPTY_EXCEPTION_MESSAGE = "微信用户openId为空";
+    public static final String NOT_WECHATUSER_EXCEPTION_MESSAGE = "非微信用户";
+    public static final String REFRESH_ACCESSTOKEN_EXCEPTION_MESSAGE = "刷新微信accessToken异常";
 
 }

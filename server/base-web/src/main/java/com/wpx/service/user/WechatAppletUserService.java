@@ -7,11 +7,14 @@ import com.baomidou.mybatisplus.extension.service.additional.update.impl.LambdaU
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wpx.exception.BaseExceptionMessage;
 import com.wpx.mapper.user.WechatAppletUserMapper;
+import com.wpx.model.DecryptResult;
 import com.wpx.model.app.app.envm.AppTypeEnum;
 import com.wpx.model.user.login.WechatLoginDTO;
 import com.wpx.model.user.wechatappletuser.WechatAppletUser;
+import com.wpx.service.WechatLoginService;
 import com.wpx.util.Assert;
 import com.wpx.util.CollectionUtils;
+import com.wpx.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,10 +89,11 @@ public class WechatAppletUserService extends ServiceImpl<WechatAppletUserMapper,
      * @param wechatUserId
      * @param appId
      * @param appSign
+     * @param sessionKey
      */
     @Transactional(rollbackFor = RuntimeException.class)
     public Long updateUser(WechatLoginDTO wechatLoginDTO, String openId, String unionId, Long wechatUserId,
-                           Long appId, String appSign) {
+                           Long appId, String appSign, String sessionKey) {
 
         LambdaQueryChainWrapper<WechatAppletUser> query = lambdaQuery().eq(WechatAppletUser::getOpenId, openId)
                 .eq(WechatAppletUser::getUnionId, unionId)
@@ -101,7 +105,6 @@ public class WechatAppletUserService extends ServiceImpl<WechatAppletUserMapper,
         String nickname = wechatLoginDTO.getNickname();
         String avatarUrl = wechatLoginDTO.getAvatarUrl();
         Integer gender = wechatLoginDTO.getGender();
-        String phone = wechatLoginDTO.getPhone();
         String location = wechatLoginDTO.getCountry() + wechatLoginDTO.getProvince() + wechatLoginDTO.getCity();
         // 微信小程序用户为空，则在tb_user表也为空
         if (Objects.isNull(wechatAppletUser)) {
@@ -113,23 +116,46 @@ public class WechatAppletUserService extends ServiceImpl<WechatAppletUserMapper,
                     .setAppSign(appSign)
                     .setOpenId(openId)
                     .setUnionId(unionId)
-                    .setPhone(phone)
                     .setNickname(nickname)
                     .setAvatar(avatarUrl)
                     .setGender(gender)
-                    .setLocation(location);
+                    .setLocation(location)
+                    .setSessionKey(sessionKey);
             Assert.isTrue(save(wechatAppletUser), BaseExceptionMessage.WECHATAPPLETUSER_SAVE_EXCEPTION);
         } else {
+            LambdaUpdateChainWrapper<WechatAppletUser> update = lambdaUpdate();
+            update.set(WechatAppletUser::getSessionKey, sessionKey);
             if (authorized) {
-                LambdaUpdateChainWrapper<WechatAppletUser> update = lambdaUpdate();
                 update.set(WechatAppletUser::getLocation, location)
-                        .set(WechatAppletUser::getPhone, phone)
                         .set(WechatAppletUser::getNickname, nickname)
                         .set(WechatAppletUser::getAvatar, avatarUrl)
                         .set(WechatAppletUser::getGender, gender);
-                update(update);
             }
+            update(update);
         }
         return wechatAppletUser.getUserId();
     }
+
+    /**
+     * 更新用户的手机号码
+     *
+     * @param encryptedData
+     * @param iv
+     * @param userId
+     */
+    public void updatePhone(String encryptedData, String iv, Long userId) {
+        LambdaQueryChainWrapper<WechatAppletUser> query = lambdaQuery().select(WechatAppletUser::getSessionKey)
+                .eq(WechatAppletUser::getUserId, userId);
+        WechatAppletUser wechatAppletUser = getOne(query);
+        Assert.notNull(wechatAppletUser, BaseExceptionMessage.WECHATAPPLETUSER_NOT_EXIST_EXCEPTION);
+        String sessionKey = wechatAppletUser.getSessionKey();
+        DecryptResult decryptResult = WechatLoginService.encryptedWechatData(encryptedData, iv, sessionKey);
+        if (Objects.nonNull(decryptResult) && StringUtils.nonEmpty(decryptResult.getPhoneNumber())) {
+            LambdaUpdateChainWrapper<WechatAppletUser> update = lambdaUpdate();
+            update.set(WechatAppletUser::getPhone, decryptResult.getPhoneNumber())
+                    .eq(WechatAppletUser::getUserId, userId);
+            update(update);
+        }
+    }
+
 }
