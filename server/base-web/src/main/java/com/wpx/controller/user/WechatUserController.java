@@ -4,7 +4,6 @@ import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
 import com.wpx.model.user.login.WechatPhoneDTO;
 import com.wpx.processor.WechatUserProcessor;
-import com.wpx.service.user.WechatUserService;
 import com.wpx.util.UserHelper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -5,6 +5,7 @@ import com.wpx.exception.BaseExceptionMessage;
 import com.wpx.exception.CommonException;
 import com.wpx.exception.ExceptionMessage;
 import com.wpx.gatewayweb.auth.AuthFeignService;
+import com.wpx.manager.redis.CaptchaRedisService;
 import com.wpx.model.BooleanVO;
 import com.wpx.model.JsCode2SessionResult;
 import com.wpx.model.ResultVO;
@@ -13,6 +14,7 @@ import com.wpx.model.app.wechatapp.pojo.WechatAppRO;
 import com.wpx.model.login.LoginDTO;
 import com.wpx.model.login.LoginVO;
 import com.wpx.model.login.TokenDTO;
+import com.wpx.model.user.login.PhoneLoginDTO;
 import com.wpx.model.user.login.WechatLoginDTO;
 import com.wpx.service.WechatLoginService;
 import com.wpx.service.app.WechatAppService;
@@ -44,6 +46,21 @@ public class LoginService {
 
     @Autowired
     private AuthFeignService authFeignService;
+
+    @Autowired
+    private CaptchaRedisService captchaRedisService;
+
+    /**
+     * 手机号码登录
+     *
+     * @param phoneLoginDTO
+     */
+    public LoginVO phoneLogin(PhoneLoginDTO phoneLoginDTO) {
+        String phone = phoneLoginDTO.getPhone();
+        String smsCaptcha = phoneLoginDTO.getSmsCaptcha();
+        String captcha = captchaRedisService.getSmsCaptcha(phone);
+        return null;
+    }
 
     /**
      * 检查token是否合法
@@ -109,4 +126,5 @@ public class LoginService {
         ResultVO<LoginVO> loginResult = authFeignService.login(loginDTO);
         return ResultUtils.checkResultVO(loginResult);
     }
+
 }

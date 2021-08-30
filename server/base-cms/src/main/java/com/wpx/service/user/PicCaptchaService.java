@@ -2,7 +2,7 @@ package com.wpx.service.user;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.wpx.util.StringUtils;
-import com.wpx.manager.redis.SystemRedisService;
+import com.wpx.manager.redis.CaptchaRedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import java.io.IOException;
 public class PicCaptchaService {
 
     @Autowired
-    private SystemRedisService systemRedisService;
+    private CaptchaRedisService captchaRedisService;
 
     @Autowired
     private DefaultKaptcha captchaProducer;
@@ -34,11 +34,11 @@ public class PicCaptchaService {
      */
     public void writeCaptcha(String uuid, HttpServletResponse res) {
         log.info(" login uuid is {}", uuid);
-        String capText = systemRedisService.getCapText(uuid);
+        String capText = captchaRedisService.getCapText(uuid);
         if (StringUtils.isEmpty(capText)) {
             capText = captchaProducer.createText();
             log.info("----------capText:" + capText + "----------------");
-            systemRedisService.setCapText(uuid, capText);
+            captchaRedisService.setCapText(uuid, capText);
         }
 
         res.setDateHeader("Expires", 0);

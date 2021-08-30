@@ -1,19 +1,17 @@
 package com.wpx.manager.redis;
 
-import com.wpx.util.CollectionUtils;
 import com.wpx.constant.BaseRedisKeyPrefix;
 import com.wpx.util.RedisCacheUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author 不会飞的小鹏
  */
 @Service
-public class SystemRedisService {
+public class CaptchaRedisService {
 
     @Autowired
     private RedisCacheUtils redisCacheUtils;
@@ -49,30 +47,4 @@ public class SystemRedisService {
         redisCacheUtils.delete(key);
     }
 
-    /**
-     * 将应用信息从缓存中删除
-     *
-     * @param appSigns
-     */
-    public void deleteApplicationMessageForRedis(Set<String> appSigns) {
-        if (CollectionUtils.isEmpty(appSigns)) {
-            return;
-        }
-        // 删除缓存中的应用信息
-        String key = BaseRedisKeyPrefix.applicationMessage();
-        redisCacheUtils.deleteForHash(key, appSigns.toArray());
-    }
-
-    /**
-     * 从缓存中删除应用主题消息信息
-     *
-     * @param topics
-     */
-    public void deleteApplicationTopicMessageForRedis(Set<String> topics) {
-        if (CollectionUtils.isEmpty(topics)) {
-            return;
-        }
-        String key = BaseRedisKeyPrefix.applicationTopicMessage();
-        redisCacheUtils.deleteForHash(key, topics.toArray());
-    }
 }

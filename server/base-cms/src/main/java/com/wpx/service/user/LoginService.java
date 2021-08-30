@@ -12,7 +12,7 @@ import com.wpx.model.login.LogoutDTO;
 import com.wpx.model.user.manager.Manager;
 import com.wpx.model.user.manager.pojo.cms.LoginSuccessVO;
 import com.wpx.model.user.manager.pojo.cms.ManagerLoginDTO;
-import com.wpx.manager.redis.SystemRedisService;
+import com.wpx.manager.redis.CaptchaRedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,7 +36,7 @@ public class LoginService {
     private ManagerService managerService;
 
     @Autowired
-    private SystemRedisService systemRedisService;
+    private CaptchaRedisService captchaRedisService;
 
     @Autowired
     private AuthFeignService authFeignService;
@@ -50,8 +50,8 @@ public class LoginService {
     public LoginSuccessVO login(ManagerLoginDTO loginDTO) {
         //从redis中获得该验证码
         String uuid = loginDTO.getUuid();
-        String rightCaptcha = systemRedisService.getCapText(uuid);
-        systemRedisService.deleteCaptcha(uuid);
+        String rightCaptcha = captchaRedisService.getCapText(uuid);
+        captchaRedisService.deleteCaptcha(uuid);
         if (StringUtils.isEmpty(rightCaptcha)) {
             //验证码已失效
             throw new ValidationException(MessageCodes.AUTH_PICCAPTCHA_LOST_MESSAGE);

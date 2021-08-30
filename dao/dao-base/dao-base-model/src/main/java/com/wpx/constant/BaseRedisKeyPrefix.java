@@ -34,6 +34,15 @@ public class BaseRedisKeyPrefix {
     /** ************************************************************************************************************** */
 
     /**
+     * 短信验证码
+     *
+     * @param phone
+     */
+    public static String smsCaptcha(String phone) {
+        return "SmsCaptcha:" + phone;
+    }
+
+    /**
      * 存放验证码的key
      *
      * @param uuid
@@ -73,4 +82,5 @@ public class BaseRedisKeyPrefix {
     public static String wechatAppKey() {
         return "WechatAppKey:";
     }
+
 }

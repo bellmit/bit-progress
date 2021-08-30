@@ -1,5 +1,7 @@
 package com.wpx.util;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * @author 不会飞的小鹏
  * create on 2021/7/10 23:20
@@ -46,5 +48,21 @@ public class NumberUtils {
      * 请求成功的状态码
      */
     public static final int REQUEST_SUCCESS = INT_TWO_HUNDRED;
+
+    public static final String ALL_NUMBER = "0123456789";
+
+    public static String randomNumbers(int length) {
+        StringBuilder sb = new StringBuilder(length);
+        if (length < 1) {
+            length = 1;
+        }
+        int baseLength = ALL_NUMBER.length();
+
+        for(int i = 0; i < length; ++i) {
+            int number = ThreadLocalRandom.current().nextInt(baseLength);
+            sb.append(ALL_NUMBER.charAt(number));
+        }
+        return sb.toString();
+    }
 
 }

@@ -57,6 +57,8 @@
         <feign.okhttp.version>11.5</feign.okhttp.version>
         <!-- quartz -->
         <quartz.version>2.3.2</quartz.version>
+        <!--AliSms-->
+        <ali.sms.version>4.1.0</ali.sms.version>
     </properties>
 
     <packaging>pom</packaging>
@@ -196,6 +198,13 @@
                 <groupId>org.quartz-scheduler</groupId>
                 <artifactId>quartz</artifactId>
                 <version>${quartz.version}</version>
+            </dependency>
+
+            <!-- AliSms -->
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+                <version>${ali.sms.version}</version>
             </dependency>
 
         </dependencies>
