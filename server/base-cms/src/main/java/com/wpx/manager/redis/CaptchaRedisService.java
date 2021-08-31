@@ -22,7 +22,7 @@ public class CaptchaRedisService {
      * @param uuid
      */
     public String getCapText(String uuid) {
-        String key = BaseRedisKeyPrefix.captcha(uuid);
+        String key = BaseRedisKeyPrefix.picCaptcha(uuid);
         return redisCacheUtils.getForValue(key);
     }
 
@@ -33,7 +33,7 @@ public class CaptchaRedisService {
      * @param capText
      */
     public void setCapText(String uuid, String capText) {
-        String key = BaseRedisKeyPrefix.captcha(uuid);
+        String key = BaseRedisKeyPrefix.picCaptcha(uuid);
         redisCacheUtils.setForValueTtl(key, capText, 5L, TimeUnit.MINUTES);
     }
 
@@ -43,7 +43,7 @@ public class CaptchaRedisService {
      * @param uuid
      */
     public void deleteCaptcha(String uuid) {
-        String key = BaseRedisKeyPrefix.captcha(uuid);
+        String key = BaseRedisKeyPrefix.picCaptcha(uuid);
         redisCacheUtils.delete(key);
     }
 

@@ -107,7 +107,7 @@ public class RedisCacheUtils {
      * @param value  需要存放的值
      * @param timeout  过期时间  默认单位为秒
      */
-    public void setForValueTtl(String key, String value, Long timeout) {
+    public void setForValueTtl(String key, String value, long timeout) {
         setForValueTtl(key, value, timeout, TimeUnit.SECONDS);
     }
 

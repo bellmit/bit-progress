@@ -14,15 +14,17 @@ import com.wpx.model.app.wechatapp.pojo.WechatAppRO;
 import com.wpx.model.login.LoginDTO;
 import com.wpx.model.login.LoginVO;
 import com.wpx.model.login.TokenDTO;
-import com.wpx.model.user.login.PhoneLoginDTO;
-import com.wpx.model.user.login.WechatLoginDTO;
+import com.wpx.model.login.SmsCaptchaLoginDTO;
+import com.wpx.model.login.WechatLoginDTO;
 import com.wpx.service.WechatLoginService;
 import com.wpx.service.app.WechatAppService;
+import com.wpx.service.user.PhoneUserService;
 import com.wpx.service.user.WechatAppletUserService;
 import com.wpx.service.user.WechatOaUserService;
 import com.wpx.service.user.WechatUserService;
 import com.wpx.util.Assert;
 import com.wpx.util.ResultUtils;
+import com.wpx.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,21 +47,27 @@ public class LoginService {
     private WechatUserService wechatUserService;
 
     @Autowired
+    private PhoneUserService phoneUserService;
+
+    @Autowired
     private AuthFeignService authFeignService;
 
     @Autowired
     private CaptchaRedisService captchaRedisService;
 
     /**
-     * 手机号码登录
+     * 短信验证码登录
      *
-     * @param phoneLoginDTO
+     * @param smsCaptchaLoginDTO
      */
-    public LoginVO phoneLogin(PhoneLoginDTO phoneLoginDTO) {
-        String phone = phoneLoginDTO.getPhone();
-        String smsCaptcha = phoneLoginDTO.getSmsCaptcha();
+    public LoginVO smsCaptchaLogin(SmsCaptchaLoginDTO smsCaptchaLoginDTO) {
+        String phone = smsCaptchaLoginDTO.getPhone();
+        String smsCaptcha = smsCaptchaLoginDTO.getSmsCaptcha();
         String captcha = captchaRedisService.getSmsCaptcha(phone);
-        return null;
+        // 验证码正确
+        Assert.isTrue(StringUtils.equals(smsCaptcha, captcha), ExceptionMessage.SMS_CAPTCHA_WRONG_EXCEPTION);
+        Long userId = phoneUserService.updateUser(phone);
+        return login(userId, null);
     }
 
     /**
@@ -85,7 +93,9 @@ public class LoginService {
         Long appId = wechatApp.getAppId();
         // 解析jsCode
         String jsCode = wechatLoginDTO.getJsCode();
-        JsCode2SessionResult result = WechatLoginService.jsCode2Session(jsCode, wechatApp.getWxAppId(), wechatApp.getAppSecret());
+        String wxAppId = wechatApp.getWxAppId();
+        String appSecret = wechatApp.getAppSecret();
+        JsCode2SessionResult result = WechatLoginService.jsCode2Session(jsCode, wxAppId, appSecret);
         String openId = result.getOpenId();
         String unionId = result.getUnionId();
         String sessionKey = result.getSessionKey();
@@ -119,7 +129,17 @@ public class LoginService {
                 throw new CommonException(ExceptionMessage.TYPE_NOT_APPOINT);
             }
         }
+        return login(userId, null);
+    }
 
+    /**
+     * 进行登录获取token
+     *
+     * @param userId
+     * @param role
+     * @return  登录结果（包括登录获取的token）
+     */
+    private LoginVO login(Long userId, Integer role) {
         // 调用gateway登录接口获取token
         LoginDTO loginDTO = new LoginDTO();
         loginDTO.setUserId(String.valueOf(userId));

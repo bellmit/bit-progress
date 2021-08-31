@@ -47,8 +47,8 @@ public class BaseRedisKeyPrefix {
      *
      * @param uuid
      */
-    public static String captcha(String uuid) {
-        return "Captcha:" + uuid;
+    public static String picCaptcha(String uuid) {
+        return "PicCaptcha:" + uuid;
     }
 
     /* ====================================== 应用信息 ======================================= */

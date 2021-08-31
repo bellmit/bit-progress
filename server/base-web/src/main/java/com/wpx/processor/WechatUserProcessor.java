@@ -2,11 +2,8 @@ package com.wpx.processor;
 
 import com.wpx.exception.BaseException;
 import com.wpx.exception.BaseExceptionMessage;
-import com.wpx.model.DecryptResult;
 import com.wpx.model.app.app.envm.AppTypeEnum;
-import com.wpx.model.user.login.WechatPhoneDTO;
-import com.wpx.model.user.user.User;
-import com.wpx.service.WechatLoginService;
+import com.wpx.model.login.WechatPhoneDTO;
 import com.wpx.service.user.UserService;
 import com.wpx.service.user.WechatAppletUserService;
 import com.wpx.service.user.WechatOaUserService;

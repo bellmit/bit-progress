@@ -1,4 +1,4 @@
-package com.wpx.model.user.login;
+package com.wpx.model.login;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

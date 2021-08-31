@@ -1,4 +1,4 @@
-package com.wpx.model.user.login;
+package com.wpx.model.login;
 
 import com.wpx.model.app.wechatapp.envm.WechatAppTypeEnum;
 import io.swagger.annotations.ApiModel;

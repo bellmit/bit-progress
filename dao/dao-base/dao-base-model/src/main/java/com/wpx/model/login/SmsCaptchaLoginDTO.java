@@ -1,4 +1,4 @@
-package com.wpx.model.user.login;
+package com.wpx.model.login;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -11,7 +11,15 @@ import javax.validation.constraints.Size;
  * @author 不会飞的小鹏
  */
 @Data
-public class PhoneLoginDTO {
+public class SmsCaptchaLoginDTO {
+
+    /**
+     * 应用标识
+     */
+    @ApiModelProperty(value = "应用标识")
+    @NotNull(message = "应用标识不能为空")
+    @NotBlank(message = "应用标识不能为空")
+    private String appSign;
 
     /**
      * 手机号码

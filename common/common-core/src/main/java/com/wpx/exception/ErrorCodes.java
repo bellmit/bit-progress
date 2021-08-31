@@ -28,5 +28,6 @@ public class ErrorCodes {
     public static final String URL_EMPTY_EXCEPTION_CODE = "URL_EMPTY_EXCEPTION";
 
     public static final String ACQUIRE_LOCK_EXCEPTION_CODE = "ACQUIRE_LOCK_EXCEPTION";
+    public static final String SMS_CAPTCHA_WRONG_EXCEPTION_CODE = "SMS_CAPTCHA_WRONG_EXCEPTION";
 
 }

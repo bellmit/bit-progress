@@ -22,5 +22,6 @@ public class MessageCodes {
     public static final String URL_EMPTY_EXCEPTION_MESSAGE = "Url为空";
 
     public static final String ACQUIRE_LOCK_EXCEPTION_MESSAGE = "获取锁失败";
+    public static final String SMS_CAPTCHA_WRONG_EXCEPTION_MESSAGE = "短信验证码错误";
 
 }

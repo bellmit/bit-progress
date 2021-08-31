@@ -50,4 +50,9 @@ public class BaseMessageCodes {
     public static final String NOT_WECHATUSER_EXCEPTION_MESSAGE = "非微信用户";
     public static final String REFRESH_ACCESSTOKEN_EXCEPTION_MESSAGE = "刷新微信accessToken异常";
 
+    public static final String PHONEUSER_NOT_EXIST_EXCEPTION_MESSAGE = "手机用户信息不存在";
+    public static final String PHONEUSER_SAVE_EXCEPTION_MESSAGE = "手机用户信息保存失败";
+    public static final String PHONEUSER_UPDATE_EXCEPTION_MESSAGE = "手机用户信息更新失败";
+    public static final String PHONEUSER_DELETE_EXCEPTION_MESSAGE = "手机用户信息删除失败";
+
 }

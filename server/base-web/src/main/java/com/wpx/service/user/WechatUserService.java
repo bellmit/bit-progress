@@ -2,14 +2,13 @@ package com.wpx.service.user;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.additional.query.impl.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.service.additional.update.impl.LambdaUpdateChainWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import com.wpx.exception.BaseExceptionMessage;
 import com.wpx.mapper.user.WechatUserMapper;
-import com.wpx.model.user.login.WechatLoginDTO;
+import com.wpx.model.login.WechatLoginDTO;
 import com.wpx.model.user.wechatuser.WechatUser;
 import com.wpx.model.user.wechatuser.pojo.web.WechatUserWebVO;
 import com.wpx.util.Assert;

@@ -1,4 +1,4 @@
-package com.wpx.controller.user;
+package com.wpx.controller.captcha;
 
 import com.wpx.service.user.PicCaptchaService;
 import io.swagger.annotations.Api;

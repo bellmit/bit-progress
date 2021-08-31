@@ -61,6 +61,11 @@
             <artifactId>wechat-login</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.wpx</groupId>
+            <artifactId>ali-sms</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

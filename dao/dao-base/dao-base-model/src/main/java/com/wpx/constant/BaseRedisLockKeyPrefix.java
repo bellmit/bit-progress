@@ -13,4 +13,10 @@ public class BaseRedisLockKeyPrefix {
         return "WechatAccessTokenLock:" + appSign;
     }
 
+    /**
+     * 发送短信验证码 的 redis lock
+     */
+    public static String sendSmsCaptchaLock(String phone) {
+        return "SendSmsCaptchaLock:" + phone;
+    }
 }

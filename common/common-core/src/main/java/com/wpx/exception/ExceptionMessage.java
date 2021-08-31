@@ -61,6 +61,11 @@ public enum ExceptionMessage implements IExceptionMessage {
      */
     ACQUIRE_LOCK_EXCEPTION(1011, ACQUIRE_LOCK_EXCEPTION_CODE, ACQUIRE_LOCK_EXCEPTION_MESSAGE),
 
+    /**
+     * 短信验证码错误
+     */
+    SMS_CAPTCHA_WRONG_EXCEPTION(1012, SMS_CAPTCHA_WRONG_EXCEPTION_CODE, SMS_CAPTCHA_WRONG_EXCEPTION_MESSAGE),
+
     ;
 
     /**

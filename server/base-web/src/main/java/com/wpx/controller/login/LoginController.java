@@ -4,8 +4,8 @@ import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
 import com.wpx.model.login.LoginVO;
 import com.wpx.model.login.TokenDTO;
-import com.wpx.model.user.login.PhoneLoginDTO;
-import com.wpx.model.user.login.WechatLoginDTO;
+import com.wpx.model.login.SmsCaptchaLoginDTO;
+import com.wpx.model.login.WechatLoginDTO;
 import com.wpx.service.login.LoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,10 +28,10 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @GetMapping("phone")
-    @ApiOperation("手机号码登录")
-    public ResultVO<LoginVO> phoneLogin(PhoneLoginDTO phoneLoginDTO) {
-        return ResultVO.successData(loginService.phoneLogin(phoneLoginDTO));
+    @GetMapping("smsCaptcha")
+    @ApiOperation("短信验证码登录")
+    public ResultVO<LoginVO> smsCaptchaLogin(SmsCaptchaLoginDTO smsCaptchaLoginDTO) {
+        return ResultVO.successData(loginService.smsCaptchaLogin(smsCaptchaLoginDTO));
     }
 
     @GetMapping("tokenCheck")
