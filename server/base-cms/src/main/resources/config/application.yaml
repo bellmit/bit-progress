@@ -85,10 +85,9 @@ feign:
         readTimeout: 10000
   httpclient:
     enabled: false
-wpx:
+application:
   config:
     salt: ufg48UH849Yhngf4
-application:
   server:
     token:
       api: main-base-cms-api-token

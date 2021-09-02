@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author 不会飞的小鹏
  * @Description: 登录服务dubbo接口
  */
-@Service
+@Service(version = "1.0.0")
 public class AuthDubboServiceImpl implements AuthDubboService {
 
     @Autowired

@@ -38,7 +38,7 @@ import java.util.Set;
 @Service
 public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
 
-    @Value("${wpx.config.salt}")
+    @Value("${application.config.salt}")
     private String salt;
 
     private final String rootManagerName = ManagerConstant.ROOT_MANAGER_NAME;

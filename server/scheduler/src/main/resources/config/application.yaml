@@ -36,20 +36,34 @@ spring:
       max-request-size: 8MB
       location: ${user.dir}/tmp
 feign:
-  sentinel:
+  circuitbreaker:
     enabled: true
   client:
     config:
       default:
         connectTimeout: 6000
         readTimeout: 10000
-ribbon:
-  MaxAutoRetries: 0
-  MaxAutoRetriesNextServer: 0
-  OkToRetryOnAllOperations: false
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false
+application:
+  server:
+    token:
+      api: scheduler-api-token
+      rest: scheduler-rest-token
+  dubbo:
+    version: 1.0.0
 
-wpx:
-  config:
-    salt: ufg48UH849Yhngf4
 swagger:
-  show: true
+  enable: true
+  application-name: ${spring.application.name}
+  group: cms
+  description: 接口信息
+  version: v1.0.0
+  security-scheme:
+    Authorization: Authorization
+    route_api_token: route_api_token
+    route_rest_token: route_rest_token
+    User-Id: User-Id
+  securityContext: Authorization,route_api_token,route_rest_token,User-Id

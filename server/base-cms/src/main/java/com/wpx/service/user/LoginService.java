@@ -29,7 +29,7 @@ import org.springframework.util.DigestUtils;
 @Service
 public class LoginService {
 
-    @Value("${wpx.config.salt}")
+    @Value("${application.config.salt}")
     private String salt;
 
     @Autowired

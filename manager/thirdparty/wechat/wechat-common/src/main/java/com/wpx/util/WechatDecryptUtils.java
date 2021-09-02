@@ -1,6 +1,5 @@
 package com.wpx.util;
 
-import com.sun.deploy.util.ArrayUtil;
 import com.wpx.exception.WechatException;
 import com.wpx.exception.WechatExceptionMessage;
 
@@ -9,7 +8,6 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.AlgorithmParameters;
-import java.util.Arrays;
 
 /**
  * 微信相关解密

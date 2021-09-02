@@ -1,9 +1,5 @@
 package com.wpx.manager.swagger.provider;
 
-import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
-import com.alibaba.nacos.api.exception.NacosException;
-import com.alibaba.nacos.api.naming.pojo.ListView;
-import com.wpx.discover.NacosServiceDiscovery;
 import com.wpx.manager.swagger.property.SwaggerProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.Route;
@@ -14,7 +10,6 @@ import reactor.core.publisher.Flux;
 import springfox.documentation.swagger.web.SwaggerResource;
 import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

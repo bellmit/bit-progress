@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author 不会飞的小鹏
  *  QuartzJob dubbo
  */
-@Service
+@Service(version = "1.0.0")
 public class QuartzJobDubboServiceImpl implements QuartzJobDubboService {
 
     @Autowired

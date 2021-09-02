@@ -14,7 +14,7 @@ import java.util.Set;
  * @author 不会飞的小鹏
  * @Description: dubbo获取用户信息实现类
  */
-@Service
+@Service(version = "1.0.0")
 public class UserDubboServiceImpl implements UserDubboService {
 
     @Autowired

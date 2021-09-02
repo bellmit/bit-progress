@@ -1,9 +1,9 @@
 package com.wpx.controller.user;
 
+import com.wpx.manager.wechat.WechatService;
 import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
 import com.wpx.model.login.WechatPhoneDTO;
-import com.wpx.processor.WechatUserProcessor;
 import com.wpx.util.UserHelper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,12 +24,12 @@ import javax.validation.Valid;
 public class WechatUserController {
 
     @Autowired
-    private WechatUserProcessor wechatUserProcessor;
+    private WechatService wechatService;
 
     @PostMapping("phone")
     @ApiOperation("微信端获取用户手机号码")
     public ResultVO<BooleanVO> updatePhone(@RequestBody @Valid WechatPhoneDTO wechatPhoneDTO) {
-        wechatUserProcessor.updatePhone(wechatPhoneDTO, UserHelper.getUserId());
+        wechatService.updatePhone(wechatPhoneDTO, UserHelper.getUserId());
         return ResultVO.successData(BooleanVO.result(true));
     }
 

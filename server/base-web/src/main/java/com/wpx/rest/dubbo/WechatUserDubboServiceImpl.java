@@ -14,7 +14,7 @@ import java.util.Set;
  * @author 不会飞的小鹏
  * @description： wechatUser dubbo remote
  */
-@Service
+@Service(version = "1.0.0")
 public class WechatUserDubboServiceImpl implements WechatUserDubboService {
 
     @Autowired
