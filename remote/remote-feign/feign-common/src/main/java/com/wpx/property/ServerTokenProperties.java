@@ -3,6 +3,7 @@ package com.wpx.property;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -19,7 +20,7 @@ public class ServerTokenProperties {
     /**
      * 调用服务配置rest-token
      */
-    private Map<String, String> serverToken;
+    private Map<String, String> serverToken = new HashMap<>();
 
     public Map<String, String> getServerToken() {
         return serverToken;
@@ -36,6 +37,16 @@ public class ServerTokenProperties {
      */
     public String getServerTokenByServerName(String serverName) {
         return this.serverToken.get(serverName);
+    }
+
+    /**
+     * 根据服务名称设置其rest接口token
+     *
+     * @param serverName
+     * @param restToken
+     */
+    public void setServerTokenByServerName(String serverName, String restToken) {
+        this.serverToken.putIfAbsent(serverName, restToken);
     }
 
 }

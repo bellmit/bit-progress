@@ -4,17 +4,16 @@ spring:
   cloud:
     nacos:
       discovery:
+        username: nacos-public
+        password: fsyH458lPks25Sei
         server-addr: 127.0.0.1:8848
         metadata:
           version: default
           default: true
           server-name: ${spring.application.name}
-      api-token: scheduler-api-token
-      rest-token: scheduler-rest-token
       config:
+        username: nacos-public
+        password: fsyH458lPks25Sei
         server-addr: 127.0.0.1:8848
         file-extension: yml
-    sentinel:
-      transport:
-        dashboard: localhost:8718
-      eager: true
+        group: YML_GROUP

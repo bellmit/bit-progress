@@ -56,6 +56,11 @@ public class QuartzJob implements Serializable {
      */
     private String serverUrl;
 
+    /**
+     * 服务调用的token
+     */
+    private String restToken;
+
     /*public QuartzJob(String jobName, TriggerType triggerType, String cronExpression, Long duration, String beanName, String methodName) {
         this.jobName = jobName;
         this.triggerType = triggerType;

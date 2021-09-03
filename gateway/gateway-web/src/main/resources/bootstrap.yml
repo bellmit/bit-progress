@@ -4,27 +4,16 @@ spring:
   cloud:
     nacos:
       discovery:
+        username: nacos-public
+        password: fsyH458lPks25Sei
         server-addr: 127.0.0.1:8848
         metadata:
-          version: default
+          version: 1.0.0
           default: true
+          server-name: ${spring.application.name}
       config:
+        username: nacos-public
+        password: fsyH458lPks25Sei
         server-addr: 127.0.0.1:8848
         file-extension: yml
-    sentinel:
-      transport:
-        dashboard: 127.0.0.1:8850
-dubbo:
-  application:
-    id: ${spring.application.name}
-    name: ${spring.application.name}
-  scan:
-    base-packages: com.wpx.rest.dubbo
-  protocol:
-    name: dubbo
-    port: -1
-  registry:
-    address: spring-cloud://127.0.0.1:8848
-    check: true
-  cloud:
-    subscribed-services: ""
+        group: YML_GROUP

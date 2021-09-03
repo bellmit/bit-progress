@@ -8,7 +8,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
 import java.util.Map;
@@ -17,7 +16,7 @@ import java.util.Map;
  * @author 不会飞的小鹏
  * @desc: dubbo配置
  */
-public class DubboConfig implements BeanFactoryAware, InstantiationAwareBeanPostProcessor {
+public class DubboConfig implements BeanFactoryAware {
 
     @Autowired
     private DubboServiceProperties dubboServiceProperties;

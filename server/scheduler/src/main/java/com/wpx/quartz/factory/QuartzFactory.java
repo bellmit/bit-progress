@@ -4,6 +4,7 @@ import com.wpx.exception.ScheduleException;
 import com.wpx.exception.ScheduleExceptionMessage;
 import com.wpx.model.quartzjob.QuartzJob;
 import com.wpx.model.quartzjob.envm.TriggerType;
+import com.wpx.property.ServerTokenProperties;
 import com.wpx.quartz.job.CustomJob;
 import com.wpx.util.Assert;
 import com.wpx.util.StringUtils;
@@ -29,6 +30,9 @@ public class QuartzFactory {
     @Autowired
     private Scheduler scheduler;
 
+    @Autowired
+    private ServerTokenProperties serverTokenProperties;
+
     public JobKey createQuartzJob(QuartzJob job) throws SchedulerException {
         String name = job.getJobName();
         Assert.isNotEmpty(name, ScheduleExceptionMessage.QUARTZJOB_NAME_EMPTY_EXCEPTION);
@@ -43,7 +47,6 @@ public class QuartzFactory {
         Trigger tri = scheduler.getTrigger(triggerKey);
         if (Objects.nonNull(tri)) {
             log.info("quartzJob exists, jobName [{}]", name);
-            return jobKey;
         } else {
             log.info("create quartz trigger，name {}", name);
             TriggerType type = job.getTriggerType();
@@ -63,7 +66,7 @@ public class QuartzFactory {
                             .startAt(new Date(startAtTime))
                             .build();
                     scheduler.scheduleJob(jobDetail, trigger);
-                    return jobKey;
+                    break;
                 }
                 case CRON: {
                     String cronExpression = job.getCronExpression();
@@ -79,13 +82,17 @@ public class QuartzFactory {
                             .startAt(new Date(millis))
                             .build();
                     scheduler.scheduleJob(jobDetail, scheduleTrigger);
-                    return jobKey;
+                    break;
                 }
                 default: {
                     throw new ScheduleException(ScheduleExceptionMessage.JOBGROUP_QUERY_EXCEPTION);
                 }
             }
         }
+        String serverName = job.getApplicationName();
+        String restToken = job.getRestToken();
+        serverTokenProperties.setServerTokenByServerName(serverName, restToken);
+        return jobKey;
     }
 
     /**

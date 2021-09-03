@@ -2,8 +2,10 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8847
-        namespace: 95d16571-68c1-4bfe-b21c-023a47101a5a
+        username: nacos-dev
+        password: shy5hhs9uYybf7y
+        namespace: 070474c4-e846-47e9-85dd-bb1ff200f9bc
       config:
-        server-addr: 127.0.0.1:8847
-        namespace: 95d16571-68c1-4bfe-b21c-023a47101a5a
+        username: nacos-dev
+        password: shy5hhs9uYybf7y
+        namespace: 070474c4-e846-47e9-85dd-bb1ff200f9bc
