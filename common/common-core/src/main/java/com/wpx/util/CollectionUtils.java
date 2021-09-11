@@ -4,7 +4,6 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 
@@ -15,9 +14,10 @@ import static java.util.stream.Collectors.*;
  */
 public class CollectionUtils {
 
-    private static final String TYPE_NOT_APPOINT = "type_not_appoint";
-
-    public enum ComparableType {
+    /**
+     * 极值类型，默认情况下选择最大值
+     */
+    public enum ExtremeType {
 
         /**
          * key重复时取最大
@@ -29,10 +29,11 @@ public class CollectionUtils {
          */
         MIN,
 
-        ;
-
     }
 
+    /**
+     * 排序方式枚举，默认情况下使用降序
+     */
     public enum OrderType {
 
         /**
@@ -44,7 +45,6 @@ public class CollectionUtils {
          * key重复时取最小
          */
         ASC,
-        ;
 
     }
 
@@ -109,28 +109,6 @@ public class CollectionUtils {
     }
 
     /**
-     * 检查比较器类型
-     *
-     * @param type
-     */
-    private static void checkComparableType(ComparableType type) {
-        if (Objects.isNull(type)) {
-            throw new RuntimeException(TYPE_NOT_APPOINT);
-        }
-    }
-
-    /**
-     * 排序类型
-     *
-     * @param type
-     */
-    private static void checkOrderType(OrderType type) {
-        if (Objects.isNull(type)) {
-            throw new RuntimeException(TYPE_NOT_APPOINT);
-        }
-    }
-
-    /**
      * 对collection分组
      *
      * @param collection    需要分组的集合
@@ -169,10 +147,7 @@ public class CollectionUtils {
      * @return List<C> 转换后的list
      */
     public static <T, C> List<C> conversionList(Collection<T> collection, Function<T, C> function) {
-        if (isEmpty(collection)) {
-            return emptyList();
-        }
-        return collection.stream().map(function).collect(toList());
+        return mapList(collection, function);
     }
 
     /**
@@ -183,10 +158,7 @@ public class CollectionUtils {
      * @return Set<C> 转换后的set
      */
     public static <T, C> Set<C> conversionSet(Collection<T> collection, Function<T, C> function) {
-        if (isEmpty(collection)) {
-            return emptySet();
-        }
-        return collection.stream().map(function).collect(toSet());
+        return mapSet(collection, function);
     }
 
     /**
@@ -194,7 +166,7 @@ public class CollectionUtils {
      *
      * @param collection 传入的list
      * @param predicate  <T> T传入类型
-     * @return Set<C> 转换后的set
+     * @return List<T>
      */
     public static <T> List<T> filterList(Collection<T> collection, Predicate<? super T> predicate) {
         if (isEmpty(collection)) {
@@ -208,7 +180,7 @@ public class CollectionUtils {
      *
      * @param collection 传入的collection
      * @param predicate  <T> T传入类型
-     * @return Set<C> 转换后的set
+     * @return Set<T>
      */
     public static <T> Set<T> filterSet(Collection<T> collection, Predicate<? super T> predicate) {
         if (isEmpty(collection)) {
@@ -230,7 +202,7 @@ public class CollectionUtils {
     public static <T, R, U extends Comparable<U>> Map<R, T> collectionToMap(Collection<T> collection,
                                                                             Function<T, R> keyFunction,
                                                                             Function<T, U> comparableFunction) {
-        return collectionToMap(collection, keyFunction, comparableFunction, t -> t, ComparableType.MAX);
+        return collectionToMap(collection, keyFunction, comparableFunction, t -> t, ExtremeType.MAX);
     }
 
     /**
@@ -247,7 +219,7 @@ public class CollectionUtils {
                                                                                Function<T, R> keyFunction,
                                                                                Function<T, U> comparableFunction,
                                                                                Function<T, C> valueFunction) {
-        return collectionToMap(collection, keyFunction, comparableFunction, valueFunction, ComparableType.MAX);
+        return collectionToMap(collection, keyFunction, comparableFunction, valueFunction, ExtremeType.MAX);
     }
 
     /**
@@ -263,7 +235,7 @@ public class CollectionUtils {
     public static <T, R, U extends Comparable<U>> Map<R, T> collectionToMap(Collection<T> collection,
                                                                             Function<T, R> keyFunction,
                                                                             Function<T, U> comparableFunction,
-                                                                            ComparableType type) {
+                                                                            ExtremeType type) {
         return collectionToMap(collection, keyFunction, comparableFunction, t -> t, type);
     }
 
@@ -274,19 +246,19 @@ public class CollectionUtils {
      * @param keyFunction        获取map的key的function <T, R> T传入的类型，R转换后map的key类型
      * @param comparableFunction key重复的情况下获取比较器的function <T, U> T传入的类型，U生成比较器的类型
      * @param valueFunction      获取map的value的function <T, C> T传入类型，C转换后map的value类型
-     * @param type               key重复情况下，比较器的类型，MAX最大值或MIN最小值
+     * @param type               key重复情况下，比较器的类型，MAX最大值或MIN最小值，默认为MAX
      * @return Map<R, C>
      */
     public static <T, C, R, U extends Comparable<U>> Map<R, C> collectionToMap(Collection<T> collection,
                                                                                Function<T, R> keyFunction,
                                                                                Function<T, U> comparableFunction,
                                                                                Function<T, C> valueFunction,
-                                                                               ComparableType type) {
+                                                                               ExtremeType type) {
         if (isEmpty(collection)) {
             return emptyMap();
         }
-        return !checkParamRepeat(collection, keyFunction) ? toMap(collection, keyFunction, valueFunction)
-                : toMap(collection, keyFunction, comparableFunction, valueFunction, type);
+        return checkParamUnRepeat(collection, keyFunction) ? simpleToMap(collection, keyFunction, valueFunction)
+                : groupingToMap(collection, keyFunction, comparableFunction, valueFunction, type);
     }
 
     /**
@@ -296,61 +268,47 @@ public class CollectionUtils {
      * @param function
      * @param <T>
      * @param <R>
-     * @return true：重复，false：无重复
+     * @return true：无重复，false：重复
      */
-    public static <T, R> boolean checkParamRepeat(Collection<T> collection, Function<T, R> function) {
-        if (isEmpty(collection)) {
-            return false;
-        }
-        Set<R> rSet = conversionSet(collection, function);
-        return rSet.size() != collection.size();
+    public static <T, R> boolean checkParamUnRepeat(Collection<T> collection, Function<T, R> function) {
+        return isEmpty(collection) || (conversionSet(collection, function).size() == collection.size());
     }
 
     /**
      * collection 转换为 map
      * key不重复的情况将collection转换为map的方法
+     * 为避免空指针，对集合元素进行非空筛选
      *
      * @param collection    需要转换的collection
      * @param keyFunction   获取map的key的function <T, R> T传入的类型，R转换后map的key类型
      * @param valueFunction 获取map的value的function <T, C> T传入类型，C转换后map的value类型
      * @return Map<R, C>
      */
-    private static <T, C, R> Map<R, C> toMap(Collection<T> collection,
-                                             Function<T, R> keyFunction,
-                                             Function<T, C> valueFunction) {
-        return collection.stream().collect(Collectors.toMap(keyFunction, valueFunction));
+    private static <T, C, R> Map<R, C> simpleToMap(Collection<T> collection,
+                                                   Function<T, R> keyFunction,
+                                                   Function<T, C> valueFunction) {
+        return collection.stream().filter(Objects::nonNull).collect(toMap(keyFunction, valueFunction));
     }
 
     /**
      * collection 转换为 map
      * key重复的情况下将list转换为map的方法
+     * 为避免对分组后的元素进行mapping时空指针，在分组前对集合进行筛选
      *
      * @param collection         需要转换的collection
      * @param keyFunction        获取map的key的function <T, R> T传入的类型，R转换后map的key类型
      * @param comparableFunction key重复的情况下获取构造器的function <T, U> T传入的类型，U生成比较器的类型
      * @param valueFunction      获取map的value的function <T, C> T传入类型，C转换后map的value类型
-     * @param type               key重复情况下，比较器的类型，MAX最大值或MIN最小值
+     * @param type               key重复情况下，比较器的类型，MAX最大值或MIN最小值，默认为MAX
      * @return Map<R, C>
      */
-    private static <T, C, R, U extends Comparable<U>> Map<R, C> toMap(Collection<T> collection,
-                                                                      Function<T, R> keyFunction,
-                                                                      Function<T, U> comparableFunction,
-                                                                      Function<T, C> valueFunction,
-                                                                      ComparableType type) {
-        checkComparableType(type);
-        switch (type) {
-            case MAX: {
-                return collection.stream().collect(groupingBy(keyFunction, collectingAndThen(Collectors
-                        .collectingAndThen(maxCollector(comparableFunction), Optional::get), valueFunction)));
-            }
-            case MIN: {
-                return collection.stream().collect(groupingBy(keyFunction, collectingAndThen(Collectors
-                        .collectingAndThen(minCollector(comparableFunction), Optional::get), valueFunction)));
-            }
-            default: {
-                throw new RuntimeException(TYPE_NOT_APPOINT);
-            }
-        }
+    private static <T, C, R, U extends Comparable<U>> Map<R, C> groupingToMap(Collection<T> collection,
+                                                                              Function<T, R> keyFunction,
+                                                                              Function<T, U> comparableFunction,
+                                                                              Function<T, C> valueFunction,
+                                                                              ExtremeType type) {
+        return collection.stream().filter(Objects::nonNull).collect(groupingBy(keyFunction, collectingAndThen(
+                collectingAndThen(comparable(comparableFunction, type), Optional::get), valueFunction)));
     }
 
     /**
@@ -436,18 +394,7 @@ public class CollectionUtils {
         if (isEmpty(list)) {
             return Optional.empty();
         }
-        checkOrderType(orderType);
-        switch (orderType) {
-            case DESC: {
-                return list.stream().sorted(getComparator(function).reversed()).skip(skip).findFirst();
-            }
-            case ASC: {
-                return list.stream().sorted(getComparator(function)).skip(skip).findFirst();
-            }
-            default: {
-                throw new RuntimeException(TYPE_NOT_APPOINT);
-            }
-        }
+        return list.stream().sorted(getComparator(function, orderType)).skip(skip).findFirst();
     }
 
     /**
@@ -530,18 +477,7 @@ public class CollectionUtils {
         if (isEmpty(list)) {
             return emptyList();
         }
-        checkOrderType(orderType);
-        switch (orderType) {
-            case DESC: {
-                return list.stream().sorted(getComparator(function).reversed()).skip(skip).limit(limit).collect(toList());
-            }
-            case ASC: {
-                return list.stream().sorted(getComparator(function)).skip(skip).limit(limit).collect(toList());
-            }
-            default: {
-                throw new RuntimeException(TYPE_NOT_APPOINT);
-            }
-        }
+        return list.stream().sorted(getComparator(function, orderType)).skip(skip).limit(limit).collect(toList());
     }
 
     /**
@@ -585,22 +521,11 @@ public class CollectionUtils {
         if (isEmpty(list)) {
             return emptyList();
         }
-        checkOrderType(orderType);
-        switch (orderType) {
-            case DESC: {
-                return list.stream().sorted(getComparator(function).reversed()).skip(skip).collect(toList());
-            }
-            case ASC: {
-                return list.stream().sorted(getComparator(function)).skip(skip).collect(toList());
-            }
-            default: {
-                throw new RuntimeException(TYPE_NOT_APPOINT);
-            }
-        }
+        return list.stream().sorted(getComparator(function, orderType)).skip(skip).collect(toList());
     }
 
     /**
-     * 获取比较器
+     * 获取Comparator
      *
      * @param function 生成比较器的function
      * @return Comparator<T> T类型的比较器
@@ -610,23 +535,62 @@ public class CollectionUtils {
     }
 
     /**
-     * 获取最大值
+     * 根据ComparableType获取Comparator
      *
-     * @param function
-     * @return Collector<T, ?, Optional < T>>
+     * @param function 生成比较器的function
+     * @param type     排序方式，ASC：升序，DESC降序
+     * @return Comparator<T> T类型的比较器
      */
-    private static <T, C extends Comparable<C>> Collector<T, ?, Optional<T>> maxCollector(Function<T, C> function) {
-        return maxBy(getComparator(function));
+    private static <T, C extends Comparable<C>> Comparator<T> getComparator(Function<T, C> function,
+                                                                            OrderType type) {
+        Comparator<T> comparator = getComparator(function);
+        return OrderType.ASC == type ? comparator : comparator.reversed();
     }
 
     /**
-     * 获取最小值
+     * 获取对应比较类型的比较器
      *
      * @param function
-     * @return Collector<T, ?, Optional < T>>
+     * @param type
+     * @param <T>
+     * @param <C>
+     * @return
      */
-    private static <T, C extends Comparable<C>> Collector<T, ?, Optional<T>> minCollector(Function<T, C> function) {
-        return minBy(getComparator(function));
+    private static <T, C extends Comparable<C>> Collector<T, ?, Optional<T>> comparable(Function<T, C> function,
+                                                                                        ExtremeType type) {
+        return ExtremeType.MIN == type ? minBy(getComparator(function)) : maxBy(getComparator(function));
+    }
+
+    /**
+     * 对集合进行map操作后返回list
+     *
+     * @param collection
+     * @param function
+     * @param <T>
+     * @param <R>
+     * @return List<R>
+     */
+    private static <T, R> List<R> mapList(Collection<T> collection, Function<T, R> function) {
+        if (isEmpty(collection)) {
+            return emptyList();
+        }
+        return collection.stream().map(function).collect(toList());
+    }
+
+    /**
+     * 对集合进行map操作后返回set
+     *
+     * @param collection
+     * @param function
+     * @param <T>
+     * @param <R>
+     * @return Set<R>
+     */
+    private static <T, R> Set<R> mapSet(Collection<T> collection, Function<T, R> function) {
+        if (isEmpty(collection)) {
+            return emptySet();
+        }
+        return collection.stream().map(function).collect(toSet());
     }
 
 }

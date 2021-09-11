@@ -14,6 +14,13 @@ spring:
       config:
         username: nacos-public
         password: fsyH458lPks25Sei
-        server-addr: 127.0.0.1:8848
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
         group: YML_GROUP
+        shared-configs:
+          - dataId: share-config-redis-1.${spring.cloud.nacos.config.file-extension}
+            group: SHARE_YML_GROUP
+            refresh: true
+          - dataId: share-config-sentinel.${spring.cloud.nacos.config.file-extension}
+            group: SHARE_YML_GROUP
+            refresh: true
