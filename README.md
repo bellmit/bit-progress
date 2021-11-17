@@ -6,7 +6,8 @@
   4. 如果服务消费方没有指定明确的服务版本，则采用所有配置为默认版本的服务
 
 ###依赖问题
-  1. 需要注册为SpringCloud的服务都需要依赖remote-common
+  1. 应用需要依赖server-common模块
+  2. 需要注册为SpringCloud的服务需要依赖cloud-nacos或者cloud-eureka模块
   
 ##需要改进
 ###dao模块
@@ -15,4 +16,11 @@
 
 ##鉴权模块
   1. 借鉴了shiro的token解析和生成
+
+##nacos配置
+  1. nacos的服务名指定的配置会覆盖本地的配置
+  2. nacos的共享配置优先级最低
+
+
+
   

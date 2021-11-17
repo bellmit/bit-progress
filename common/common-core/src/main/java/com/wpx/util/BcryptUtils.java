@@ -19,6 +19,9 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import java.util.Objects;
 
+/**
+ * @author 不会飞的小鹏
+ */
 public class BcryptUtils {
 
     private static Base64.Encoder encoder = Base64.getEncoder();
@@ -28,7 +31,7 @@ public class BcryptUtils {
 
     private static KeyFactory keyFactory;
 
-    private static String PATH = System.getProperty("java.io.tmpdir") + File.separator + "spring-cloud-study" + File.separator
+    private static String PATH = System.getProperty("java.io.tmpdir") + File.separator + "bit-progress" + File.separator
             + "file" + File.separator;
 
     static {

@@ -1,6 +1,6 @@
 package com.wpx.manager.swagger.provider;
 
-import com.wpx.manager.swagger.property.SwaggerProperties;
+import com.wpx.property.SwaggerProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.Route;
 import org.springframework.cloud.gateway.route.RouteLocator;

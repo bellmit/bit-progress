@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.wpx</groupId>
-    <artifactId>spring-cloud-study</artifactId>
+    <artifactId>bit-progress</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
     <modules>

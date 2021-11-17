@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration scan="true" scanPeriod="600 seconds" debug="false">
+    <property name="LOG_PATH_DEV" value="logs/dev/"/>
     <property name="LOG_PATH_TEST" value="logs/test/"/>
-    <property name="LOG_PATH_PRO" value="logs/pro/"/>
+    <property name="LOG_PATH_PROD" value="logs/prod/"/>
     <springProperty scope="context" name="LOG_NAME" source="spring.application.name" defaultValue="info"/>
 
     <property name="LOG_LAYOUT" value="%d{yyyy-MM-dd HH:mm:ss.SSS} -%5p ${PID:-} [%15.15t] %-40.40logger{39} : %m%n"/>
@@ -22,14 +23,14 @@
         </encoder>
     </appender>
 
-    <springProfile name="prod">
+    <springProfile name="dev">
         <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <file>${LOG_PATH_PRO}/${LOG_NAME}.log</file>
+            <file>${LOG_PATH_DEV}/${LOG_NAME}.log</file>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <fileNamePattern>${LOG_PATH_PRO}/${LOG_NAME}.log-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
-                <MaxHistory>5</MaxHistory>
+                <fileNamePattern>${LOG_PATH_DEV}/${LOG_NAME}.log-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+                <MaxHistory>3</MaxHistory>
                 <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                    <maxFileSize>500mb</maxFileSize>
+                    <maxFileSize>30mb</maxFileSize>
                 </timeBasedFileNamingAndTriggeringPolicy>
             </rollingPolicy>
             <layout class="ch.qos.logback.classic.PatternLayout">
@@ -41,21 +42,35 @@
             <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
                 <level>Error</level>
             </filter>
-            <file>${LOG_PATH_PRO}/error/${LOG_NAME}-error.log</file>
+            <file>${LOG_PATH_DEV}/error/${LOG_NAME}-error.log</file>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-                <fileNamePattern>${LOG_PATH_PRO}/error/${LOG_NAME}-error.log-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
-                <MaxHistory>5</MaxHistory>
+                <fileNamePattern>${LOG_PATH_DEV}/error/${LOG_NAME}-error.log-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+                <MaxHistory>3</MaxHistory>
                 <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                    <maxFileSize>500mb</maxFileSize>
+                    <maxFileSize>30mb</maxFileSize>
                 </timeBasedFileNamingAndTriggeringPolicy>
             </rollingPolicy>
             <layout class="ch.qos.logback.classic.PatternLayout">
                 <pattern>${LOG_LAYOUT}</pattern>
             </layout>
         </appender>
+
+        <appender name="fileAsyncLog" class="ch.qos.logback.classic.AsyncAppender">
+            <discardingThreshold>0</discardingThreshold>
+            <queueSize>1024</queueSize>
+            <neverBlock>true</neverBlock>
+            <appender-ref ref="FILE"/>
+        </appender>
+
+        <appender name="fileErrorAsyncLog" class="ch.qos.logback.classic.AsyncAppender">
+            <discardingThreshold>0</discardingThreshold>
+            <queueSize>512</queueSize>
+            <neverBlock>true</neverBlock>
+            <appender-ref ref="fileErrorLog"/>
+        </appender>
     </springProfile>
 
-    <springProfile name="dev">
+    <springProfile name="test">
         <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
             <file>${LOG_PATH_TEST}/${LOG_NAME}.log</file>
             <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -102,6 +117,38 @@
         </appender>
     </springProfile>
 
+    <springProfile name="prod">
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_PATH_PROD}/${LOG_NAME}.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH_PROD}/${LOG_NAME}.log-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+                <MaxHistory>5</MaxHistory>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>500mb</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>${LOG_LAYOUT}</pattern>
+            </layout>
+        </appender>
+
+        <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+                <level>Error</level>
+            </filter>
+            <file>${LOG_PATH_PROD}/error/${LOG_NAME}-error.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH_PROD}/error/${LOG_NAME}-error.log-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+                <MaxHistory>5</MaxHistory>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>500mb</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+            </rollingPolicy>
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>${LOG_LAYOUT}</pattern>
+            </layout>
+        </appender>
+    </springProfile>
 
     <logger name="com.luwei" level="DEBUG"/>
     <!-- 开发 控制台标准输出 -->

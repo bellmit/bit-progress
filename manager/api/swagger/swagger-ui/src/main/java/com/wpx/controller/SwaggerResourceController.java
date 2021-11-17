@@ -1,8 +1,6 @@
-package com.wpx.manager.swagger.controller;
+package com.wpx.controller;
 
-import com.wpx.manager.swagger.provider.GatewaySwaggerResourceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +18,7 @@ import java.util.List;
 public class SwaggerResourceController {
 
     @Autowired
-    private GatewaySwaggerResourceProvider gatewaySwaggerResourceProvider;
+    private SwaggerResourcesProvider swaggerResourcesProvider;
 
     @RequestMapping(value = "/configuration/security")
     public ResponseEntity<SecurityConfiguration> securityConfiguration() {
@@ -34,7 +32,7 @@ public class SwaggerResourceController {
 
     @RequestMapping
     public ResponseEntity<List<SwaggerResource>> swaggerResources() {
-        return new ResponseEntity<>(gatewaySwaggerResourceProvider.get(), HttpStatus.OK);
+        return new ResponseEntity<>(swaggerResourcesProvider.get(), HttpStatus.OK);
     }
 
 }

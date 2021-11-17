@@ -1,4 +1,4 @@
-package com.wpx.manager.swagger.property;
+package com.wpx.property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

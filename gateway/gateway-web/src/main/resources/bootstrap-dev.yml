@@ -3,9 +3,9 @@ spring:
     nacos:
       discovery:
         username: nacos-dev
-        password: shy5hhs9uYybf7y
-        namespace: 070474c4-e846-47e9-85dd-bb1ff200f9bc
+        password: shy5hhs9uYybf7yo
+        namespace: ea89e7d4-84ee-4bf4-b06a-43e7431eb687
       config:
         username: nacos-dev
-        password: shy5hhs9uYybf7y
-        namespace: 070474c4-e846-47e9-85dd-bb1ff200f9bc
+        password: shy5hhs9uYybf7yo
+        namespace: ea89e7d4-84ee-4bf4-b06a-43e7431eb687
