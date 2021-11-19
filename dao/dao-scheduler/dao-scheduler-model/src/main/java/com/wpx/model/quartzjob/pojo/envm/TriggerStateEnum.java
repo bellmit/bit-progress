@@ -1,4 +1,4 @@
-package com.wpx.model.quartzjob.envm;
+package com.wpx.model.quartzjob.pojo.envm;
 
 import com.baomidou.mybatisplus.core.enums.IEnum;
 

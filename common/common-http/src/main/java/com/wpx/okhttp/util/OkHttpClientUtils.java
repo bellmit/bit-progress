@@ -18,7 +18,7 @@ import java.util.Objects;
 /**
  * @author 不会飞的小鹏
  * create on 2021/7/19 20:59
- * @Description: okhttp请求工具类
+ * okhttp请求工具类
  */
 public class OkHttpClientUtils {
 

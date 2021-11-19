@@ -7,7 +7,7 @@ import com.wpx.model.pay.*;
  * @author 不会飞的小鹏
  * create on 2021/7/19 0:00
  * 官方文档 https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_1.shtml
- * @Description: 微信支付 JSAPI支付下单
+ * 微信支付 JSAPI支付下单
  */
 public class JsApiUnifiedOrder {
 

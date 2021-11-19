@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @author 不会飞的小鹏
- * @Description: swagger-ui访问资源controller
+ * swagger-ui访问资源controller
  */
 @RestController
 @RequestMapping("swagger-resources")

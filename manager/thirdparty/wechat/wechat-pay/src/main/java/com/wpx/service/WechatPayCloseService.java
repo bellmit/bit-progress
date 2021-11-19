@@ -15,7 +15,7 @@ import static com.wpx.constant.WechatPayConstants.MCH_ID;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 微信支付订单关闭服务
+ * 微信支付订单关闭服务
  */
 public class WechatPayCloseService {
 

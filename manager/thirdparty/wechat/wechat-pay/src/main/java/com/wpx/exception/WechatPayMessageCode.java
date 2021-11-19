@@ -2,7 +2,7 @@ package com.wpx.exception;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 微信支付错误信息
+ * 微信支付错误信息
  */
 public class WechatPayMessageCode {
 

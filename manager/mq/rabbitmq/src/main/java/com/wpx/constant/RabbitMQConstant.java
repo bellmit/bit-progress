@@ -2,7 +2,7 @@ package com.wpx.constant;
 
 /**
  * @author 不会飞的小鹏
- * @Description: RabbitMQ常量
+ * RabbitMQ常量
  */
 public class RabbitMQConstant {
 

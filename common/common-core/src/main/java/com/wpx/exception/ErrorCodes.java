@@ -2,7 +2,7 @@ package com.wpx.exception;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 错误码
+ * 错误码
  */
 public class ErrorCodes {
 

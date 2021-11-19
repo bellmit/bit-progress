@@ -3,10 +3,12 @@ package com.wpx.quartz.factory;
 import com.wpx.exception.ScheduleException;
 import com.wpx.exception.ScheduleExceptionMessage;
 import com.wpx.model.quartzjob.QuartzJob;
-import com.wpx.model.quartzjob.envm.TriggerType;
-import com.wpx.property.ServerTokenProperties;
+import com.wpx.model.quartzjob.pojo.envm.TriggerStateEnum;
+import com.wpx.model.quartzjob.pojo.envm.TriggerType;
+import com.wpx.quartz.TriggerStateItem;
 import com.wpx.quartz.job.CustomJob;
 import com.wpx.util.Assert;
+import com.wpx.util.CollectionUtils;
 import com.wpx.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
@@ -21,7 +23,7 @@ import java.util.Set;
 
 /**
  * @author 不会飞的小鹏
- * @Description: Quartz
+ * Quartz
  */
 @Component
 @Slf4j
@@ -30,23 +32,16 @@ public class QuartzFactory {
     @Autowired
     private Scheduler scheduler;
 
-    @Autowired
-    private ServerTokenProperties serverTokenProperties;
-
     public JobKey createQuartzJob(QuartzJob job) throws SchedulerException {
-        String name = job.getJobName();
-        Assert.isNotEmpty(name, ScheduleExceptionMessage.QUARTZJOB_NAME_EMPTY_EXCEPTION);
-
-        String groupName = job.getGroupName();
-        if (StringUtils.isEmpty(groupName)) {
-            groupName = job.getClass().getName();
-        }
+        Long quartzJobId = job.getQuartzJobId();
+        String name = String.valueOf(quartzJobId);
+        Long groupId = job.getGroupId();
+        String groupName = String.valueOf(groupId);
         JobKey jobKey = new JobKey(name, groupName);
-
         TriggerKey triggerKey = new TriggerKey(name, groupName);
-        Trigger tri = scheduler.getTrigger(triggerKey);
-        if (Objects.nonNull(tri)) {
+        if (scheduler.checkExists(jobKey)) {
             log.info("quartzJob exists, jobName [{}]", name);
+            return jobKey;
         } else {
             log.info("create quartz trigger，name {}", name);
             TriggerType type = job.getTriggerType();
@@ -66,7 +61,7 @@ public class QuartzFactory {
                             .startAt(new Date(startAtTime))
                             .build();
                     scheduler.scheduleJob(jobDetail, trigger);
-                    break;
+                    return jobKey;
                 }
                 case CRON: {
                     String cronExpression = job.getCronExpression();
@@ -82,17 +77,13 @@ public class QuartzFactory {
                             .startAt(new Date(millis))
                             .build();
                     scheduler.scheduleJob(jobDetail, scheduleTrigger);
-                    break;
+                    return jobKey;
                 }
                 default: {
                     throw new ScheduleException(ScheduleExceptionMessage.JOBGROUP_QUERY_EXCEPTION);
                 }
             }
         }
-        String serverName = job.getApplicationName();
-        String restToken = job.getRestToken();
-        serverTokenProperties.setServerTokenByServerName(serverName, restToken);
-        return jobKey;
     }
 
     /**
@@ -116,13 +107,30 @@ public class QuartzFactory {
     }
 
     /**
+     * 获取定时任务状态 -- 即获取触发器状态
+     *
+     * @param triggerName
+     * @param triggerGroup
+     * @return 任务的触发器状态
+     * @throws SchedulerException
+     */
+    public TriggerStateItem getTriggerState(String triggerName, String triggerGroup) throws SchedulerException {
+        TriggerKey triggerKey = generateTriggerKey(triggerName, triggerGroup);
+        return getTriggerState(triggerKey);
+    }
+
+    /**
      * 获取触发器状态
      *
      * @param triggerKey
      * @throws SchedulerException
      */
-    public Trigger.TriggerState getTriggerState(TriggerKey triggerKey) throws SchedulerException {
-        return scheduler.getTriggerState(triggerKey);
+    public TriggerStateItem getTriggerState(TriggerKey triggerKey) throws SchedulerException {
+        Trigger.TriggerState triggerState = scheduler.getTriggerState(triggerKey);
+        TriggerStateItem stateItem = new TriggerStateItem();
+        stateItem.setName(triggerKey.getName());
+        stateItem.setTriggerState(TriggerStateEnum.valueOf(triggerState.name()));
+        return stateItem;
     }
 
     /**
@@ -144,7 +152,7 @@ public class QuartzFactory {
                 if (type.equals(TriggerType.SIMPLE)) {
                     String groupName = job.getClass().getName();
                     //递增重试，每 5 * retryTime ^ 2
-                    Long startAtTime = System.currentTimeMillis() + new Double(5000 * Math.pow(job.getRetryTime(), 2)).longValue();
+                    Long startAtTime = System.currentTimeMillis() + new Double(5000 * Math.pow(job.getRetry(), 2)).longValue();
                     JobDetail jobDetail = JobBuilder.newJob(CustomJob.class).withIdentity(name, groupName).build();
                     jobDetail.getJobDataMap().put("quartzJob", job);
                     Trigger trigger = TriggerBuilder.newTrigger().withIdentity(name, groupName)
@@ -161,19 +169,17 @@ public class QuartzFactory {
     /**
      * 移除任务
      *
-     * @param jobName
-     * @param triggerName
+     * @param name
+     * @param group
      */
-    public void removeJob(String jobName, String triggerName) {
+    public void removeJob(String name, String group) {
         try {
-            String triggerGroupName = QuartzJob.class.getName();
-            String jobGroupName = QuartzJob.class.getName();
-            TriggerKey triggerKey = TriggerKey.triggerKey(triggerName, triggerGroupName);
-            JobKey jobKey = JobKey.jobKey(jobName, jobGroupName);
+            JobKey jobKey = JobKey.jobKey(name, group);
+            TriggerKey triggerKey = TriggerKey.triggerKey(name, group);
             removeJob(triggerKey, jobKey);
         } catch (Exception e) {
-            log.error("removeJob error: ", e);
-            log.error("移除 job[{}] 发生异常", jobName);
+            log.error("removeJob [{}] error: ", name, e);
+            throw new ScheduleException(ScheduleExceptionMessage.QUARTZJOB_DELETE_EXCEPTION);
         }
     }
 
@@ -202,10 +208,32 @@ public class QuartzFactory {
         try {
             String jobGroupName = QuartzJob.class.getName();
             JobDetail jobDetail = scheduler.getJobDetail(JobKey.jobKey(jobName, jobGroupName));
-            return null == jobDetail ? false : true;
+            return null != jobDetail;
         } catch (Exception e) {
             return false;
         }
+    }
+
+    /**
+     * 暂停定时任务
+     *
+     * @param name
+     * @param group
+     * @throws SchedulerException
+     */
+    public void pauseQuartzJob(String name, String group) throws SchedulerException {
+        JobKey jobKey = generateJobKey(name, group);
+        scheduler.pauseJob(jobKey);
+    }
+
+    /**
+     * 暂停定时任务
+     *
+     * @param jobKey
+     * @throws SchedulerException
+     */
+    public void pauseQuartzJob(JobKey jobKey) throws SchedulerException {
+        scheduler.pauseJob(jobKey);
     }
 
     /**
@@ -219,12 +247,25 @@ public class QuartzFactory {
     }
 
     /**
+     * 恢复定时任务
+     *
+     * @param name
+     * @param group
+     * @throws SchedulerException
+     */
+    public void rescheduleQuartzJob(String name, String group) throws SchedulerException {
+        TriggerKey triggerKey = generateTriggerKey(name, group);
+        Trigger trigger = scheduler.getTrigger(triggerKey);
+        scheduler.rescheduleJob(triggerKey, trigger);
+    }
+
+    /**
      * 恢复触发器
      *
      * @param triggerKey
      * @throws SchedulerException
      */
-    public void rescheduleJob(TriggerKey triggerKey) throws SchedulerException {
+    public void rescheduleTrigger(TriggerKey triggerKey) throws SchedulerException {
         Trigger trigger = scheduler.getTrigger(triggerKey);
         scheduler.rescheduleJob(triggerKey, trigger);
     }
@@ -263,6 +304,40 @@ public class QuartzFactory {
      */
     public List<String> getJobGroupNames() throws SchedulerException {
         return scheduler.getJobGroupNames();
+    }
+
+    /**
+     * 获取定时任务状态
+     *
+     * @param triggerKeys 定时任务触发器key列表
+     * @return 定时任务状态列表
+     */
+    public List<TriggerStateItem> listTriggerState(List<TriggerKey> triggerKeys) {
+        if (CollectionUtils.isEmpty(triggerKeys)) {
+            return CollectionUtils.emptyList();
+        }
+        return CollectionUtils.conversionList(triggerKeys, triggerKey -> {
+            try {
+                return getTriggerState(triggerKey);
+            } catch (SchedulerException e) {
+                log.error("get [{}] [{}] jobState error", triggerKey.getName(), triggerKey.getGroup(), e);
+                throw new ScheduleException(ScheduleExceptionMessage.QUARTZJOB_GET_TRIGGER_STATE_EXCEPTION);
+            }
+        });
+    }
+
+    /**
+     * 生成JobKey
+     */
+    public JobKey generateJobKey(String jobName, String groupName) {
+        return JobKey.jobKey(jobName, groupName);
+    }
+
+    /**
+     * 生成TriggerKey
+     */
+    public TriggerKey generateTriggerKey(String triggerName, String triggerGroup) {
+        return TriggerKey.triggerKey(triggerName, triggerGroup);
     }
 
 }

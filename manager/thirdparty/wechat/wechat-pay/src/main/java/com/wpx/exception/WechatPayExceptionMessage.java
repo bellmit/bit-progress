@@ -5,7 +5,7 @@ import static com.wpx.exception.WechatPayMessageCode.*;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 微信支付异常信息 继承自{@link ExceptionMessage}
+ * 微信支付异常信息 继承自{@link ExceptionMessage}
  */
 public enum WechatPayExceptionMessage implements IExceptionMessage {
 

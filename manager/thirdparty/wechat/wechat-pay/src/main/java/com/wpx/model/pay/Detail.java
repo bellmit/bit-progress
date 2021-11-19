@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 优惠功能
+ * 优惠功能
  */
 public class Detail {
 

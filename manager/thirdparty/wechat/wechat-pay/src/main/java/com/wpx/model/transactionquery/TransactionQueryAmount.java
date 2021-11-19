@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 订单查询金额信息
+ * 订单查询金额信息
  */
 public class TransactionQueryAmount {
 

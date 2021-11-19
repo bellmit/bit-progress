@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * @author 不会飞的小鹏
- * @Description: RabbitMQ配置
+ * RabbitMQ配置
  */
 @Configuration
 @ConfigurationProperties(prefix = RabbitMQProperties.PREFIX)

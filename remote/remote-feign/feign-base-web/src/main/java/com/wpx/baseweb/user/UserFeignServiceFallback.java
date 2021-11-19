@@ -10,7 +10,7 @@ import java.util.Set;
 
 /**
  * @author 不会飞的小鹏
- * @Description: UserFeignService的服务降级
+ * UserFeignService的服务降级
  */
 @Component
 public class UserFeignServiceFallback implements FallbackFactory<UserFeignService> {

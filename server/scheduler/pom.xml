@@ -33,12 +33,7 @@
         </dependency>
         <dependency>
             <groupId>com.wpx</groupId>
-            <artifactId>dao-scheduler-model</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.wpx</groupId>
-            <artifactId>dao-common-mapper</artifactId>
+            <artifactId>dao-scheduler-mapper</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

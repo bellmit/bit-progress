@@ -14,7 +14,7 @@ import java.io.IOException;
 
 /**
  * @author 不会飞的小鹏
- * @Description: GitHub登录服务
+ * GitHub登录服务
  */
 public class GitHubLoginService {
 

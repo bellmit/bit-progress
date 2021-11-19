@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
- * @Description: H5场景信息
+ * H5场景信息
  */
 public class H5Info {
 

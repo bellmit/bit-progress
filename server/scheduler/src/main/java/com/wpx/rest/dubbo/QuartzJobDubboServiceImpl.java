@@ -2,14 +2,16 @@ package com.wpx.rest.dubbo;
 
 import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
-import com.wpx.model.quartzjob.pojo.QuartzJobAddDTO;
-import com.wpx.model.quartzjob.pojo.QuartzJobDeleteDTO;
-import com.wpx.model.quartzjob.pojo.QuartzJobExistsCheckDTO;
-import com.wpx.model.quartzjob.pojo.QuartzJobVO;
+import com.wpx.model.quartzjob.pojo.dto.QuartzJobAddDTO;
+import com.wpx.model.quartzjob.pojo.dto.QuartzJobStateDTO;
+import com.wpx.model.quartzjob.pojo.dto.QuartzJobUpdateDTO;
+import com.wpx.model.quartzjob.pojo.vo.QuartzJobVO;
 import com.wpx.scheduler.quartzjob.QuartzJobDubboService;
-import com.wpx.service.QuartzJobService;
+import com.wpx.service.quartzjob.QuartzJobService;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Set;
 
 /**
  * @author 不会飞的小鹏
@@ -25,33 +27,55 @@ public class QuartzJobDubboServiceImpl implements QuartzJobDubboService {
      * 创建定时任务
      *
      * @param addDTO 需要添加的定时任务信息
-     * @return: ResultVO<QuartzJobVO>
      */
     @Override
     public ResultVO<QuartzJobVO> createQuartzJob(QuartzJobAddDTO addDTO) {
-        return ResultVO.successData(quartzJobService.createJob(addDTO));
+        return ResultVO.successData(quartzJobService.saveQuartzJob(addDTO));
+    }
+
+    /**
+     * 更新定时任务信息
+     *
+     * @param quartzJobUpdateDTO
+     * @return 更新后的定时任务信息
+     */
+    @Override
+    public ResultVO<QuartzJobVO> update(QuartzJobUpdateDTO quartzJobUpdateDTO) {
+        return ResultVO.successData(quartzJobService.updateQuartzJob(quartzJobUpdateDTO));
     }
 
     /**
      * 移除定时任务
      *
-     * @param deleteDTO 需要移除的定时任务信息
-     * @return: ResultVO<BooleanVO>
+     * @param quartzJobIds 移除的任务ID
      */
     @Override
-    public ResultVO<BooleanVO> deleteQuartzJob(QuartzJobDeleteDTO deleteDTO) {
-        quartzJobService.deleteJob(deleteDTO);
+    public ResultVO<BooleanVO> deleteQuartzJob(Set<Long> quartzJobIds) {
+        quartzJobService.deleteQuartzJobs(quartzJobIds);
         return ResultVO.successData(BooleanVO.result(true));
     }
 
     /**
-     * 查询定时任务是否存在同名任务
+     * 暂停定时任务
      *
-     * @param existsCheckDTO 需要检查的任务信息
-     * @return: ResultVO<BooleanVO>
+     * @param stateDTO 暂停的任务ID
+     * @return 是否暂停成功
      */
     @Override
-    public ResultVO<BooleanVO> checkExists(QuartzJobExistsCheckDTO existsCheckDTO) {
+    public ResultVO<BooleanVO> pauseQuartzJob(QuartzJobStateDTO stateDTO) {
+        quartzJobService.pauseQuartzJob(stateDTO);
+        return ResultVO.successData(BooleanVO.result(true));
+    }
+
+    /**
+     * 恢复任务
+     *
+     * @param stateDTO 恢复的任务ID
+     * @return 是否恢复成功
+     */
+    @Override
+    public ResultVO<BooleanVO> rescheduleQuartzJob(QuartzJobStateDTO stateDTO) {
+        quartzJobService.rescheduleQuartzJob(stateDTO);
         return ResultVO.successData(BooleanVO.result(true));
     }
 

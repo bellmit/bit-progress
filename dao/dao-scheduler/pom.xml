@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>dao-scheduler-model</module>
+        <module>dao-scheduler-mapper</module>
     </modules>
 
 </project>

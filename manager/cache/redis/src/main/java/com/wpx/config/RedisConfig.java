@@ -8,7 +8,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 配置默认的Redis
+ * 配置默认的Redis
  */
 @Configuration
 public class RedisConfig {

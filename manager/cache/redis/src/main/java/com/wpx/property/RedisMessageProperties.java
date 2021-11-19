@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * @author 不会飞的小鹏
- * @Description: Redis配置信息
+ * Redis配置信息
  */
 public class RedisMessageProperties {
 

@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * @author 不会飞的小鹏
  * create on 2021/7/19 1:04
- * @Description: 微信支付统一下单服务类
+ * 微信支付统一下单服务类
  */
 public class WechatPayUnifiedOrderService {
 

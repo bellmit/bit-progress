@@ -2,7 +2,7 @@ package com.wpx.quartz.job;
 
 import com.wpx.feignclient.FeignClientService;
 import com.wpx.model.quartzjob.QuartzJob;
-import com.wpx.model.quartzjob.envm.TriggerType;
+import com.wpx.model.quartzjob.pojo.envm.TriggerType;
 import com.wpx.quartz.factory.QuartzFactory;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -15,7 +15,7 @@ import java.net.URI;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 任务触发
+ * 任务触发
  **/
 @Component
 public class CustomJob implements Job {
@@ -49,9 +49,9 @@ public class CustomJob implements Job {
 
             //根据任务定义，只对普通任务实施重试
             //重试次数为最大为三次
-            if (triggerType.equals(TriggerType.SIMPLE) && quartzJob.getRetryTime() < 3) {
+            if (triggerType.equals(TriggerType.SIMPLE) && quartzJob.getRetry() < 3) {
                 //重试次数递增
-                quartzJob.setRetryTime(quartzJob.getRetryTime() + 1);
+                quartzJob.setRetry(quartzJob.getRetry() + 1);
                 quartzFactory.reTrySimpleJob(quartzJob);
             }
         }

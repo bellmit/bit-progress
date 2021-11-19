@@ -9,7 +9,7 @@ import org.springframework.web.util.pattern.PathPatternParser;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 跨域配置
+ * 跨域配置
  */
 @Configuration
 public class CorsConfig {

@@ -1,74 +1,85 @@
 package com.wpx.model.quartzjob;
 
-import com.wpx.model.quartzjob.envm.TriggerType;
-import lombok.Data;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.Version;
+import com.baomidou.mybatisplus.annotation.TableId;
+
+import java.time.LocalDateTime;
+
+import com.baomidou.mybatisplus.annotation.TableLogic;
 
 import java.io.Serializable;
 
+import com.wpx.model.quartzjob.pojo.envm.TriggerType;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
 /**
  * @author 不会飞的小鹏
- * @Description: 定时任务
- **/
+ * @since 2021-11-19
+ */
+@ApiModel(value = "定时任务")
 @Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@TableName("sdr_quartz_job")
 public class QuartzJob implements Serializable {
 
-    private static final long serialVersionUID = 6575630849578006711L;
+    private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "定时任务ID")
+    @TableId(value = "quartz_job_id", type = IdType.AUTO)
+    private Long quartzJobId;
+
+    @ApiModelProperty(value = "任务名称")
     private String jobName;
 
+    @ApiModelProperty(value = "任务触发类型，SIMPLE：倒计时出发，CRON：表达式触发")
     private TriggerType triggerType;
 
-    /**
-     * 重试次数
-     */
-    private Integer retryTime;
+    @ApiModelProperty(value = "重试次数，出发类型为倒计时出发时才生效")
+    private Integer retry;
 
+    @ApiModelProperty(value = "cron表达式")
     private String cronExpression;
 
+    @ApiModelProperty(value = "倒计时触发时长")
     private Long duration;
 
-    /**
-     * bean名
-     */
+    @ApiModelProperty(value = "触发的bean名称")
     private String beanName;
 
-    /**
-     * 方法名
-     */
+    @ApiModelProperty(value = "触发的方法名称")
     private String methodName;
 
-    private String argsList;
+    @ApiModelProperty(value = "触发参数")
+    private String args;
 
-    private String argsClassList;
+    @ApiModelProperty(value = "触发的参数类型")
+    private String argsClass;
 
-    /**
-     * 定时器分组，例：main-cms-kitty-cron，main-cms-kitty-simple
-     */
-    private String groupName;
+    @ApiModelProperty(value = "分组ID")
+    private Long groupId;
 
-    /**
-     * 调用的服务
-     */
+    @ApiModelProperty(value = "定时任务服务名称")
     private String applicationName;
 
-    /**
-     * 定时器的服务调用地址
-     */
+    @ApiModelProperty(value = "定时任务触达地址")
     private String serverUrl;
 
-    /**
-     * 服务调用的token
-     */
-    private String restToken;
+    @ApiModelProperty(value = "创建时间")
+    private LocalDateTime createTime;
 
-    /*public QuartzJob(String jobName, TriggerType triggerType, String cronExpression, Long duration, String beanName, String methodName) {
-        this.jobName = jobName;
-        this.triggerType = triggerType;
-        this.cronExpression = cronExpression;
-        this.duration = duration;
-        this.beanName = beanName;
-        this.methodName = methodName;
+    @ApiModelProperty(value = "更新时间")
+    private LocalDateTime updateTime;
 
-        this.retryTime = 0;
-    }*/
+    @ApiModelProperty(value = "是否删除，0：false，未删除；1：true，已删除")
+    @TableLogic
+    private Boolean deleted;
+
+
 }

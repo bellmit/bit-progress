@@ -4,7 +4,7 @@ import java.util.Map;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 队列配置
+ * 队列配置
  */
 public class QueueMessage {
 

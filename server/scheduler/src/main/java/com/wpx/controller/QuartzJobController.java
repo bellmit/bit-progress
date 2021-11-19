@@ -1,89 +1,92 @@
 package com.wpx.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wpx.model.BooleanVO;
-import com.wpx.model.ResultVO;
-import com.wpx.model.quartzjob.pojo.*;
-import com.wpx.service.QuartzJobService;
+import com.wpx.model.quartzjob.pojo.dto.QuartzJobStateDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wpx.model.ResultVO;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
+
+import com.wpx.model.quartzjob.pojo.dto.QuartzJobQueryDTO;
+import com.wpx.model.quartzjob.pojo.dto.QuartzJobUpdateDTO;
+import com.wpx.model.quartzjob.pojo.vo.QuartzJobVO;
+import com.wpx.model.quartzjob.pojo.dto.QuartzJobAddDTO;
+import com.wpx.service.quartzjob.QuartzJobService;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author 不会飞的小鹏
- *  定时任务管理后台
+ * @author wpx
+ * create on 2021-11-19
  */
-@Api(tags = "定时任务 -- 管理")
+@Api(tags = {"scheduler -- 定时任务分组"})
 @RestController
-@RequestMapping("api/scheduler/quartzJob")
+@RequestMapping("/api/scheduler/quartzJob")
 public class QuartzJobController {
 
     @Autowired
     private QuartzJobService quartzJobService;
 
-    @PostMapping
-    @ApiOperation(value = "创建任务")
-    public ResultVO<QuartzJobVO> createQuartzJob(@RequestBody QuartzJobAddDTO addDTO) {
-        return ResultVO.successData(quartzJobService.createJob(addDTO));
+    @GetMapping
+    @ApiOperation("查询详情")
+    public ResultVO<QuartzJobVO> findById(@RequestParam @ApiParam("quartzJobId") Long quartzJobId) {
+        return ResultVO.successData(quartzJobService.findById(quartzJobId));
     }
 
-    @GetMapping
-    @ApiOperation(value = "查看任务")
-    public ResultVO<QuartzJobVO> getQuartzJob(@ModelAttribute QuartzJobGetDTO getDTO) {
-        return ResultVO.successData(quartzJobService.getJob(getDTO));
+    @PostMapping
+    @ApiOperation("添加")
+    public ResultVO<QuartzJobVO> save(@RequestBody @Valid QuartzJobAddDTO quartzJobAddDTO) {
+        return ResultVO.successData(quartzJobService.saveQuartzJob(quartzJobAddDTO));
+    }
+
+    @DeleteMapping
+    @ApiOperation("删除")
+    public ResultVO<BooleanVO> delete(@RequestParam @ApiParam("quartzJobId列表") Set<Long> quartzJobIds) {
+        quartzJobService.deleteQuartzJobs(quartzJobIds);
+        return ResultVO.successData(BooleanVO.result(true));
+    }
+
+    @PutMapping
+    @ApiOperation("修改")
+    public ResultVO<QuartzJobVO> update(@RequestBody @Valid QuartzJobUpdateDTO quartzJobUpdateDTO) {
+        return ResultVO.successData(quartzJobService.updateQuartzJob(quartzJobUpdateDTO));
+    }
+
+    @GetMapping("page")
+    @ApiOperation("分页")
+    public ResultVO<IPage<QuartzJobVO>> page(@ModelAttribute QuartzJobQueryDTO quartzJobQueryDTO, Page page) {
+        return ResultVO.successData(quartzJobService.findQuartzJobPage(quartzJobQueryDTO, page));
     }
 
     @PutMapping("pause")
     @ApiOperation(value = "暂停任务")
-    public ResultVO<QuartzJobVO> pauseTrigger(@RequestBody QuartzJobTriggerDTO triggerDTO) {
-        return ResultVO.successData(quartzJobService.pauseTrigger(triggerDTO));
+    public ResultVO<BooleanVO> pauseQuartzJob(@RequestBody @Valid QuartzJobStateDTO stateDTO) {
+        quartzJobService.pauseQuartzJob(stateDTO);
+        return ResultVO.successData(BooleanVO.result(true));
     }
 
     @PutMapping("reschedule")
     @ApiOperation(value = "恢复任务")
-    public ResultVO<QuartzJobVO> rescheduleTrigger(@RequestBody QuartzJobTriggerDTO triggerDTO) {
-        return ResultVO.successData(quartzJobService.rescheduleJob(triggerDTO));
-    }
-
-    @DeleteMapping
-    @ApiOperation(value = "移除任务")
-    public ResultVO<BooleanVO> deleteQuartzJob(@ModelAttribute QuartzJobDeleteDTO deleteDTO) {
-        quartzJobService.deleteJob(deleteDTO);
+    public ResultVO<BooleanVO> rescheduleQuartzJob(@RequestBody @Valid QuartzJobStateDTO stateDTO) {
+        quartzJobService.rescheduleQuartzJob(stateDTO);
         return ResultVO.successData(BooleanVO.result(true));
     }
+/*
 
     @PostMapping("list")
     @ApiOperation(value = "创建多个任务")
-    public ResultVO<List<QuartzJobVO>> createQuartzJob(@RequestBody QuartzJobListAddDTO listAddDTO) {
-        return ResultVO.successData(quartzJobService.createJobList(listAddDTO));
+    public ResultVO<BooleanVO> createQuartzJob(@RequestBody QuartzJobListAddDTO listAddDTO) {
+        quartzJobService.createJobList(listAddDTO);
+        return ResultVO.successData(BooleanVO.result(true));
     }
-
-    @GetMapping("list")
-    @ApiOperation(value = "获取任务列表")
-    public ResultVO<List<QuartzJobVO>> listQuartzJob() {
-        return ResultVO.successData(quartzJobService.listJob());
-    }
-
-    @GetMapping("page")
-    @ApiOperation(value = "分页获取任务")
-    public ResultVO<IPage<QuartzJobVO>> pageQuartzJob(@ModelAttribute QuartzJobQueryDTO queryDTO, Page page) {
-        return ResultVO.successData(quartzJobService.pageJob(queryDTO, page));
-    }
-
-    @GetMapping("exists")
-    @ApiOperation(value = "检查是否有同名任务")
-    public ResultVO<BooleanVO> checkExists(@ModelAttribute QuartzJobExistsCheckDTO existsCheckDTO) {
-        return ResultVO.successData(quartzJobService.checkExists(existsCheckDTO));
-    }
-
-    @GetMapping("group/list")
-    @ApiOperation(value = "获取任务分组")
-    public ResultVO<List<String>> listJobGroup() {
-        return ResultVO.successData(quartzJobService.listJobGroup());
-    }
+*/
 
 }
+

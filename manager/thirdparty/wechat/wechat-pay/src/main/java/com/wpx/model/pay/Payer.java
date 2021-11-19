@@ -3,7 +3,7 @@ package com.wpx.model.pay;
 /**
  * @author 不会飞的小鹏
  * create on 2021/7/19 0:22
- * @Description: 支付人
+ * 支付人
  */
 public class Payer {
 

@@ -15,7 +15,7 @@ import java.util.Optional;
 
 /**
  * @author 不会飞的小鹏
- * @Description: RabbitMQ多数据源配置
+ * RabbitMQ多数据源配置
  */
 public class ConnectionMessage {
 

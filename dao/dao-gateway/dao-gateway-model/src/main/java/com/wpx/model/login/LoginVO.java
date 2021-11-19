@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 登录VO
+ * 登录VO
  */
 public class LoginVO implements Serializable {
 

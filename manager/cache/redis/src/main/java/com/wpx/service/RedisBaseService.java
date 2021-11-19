@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 在RedisCacheUtils的基础上封装，将数据序列化
+ * 在RedisCacheUtils的基础上封装，将数据序列化
  */
 public class RedisBaseService {
 

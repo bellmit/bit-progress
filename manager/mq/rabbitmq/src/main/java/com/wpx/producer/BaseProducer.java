@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 生产者基础类
+ * 生产者基础类
  */
 @Component
 public abstract class BaseProducer {

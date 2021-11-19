@@ -2,14 +2,21 @@ package com.wpx.scheduler.quartzjob;
 
 import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
-import com.wpx.model.quartzjob.pojo.QuartzJobAddDTO;
-import com.wpx.model.quartzjob.pojo.QuartzJobVO;
+import com.wpx.model.quartzjob.pojo.dto.QuartzJobAddDTO;
+import com.wpx.model.quartzjob.pojo.dto.QuartzJobStateDTO;
+import com.wpx.model.quartzjob.pojo.dto.QuartzJobUpdateDTO;
+import com.wpx.model.quartzjob.pojo.vo.QuartzJobVO;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.Set;
+
 /**
  * @author 不会飞的小鹏
- * @Description: quartzJob feign 服务调用类
+ * quartzJob feign 服务调用类
  */
 @FeignClient(name = "scheduler", path = "rest/scheduler/quartzJob", fallbackFactory = QuartzJobFeignServiceFallback.class)
 public interface QuartzJobFeignService {
@@ -17,36 +24,50 @@ public interface QuartzJobFeignService {
     /**
      * 创建定时任务
      *
-     * @param addDTO  需要添加的定时任务信息
-     * @return: ResultVO<QuartzJobVO>
+     * @param addDTO 需要添加的定时任务信息
+     * @return 创建后的定时任务信息
      */
     @PostMapping
+    @ApiOperation(value = "创建任务")
     ResultVO<QuartzJobVO> createQuartzJob(@RequestBody QuartzJobAddDTO addDTO);
+
+    /**
+     * 更新定时任务信息
+     *
+     * @param quartzJobUpdateDTO
+     * @return 更新后的定时任务信息
+     */
+    @PutMapping
+    @ApiOperation("修改")
+    ResultVO<QuartzJobVO> update(@RequestBody @Valid QuartzJobUpdateDTO quartzJobUpdateDTO);
 
     /**
      * 移除定时任务
      *
-     * @param jobKeyName  需要移除的定时任务名称
-     * @param jobKeyGroup  需要移除的定时任务分组
-     * @param triggerKeyName  需要移除的定时任务触发器名称
-     * @param triggerKeyGroup  需要移除的定时任务触发器分组
-     * @return: ResultVO<BooleanVO>
+     * @param quartzJobIds 移除的任务ID
+     * @return 是否移除成功
      */
     @DeleteMapping
-    ResultVO<BooleanVO> deleteQuartzJob(@RequestParam String jobKeyName,
-                                        @RequestParam String jobKeyGroup,
-                                        @RequestParam String triggerKeyName,
-                                        @RequestParam String triggerKeyGroup);
+    ResultVO<BooleanVO> deleteQuartzJob(@RequestParam @ApiParam("quartzJobId列表") Set<Long> quartzJobIds);
 
     /**
-     * 查询定时任务是否存在同名任务
+     * 暂停定时任务
      *
-     * @param jobName 需要检查的任务名称
-     * @param jobGroupName  需要检查的任务分组
-     * @return: ResultVO<BooleanVO>
+     * @param stateDTO 暂停的任务ID
+     * @return 是否暂停成功
      */
-    @GetMapping("exists")
-    ResultVO<BooleanVO> checkExists(@RequestParam String jobName,
-                                    @RequestParam String jobGroupName);
+    @PutMapping("pause")
+    @ApiOperation(value = "暂停任务")
+    ResultVO<BooleanVO> pauseQuartzJob(@RequestBody @Valid QuartzJobStateDTO stateDTO);
+
+    /**
+     * 恢复任务
+     *
+     * @param stateDTO 恢复的任务ID
+     * @return 是否恢复成功
+     */
+    @PutMapping("reschedule")
+    @ApiOperation(value = "恢复任务")
+    ResultVO<BooleanVO> rescheduleQuartzJob(@RequestBody @Valid QuartzJobStateDTO stateDTO);
 
 }

@@ -12,7 +12,7 @@ import java.io.IOException;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 微信支付订单查询服务类
+ * 微信支付订单查询服务类
  */
 public class WechatPayQueryService {
 

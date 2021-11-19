@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 服务版本配置
+ * 服务版本配置
  */
 @ConfigurationProperties(prefix = ServerVersionProperties.PREFIX)
 public class ServerVersionProperties {

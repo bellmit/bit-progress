@@ -5,7 +5,7 @@ import static com.wpx.exception.BaseMessageCodes.*;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 基础模块错误枚举
+ * 基础模块错误枚举
  */
 public enum BaseExceptionMessage implements IExceptionMessage {
 

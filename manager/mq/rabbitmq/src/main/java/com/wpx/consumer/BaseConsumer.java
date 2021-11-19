@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 基础消费者
+ * 基础消费者
  */
 @Service
 public abstract class BaseConsumer {

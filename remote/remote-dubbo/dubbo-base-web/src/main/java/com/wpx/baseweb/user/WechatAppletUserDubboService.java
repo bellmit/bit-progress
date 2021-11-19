@@ -8,7 +8,7 @@ import java.util.Set;
 
 /**
  * @author 不会飞的小鹏
- * @description: wechatAppletUser feign remote
+ * wechatAppletUser feign remote
  */
 public interface WechatAppletUserDubboService {
 

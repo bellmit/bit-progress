@@ -18,7 +18,7 @@ import com.wpx.model.user.manager.envm.RoleEnum;
 import com.wpx.model.user.manager.pojo.cms.*;
 import com.wpx.util.Assert;
 import com.wpx.util.BeanUtils;
-import com.wpx.util.ConversionBeanUtils;
+import com.wpx.util.PageUtils;
 import com.wpx.util.UserHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,7 +101,7 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
         if (StringUtils.nonEmpty(username)) {
             lambda.like(Manager::getUsername, queryDTO.getUsername());
         }
-        return ConversionBeanUtils.conversionBean(page(page, lambda), this::toManagerPageVO);
+        return PageUtils.conversionBean(page(page, lambda), this::toManagerPageVO);
     }
 
     /**

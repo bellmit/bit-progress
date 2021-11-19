@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @author 不会飞的小鹏
- * @Description: Cms端登录调用接口
+ * Cms端登录调用接口
  */
 @RestController
 @RequestMapping("rest/gatewayCms/auth")

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 登录DTO
+ * 登录DTO
  */
 public class LoginDTO implements Serializable {
 

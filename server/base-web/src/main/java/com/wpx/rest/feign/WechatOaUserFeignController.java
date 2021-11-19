@@ -14,7 +14,7 @@ import java.util.Set;
 
 /**
  * @author 不会飞的小鹏
- * @description: wechatOaUser feign remote controller
+ * wechatOaUser feign remote controller
  */
 @RestController
 @RequestMapping("rest/baseWeb/wechatOaUser")

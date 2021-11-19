@@ -4,7 +4,7 @@ import java.util.Map;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 绑定配置
+ * 绑定配置
  */
 public class BindingMessage {
 

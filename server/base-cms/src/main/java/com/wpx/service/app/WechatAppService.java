@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import java.util.Set;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wpx.util.ConversionBeanUtils;
+import com.wpx.util.PageUtils;
 import java.time.LocalDateTime;
 import org.springframework.transaction.annotation.Transactional;
 import com.wpx.util.Assert;
@@ -68,6 +68,6 @@ public class WechatAppService extends ServiceImpl<WechatAppMapper, WechatApp> {
 
     public IPage<WechatAppCmsVO> findWechatAppPage (WechatAppCmsQueryDTO wechatAppQueryDTO, Page page) {
         QueryWrapper<WechatApp> queryWrapper = new QueryWrapper<>();
-        return ConversionBeanUtils.conversionBean(page(page, queryWrapper), this::toWechatAppCmsVO);
+        return PageUtils.conversionBean(page(page, queryWrapper), this::toWechatAppCmsVO);
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author 不会飞的小鹏
- * @Description: JSAPI订单查询结果
+ * JSAPI订单查询结果
  */
 public class TransactionQueryResult {
 

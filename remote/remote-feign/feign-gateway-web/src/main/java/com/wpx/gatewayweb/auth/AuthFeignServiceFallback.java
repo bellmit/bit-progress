@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author 不会飞的小鹏
- * @Description: GatewayWebRemoteService的服务降级类
+ * GatewayWebRemoteService的服务降级类
  */
 @Component
 public class AuthFeignServiceFallback implements FallbackFactory<AuthFeignService> {

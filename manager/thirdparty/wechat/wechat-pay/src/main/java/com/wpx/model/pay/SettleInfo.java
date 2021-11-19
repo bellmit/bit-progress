@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 结算信息
+ * 结算信息
  */
 public class SettleInfo {
 

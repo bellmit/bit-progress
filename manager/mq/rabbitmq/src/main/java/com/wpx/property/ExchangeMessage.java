@@ -4,7 +4,7 @@ import java.util.Map;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 交换机配置
+ * 交换机配置
  */
 public class ExchangeMessage {
 

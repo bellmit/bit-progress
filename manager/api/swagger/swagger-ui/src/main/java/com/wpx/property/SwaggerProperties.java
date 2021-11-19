@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author 不会飞的小鹏
- * @Description: swagger配置类
+ * swagger配置类
  */
 @Component
 @ConfigurationProperties(prefix = SwaggerProperties.PREFIX)

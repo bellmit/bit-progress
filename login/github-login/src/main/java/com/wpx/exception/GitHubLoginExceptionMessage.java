@@ -2,7 +2,7 @@ package com.wpx.exception;
 
 /**
  * @author 不会飞的小鹏
- * @Description: GitHub登录模块错误信息
+ * GitHub登录模块错误信息
  */
 public enum GitHubLoginExceptionMessage implements IExceptionMessage {
 

@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 
 /**
  * @author 不会飞的小鹏
- * @Description: Quartz配置
+ * Quartz配置
  **/
 @Configuration
 @EnableScheduling

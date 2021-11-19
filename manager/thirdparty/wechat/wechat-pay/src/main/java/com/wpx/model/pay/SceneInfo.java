@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 支付场景信息
+ * 支付场景信息
  */
 public class SceneInfo {
 

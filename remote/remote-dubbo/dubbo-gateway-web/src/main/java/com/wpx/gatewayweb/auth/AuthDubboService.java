@@ -9,7 +9,7 @@ import com.wpx.model.login.TokenDTO;
 
 /**
  * @author 不会飞的小鹏
- * @Description: gateway-web dubbo远程服务
+ * gateway-web dubbo远程服务
  */
 public interface AuthDubboService {
 

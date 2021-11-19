@@ -11,7 +11,7 @@ import java.util.Set;
 
 /**
  * @author 不会飞的小鹏
- * @description: wechatOaUser feign remote
+ * wechatOaUser feign remote
  */
 @FeignClient(name = "main-base-cms", path = "rest/baseCms/wechatOaUser", fallbackFactory = WechatOaUserFeignServiceFallback.class)
 public interface WechatOaUserFeignService {

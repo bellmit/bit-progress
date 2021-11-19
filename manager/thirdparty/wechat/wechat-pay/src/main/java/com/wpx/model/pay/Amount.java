@@ -3,7 +3,7 @@ package com.wpx.model.pay;
 /**
  * @author 不会飞的小鹏
  * create on 2021/7/19 0:12
- * @Description: 订单金额信息
+ * 订单金额信息
  */
 public class Amount {
 

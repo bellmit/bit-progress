@@ -3,7 +3,7 @@ package com.wpx.constant;
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/21 1:52
- * @Description: 验证信息常量
+ * 验证信息常量
  */
 public class VerifyConstant {
 

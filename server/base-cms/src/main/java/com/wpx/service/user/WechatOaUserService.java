@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wpx.util.ConversionBeanUtils;
+import com.wpx.util.PageUtils;
 import org.springframework.transaction.annotation.Transactional;
 import com.wpx.util.Assert;
 
@@ -54,7 +54,7 @@ public class WechatOaUserService extends ServiceImpl<WechatOaUserMapper, WechatO
 
     public IPage<WechatOaUserCmsVO> findWechatOaUserPage (WechatOaUserCmsQueryDTO queryDTO, Page page) {
         QueryWrapper<WechatOaUser> queryWrapper = new QueryWrapper<>();
-        return ConversionBeanUtils.conversionBean(page(page, queryWrapper), this::toWechatOaUserCmsVO);
+        return PageUtils.conversionBean(page(page, queryWrapper), this::toWechatOaUserCmsVO);
     }
 
     /**

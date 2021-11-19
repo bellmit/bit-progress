@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 定时任务服务降级
+ * 定时任务服务降级
  */
 @Component
 public class QuartzJobFeignServiceFallback implements FallbackFactory<QuartzJobFeignService> {

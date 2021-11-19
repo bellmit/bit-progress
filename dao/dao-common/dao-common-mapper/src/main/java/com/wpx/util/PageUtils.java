@@ -10,9 +10,9 @@ import java.util.stream.Collectors;
 
 /**
  * @author 不会飞的小鹏
- * @Description: Bean转换工具
+ * Bean转换工具
  */
-public class ConversionBeanUtils {
+public class PageUtils {
 
     /**
      * IPage的records类型转换

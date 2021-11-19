@@ -2,7 +2,7 @@ package com.wpx.constant;
 
 /**
  * @author 不会飞的小鹏
- * @Description: GitHub登录模块url
+ * GitHub登录模块url
  */
 public class GitHubLoginUrl {
 

@@ -25,7 +25,7 @@ import static com.wpx.constant.RabbitMQConstant.*;
 
 /**
  * @author 不会飞的小鹏
- * @Description: RabbitMQ注册
+ * RabbitMQ注册
  */
 @Component
 public class RabbitMQRegister implements BeanFactoryAware, InstantiationAwareBeanPostProcessor {

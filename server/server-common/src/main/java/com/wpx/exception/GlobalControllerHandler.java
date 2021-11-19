@@ -17,7 +17,7 @@ import java.util.Objects;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 全局异常处理
+ * 全局异常处理
  */
 @RestControllerAdvice
 public class GlobalControllerHandler {

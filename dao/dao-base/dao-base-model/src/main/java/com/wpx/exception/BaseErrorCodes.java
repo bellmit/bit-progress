@@ -2,7 +2,7 @@ package com.wpx.exception;
 
 /**
  * @author 不会飞的小鹏
- * @Description: 基础模块错误码
+ * 基础模块错误码
  */
 public class BaseErrorCodes {
 

@@ -8,7 +8,7 @@ import java.util.Set;
 
 /**
  * @author 不会飞的小鹏
- * @Description: swagger配置信息
+ * swagger配置信息
  */
 @Configuration
 @ConfigurationProperties(prefix = SwaggerProperties.PREFIX)
