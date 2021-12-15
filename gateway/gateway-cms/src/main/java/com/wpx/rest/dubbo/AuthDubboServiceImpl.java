@@ -25,7 +25,7 @@ public class AuthDubboServiceImpl implements AuthDubboService {
      * 用户登录 -- 返回token
      *
      * @param loginDTO  登录信息DTO
-     * @return: 返回token
+     * @return 返回token
      */
     @Override
     public ResultVO<LoginVO> login(LoginDTO loginDTO) {
@@ -36,7 +36,7 @@ public class AuthDubboServiceImpl implements AuthDubboService {
      * 退出登录
      *
      * @param logoutDTO  退出登录信息DTO
-     * @return: 返回状态码
+     * @return 返回状态码
      */
     @Override
     public ResultVO<BooleanVO> logout(LogoutDTO logoutDTO) {
@@ -48,7 +48,7 @@ public class AuthDubboServiceImpl implements AuthDubboService {
      * 解析token获取用户的userId
      *
      * @param tokenDTO  需要解析的token
-     * @return: 返回userId
+     * @return 返回userId
      */
     @Override
     public ResultVO<LoginVO> getUserIdInToken(TokenDTO tokenDTO) {
@@ -59,7 +59,7 @@ public class AuthDubboServiceImpl implements AuthDubboService {
      * 校验token是否有效
      *
      * @param tokenDTO 检查的token
-     * @return: ResultVO<Boolean>
+     * @return ResultVO<Boolean>
      */
     @Override
     public ResultVO<BooleanVO> checkToken(TokenDTO tokenDTO) {

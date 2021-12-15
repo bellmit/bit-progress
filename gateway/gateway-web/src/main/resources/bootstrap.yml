@@ -6,7 +6,7 @@ spring:
       discovery:
         username: nacos-public
         password: fsyH458lPks25Sei
-        server-addr: 127.0.0.1:8847
+        server-addr: 127.0.0.1:8849
         metadata:
           version: 1.0.0
           default: true
@@ -21,6 +21,21 @@ spring:
           - dataId: share-config-redis-1.${spring.cloud.nacos.config.file-extension}
             group: SHARE_YML_GROUP
             refresh: true
+          - dataId: share-config-jackson.${spring.cloud.nacos.config.file-extension}
+            group: SHARE_YML_GROUP
+            refresh: true
+          - dataId: share-config-servlet.${spring.cloud.nacos.config.file-extension}
+            group: SHARE_YML_GROUP
+            refresh: true
           - dataId: share-config-sentinel.${spring.cloud.nacos.config.file-extension}
+            group: SHARE_YML_GROUP
+            refresh: true
+          - dataId: share-config-dubbo.${spring.cloud.nacos.config.file-extension}
+            group: SHARE_YML_GROUP
+            refresh: true
+          - dataId: share-config-log-level.${spring.cloud.nacos.config.file-extension}
+            group: SHARE_YML_GROUP
+            refresh: true
+          - dataId: share-config-application.${spring.cloud.nacos.config.file-extension}
             group: SHARE_YML_GROUP
             refresh: true

@@ -18,7 +18,7 @@ import java.security.SecureRandom;
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/13 20:37
- * @Description token工具类
+ * token工具类
  */
 @Component
 public class TokenUtil {

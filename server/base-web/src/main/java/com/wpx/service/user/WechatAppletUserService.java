@@ -44,7 +44,7 @@ public class WechatAppletUserService extends ServiceImpl<WechatAppletUserMapper,
      * 获取微信小程序用户信息
      *
      * @param wechatAppletUserId 微信小程序用户ID
-     * @return: WechatAppletUser
+     * @return WechatAppletUser
      */
     public WechatAppletUser getWechatAppletUserById(Long wechatAppletUserId) {
         return getById(wechatAppletUserId);

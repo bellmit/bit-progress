@@ -24,7 +24,7 @@ public interface AuthFeignService {
      * 用户登录 -- 返回token
      *
      * @param loginDTO  登录信息DTO
-     * @return: 返回token
+     * @return 返回token
      */
     @RequestMapping(value = "login", method = RequestMethod.POST)
     ResultVO<LoginVO> login(@RequestBody LoginDTO loginDTO);
@@ -33,7 +33,7 @@ public interface AuthFeignService {
      * 退出登录
      *
      * @param logoutDTO  退出登录信息DTO
-     * @return: 返回状态码
+     * @return 返回状态码
      */
     @RequestMapping(value = "logout", method = RequestMethod.POST)
     ResultVO<BooleanVO> logout(@RequestBody LogoutDTO logoutDTO);
@@ -42,7 +42,7 @@ public interface AuthFeignService {
      * 解析token获取用户的userId
      *
      * @param token  需要解析的token
-     * @return: 返回LoginVO
+     * @return 返回LoginVO
      */
     @RequestMapping(value = "userId", method = RequestMethod.GET)
     ResultVO<LoginVO> getUserIdInToken(@RequestParam String token);
@@ -51,7 +51,7 @@ public interface AuthFeignService {
      * 校验token是否有效
      *
      * @param tokenDTO  检查的token
-     * @return: ResultVO<BooleanVO>
+     * @return ResultVO<BooleanVO>
      */
     @RequestMapping(value = "checkToken", method = RequestMethod.POST)
     ResultVO<BooleanVO> checkToken(@RequestBody TokenDTO tokenDTO);

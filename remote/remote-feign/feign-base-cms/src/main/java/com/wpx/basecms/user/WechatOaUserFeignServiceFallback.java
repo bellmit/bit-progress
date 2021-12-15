@@ -26,7 +26,7 @@ public class WechatOaUserFeignServiceFallback implements FallbackFactory<WechatO
              * 获取微信公众号用户信息
              *
              * @param wechatOaUserId 微信公众号用户ID
-             * @return: ResultVO<WechatOaUser>
+             * @return ResultVO<WechatOaUser>
              */
             @Override
             public ResultVO<WechatOaUser> getWechatOaUser(Long wechatOaUserId) {
@@ -37,7 +37,7 @@ public class WechatOaUserFeignServiceFallback implements FallbackFactory<WechatO
              * 获取微信公众号用户信息
              *
              * @param wechatOaUserIds 微信公众号用户ID集合
-             * @return: ResultVO<List < WechatOaUser>>
+             * @return ResultVO<List < WechatOaUser>>
              */
             @Override
             public ResultVO<List<WechatOaUser>> listWechatOaUser(Set<Long> wechatOaUserIds) {
@@ -48,7 +48,7 @@ public class WechatOaUserFeignServiceFallback implements FallbackFactory<WechatO
              * 获取公众号微信用户信息
              *
              * @param userIds 用户ID集合
-             * @return: ResultVO<List < WechatOaUser>>
+             * @return ResultVO<List < WechatOaUser>>
              */
             @Override
             public ResultVO<List<WechatOaUser>> listWechatOaUserByUserIds(Set<Long> userIds) {

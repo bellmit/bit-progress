@@ -24,7 +24,7 @@ public class WechatUserDubboServiceImpl implements WechatUserDubboService {
      * 获取微信用户信息
      *
      * @param wechatUserId 微信用户ID
-     * @return: ResultVO<WechatUser>
+     * @return ResultVO<WechatUser>
      */
     @Override
     public ResultVO<WechatUser> getWechatUser(Long wechatUserId) {
@@ -35,7 +35,7 @@ public class WechatUserDubboServiceImpl implements WechatUserDubboService {
      * 获取微信用户信息
      *
      * @param wechatUserIds 微信用户ID集合
-     * @return: ResultVO<List < WechatUser>>
+     * @return ResultVO<List < WechatUser>>
      */
     @Override
     public ResultVO<List<WechatUser>> listWechatUser(Set<Long> wechatUserIds) {

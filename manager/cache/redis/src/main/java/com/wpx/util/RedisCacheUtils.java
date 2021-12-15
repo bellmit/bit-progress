@@ -575,7 +575,7 @@ public class RedisCacheUtils {
      * @param key  Redis key
      * @param start  区间开始 0开始
      * @param end  区间结束
-     * @return: Set<String>  返回的value
+     * @return Set<String>  返回的value
      */
     public Set<String> reverseRangeForZSet(String key, Long start, Long end){
         return stringRedisTemplate.opsForZSet().reverseRange(key, start, end);

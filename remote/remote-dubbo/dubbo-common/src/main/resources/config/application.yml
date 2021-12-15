@@ -1,4 +1,0 @@
-logging:
-  level:
-    com.alibaba.cloud.dubbo.registry: warn
-    com.alibaba.cloud.dubbo.autoconfigure: warn

@@ -3,7 +3,7 @@ package com.wpx.constant;
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/13 17:30
- * @Description 请求的返回信息
+ * 请求的返回信息
  */
 public class ResultConstants {
 

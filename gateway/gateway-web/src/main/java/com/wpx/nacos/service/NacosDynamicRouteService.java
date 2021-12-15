@@ -52,7 +52,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
     private ApplicationEventPublisher applicationEventPublisher;
 
     @Autowired
-    private NacosDiscoveryProperties nacosDiscoveryProperties;
+    private ConfigService configService;
 
     /**
      * 监听路由配置，如果获取到的配置为空则清空路由
@@ -61,13 +61,8 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
     public void nacosRouteListener() {
         String routeDataId = nacosGatewayProperties.getRouteDataId();
         String group = nacosGatewayProperties.getGroup();
-        String namespace = nacosDiscoveryProperties.getNamespace();
-        String serverAddr = nacosDiscoveryProperties.getServerAddr();
+
         try {
-            Properties properties = new Properties();
-            properties.put(PropertyKeyConst.NAMESPACE, namespace);
-            properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
-            ConfigService configService = NacosFactory.createConfigService(properties);
             String config = configService.getConfig(routeDataId, group, 5000);
 
             // gateway启动初始化路由
@@ -104,14 +99,8 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
     public void nacosWhiteRouteListener() {
         String whiteRouteDataId = nacosGatewayProperties.getWhiteRouteDataId();
         String group = nacosGatewayProperties.getGroup();
-        String namespace = nacosDiscoveryProperties.getNamespace();
-        String serverAddr = nacosDiscoveryProperties.getServerAddr();
 
         try {
-            Properties properties = new Properties();
-            properties.put(PropertyKeyConst.NAMESPACE, namespace);
-            properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
-            ConfigService configService = NacosFactory.createConfigService(properties);
             String config = configService.getConfig(whiteRouteDataId, group, 5000);
 
             // gateway启动初始化路由白名单
@@ -147,14 +136,8 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
     public void nacosRouteRouseListener() {
         String routeRouseDataId = nacosGatewayProperties.getRouteRouseDataId();
         String group = nacosGatewayProperties.getGroup();
-        String namespace = nacosDiscoveryProperties.getNamespace();
-        String serverAddr = nacosDiscoveryProperties.getServerAddr();
 
         try {
-            Properties properties = new Properties();
-            properties.put(PropertyKeyConst.NAMESPACE, namespace);
-            properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
-            ConfigService configService = NacosFactory.createConfigService(properties);
             String config = configService.getConfig(routeRouseDataId, group, 5000);
 
             // gateway启动初始化资源
@@ -194,14 +177,8 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
     public void nacosRouteApiTokenListener() {
         String routeApiTokenDataId = nacosGatewayProperties.getRouteApiTokenDataId();
         String group = nacosGatewayProperties.getGroup();
-        String namespace = nacosDiscoveryProperties.getNamespace();
-        String serverAddr = nacosDiscoveryProperties.getServerAddr();
 
         try {
-            Properties properties = new Properties();
-            properties.put(PropertyKeyConst.NAMESPACE, namespace);
-            properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
-            ConfigService configService = NacosFactory.createConfigService(properties);
             String config = configService.getConfig(routeApiTokenDataId, group, 5000);
 
             // gateway启动初始化资源

@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/21 3:31
- * @Description ServerProperties is
+ * ServerProperties is
  */
 @Configuration
 @ConfigurationProperties(prefix = ServerTokenProperties.PREFIX)

@@ -3,7 +3,7 @@ package com.wpx.exception;
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/26 20:13
- * @Description 自定义异常
+ * 自定义异常
  */
 public class CommonException extends RuntimeException {
 

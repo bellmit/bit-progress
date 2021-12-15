@@ -3,7 +3,7 @@ package com.wpx.constant;
 /**
  * @author 不会飞的小鹏
  * create on 2021/7/19 0:54
- * @Description StringConstants is
+ * StringConstants is
  */
 public class StringConstants {
 

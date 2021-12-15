@@ -1,11 +1,8 @@
 package com.wpx.nacos.service;
 
-import com.alibaba.cloud.nacos.NacosDiscoveryProperties;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.nacos.api.NacosFactory;
-import com.alibaba.nacos.api.PropertyKeyConst;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
@@ -29,7 +26,6 @@ import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
@@ -52,7 +48,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
     private ApplicationEventPublisher applicationEventPublisher;
 
     @Autowired
-    private NacosDiscoveryProperties nacosDiscoveryProperties;
+    private ConfigService configService;
 
     /**
      * 监听路由配置，如果获取到的配置为空则情况路由
@@ -61,13 +57,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
     public void nacosRouteListener() {
         String routeDataId = nacosGatewayProperties.getRouteDataId();
         String group = nacosGatewayProperties.getGroup();
-        String namespace = nacosDiscoveryProperties.getNamespace();
-        String serverAddr = nacosDiscoveryProperties.getServerAddr();
         try {
-            Properties properties = new Properties();
-            properties.put(PropertyKeyConst.NAMESPACE, namespace);
-            properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
-            ConfigService configService = NacosFactory.createConfigService(properties);
             String config = configService.getConfig(routeDataId, group, 5000);
 
             // gateway启动初始化路由
@@ -104,14 +94,8 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
     public void nacosWhiteRouteListener() {
         String whiteRouteDataId = nacosGatewayProperties.getWhiteRouteDataId();
         String group = nacosGatewayProperties.getGroup();
-        String namespace = nacosDiscoveryProperties.getNamespace();
-        String serverAddr = nacosDiscoveryProperties.getServerAddr();
 
         try {
-            Properties properties = new Properties();
-            properties.put(PropertyKeyConst.NAMESPACE, namespace);
-            properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
-            ConfigService configService = NacosFactory.createConfigService(properties);
             String config = configService.getConfig(whiteRouteDataId, group, 5000);
 
             // gateway启动初始化路由白名单
@@ -147,14 +131,8 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
     public void nacosRouteRouseListener() {
         String routeRouseDataId = nacosGatewayProperties.getRouteRouseDataId();
         String group = nacosGatewayProperties.getGroup();
-        String namespace = nacosDiscoveryProperties.getNamespace();
-        String serverAddr = nacosDiscoveryProperties.getServerAddr();
 
         try {
-            Properties properties = new Properties();
-            properties.put(PropertyKeyConst.NAMESPACE, namespace);
-            properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
-            ConfigService configService = NacosFactory.createConfigService(properties);
             String config = configService.getConfig(routeRouseDataId, group, 5000);
 
             // gateway启动初始化资源
@@ -194,14 +172,8 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
     public void nacosRouteApiTokenListener() {
         String routeApiTokenDataId = nacosGatewayProperties.getRouteApiTokenDataId();
         String group = nacosGatewayProperties.getGroup();
-        String namespace = nacosDiscoveryProperties.getNamespace();
-        String serverAddr = nacosDiscoveryProperties.getServerAddr();
 
         try {
-            Properties properties = new Properties();
-            properties.put(PropertyKeyConst.NAMESPACE, namespace);
-            properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
-            ConfigService configService = NacosFactory.createConfigService(properties);
             String config = configService.getConfig(routeApiTokenDataId, group, 5000);
 
             // gateway启动初始化资源
@@ -217,7 +189,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
                         return;
                     }
                     JSONObject apiTokenObject = JSON.parseObject(configInfo);
-                    Map<String, String> apiTokenMap = new HashMap<>();
+                    Map<String, String> apiTokenMap = new HashMap<>(apiTokenObject.size());
                     apiTokenObject.forEach((key, value) -> apiTokenMap.put(key, String.valueOf(value)));
                     GatewayRoute.addRouteApiTokenMap(apiTokenMap);
                 }
@@ -294,7 +266,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
             return;
         }
         JSONObject apiTokenObject = JSON.parseObject(configInfo);
-        Map<String, String> apiTokenMap = new HashMap<>();
+        Map<String, String> apiTokenMap = new HashMap<>(apiTokenObject.size());
         apiTokenObject.forEach((key, value) -> apiTokenMap.put(key, String.valueOf(value)));
         GatewayRoute.addRouteApiTokenMap(apiTokenMap);
     }

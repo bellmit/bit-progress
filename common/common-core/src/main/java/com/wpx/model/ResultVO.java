@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/13 17:26
- * @Description 返回请求结果
+ * 返回请求结果
  */
 public class ResultVO<T> implements Serializable {
 

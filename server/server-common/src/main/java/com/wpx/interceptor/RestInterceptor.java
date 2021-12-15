@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/21 1:41
- * @Description REST拦截器，检验对内部提供的接口token
+ * REST拦截器，检验对内部提供的接口token
  */
 @Service
 public class RestInterceptor implements HandlerInterceptor {

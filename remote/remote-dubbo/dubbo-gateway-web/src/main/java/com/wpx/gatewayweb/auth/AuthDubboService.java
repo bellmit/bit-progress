@@ -17,7 +17,7 @@ public interface AuthDubboService {
      * 用户登录 -- 返回token
      *
      * @param dto
-     * @return: token
+     * @return token
      */
     ResultVO<LoginVO> login(LoginDTO dto);
 
@@ -25,7 +25,7 @@ public interface AuthDubboService {
      * 退出登录
      *
      * @param dto
-     * @return: 状态码
+     * @return 状态码
      */
     ResultVO<BooleanVO> logout(LogoutDTO dto);
 
@@ -33,7 +33,7 @@ public interface AuthDubboService {
      * 解析token获取用户的userId
      *
      * @param tokenDTO
-     * @return: userId
+     * @return userId
      */
     ResultVO<LoginVO> getUserIdInToken(TokenDTO tokenDTO);
 
@@ -41,7 +41,7 @@ public interface AuthDubboService {
      * 校验token是否有效
      *
      * @param checkDTO
-     * @return: 是否通过
+     * @return 是否通过
      */
     ResultVO<BooleanVO> checkToken(TokenDTO checkDTO);
 

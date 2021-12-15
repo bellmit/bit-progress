@@ -28,7 +28,7 @@ public class UserFeignServiceFallback implements FallbackFactory<UserFeignServic
              * 获取用户信息
              *
              * @param userId 用户ID
-             * @return: ResultVO<User>
+             * @return ResultVO<User>
              */
             @Override
             public ResultVO<User> getUser(Long userId) {
@@ -39,7 +39,7 @@ public class UserFeignServiceFallback implements FallbackFactory<UserFeignServic
              * 获取用户信息
              *
              * @param userIds 用户ID集合
-             * @return: ResultVO<List < User>>
+             * @return ResultVO<List < User>>
              */
             @Override
             public ResultVO<List<User>> listUser(Set<Long> userIds) {

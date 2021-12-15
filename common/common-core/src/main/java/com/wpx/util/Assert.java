@@ -8,7 +8,7 @@ import java.util.Collection;
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/27 2:09
- * @Description 断言类
+ * 断言类
  */
 public class Assert {
 

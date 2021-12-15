@@ -16,7 +16,7 @@ public interface WechatAppletUserDubboService {
      * 获取微信用户信息
      *
      * @param wechatAppletUserId  微信用户ID
-     * @return: ResultVO<WechatAppletUser>
+     * @return ResultVO<WechatAppletUser>
      */
     ResultVO<WechatAppletUser> getWechatAppletUser(Long wechatAppletUserId);
 
@@ -24,7 +24,7 @@ public interface WechatAppletUserDubboService {
      * 获取微信用户信息
      *
      * @param wechatAppletUserIds  微信用户ID集合
-     * @return: ResultVO<List<WechatAppletUser>>
+     * @return ResultVO<List<WechatAppletUser>>
      */
     ResultVO<List<WechatAppletUser>> listWechatAppletUser(Set<Long> wechatAppletUserIds);
 
@@ -32,7 +32,7 @@ public interface WechatAppletUserDubboService {
      * 获取微信用户信息
      *
      * @param userIds  用户ID集合
-     * @return: ResultVO<List<WechatAppletUser>>
+     * @return ResultVO<List<WechatAppletUser>>
      */
     ResultVO<List<WechatAppletUser>> listWechatAppletUserByUserIds(Set<Long> userIds);
 

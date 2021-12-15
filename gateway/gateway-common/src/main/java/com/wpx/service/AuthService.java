@@ -24,10 +24,20 @@ public class AuthService {
     private static final String BEARER = "token ";
 
     /**
+     * Authentication的值分割后的长度
+     */
+    private static final int AUTHENTICATION_SPIT_LENGTH = 2;
+
+    /**
+     * token的下标
+     */
+    private static final int TOKEN_INDEX = 1;
+
+    /**
      * 检验是否有访问权限
      *
      * @param authentication
-     * @return: Result
+     * @return Result
      */
     public AuthResult checkToken(String authentication) {
         String token;
@@ -49,10 +59,10 @@ public class AuthService {
      */
     private String getToken(String authorizationHeader) {
         String[] authTokens = authorizationHeader.split(StringUtils.SPACE);
-        if (authTokens.length < 2) {
+        if (authTokens.length < AUTHENTICATION_SPIT_LENGTH) {
             return null;
         }
-        return authTokens[1];
+        return authTokens[TOKEN_INDEX];
     }
 
 }

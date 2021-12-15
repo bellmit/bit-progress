@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/14 19:34
- * @Description Cms端网关
+ * Cms端网关
  */
 @SpringBootApplication
 @EnableDiscoveryClient

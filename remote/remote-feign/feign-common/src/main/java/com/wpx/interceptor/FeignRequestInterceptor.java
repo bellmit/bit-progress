@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/23 0:22
- * @Description feign服务调用都需要加上对应服务的token
+ * feign服务调用都需要加上对应服务的token
  */
 public class FeignRequestInterceptor implements RequestInterceptor {
 

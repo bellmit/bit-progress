@@ -16,7 +16,7 @@ public interface WechatOaUserDubboService {
      * 获取微信公众号用户信息
      *
      * @param wechatOaUserId  微信公众号用户ID
-     * @return: ResultVO<WechatOaUser>
+     * @return ResultVO<WechatOaUser>
      */
     ResultVO<WechatOaUser> getWechatOaUser(Long wechatOaUserId);
 
@@ -24,7 +24,7 @@ public interface WechatOaUserDubboService {
      * 获取微信公众号用户信息
      *
      * @param wechatOaUserIds  微信公众号用户ID集合
-     * @return: ResultVO<List<WechatOaUser>>
+     * @return ResultVO<List<WechatOaUser>>
      */
     ResultVO<List<WechatOaUser>> listWechatOaUser(Set<Long> wechatOaUserIds);
 
@@ -32,7 +32,7 @@ public interface WechatOaUserDubboService {
      * 获取公众号微信用户信息
      *
      * @param userIds  用户ID集合
-     * @return: ResultVO<List<WechatOaUser>>
+     * @return ResultVO<List<WechatOaUser>>
      */
     ResultVO<List<WechatOaUser>> listWechatOaUserByUserIds(Set<Long> userIds);
 

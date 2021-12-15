@@ -11,7 +11,7 @@ import java.net.URI;
  * 基础的feign调用方法，从URI中解析服务名
  * @author 不会飞的小鹏
  */
-@FeignClient(name = "feign")
+@FeignClient(name = "feign", fallbackFactory = FeignClientServiceFallback.class)
 public interface FeignClientService {
 
     /**

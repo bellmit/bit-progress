@@ -27,7 +27,7 @@ public class WechatUserFeignController {
      * 获取微信用户信息
      *
      * @param wechatUserId  微信用户ID
-     * @return: ResultVO<WechatUser>
+     * @return ResultVO<WechatUser>
      */
     @GetMapping
     public ResultVO<WechatUser> getWechatUser(@RequestParam Long wechatUserId) {
@@ -38,7 +38,7 @@ public class WechatUserFeignController {
      * 获取微信用户信息
      *
      * @param wechatUserIds  微信用户ID集合
-     * @return: ResultVO<List<WechatUser>>
+     * @return ResultVO<List<WechatUser>>
      */
     @GetMapping("list")
     public ResultVO<List<WechatUser>> listWechatUser(@RequestParam Set<Long> wechatUserIds) {

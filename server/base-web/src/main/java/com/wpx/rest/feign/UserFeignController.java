@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/23 0:45
- * @Description TestRemoteController is
+ * TestRemoteController is
  */
 @RestController
 @RequestMapping("rest/baseWeb/user")
@@ -25,7 +25,7 @@ public class UserFeignController {
      * 获取用户信息
      *
      * @param userId  用户ID
-     * @return: ResultVO<User>
+     * @return ResultVO<User>
      */
     @GetMapping
     public ResultVO<User> getUser(@RequestParam Long userId) {
@@ -36,7 +36,7 @@ public class UserFeignController {
      * 获取用户信息
      *
      * @param userIds  用户ID集合
-     * @return: ResultVO<List<User>>
+     * @return ResultVO<List<User>>
      */
     @GetMapping("list")
     public ResultVO<List<User>> listUser(@RequestParam Set<Long> userIds) {

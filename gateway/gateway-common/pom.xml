@@ -29,12 +29,22 @@
         </dependency>
         <dependency>
             <groupId>com.wpx</groupId>
-            <artifactId>cloud-nacos</artifactId>
+            <artifactId>nacos-discovery</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wpx</groupId>
+            <artifactId>nacos-config</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.wpx</groupId>
             <artifactId>redis</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.wpx</groupId>
+            <artifactId>sentinel</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

@@ -12,7 +12,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/22 23:44
- * @Description WebBaseApplication is
+ * WebBaseApplication is
  */
 @SpringBootApplication
 @EnableSwagger2

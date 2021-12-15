@@ -15,7 +15,7 @@ public interface UserDubboService {
      * 获取用户信息
      *
      * @param userId  用户ID
-     * @return: ResultVO<User>
+     * @return ResultVO<User>
      */
     ResultVO<User> getUser(Long userId);
 
@@ -23,7 +23,7 @@ public interface UserDubboService {
      * 获取用户信息
      *
      * @param userIds  用户ID集合
-     * @return: ResultVO<List<User>>
+     * @return ResultVO<List<User>>
      */
     ResultVO<List<User>> listUser(Set<Long> userIds);
 

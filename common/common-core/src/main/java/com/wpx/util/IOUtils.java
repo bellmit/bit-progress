@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/20 22:06
- * @Description IOUtils is
+ * IOUtils is
  */
 public class IOUtils {
 

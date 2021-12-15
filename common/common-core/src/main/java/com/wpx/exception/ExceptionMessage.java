@@ -6,7 +6,7 @@ import static com.wpx.exception.MessageCodes.*;
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/26 20:08
- * @Description 请求异常信息枚举
+ * 请求异常信息枚举
  */
 public enum ExceptionMessage implements IExceptionMessage {
 

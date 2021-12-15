@@ -42,7 +42,7 @@ public class NacosRouteMatchService {
      * 查询是否为不校验路由
      *
      * @param  url
-     * @return: boolean
+     * @return boolean
      */
     public boolean ignoreAuthentication(String url) {
         //如果为非/api/开头，一律通过

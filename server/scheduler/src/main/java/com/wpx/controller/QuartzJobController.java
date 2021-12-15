@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author wpx
  * create on 2021-11-19
  */
-@Api(tags = {"scheduler -- 定时任务分组"})
+@Api(tags = {"scheduler -- 定时任务"})
 @RestController
 @RequestMapping("/api/scheduler/quartzJob")
 public class QuartzJobController {

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author 不会飞的小鹏
  * create on 2021/6/26 14:23
- * @Description 登录controller
+ * 登录controller
  */
 @Api(tags = "系统 -- 登录模块")
 @RestController

@@ -34,7 +34,7 @@ public class UserDubboServiceImpl implements UserDubboService {
      * 获取用户信息
      *
      * @param userIds 用户ID集合
-     * @return: ResultVO<List < User>>
+     * @return ResultVO<List < User>>
      */
     @Override
     public ResultVO<List<User>> listUser(Set<Long> userIds) {

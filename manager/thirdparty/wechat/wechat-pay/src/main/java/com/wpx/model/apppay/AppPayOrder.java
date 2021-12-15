@@ -3,7 +3,7 @@ package com.wpx.model.apppay;
 /**
  * @author 不会飞的小鹏
  * create on 2021/7/19 1:08
- * @Description APP支付 发起支付
+ * APP支付 发起支付
  */
 public class AppPayOrder {
 

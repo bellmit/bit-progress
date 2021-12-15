@@ -20,7 +20,7 @@ public interface WechatAppletUserFeignService {
      * 获取微信小程序用户信息
      *
      * @param wechatAppletUserId  微信小程序用户ID
-     * @return: ResultVO<WechatAppletUser>
+     * @return ResultVO<WechatAppletUser>
      */
     @GetMapping
     ResultVO<WechatAppletUser> getWechatAppletUser(@RequestParam Long wechatAppletUserId);
@@ -29,7 +29,7 @@ public interface WechatAppletUserFeignService {
      * 获取微信小程序用户信息
      *
      * @param wechatAppletUserIds  微信小程序用户ID集合
-     * @return: ResultVO<List<WechatAppletUser>>
+     * @return ResultVO<List<WechatAppletUser>>
      */
     @GetMapping("list")
     ResultVO<List<WechatAppletUser>> listWechatAppletUser(@RequestParam Set<Long> wechatAppletUserIds);
@@ -38,7 +38,7 @@ public interface WechatAppletUserFeignService {
      * 获取微信小程序用户信息
      *
      * @param userIds  用户ID集合
-     * @return: ResultVO<List<WechatAppletUser>>
+     * @return ResultVO<List<WechatAppletUser>>
      */
     @GetMapping("list/userIds")
     ResultVO<List<WechatAppletUser>> listWechatAppletUserByUserIds(@RequestParam Set<Long> userIds);

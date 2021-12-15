@@ -19,7 +19,7 @@ public interface UserFeignService {
      * 获取用户信息
      *
      * @param userId  用户ID
-     * @return: ResultVO<User>
+     * @return ResultVO<User>
      */
     @GetMapping
     ResultVO<User> getUser(@RequestParam Long userId);
@@ -28,7 +28,7 @@ public interface UserFeignService {
      * 获取用户信息
      *
      * @param userIds  用户ID集合
-     * @return: ResultVO<List<User>>
+     * @return ResultVO<List<User>>
      */
     @GetMapping("list")
     ResultVO<List<User>> listUser(@RequestParam Set<Long> userIds);

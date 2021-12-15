@@ -20,7 +20,7 @@ public interface WechatOaUserFeignService {
      * 获取微信公众号用户信息
      *
      * @param wechatOaUserId  微信公众号用户ID
-     * @return: ResultVO<WechatOaUser>
+     * @return ResultVO<WechatOaUser>
      */
     @GetMapping
     ResultVO<WechatOaUser> getWechatOaUser(@RequestParam Long wechatOaUserId);
@@ -29,7 +29,7 @@ public interface WechatOaUserFeignService {
      * 获取微信公众号用户信息
      *
      * @param wechatOaUserIds  微信公众号用户ID集合
-     * @return: ResultVO<List<WechatOaUser>>
+     * @return ResultVO<List<WechatOaUser>>
      */
     @GetMapping("list")
     ResultVO<List<WechatOaUser>> listWechatOaUser(@RequestParam Set<Long> wechatOaUserIds);
@@ -38,7 +38,7 @@ public interface WechatOaUserFeignService {
      * 获取公众号微信用户信息
      *
      * @param userIds  用户ID集合
-     * @return: ResultVO<List<WechatOaUser>>
+     * @return ResultVO<List<WechatOaUser>>
      */
     @GetMapping("list/userIds")
     ResultVO<List<WechatOaUser>> listWechatOaUserByUserIds(@RequestParam Set<Long> userIds);
