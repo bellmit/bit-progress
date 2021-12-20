@@ -27,7 +27,7 @@ import static com.wpx.excetion.WechatOaExceptionMessage.*;
 
 /**
  * @author 不会飞的小鹏
- * @description： 公众号客服会话管理
+ *  公众号客服会话管理
  */
 public class WechatOaKfSessionManager {
 

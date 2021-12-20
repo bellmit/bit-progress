@@ -3,7 +3,7 @@ package com.wpx.constant;
 /**
  * @author 不会飞的小鹏
  * create on 2021/7/20 21:54
- * @Description： 字符常量
+ *  字符常量
  */
 public class CharacterConstants {
 

@@ -2,14 +2,17 @@ package com.wpx.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.wpx.constant.VerifyConstant;
+import com.wpx.model.login.AuthWebMsg;
+import com.wpx.route.GatewayRoute;
+import com.wpx.service.AuthorizeService;
+import com.wpx.service.RouteMatchService;
 import com.wpx.util.StringUtils;
 import com.wpx.exception.envm.AuthException;
 import com.wpx.model.result.AuthResult;
 import com.wpx.model.result.Result;
-import com.wpx.nacos.route.GatewayRoute;
-import com.wpx.nacos.service.NacosRouteMatchService;
 import com.wpx.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.DefaultResponse;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.cloud.gateway.route.Route;
@@ -23,21 +26,23 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_LOADBALANCER_RESPONSE_ATTR;
+
 /**
  * @author wpx
  * Created on 2021/1/23 16:20
- * @description：
+ * 
  */
 @Configuration
 public class AccessGatewayFilter implements GlobalFilter {
 
     @Autowired
-    private AuthService authService;
+    private AuthorizeService authorizeService;
     @Autowired
-    private NacosRouteMatchService nacosRouteMatchService;
+    private RouteMatchService routeMatchService;
 
     /**
-     * 1. 检验是否白名单或非api开头 {@link NacosRouteMatchService#ignoreAuthentication(String)}
+     * 1. 检验是否白名单或非api开头 {@link RouteMatchService#ignoreAuthentication(String,String)}
      * 2. 检验token是否正确 {@link AuthService#checkToken(String)}
      *
      * @param exchange
@@ -48,15 +53,16 @@ public class AccessGatewayFilter implements GlobalFilter {
 
         ServerHttpRequest request = exchange.getRequest();
         String url = request.getPath().value();
+        String method = request.getMethodValue();
         HttpHeaders headers = request.getHeaders();
         String authentication = headers.getFirst(HttpHeaders.AUTHORIZATION);
 
-        if (nacosRouteMatchService.ignoreAuthentication(url)) {
+        if (routeMatchService.ignoreAuthentication(method, url)) {
             // 白名单，不需要检验token，使用-1作为userId
             return authorized(chain, exchange, request, StringUtils.MINUS_ONE);
         }
         // 校验token
-        AuthResult authResult = authService.checkToken(authentication);
+        AuthResult<AuthWebMsg> authResult = authorizeService.checkToken(authentication, AuthWebMsg.class);
         if (authResult.getResult()) {
             return authorized(chain, exchange, request, authResult.getUserId());
         }
@@ -71,9 +77,9 @@ public class AccessGatewayFilter implements GlobalFilter {
                                   ServerWebExchange exchange,
                                   ServerHttpRequest request,
                                   String userId) {
-        Route route =(Route) exchange.getAttributes().get(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR);
-        String serverName = (String) route.getMetadata().get(VerifyConstant.SERVER_NAME);
-        String routeApiToken = GatewayRoute.getRouteApiToken(serverName);
+        DefaultResponse response = (DefaultResponse) exchange.getAttributes().get(GATEWAY_LOADBALANCER_RESPONSE_ATTR);
+        String serviceId = response.getServer().getServiceId();
+        String routeApiToken = GatewayRoute.getRouteApiToken(serviceId);
         ServerHttpRequest httpRequest = request.mutate()
                 .header(VerifyConstant.USER_ID, userId)
                 .header(VerifyConstant.ROUTE_API_TOKEN, routeApiToken)

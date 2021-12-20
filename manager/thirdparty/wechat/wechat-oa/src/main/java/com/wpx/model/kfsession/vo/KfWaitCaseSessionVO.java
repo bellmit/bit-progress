@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author 不会飞的小鹏
- * @description： 未接入客服会话列表
+ *  未接入客服会话列表
  */
 public class KfWaitCaseSessionVO extends WechatResult {
 

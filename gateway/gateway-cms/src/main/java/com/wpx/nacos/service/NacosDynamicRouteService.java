@@ -6,10 +6,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
+import com.wpx.route.GatewayRoute;
 import com.wpx.util.StringUtils;
-import com.wpx.nacos.bean.RouteRouse;
+import com.wpx.model.RouteRouse;
 import com.wpx.nacos.property.NacosGatewayProperties;
-import com.wpx.nacos.route.GatewayRoute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 /**
  * @author wpx
  * Created on 2021/1/25 10:09
- * @description：
+ * 
  */
 @Service
 public class NacosDynamicRouteService implements ApplicationEventPublisherAware {
@@ -297,7 +297,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
      * 清空路由白名单
      */
     private void clearWhiteRoute() {
-        GatewayRoute.clearWhiteRouteList();
+        GatewayRoute.clearWhiteRoute();
     }
 
     /**

@@ -8,7 +8,7 @@ import java.util.Set;
 
 /**
  * @author 不会飞的小鹏
- * @description： wechatUser dubbo remote
+ *  wechatUser dubbo remote
  */
 public interface WechatUserDubboService {
 

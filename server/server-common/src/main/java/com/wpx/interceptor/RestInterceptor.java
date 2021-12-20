@@ -1,6 +1,5 @@
 package com.wpx.interceptor;
 
-import com.wpx.constant.VerifyConstant;
 import com.wpx.exception.CommonException;
 import com.wpx.exception.ExceptionMessage;
 import com.wpx.util.StringUtils;
@@ -11,6 +10,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import static com.wpx.constant.VerifyConstant.FEIGN_COMMON_TOKEN;
+import static com.wpx.constant.VerifyConstant.ROUTE_REST_TOKEN;
 
 /**
  * @author 不会飞的小鹏
@@ -25,9 +27,9 @@ public class RestInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        String routeRestToken = request.getHeader(VerifyConstant.ROUTE_REST_TOKEN);
+        String routeRestToken = request.getHeader(ROUTE_REST_TOKEN);
         String restToken = applicationTokenProperties.getRest();
-        if (StringUtils.equals(routeRestToken, restToken)) {
+        if (StringUtils.equals(FEIGN_COMMON_TOKEN, routeRestToken) || StringUtils.equals(routeRestToken, restToken)) {
             return true;
         }
         throw new CommonException(ExceptionMessage.NON_INTERNAL_ACCESS_ERROR);

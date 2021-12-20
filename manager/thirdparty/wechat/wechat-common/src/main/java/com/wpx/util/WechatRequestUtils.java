@@ -15,7 +15,7 @@ import static com.wpx.constant.WechatConstant.ACCESS_TOKEN;
 
 /**
  * @author 不会飞的小鹏
- * @description： 微信请求工具类
+ *  微信请求工具类
  */
 public class WechatRequestUtils {
 

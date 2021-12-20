@@ -2,7 +2,6 @@ package com.wpx.rest.feign;
 
 import com.wpx.util.JsonUtils;
 import com.wpx.model.ResultVO;
-import com.wpx.model.login.LoginDTO;
 import com.wpx.model.login.TokenDTO;
 import org.springframework.web.bind.annotation.*;
 

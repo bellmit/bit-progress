@@ -4,7 +4,7 @@ import okhttp3.MediaType;
 
 /**
  * @author 不会飞的小鹏
- * @description： OkHttp常量
+ *  OkHttp常量
  */
 public class OkHttpConstants {
 

@@ -9,49 +9,52 @@ import java.net.URI;
 
 /**
  * 基础的feign调用方法，从URI中解析服务名
+ *
  * @author 不会飞的小鹏
  */
-@FeignClient(name = "feign", fallbackFactory = FeignClientServiceFallback.class)
+@FeignClient(name = FeignClientService.FEIGN_NAME, fallbackFactory = FeignClientServiceFallback.class)
 public interface FeignClientService {
 
+    String FEIGN_NAME = "feign-common";
+
     /**
-     * 创建自定义的feignClient -- GET
+     * 在URI中动态指定目标服务的feignClient -- GET
      *
-     * @param uri
-     * @param data
-     * @return ResultVO<String>
+     * @param uri  目标uri
+     * @param data 请求参数
+     * @return ResultVO<Object>
      */
     @GetMapping
-    ResultVO<String> createGetFeignClient(URI uri, @SpringQueryMap Object data);
+    ResultVO<Object> createGetFeignClient(URI uri, @SpringQueryMap Object data);
 
     /**
-     * 创建自定义的feignClient -- POST
+     * 在URI中动态指定目标服务的feignClient -- POST
      *
-     * @param uri
-     * @param data
-     * @return ResultVO<String>
+     * @param uri  目标uri
+     * @param data 请求body参数
+     * @return ResultVO<Object>
      */
     @PostMapping
-    ResultVO<String> createPostFeignClient(URI uri, @RequestBody Object data);
+    ResultVO<Object> createPostFeignClient(URI uri, @RequestBody Object data);
 
     /**
-     * 创建自定义的feignClient -- PUT
+     * 在URI中动态指定目标服务的feignClient -- PUT
      *
-     * @param uri
-     * @param data
-     * @return ResultVO<String>
+     * @param uri  目标uri
+     * @param data 请求body参数
+     * @return ResultVO<Object>
      */
     @PutMapping
-    ResultVO<String> createPutFeignClient(URI uri, @RequestBody Object data);
+    ResultVO<Object> createPutFeignClient(URI uri, @RequestBody Object data);
 
     /**
-     * 创建自定义的feignClient -- DELETE
+     * 在URI中动态指定目标服务的feignClient -- DELETE
      *
-     * @param uri
-     * @param data
-     * @return ResultVO<String>
+     * @param uri  目标uri
+     * @param data 请求参数
+     * @return ResultVO<Object>
      */
     @DeleteMapping
-    ResultVO<String> createDeleteFeignClient(URI uri, @SpringQueryMap Object data);
+    ResultVO<Object> createDeleteFeignClient(URI uri, @SpringQueryMap Object data);
 
 }

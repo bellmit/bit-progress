@@ -6,6 +6,10 @@ import org.springframework.stereotype.Component;
 
 import java.net.URI;
 
+/**
+ * @author 不会飞的小鹏
+ * 服务降级
+ */
 @Component
 public class FeignClientServiceFallback implements FallbackFactory<FeignClientService> {
     /**
@@ -17,53 +21,55 @@ public class FeignClientServiceFallback implements FallbackFactory<FeignClientSe
     @Override
     public FeignClientService create(Throwable cause) {
         return new FeignClientService() {
+
             /**
-             * 创建自定义的feignClient -- GET
+             * 在URI中动态指定目标服务的feignClient -- GET
              *
-             * @param uri
-             * @param data
-             * @return ResultVO<String>
+             * @param uri  目标uri
+             * @param data 请求参数
+             * @return ResultVO<Object>
              */
             @Override
-            public ResultVO<String> createGetFeignClient(URI uri, Object data) {
+            public ResultVO<Object> createGetFeignClient(URI uri, Object data) {
                 return null;
             }
 
             /**
-             * 创建自定义的feignClient -- POST
+             * 在URI中动态指定目标服务的feignClient -- POST
              *
-             * @param uri
-             * @param data
-             * @return ResultVO<String>
+             * @param uri  目标uri
+             * @param data 请求body参数
+             * @return ResultVO<Object>
              */
             @Override
-            public ResultVO<String> createPostFeignClient(URI uri, Object data) {
+            public ResultVO<Object> createPostFeignClient(URI uri, Object data) {
                 return null;
             }
 
             /**
-             * 创建自定义的feignClient -- PUT
+             * 在URI中动态指定目标服务的feignClient -- PUT
              *
-             * @param uri
-             * @param data
-             * @return ResultVO<String>
+             * @param uri  目标uri
+             * @param data 请求body参数
+             * @return ResultVO<Object>
              */
             @Override
-            public ResultVO<String> createPutFeignClient(URI uri, Object data) {
+            public ResultVO<Object> createPutFeignClient(URI uri, Object data) {
                 return null;
             }
 
             /**
-             * 创建自定义的feignClient -- DELETE
+             * 在URI中动态指定目标服务的feignClient -- DELETE
              *
-             * @param uri
-             * @param data
-             * @return ResultVO<String>
+             * @param uri  目标uri
+             * @param data 请求参数
+             * @return ResultVO<Object>
              */
             @Override
-            public ResultVO<String> createDeleteFeignClient(URI uri, Object data) {
+            public ResultVO<Object> createDeleteFeignClient(URI uri, Object data) {
                 return null;
             }
+
         };
     }
 }

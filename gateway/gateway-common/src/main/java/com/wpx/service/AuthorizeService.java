@@ -1,5 +1,6 @@
 package com.wpx.service;
 
+import com.wpx.model.login.AuthMsg;
 import com.wpx.util.StringUtils;
 import com.wpx.exception.envm.AuthException;
 import com.wpx.model.result.AuthResult;
@@ -11,9 +12,10 @@ import java.util.Objects;
 
 /**
  * @author 不会飞的小鹏
+ * 授权鉴权服务
  */
 @Service
-public class AuthService {
+public class AuthorizeService {
 
     @Autowired
     private ShiroTokenService shiroTokenService;
@@ -39,17 +41,17 @@ public class AuthService {
      * @param authentication
      * @return Result
      */
-    public AuthResult checkToken(String authentication) {
+    public <T extends AuthMsg> AuthResult<T> checkToken(String authentication, Class<T> target) {
         String token;
         // 如果请求未携带token信息, 直接权限拒绝
         if (StringUtils.isEmpty(authentication) || !authentication.startsWith(BEARER)
                 || Objects.isNull(token = getToken(authentication))) {
-            AuthResult authResult = new AuthResult();
+            AuthResult<T> authResult = new AuthResult<>();
             authResult.setResult(false);
             authResult.setAuthException(AuthException.AUTH_TOKEN_EMPTY);
             return authResult;
         }
-        return shiroTokenService.checkToken(token);
+        return shiroTokenService.checkToken(token, target);
     }
 
     /**

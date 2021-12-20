@@ -2,7 +2,7 @@ package com.wpx.model.kf.message;
 
 /**
  * @author 不会飞的小鹏
- * @description： 消息类型枚举
+ *  消息类型枚举
  */
 public enum MsgTypeEnum {
 

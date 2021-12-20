@@ -2,7 +2,7 @@ package com.wpx.model.kf.message;
 
 /**
  * @author 不会飞的小鹏
- * @description： 文本消息
+ *  文本消息
  */
 public class Text implements KfBaseMessage {
 

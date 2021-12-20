@@ -5,7 +5,7 @@ import com.wpx.model.WechatResult;
 
 /**
  * @author 不会飞的小鹏
- * @description： 菜单创建结果
+ *  菜单创建结果
  */
 public class MenuResult extends WechatResult {
 

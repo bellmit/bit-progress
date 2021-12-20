@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author 不会飞的小鹏
- * @description： 客服列表
+ *  客服列表
  */
 public class KfList extends WechatResult {
 

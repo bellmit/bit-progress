@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * @author 不会飞的小鹏
- * @description： 菜单消息
+ *  菜单消息
  */
 public class MsgMenu implements KfBaseMessage {
 

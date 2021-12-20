@@ -1,4 +1,4 @@
-package com.wpx.nacos.route;
+package com.wpx.route;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * @author wpx
  * Created on 2021/1/26 16:56
- * @description：
+ * 
  */
 public class GatewayRoute {
 
@@ -20,7 +20,7 @@ public class GatewayRoute {
     /**
      * 路由白名单
      */
-    private static final List<String> WHITE_ROUTE_LIST = new ArrayList<>();
+    private static final List<String> WHITE_ROUTE = new ArrayList<>();
 
     /**
      * 路由资源
@@ -46,8 +46,8 @@ public class GatewayRoute {
      *
      * @return   List<String>
      */
-    public static List<String> getWhiteRouteList() {
-        return WHITE_ROUTE_LIST;
+    public static List<String> getWhiteRoute() {
+        return WHITE_ROUTE;
     }
 
     /**
@@ -85,7 +85,7 @@ public class GatewayRoute {
      * @param    whiteRoutes
      */
     public static void addWhiteRoute(List<String> whiteRoutes) {
-        WHITE_ROUTE_LIST.addAll(whiteRoutes);
+        WHITE_ROUTE.addAll(whiteRoutes);
     }
 
     /**
@@ -116,8 +116,8 @@ public class GatewayRoute {
     /**
      * 清空路由白名单
      */
-    public static void clearWhiteRouteList() {
-        WHITE_ROUTE_LIST.clear();
+    public static void clearWhiteRoute() {
+        WHITE_ROUTE.clear();
     }
 
     /**

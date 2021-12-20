@@ -1,18 +1,19 @@
 package com.wpx.model.result;
 
 import com.wpx.exception.envm.AuthException;
+import com.wpx.model.login.AuthMsg;
 
 /**
  * @author wpx
  * Created on 2021/1/26 11:20
  */
-public class AuthResult {
+public class AuthResult<T extends AuthMsg> {
 
     private Boolean result;
 
     private String userId;
 
-    private String role;
+    private T authMsg;
 
     private AuthException authException;
 
@@ -32,12 +33,12 @@ public class AuthResult {
         this.userId = userId;
     }
 
-    public String getRole() {
-        return role;
+    public T getAuthMsg() {
+        return authMsg;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setAuthMsg(T authMsg) {
+        this.authMsg = authMsg;
     }
 
     public AuthException getAuthException() {

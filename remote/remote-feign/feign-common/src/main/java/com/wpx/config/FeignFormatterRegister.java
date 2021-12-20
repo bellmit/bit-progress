@@ -11,6 +11,7 @@ import java.util.Locale;
 
 /**
  * @author 不会飞的小鹏
+ * feign的LocalDateTime序列化和反序列化
  */
 @Configuration
 public class FeignFormatterRegister implements FeignFormatterRegistrar {

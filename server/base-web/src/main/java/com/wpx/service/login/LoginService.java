@@ -11,7 +11,6 @@ import com.wpx.model.JsCode2SessionResult;
 import com.wpx.model.ResultVO;
 import com.wpx.model.app.wechatapp.envm.WechatAppTypeEnum;
 import com.wpx.model.app.wechatapp.pojo.WechatAppRO;
-import com.wpx.model.login.LoginDTO;
 import com.wpx.model.login.LoginVO;
 import com.wpx.model.login.TokenDTO;
 import com.wpx.model.login.SmsCaptchaLoginDTO;

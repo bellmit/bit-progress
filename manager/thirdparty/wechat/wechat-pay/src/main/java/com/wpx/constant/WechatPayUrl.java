@@ -3,7 +3,7 @@ package com.wpx.constant;
 /**
  * @author 不会飞的小鹏
  * create on 2021/7/19 0:08
- * @Description：微信的请求URL
+ * 微信的请求URL
  */
 public class WechatPayUrl {
 

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
- * @description： 未接入会话
+ *  未接入会话
  */
 public class KfWaitCaseSession {
 

@@ -25,7 +25,7 @@ import static com.wpx.okhttp.constant.OkHttpConstants.*;
 
 /**
  * @author 不会飞的小鹏
- * @description： 微信公众号素材管理
+ *  微信公众号素材管理
  */
 public class WechatOaMediaManager {
 

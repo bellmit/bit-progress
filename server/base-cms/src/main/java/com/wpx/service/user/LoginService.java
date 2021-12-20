@@ -7,7 +7,6 @@ import com.wpx.model.login.LoginVO;
 import com.wpx.util.BcryptUtils;
 import com.wpx.util.StringUtils;
 import com.wpx.gatewaycms.auth.AuthFeignService;
-import com.wpx.model.login.LoginDTO;
 import com.wpx.model.login.LogoutDTO;
 import com.wpx.model.user.manager.Manager;
 import com.wpx.model.user.manager.pojo.cms.LoginSuccessVO;

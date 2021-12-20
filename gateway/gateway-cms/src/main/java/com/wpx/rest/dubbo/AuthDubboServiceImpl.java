@@ -3,10 +3,7 @@ package com.wpx.rest.dubbo;
 import com.wpx.gatewaycms.auth.AuthDubboService;
 import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
-import com.wpx.model.login.LoginDTO;
-import com.wpx.model.login.LoginVO;
-import com.wpx.model.login.LogoutDTO;
-import com.wpx.model.login.TokenDTO;
+import com.wpx.model.login.*;
 import com.wpx.service.AuthService;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +25,8 @@ public class AuthDubboServiceImpl implements AuthDubboService {
      * @return 返回token
      */
     @Override
-    public ResultVO<LoginVO> login(LoginDTO loginDTO) {
-        return ResultVO.successData(authService.login(loginDTO.getUserId(), loginDTO.getRole()));
+    public ResultVO<LoginVO> login(LoginCmsDTO loginDTO) {
+        return ResultVO.successData(authService.login(loginDTO.getUserId(), loginDTO.getAuthMsg()));
     }
 
     /**

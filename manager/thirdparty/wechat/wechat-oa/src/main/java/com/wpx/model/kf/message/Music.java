@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
- * @description： 音乐消息
+ *  音乐消息
  */
 public class Music implements KfBaseMessage {
 

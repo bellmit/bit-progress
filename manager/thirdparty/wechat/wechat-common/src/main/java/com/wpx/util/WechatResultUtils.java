@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /**
  * @author 不会飞的小鹏
- * @description： 微信接口调用结果处理
+ *  微信接口调用结果处理
  */
 public class WechatResultUtils {
 

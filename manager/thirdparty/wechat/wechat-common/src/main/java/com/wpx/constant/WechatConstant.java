@@ -2,7 +2,7 @@ package com.wpx.constant;
 
 /**
  * @author 不会飞的小鹏
- * @description： 微信接口调用结果常量
+ *  微信接口调用结果常量
  */
 public class WechatConstant {
 

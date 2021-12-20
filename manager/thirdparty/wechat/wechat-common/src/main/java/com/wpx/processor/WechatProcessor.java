@@ -14,7 +14,7 @@ import static com.wpx.constant.WechatConstant.*;
 
 /**
  * @author 不会飞的小鹏
- * @description： 微信应用处理器
+ *  微信应用处理器
  */
 public class WechatProcessor {
 

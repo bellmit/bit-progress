@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
- * @description： 视频消息
+ *  视频消息
  */
 public class Video implements KfBaseMessage {
 

@@ -3,8 +3,11 @@ package com.wpx.manager.shiro.base;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @author 不会飞的小鹏
+ */
 @Configuration
-@ConfigurationProperties(prefix = "module.shiro")
+@ConfigurationProperties(prefix = "gateway.auth")
 public class ShiroModuleProperties {
 
     private String tokenName = "auth.token.";

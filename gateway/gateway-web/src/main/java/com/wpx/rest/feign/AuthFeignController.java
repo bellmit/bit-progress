@@ -2,8 +2,8 @@ package com.wpx.rest.feign;
 
 import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
-import com.wpx.model.login.LoginDTO;
 import com.wpx.model.login.LoginVO;
+import com.wpx.model.login.LoginWebDTO;
 import com.wpx.model.login.LogoutDTO;
 import com.wpx.model.login.TokenDTO;
 import com.wpx.service.AuthService;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author wpx
  * Created on 2021/1/26 16:03
- * @description：
+ * 
  */
 @RestController
 @RequestMapping("rest/gatewayWeb/auth")
@@ -28,8 +28,8 @@ public class AuthFeignController {
      * @param loginDTO 参数
      */
     @PostMapping("login")
-    public ResultVO<LoginVO> login(@RequestBody LoginDTO loginDTO) {
-        return ResultVO.successData(authService.login(loginDTO.getUserId(), loginDTO.getRole()));
+    public ResultVO<LoginVO> login(@RequestBody LoginWebDTO loginDTO) {
+        return ResultVO.successData(authService.login(loginDTO.getUserId(), loginDTO.getAuthMsg()));
     }
 
     /**

@@ -48,6 +48,11 @@ public class VerifyConstant {
     public static final String ROUTE_REST_TOKEN = "route_rest_token";
 
     /**
+     * 对于基础的FeignClient接口的token
+     */
+    public static final String FEIGN_COMMON_TOKEN = "feign-common-token";
+
+    /**
      * 服务名称标识
      */
     public static final String SERVER_NAME = "server-name";

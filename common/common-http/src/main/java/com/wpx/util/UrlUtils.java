@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * @author 不会飞的小鹏
- * @description： url拼接工具类
+ *  url拼接工具类
  */
 public class UrlUtils {
 

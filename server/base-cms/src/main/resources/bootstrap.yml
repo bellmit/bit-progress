@@ -1,4 +1,6 @@
 spring:
+  jackson:
+    serialization: true
   application:
     name: base-cms
   profiles:

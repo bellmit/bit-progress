@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
- * @description： 素材消息  图片消息/语音消息/图文消息（点击跳转到图文消息页面）
+ *  素材消息  图片消息/语音消息/图文消息（点击跳转到图文消息页面）
  */
 public class Media implements KfBaseMessage {
 

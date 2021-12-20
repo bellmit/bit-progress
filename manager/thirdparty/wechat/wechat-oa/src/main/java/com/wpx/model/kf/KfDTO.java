@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
- * @description： 客服DTO
+ *  客服DTO
  */
 public class KfDTO {
 

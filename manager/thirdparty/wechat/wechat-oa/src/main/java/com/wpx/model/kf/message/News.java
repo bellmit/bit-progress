@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
- * @description： 图文消息（点击跳转到外链）
+ *  图文消息（点击跳转到外链）
  */
 public class News implements KfBaseMessage {
 

@@ -12,7 +12,7 @@ import java.util.Set;
 
 /**
  * @author 不会飞的小鹏
- * @description： wechatAppleUser dubbo remote
+ *  wechatAppleUser dubbo remote
  */
 @Service(version = "1.0.0")
 public class WechatAppletUserDubboServiceImpl implements WechatAppletUserDubboService {

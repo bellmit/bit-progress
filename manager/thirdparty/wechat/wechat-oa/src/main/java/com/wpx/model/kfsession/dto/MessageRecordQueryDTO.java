@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
- * @description： 聊天记录查询DTO
+ *  聊天记录查询DTO
  */
 public class MessageRecordQueryDTO {
 

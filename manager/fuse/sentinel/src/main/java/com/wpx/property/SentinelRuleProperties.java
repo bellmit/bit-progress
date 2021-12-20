@@ -17,6 +17,8 @@ public class SentinelRuleProperties {
 
     private RuleProperties degrade;
 
+    private RuleProperties paramFlow;
+
     private RuleProperties system;
 
     private RuleProperties authority;
@@ -35,6 +37,14 @@ public class SentinelRuleProperties {
 
     public void setDegrade(RuleProperties degrade) {
         this.degrade = degrade;
+    }
+
+    public RuleProperties getParamFlow() {
+        return paramFlow;
+    }
+
+    public void setParamFlow(RuleProperties paramFlow) {
+        this.paramFlow = paramFlow;
     }
 
     public RuleProperties getSystem() {

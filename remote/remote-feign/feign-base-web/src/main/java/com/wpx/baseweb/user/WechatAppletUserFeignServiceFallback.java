@@ -10,7 +10,7 @@ import java.util.Set;
 
 /**
  * @author 不会飞的小鹏
- * @description： wechatAppletUser feign remote fallback
+ *  wechatAppletUser feign remote fallback
  */
 @Component
 public class WechatAppletUserFeignServiceFallback implements FallbackFactory<WechatAppletUserFeignService> {

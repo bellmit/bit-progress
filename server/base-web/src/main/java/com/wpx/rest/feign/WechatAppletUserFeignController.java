@@ -14,7 +14,7 @@ import java.util.Set;
 
 /**
  * @author 不会飞的小鹏
- * @description： wechatAppletUser
+ *  wechatAppletUser
  */
 @RestController
 @RequestMapping("rest/baseWeb/wechatAppletUser")

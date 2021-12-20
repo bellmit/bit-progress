@@ -4,7 +4,7 @@ import com.wpx.model.kf.KfAccount;
 
 /**
  * @author 不会飞的小鹏
- * @description： 客服消息
+ *  客服消息
  */
 public class KfMessage<T extends KfBaseMessage> {
 

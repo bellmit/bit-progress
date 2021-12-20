@@ -8,7 +8,7 @@ import java.time.ZoneOffset;
 
 /**
  * @author 不会飞的小鹏
- * @description： 客服会话
+ *  客服会话
  */
 public class KfSession extends WechatResult {
 

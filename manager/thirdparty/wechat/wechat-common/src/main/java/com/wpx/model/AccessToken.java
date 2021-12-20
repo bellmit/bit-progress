@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
- * @description： 微信接口调用凭证
+ *  微信接口调用凭证
  */
 public class AccessToken extends WechatResult {
 

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
- * @description： 微信登录信息结果
+ *  微信登录信息结果
  */
 public class JsCode2SessionResult extends WechatResult {
 

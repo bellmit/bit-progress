@@ -13,7 +13,7 @@ import static com.wpx.constant.WechatLoginConstants.*;
 
 /**
  * @author 不会飞的小鹏
- * @description： 微信登录服务
+ *  微信登录服务
  */
 public class WechatLoginService {
 

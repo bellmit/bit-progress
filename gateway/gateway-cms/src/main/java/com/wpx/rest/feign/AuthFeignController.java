@@ -2,7 +2,7 @@ package com.wpx.rest.feign;
 
 import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
-import com.wpx.model.login.LoginDTO;
+import com.wpx.model.login.LoginCmsDTO;
 import com.wpx.model.login.LoginVO;
 import com.wpx.model.login.LogoutDTO;
 import com.wpx.model.login.TokenDTO;
@@ -27,8 +27,8 @@ public class AuthFeignController {
      * @param loginDTO  登录信息DTO
      */
     @PostMapping("login")
-    public ResultVO<LoginVO> login(@RequestBody LoginDTO loginDTO) {
-        return ResultVO.successData(authService.login(loginDTO.getUserId(), loginDTO.getRole()));
+    public ResultVO<LoginVO> login(@RequestBody LoginCmsDTO loginDTO) {
+        return ResultVO.successData(authService.login(loginDTO.getUserId(), loginDTO.getAuthMsg()));
     }
 
     /**

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author 不会飞的小鹏
  * 登录DTO
  */
-public class LoginDTO implements Serializable {
+public class LoginWebDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -18,7 +18,7 @@ public class LoginDTO implements Serializable {
     /**
      * 用户权限，暂时是单一权限
      */
-    private String role;
+    private AuthWebMsg authMsg;
 
     public String getUserId() {
         return userId;
@@ -28,25 +28,25 @@ public class LoginDTO implements Serializable {
         this.userId = userId;
     }
 
-    public String getRole() {
-        return role;
+    public AuthWebMsg getAuthMsg() {
+        return authMsg;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setAuthMsg(AuthWebMsg authMsg) {
+        this.authMsg = authMsg;
     }
 
-    public LoginDTO() {
+    public LoginWebDTO() {
     }
 
-    public LoginDTO(String userId, String role) {
+    public LoginWebDTO(String userId, AuthWebMsg authMsg) {
         this.userId = userId;
-        this.role = role;
+        this.authMsg = authMsg;
     }
 
     @Override
     public String toString() {
-        return "{" + "userId=" + userId + ", role=" + role + "}";
+        return "{" + "userId=" + userId + ", role=" + authMsg + "}";
     }
 
 }

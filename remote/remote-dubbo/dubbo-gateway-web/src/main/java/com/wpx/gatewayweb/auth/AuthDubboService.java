@@ -2,8 +2,8 @@ package com.wpx.gatewayweb.auth;
 
 import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
-import com.wpx.model.login.LoginDTO;
 import com.wpx.model.login.LoginVO;
+import com.wpx.model.login.LoginWebDTO;
 import com.wpx.model.login.LogoutDTO;
 import com.wpx.model.login.TokenDTO;
 
@@ -19,7 +19,7 @@ public interface AuthDubboService {
      * @param dto
      * @return token
      */
-    ResultVO<LoginVO> login(LoginDTO dto);
+    ResultVO<LoginVO> login(LoginWebDTO dto);
 
     /**
      * 退出登录

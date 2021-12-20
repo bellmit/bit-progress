@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @author 不会飞的小鹏
- * @description： 对于不同的菜单类型，value的值意义不同
+ *  对于不同的菜单类型，value的值意义不同
  * 官网上设置的自定义菜单：
  * Text:保存文字到value；
  * Img、voice：保存mediaID到value；

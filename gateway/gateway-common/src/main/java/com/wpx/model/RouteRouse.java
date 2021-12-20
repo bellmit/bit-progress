@@ -1,11 +1,11 @@
-package com.wpx.nacos.bean;
+package com.wpx.model;
 
 import java.util.List;
 
 /**
  * @author wpx
  * Created on 2021/1/27 14:48
- * @description：
+ * 资源对象，由方法、url和权限列表组成
  */
 public class RouteRouse {
 

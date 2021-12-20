@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author wpx
  * Created on 2021/1/27 11:19
- * @description：
+ * 
  */
 @Configuration
 @ConfigurationProperties(prefix = "module.gateway")

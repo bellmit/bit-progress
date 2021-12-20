@@ -4,7 +4,7 @@ import com.wpx.util.StringUtils;
 
 /**
  * @author 不会飞的小鹏
- * @description： 素材类型
+ *  素材类型
  */
 public enum MediaTypeEnum {
 

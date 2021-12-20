@@ -2,7 +2,7 @@ package com.wpx.constant;
 
 /**
  * @author 不会飞的小鹏
- * @description： 公众号模块接口url
+ *  公众号模块接口url
  */
 public class WechatOaUrl {
 

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author 不会飞的小鹏
- * @description：
+ * 
  */
 public class MiniProgramPage implements KfBaseMessage {
 

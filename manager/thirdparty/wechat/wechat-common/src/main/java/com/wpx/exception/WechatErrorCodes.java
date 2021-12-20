@@ -2,7 +2,7 @@ package com.wpx.exception;
 
 /**
  * @author 不会飞的小鹏
- * @description： 微信模块异常错误码
+ *  微信模块异常错误码
  */
 public class WechatErrorCodes {
 

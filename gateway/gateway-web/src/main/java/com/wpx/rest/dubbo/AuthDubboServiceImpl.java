@@ -3,8 +3,8 @@ package com.wpx.rest.dubbo;
 import com.wpx.gatewayweb.auth.AuthDubboService;
 import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
-import com.wpx.model.login.LoginDTO;
 import com.wpx.model.login.LoginVO;
+import com.wpx.model.login.LoginWebDTO;
 import com.wpx.model.login.LogoutDTO;
 import com.wpx.model.login.TokenDTO;
 import com.wpx.service.AuthService;
@@ -22,8 +22,8 @@ public class AuthDubboServiceImpl implements AuthDubboService {
     private AuthService authService;
 
     @Override
-    public ResultVO<LoginVO> login(LoginDTO loginDTO) {
-        return ResultVO.successData(authService.login(loginDTO.getUserId(), loginDTO.getRole()));
+    public ResultVO<LoginVO> login(LoginWebDTO loginDTO) {
+        return ResultVO.successData(authService.login(loginDTO.getUserId(), loginDTO.getAuthMsg()));
     }
 
     @Override

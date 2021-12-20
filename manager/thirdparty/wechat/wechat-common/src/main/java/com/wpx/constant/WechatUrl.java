@@ -2,7 +2,7 @@ package com.wpx.constant;
 
 /**
  * @author 不会飞的小鹏
- * @description： 微信相关url
+ *  微信相关url
  */
 public class WechatUrl {
 

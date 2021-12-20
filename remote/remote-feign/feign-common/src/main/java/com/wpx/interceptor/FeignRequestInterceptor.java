@@ -1,10 +1,13 @@
 package com.wpx.interceptor;
 
-import com.wpx.constant.VerifyConstant;
 import com.wpx.property.ServerTokenProperties;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import static com.wpx.constant.VerifyConstant.FEIGN_COMMON_TOKEN;
+import static com.wpx.constant.VerifyConstant.ROUTE_REST_TOKEN;
+import static com.wpx.feignclient.FeignClientService.FEIGN_NAME;
 
 /**
  * @author 不会飞的小鹏
@@ -24,8 +27,14 @@ public class FeignRequestInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate template) {
         String serverName = template.feignTarget().name();
+        // 基础FeignClient进行请求，带上对应的标识
+        if (FEIGN_NAME.equals(serverName)) {
+            template.header(ROUTE_REST_TOKEN, FEIGN_COMMON_TOKEN);
+            return;
+        }
         String serverToken = serverTokenProperties.getServerTokenByServerName(serverName);
-        template.header(VerifyConstant.ROUTE_REST_TOKEN, serverToken);
+        template.header(ROUTE_REST_TOKEN, serverToken);
+
     }
 
 }

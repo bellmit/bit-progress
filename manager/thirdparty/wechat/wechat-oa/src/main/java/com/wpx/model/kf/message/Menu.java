@@ -2,7 +2,7 @@ package com.wpx.model.kf.message;
 
 /**
  * @author 不会飞的小鹏
- * @description： 菜单消息菜单项
+ *  菜单消息菜单项
  */
 public class Menu {
 

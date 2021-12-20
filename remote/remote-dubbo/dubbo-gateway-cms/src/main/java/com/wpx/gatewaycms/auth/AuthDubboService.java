@@ -2,10 +2,7 @@ package com.wpx.gatewaycms.auth;
 
 import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
-import com.wpx.model.login.LoginDTO;
-import com.wpx.model.login.LoginVO;
-import com.wpx.model.login.LogoutDTO;
-import com.wpx.model.login.TokenDTO;
+import com.wpx.model.login.*;
 
 /**
  * @author 不会飞的小鹏
@@ -18,7 +15,7 @@ public interface AuthDubboService {
      * @param loginDTO  登录信息DTO
      * @return 返回token
      */
-    ResultVO<LoginVO> login(LoginDTO loginDTO);
+    ResultVO<LoginVO> login(LoginCmsDTO loginDTO);
 
     /**
      * 退出登录

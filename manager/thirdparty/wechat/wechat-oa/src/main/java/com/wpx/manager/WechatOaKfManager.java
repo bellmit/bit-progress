@@ -24,7 +24,7 @@ import static com.wpx.util.WechatRequestUtils.*;
 
 /**
  * @author 不会飞的小鹏
- * @description： 微信公众号客服账号管理
+ *  微信公众号客服账号管理
  */
 public class WechatOaKfManager {
 

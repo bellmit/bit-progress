@@ -2,7 +2,7 @@ package com.wpx.constant;
 
 /**
  * @author 不会飞的小鹏
- * @description： 微信公众号常量
+ *  微信公众号常量
  */
 public class WechatOaConstants {
 

@@ -3,7 +3,7 @@ package com.wpx.constant;
 /**
  * @author 不会飞的小鹏
  * create on 2021/5/31 22:59
- * @description： NumberConstants is
+ *  NumberConstants is
  */
 public class NumberConstants {
 
