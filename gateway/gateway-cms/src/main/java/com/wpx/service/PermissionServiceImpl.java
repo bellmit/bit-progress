@@ -1,9 +1,10 @@
-package com.wpx.auth.service;
+package com.wpx.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.wpx.auth.base.AuthException;
 import com.wpx.auth.base.AuthMsg;
 import com.wpx.auth.base.AuthResult;
+import com.wpx.constant.VerifyConstant;
 import com.wpx.route.GatewayRouteMsg;
 import com.wpx.route.RouteRouse;
 import com.wpx.service.PermissionService;
@@ -14,6 +15,7 @@ import com.wpx.util.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.PatternMatchUtils;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -52,9 +54,9 @@ public class PermissionServiceImpl implements PermissionService {
 
         // 获取用户的角色信息
         AuthMsg authMsg = authResult.getAuthMsg();
-        String userPermission = authMsg.getPermissions();
-
-        String userRoleKey = authMsg.getRoleKey();
+        Map<String, String> params = authMsg.getParams();
+        String userPermission = params.get(VerifyConstant.PERMISSIONS);
+        String userRoleKey = params.get(VerifyConstant.ROLE_KEY);
 
         boolean permissionResult;
 

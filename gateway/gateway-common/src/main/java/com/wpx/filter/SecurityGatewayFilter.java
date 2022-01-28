@@ -89,14 +89,9 @@ public class SecurityGatewayFilter implements GlobalFilter {
         DefaultResponse response = (DefaultResponse) exchange.getAttributes().get(GATEWAY_LOADBALANCER_RESPONSE_ATTR);
         String serviceId = response.getServer().getServiceId();
         String routeApiToken = GatewayRouteMsg.getRouteApiToken(serviceId);
-        String roleKey = authMsg.getRoleKey();
-        String permissions = authMsg.getPermissions();
         Map<String, String> params = authMsg.getParams();
         ServerHttpRequest.Builder mutate = request.mutate();
-        mutate.header(VerifyConstant.USER_ID, userId)
-                .header(VerifyConstant.ROUTE_API_TOKEN, routeApiToken)
-                .header(VerifyConstant.ROLE_KEY, roleKey)
-                .header(VerifyConstant.PERMISSIONS, permissions);
+        mutate.header(VerifyConstant.USER_ID, userId).header(VerifyConstant.ROUTE_API_TOKEN, routeApiToken);
         if (CollectionUtils.nonEmpty(params)) {
             params.forEach(mutate::header);
         }
