@@ -3,6 +3,7 @@ package com.wpx.gatewayweb.auth;
 import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
 import com.wpx.model.login.LoginVO;
+import com.wpx.model.login.LoginWebDTO;
 import com.wpx.model.login.LogoutDTO;
 import com.wpx.model.login.TokenDTO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -26,7 +27,7 @@ public interface AuthFeignService {
      * @return token
      */
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    ResultVO<LoginVO> login(@RequestBody LoginDTO loginDTO);
+    ResultVO<LoginVO> login(@RequestBody LoginWebDTO loginDTO);
 
     /**
      * 退出登录

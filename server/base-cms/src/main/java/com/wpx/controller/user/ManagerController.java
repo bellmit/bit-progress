@@ -2,10 +2,11 @@ package com.wpx.controller.user;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
 import com.wpx.model.user.manager.pojo.cms.*;
 import com.wpx.service.user.ManagerService;
-import com.wpx.util.UserHelper;
+import com.wpx.util.UserUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -29,7 +30,7 @@ public class ManagerController {
     @GetMapping
     @ApiOperation("获取管理员信息")
     public ResultVO<ManagerCmsVO> findById(@RequestParam("managerId") Integer managerId) {
-        return ResultVO.successData(managerService.findById(managerId, UserHelper.getUserId()));
+        return ResultVO.successData(managerService.findById(managerId, UserUtils.getUserId()));
     }
 
     @PostMapping
@@ -41,14 +42,14 @@ public class ManagerController {
     @PutMapping
     @ApiOperation("修改")
     public ResultVO<ManagerCmsVO> update(@RequestBody @Valid ManagerCmsUpdateDTO managerUpdateDTO) {
-        return ResultVO.successData(managerService.update(managerUpdateDTO));
+        return ResultVO.successData(managerService.update(managerUpdateDTO, UserUtils.getUserId()));
     }
 
     @DeleteMapping
     @ApiOperation("删除")
-    public ResultVO delete(@RequestParam @ApiParam("id列表") Set<Long> managerIds) {
-        managerService.delete(managerIds, UserHelper.getUserId());
-        return ResultVO.success();
+    public ResultVO<BooleanVO> delete(@RequestParam @ApiParam("id列表") Set<Long> managerIds) {
+        managerService.delete(managerIds, UserUtils.getUserId());
+        return ResultVO.successData(BooleanVO.result(true));
     }
 
     @GetMapping("page")
@@ -60,19 +61,19 @@ public class ManagerController {
     @PutMapping("password")
     @ApiOperation("重置密码")
     public ResultVO<ManagerCmsVO> resetPassword(@RequestBody @Valid ManagerResetPasswordDTO managerResetPasswordVO) {
-        return ResultVO.successData(managerService.resetPassword(managerResetPasswordVO, UserHelper.getUserId()));
+        return ResultVO.successData(managerService.resetPassword(managerResetPasswordVO, UserUtils.getUserId()));
     }
 
     @PutMapping("state")
     @ApiOperation("禁用|开启")
     public ResultVO<ManagerCmsVO> handleDisabled(@RequestBody @Valid ManagerStateDTO managerStateVO) {
-        return ResultVO.successData(managerService.handleDisabled(managerStateVO, UserHelper.getUserId()));
+        return ResultVO.successData(managerService.handleDisabled(managerStateVO, UserUtils.getUserId()));
     }
 
     @PutMapping("role")
     @ApiOperation("禁用|开启")
     public ResultVO<ManagerCmsVO> handleRole(@RequestBody @Valid ManagerRoleDTO managerRoleVO) {
-        return ResultVO.successData(managerService.handleRole(managerRoleVO));
+        return ResultVO.successData(managerService.handleRole(managerRoleVO, UserUtils.getUserId()));
     }
 
 }

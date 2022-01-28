@@ -1,4 +1,4 @@
-package com.wpx.exception.envm;
+package com.wpx.auth.base;
 
 public enum AuthException {
 

@@ -1,12 +1,12 @@
-package com.wpx.manager.shiro.service;
+package com.wpx.auth.service;
 
 import com.alibaba.fastjson.JSON;
-import com.wpx.model.login.AuthMsg;
+import com.wpx.auth.base.AuthMsg;
+import com.wpx.service.AuthTokenService;
 import com.wpx.util.StringUtils;
-import com.wpx.exception.envm.AuthException;
-import com.wpx.model.result.AuthResult;
-import com.wpx.manager.shiro.base.ShiroModuleProperties;
-import com.wpx.manager.shiro.base.TokenUtil;
+import com.wpx.auth.base.AuthResult;
+import com.wpx.auth.base.AuthProperties;
+import com.wpx.auth.base.TokenUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
+import static com.wpx.auth.base.AuthException.AUTH_TOKEN_WRONG;
+
 /**
  * 采用shiro模式的token校验，而非继承了shiro
  * 相较于集成鉴权框架更加轻量，只进行了token的生成和校验，而不干涉登录的逻辑
@@ -23,26 +25,29 @@ import java.util.concurrent.TimeUnit;
  * @author wpx
  **/
 @Service
-public class ShiroTokenService {
+public class AuthTokenServiceImpl implements AuthTokenService {
 
-    private final Logger logger = LoggerFactory.getLogger(ShiroTokenService.class);
+    private final Logger logger = LoggerFactory.getLogger(AuthTokenServiceImpl.class);
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    private ShiroModuleProperties shiroModuleProperties;
+    private AuthProperties authProperties;
 
     @Autowired
-    private TokenUtil tokenUtil;
+    private TokenUtils tokenUtils;
 
     private static final String BASE_STRING = "abcdefghijklmnopqrstuvwxyz0123456789";
 
     /**
      * 登录
      *
-     * @param userId
+     * @param userId  用户ID
+     * @param authMsg 用户登录信息
+     * @return 登录后的token
      */
+    @Override
     public <T extends AuthMsg> String login(String userId, T authMsg) {
         return updateToken(userId, authMsg);
     }
@@ -50,19 +55,20 @@ public class ShiroTokenService {
     /**
      * 更新token
      *
-     * @param userId
-     * @param authMsg
+     * @param userId  用户ID
+     * @param authMsg 登录信息
+     * @return 登录后的token
      */
     private <T extends AuthMsg> String updateToken(String userId, T authMsg) {
         String salt = randomString(5);
-        String tokenPrefix = shiroModuleProperties.getTokenPrefix();
-        String tokenName = shiroModuleProperties.getTokenName();
-        int cacheDays = shiroModuleProperties.getCacheDays();
+        String tokenPrefix = authProperties.getTokenPrefix();
+        String tokenName = authProperties.getTokenName();
+        int cacheDays = authProperties.getCacheDays();
         if (StringUtils.isEmpty(userId)) {
             return null;
         }
         String content = generateEncodeContent(userId, salt);
-        String token = tokenUtil.encode(content);
+        String token = tokenUtils.encode(content);
         logger.info("setToken userId: [{}] = token:[{}]", userId, token);
         if (authMsg == null) {
             authMsg = (T) new AuthMsg();
@@ -83,12 +89,13 @@ public class ShiroTokenService {
     /**
      * 登出
      *
-     * @param userId
+     * @param userId 用户ID
      */
+    @Override
     public void logout(String userId) {
-        if (!shiroModuleProperties.isMultiLogin()) {
-            String tokenPrefix = shiroModuleProperties.getTokenPrefix();
-            String tokenName = shiroModuleProperties.getTokenName();
+        if (!authProperties.isMultiLogin()) {
+            String tokenPrefix = authProperties.getTokenPrefix();
+            String tokenName = authProperties.getTokenName();
             stringRedisTemplate.delete(tokenPrefix + tokenName + userId);
         }
     }
@@ -96,12 +103,14 @@ public class ShiroTokenService {
     /**
      * 校验token
      *
-     * @param    token
-     * @return   Result
+     * @param token  需要检验的token
+     * @param target 检验token后返回的AuthResult类型
+     * @return token检验结果
      */
+    @Override
     public <T extends AuthMsg> AuthResult<T> checkToken(String token, Class<T> target) {
         AuthResult<T> auth = new AuthResult<>();
-        String userIdTokenRole = this.tokenUtil.decode(token);
+        String userIdTokenRole = this.tokenUtils.decode(token);
         String userId;
         try {
             String[] split = userIdTokenRole.split("\\.");
@@ -109,19 +118,24 @@ public class ShiroTokenService {
             auth.setUserId(userId);
         } catch (Exception var7) {
             auth.setResult(false);
-            auth.setAuthException(AuthException.AUTH_TOKEN_WRONG);
+            auth.setAuthException(AUTH_TOKEN_WRONG);
             return auth;
         }
-        String tokenPrefix = shiroModuleProperties.getTokenPrefix();
-        String tokenName = shiroModuleProperties.getTokenName();
+        String tokenPrefix = authProperties.getTokenPrefix();
+        String tokenName = authProperties.getTokenName();
         String value = stringRedisTemplate.opsForValue().get(tokenPrefix + tokenName + userId);
+        if (StringUtils.isEmpty(value)) {
+            auth.setResult(false);
+            auth.setAuthException(AUTH_TOKEN_WRONG);
+            return auth;
+        }
         T authMsg = JSON.parseObject(value, target);
         String redisToken = authMsg.getToken();
         auth.setAuthMsg(authMsg);
         boolean result = StringUtils.nonEmpty(redisToken) && token.equals(redisToken);
         auth.setResult(result);
         if (!result) {
-            auth.setAuthException(AuthException.AUTH_TOKEN_WRONG);
+            auth.setAuthException(AUTH_TOKEN_WRONG);
         }
         return auth;
     }
@@ -129,7 +143,8 @@ public class ShiroTokenService {
     /**
      * 生成随机数
      *
-     * @param length
+     * @param length 生成的字符串长度
+     * @return 随机字符串
      */
     public static String randomString(int length) {
         if (StringUtils.isEmpty(BASE_STRING)) {
@@ -154,8 +169,10 @@ public class ShiroTokenService {
     /**
      * 从token中解析出userID
      *
-     * @param token
+     * @param token 需要解析的token
+     * @return 解析token后获得的UserId
      */
+    @Override
     public String getUserIdInToken(String token) {
         if (StringUtils.isEmpty(token)) {
             return null;
@@ -175,18 +192,22 @@ public class ShiroTokenService {
     /**
      * 加密token
      *
-     * @param rawToken
+     * @param rawToken 需要加密的字符串
+     * @return 加密后的token字符串
      */
+    @Override
     public String encodeToken(String rawToken) {
-        return tokenUtil.encode(rawToken);
+        return tokenUtils.encode(rawToken);
     }
 
     /**
      * 解密token
      *
-     * @param token
+     * @param token 需要解析的token
+     * @return 解析token后获得的字符串
      */
+    @Override
     public String decodeToken(String token) {
-        return tokenUtil.decode(token);
+        return tokenUtils.decode(token);
     }
 }

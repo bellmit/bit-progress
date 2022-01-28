@@ -1,7 +1,4 @@
-package com.wpx.model.result;
-
-import com.wpx.exception.envm.AuthException;
-import com.wpx.model.login.AuthMsg;
+package com.wpx.auth.base;
 
 /**
  * @author wpx

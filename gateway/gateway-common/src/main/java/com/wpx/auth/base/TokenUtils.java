@@ -1,4 +1,4 @@
-package com.wpx.manager.shiro.base;
+package com.wpx.auth.base;
 
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ import java.security.SecureRandom;
  * token工具类
  */
 @Component
-public class TokenUtil {
+public class TokenUtils {
 
     private String rule = "#*J&@J(#_=*!A";
 
@@ -32,7 +32,7 @@ public class TokenUtil {
     /**
      * 构造函数，初始化信息
      */
-    private TokenUtil() {
+    private TokenUtils() {
         KeyGenerator keyGenerator;
         try {
             keyGenerator = KeyGenerator.getInstance("AES");

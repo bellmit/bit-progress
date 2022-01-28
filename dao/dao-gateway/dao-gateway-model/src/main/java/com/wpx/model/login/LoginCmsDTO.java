@@ -15,11 +15,6 @@ public class LoginCmsDTO implements Serializable {
      */
     private String userId;
 
-    /**
-     * 用户权限，暂时是单一权限
-     */
-    private AuthCmsMsg authMsg;
-
     public String getUserId() {
         return userId;
     }
@@ -28,25 +23,16 @@ public class LoginCmsDTO implements Serializable {
         this.userId = userId;
     }
 
-    public AuthCmsMsg getAuthMsg() {
-        return authMsg;
-    }
-
-    public void setAuthMsg(AuthCmsMsg authMsg) {
-        this.authMsg = authMsg;
-    }
-
     public LoginCmsDTO() {
     }
 
-    public LoginCmsDTO(String userId, AuthCmsMsg authMsg) {
+    public LoginCmsDTO(String userId) {
         this.userId = userId;
-        this.authMsg = authMsg;
     }
 
     @Override
     public String toString() {
-        return "{" + "userId=" + userId + ", role=" + authMsg + "}";
+        return "{" + "userId=" + userId + "}";
     }
 
 }

@@ -6,9 +6,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
-import com.wpx.route.GatewayRoute;
+import com.wpx.route.GatewayRouteMsg;
 import com.wpx.util.StringUtils;
-import com.wpx.model.RouteRouse;
+import com.wpx.route.RouteRouse;
 import com.wpx.nacos.property.NacosGatewayProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,6 @@ import org.springframework.cloud.gateway.route.RouteDefinitionWriter;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
@@ -27,12 +26,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
-import java.util.stream.Collectors;
+
+import static com.wpx.util.CollectionUtils.collectionToMap;
+import static com.wpx.util.CollectionUtils.nonEmpty;
 
 /**
  * @author wpx
  * Created on 2021/1/25 10:09
- * 
  */
 @Service
 public class NacosDynamicRouteService implements ApplicationEventPublisherAware {
@@ -68,13 +68,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
                 @Override
                 public void receiveConfigInfo(String configInfo) {
                     clearRoute();
-                    // 路由为空则不需要转换，直接return
-                    if (StringUtils.isEmpty(configInfo)) {
-                        return;
-                    }
-                    List<RouteDefinition> routeDefinitions = JSONArray.parseArray(configInfo, RouteDefinition.class);
-                    routeDefinitions.forEach(NacosDynamicRouteService.this::addRoute);
-                    publish();
+                    addRoutes(configInfo);
                 }
 
                 @Override
@@ -82,7 +76,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
                     return null;
                 }
             });
-        }catch (NacosException e) {
+        } catch (NacosException e) {
             log.error("NacosRouteSetError ", e);
         }
     }
@@ -106,12 +100,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
                 @Override
                 public void receiveConfigInfo(String configInfo) {
                     clearWhiteRoute();
-                    // 如果内容为空则不需要转换，直接return
-                    if (StringUtils.isEmpty(configInfo)) {
-                        return;
-                    }
-                    List<String> whiteRoutes = JSONArray.parseArray(configInfo, String.class);
-                    GatewayRoute.addWhiteRoute(whiteRoutes);
+                    addWhiteRoutes(configInfo);
                 }
 
                 @Override
@@ -119,7 +108,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
                     return null;
                 }
             });
-        }catch (NacosException e) {
+        } catch (NacosException e) {
             log.error("NacosWhiteRouteSetError ", e);
         }
     }
@@ -143,16 +132,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
                 @Override
                 public void receiveConfigInfo(String configInfo) {
                     clearRouteRouse();
-                    // 如果资源配置为空，则不需要配置
-                    if (StringUtils.isEmpty(configInfo)) {
-                        return;
-                    }
-                    List<RouteRouse> routeRouses = JSONArray.parseArray(configInfo, RouteRouse.class);
-                    Map<String, List<String>> roleMap = routeRouses.stream().collect(
-                            Collectors.toMap(NacosDynamicRouteService.this::getRouteRouseKey, RouteRouse::getRole));
-                    if (!CollectionUtils.isEmpty(roleMap)) {
-                        GatewayRoute.addRouteRouse(roleMap);
-                    }
+                    addRouteRouses(configInfo);
                 }
 
                 @Override
@@ -160,7 +140,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
                     return null;
                 }
             });
-        }catch (NacosException e) {
+        } catch (NacosException e) {
             log.error("NacosRouteRouseSetError ", e);
         }
     }
@@ -184,14 +164,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
                 @Override
                 public void receiveConfigInfo(String configInfo) {
                     clearRouteRouse();
-                    // 如果资源配置为空，则不需要配置
-                    if (StringUtils.isEmpty(configInfo)) {
-                        return;
-                    }
-                    JSONObject apiTokenObject = JSON.parseObject(configInfo);
-                    Map<String, String> apiTokenMap = new HashMap<>(apiTokenObject.size());
-                    apiTokenObject.forEach((key, value) -> apiTokenMap.put(key, String.valueOf(value)));
-                    GatewayRoute.addRouteApiTokenMap(apiTokenMap);
+                    addRouteApiToken(configInfo);
                 }
 
                 @Override
@@ -199,7 +172,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
                     return null;
                 }
             });
-        }catch (NacosException e) {
+        } catch (NacosException e) {
             log.error("NacosRouteApiTokenSetError ", e);
         }
     }
@@ -207,77 +180,50 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
     /**
      * gateway启动时初始化路由
      *
-     * @param    configInfo
+     * @param configInfo 路由信息
      */
     private void initRoute(String configInfo) {
         clearRoute();
-        // 路由为空则不需要转换，直接return
-        if (StringUtils.isEmpty(configInfo)) {
-            return;
-        }
-        List<RouteDefinition> routeDefinitions = JSONArray.parseArray(configInfo, RouteDefinition.class);
-        routeDefinitions.forEach(NacosDynamicRouteService.this::addRoute);
-        publish();
+        addRoutes(configInfo);
     }
 
     /**
      * 初始化路由白名单
      *
-     * @param    configInfo
+     * @param configInfo 白名单信息
      */
     private void initWhiteRoute(String configInfo) {
         clearWhiteRoute();
-        // 如果内容为空则不需要转换，直接return
-        if (StringUtils.isEmpty(configInfo)) {
-            return;
-        }
-        List<String> whiteRoutes = JSONArray.parseArray(configInfo, String.class);
-        GatewayRoute.addWhiteRoute(whiteRoutes);
+        addWhiteRoutes(configInfo);
     }
 
     /**
      * 初始化路由资源
      *
-     * @param    configInfo
+     * @param configInfo
      */
     private void initRouteRouse(String configInfo) {
         clearRouteRouse();
-        // 如果资源配置为空，则不需要配置
-        if (StringUtils.isEmpty(configInfo)) {
-            return;
-        }
-        List<RouteRouse> routeRouses = JSONArray.parseArray(configInfo, RouteRouse.class);
-        Map<String, List<String>> roleMap = routeRouses.stream().
-                collect(Collectors.toMap(this::getRouteRouseKey, RouteRouse::getRole));
-        if (!CollectionUtils.isEmpty(roleMap)) {
-            GatewayRoute.addRouteRouse(roleMap);
-        }
+        addRouteRouses(configInfo);
     }
 
     /**
      * 初始化路由ApiToken
      *
-     * @param    configInfo
+     * @param configInfo 路由api
      */
     private void initRouteApiToken(String configInfo) {
         clearRouteApiToken();
-        // 如果资源配置为空，则不需要配置
-        if (StringUtils.isEmpty(configInfo)) {
-            return;
-        }
-        JSONObject apiTokenObject = JSON.parseObject(configInfo);
-        Map<String, String> apiTokenMap = new HashMap<>(apiTokenObject.size());
-        apiTokenObject.forEach((key, value) -> apiTokenMap.put(key, String.valueOf(value)));
-        GatewayRoute.addRouteApiTokenMap(apiTokenMap);
+        addRouteApiToken(configInfo);
     }
 
     /**
      * 清空路由
      */
     private void clearRoute() {
-        List<String> routeList = GatewayRoute.getRouteList();
+        List<String> routeList = GatewayRouteMsg.getRouteList();
         routeList.forEach(this::deleteRoute);
-        GatewayRoute.clearRouteList();
+        GatewayRouteMsg.clearRouteList();
     }
 
     /**
@@ -288,7 +234,7 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
     private void deleteRoute(String routeId) {
         try {
             this.routeDefinitionWriter.delete(Mono.just(routeId)).subscribe();
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.error("deleteRouteError routeId [{}] ", routeId, e);
         }
     }
@@ -297,43 +243,105 @@ public class NacosDynamicRouteService implements ApplicationEventPublisherAware 
      * 清空路由白名单
      */
     private void clearWhiteRoute() {
-        GatewayRoute.clearWhiteRoute();
+        GatewayRouteMsg.clearWhiteRoute();
     }
 
     /**
      * 清空路由资源
      */
     private void clearRouteRouse() {
-        GatewayRoute.clearRouteRouseMap();
+        GatewayRouteMsg.clearRouteRouseMap();
     }
 
     /**
      * 清空路由ApiToken
      */
     private void clearRouteApiToken() {
-        GatewayRoute.clearRouteApiTokenMap();
+        GatewayRouteMsg.clearRouteApiTokenMap();
     }
 
     /**
      * 添加路由
      *
-     * @param    routeDefinition
+     * @param configInfo 路由信息
+     */
+    private void addRoutes(String configInfo) {
+        // 路由为空则不需要转换，直接return
+        if (StringUtils.isEmpty(configInfo)) {
+            return;
+        }
+        List<RouteDefinition> routeDefinitions = JSONArray.parseArray(configInfo, RouteDefinition.class);
+        routeDefinitions.forEach(NacosDynamicRouteService.this::addRoute);
+        publish();
+    }
+
+    /**
+     * 添加路由
+     *
+     * @param routeDefinition 路由对象
      */
     private void addRoute(RouteDefinition routeDefinition) {
         String routeId = routeDefinition.getId();
         try {
-            GatewayRoute.addRoute(routeId);
+            GatewayRouteMsg.addRoute(routeId);
             routeDefinitionWriter.save(Mono.just(routeDefinition)).subscribe();
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.error("addRouteError routeId [{}] ", routeId, e);
         }
     }
 
     /**
+     * 添加白名单
+     *
+     * @param configInfo 白名单信息
+     */
+    private void addWhiteRoutes(String configInfo) {
+        // 如果内容为空则不需要转换，直接return
+        if (StringUtils.isEmpty(configInfo)) {
+            return;
+        }
+        List<String> whiteRoutes = JSONArray.parseArray(configInfo, String.class);
+        GatewayRouteMsg.addWhiteRoute(whiteRoutes);
+
+    }
+
+    /**
+     * 添加路由资源
+     *
+     * @param configInfo 路由资源
+     */
+    private void addRouteRouses(String configInfo) {
+        // 如果资源配置为空，则不需要配置
+        if (StringUtils.isEmpty(configInfo)) {
+            return;
+        }
+        List<RouteRouse> routeRouses = JSONArray.parseArray(configInfo, RouteRouse.class);
+        Map<String, RouteRouse> roleMap = collectionToMap(routeRouses, this::getRouteRouseKey);
+        if (nonEmpty(roleMap)) {
+            GatewayRouteMsg.addRouteRouse(roleMap);
+        }
+    }
+
+    /**
+     * 添加路由token
+     *
+     * @param configInfo 路由token
+     */
+    private void addRouteApiToken(String configInfo) {
+        if (StringUtils.isEmpty(configInfo)) {
+            return;
+        }
+        JSONObject apiTokenObject = JSON.parseObject(configInfo);
+        Map<String, String> apiTokenMap = new HashMap<>(apiTokenObject.size());
+        apiTokenObject.forEach((key, value) -> apiTokenMap.put(key, String.valueOf(value)));
+        GatewayRouteMsg.addRouteApiTokenMap(apiTokenMap);
+    }
+
+    /**
      * 生成资源key
      *
-     * @param    routeRouse
-     * @return   String
+     * @param routeRouse
+     * @return String
      */
     private String getRouteRouseKey(RouteRouse routeRouse) {
         String method = routeRouse.getMethod().toUpperCase();

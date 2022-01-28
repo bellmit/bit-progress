@@ -2,21 +2,19 @@ package com.wpx.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.wpx.constant.VerifyConstant;
-import com.wpx.model.login.AuthWebMsg;
-import com.wpx.route.GatewayRoute;
-import com.wpx.service.AuthorizeService;
-import com.wpx.service.RouteMatchService;
-import com.wpx.util.StringUtils;
-import com.wpx.exception.envm.AuthException;
-import com.wpx.model.result.AuthResult;
-import com.wpx.model.result.Result;
+import com.wpx.auth.base.AuthException;
+import com.wpx.auth.base.AuthMsg;
+import com.wpx.auth.base.AuthResult;
+import com.wpx.auth.base.Result;
+import com.wpx.route.GatewayRouteMsg;
 import com.wpx.service.AuthService;
+import com.wpx.service.MatchService;
+import com.wpx.service.PermissionService;
+import com.wpx.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.DefaultResponse;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
-import org.springframework.cloud.gateway.route.Route;
-import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
@@ -31,22 +29,23 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.G
 /**
  * @author wpx
  * Created on 2021/1/23 16:20
- * 
  */
 @Configuration
-public class AccessGatewayFilter implements GlobalFilter {
+public class SecurityGatewayFilter implements GlobalFilter {
 
     @Autowired
-    private AuthorizeService authorizeService;
+    private AuthService authService;
     @Autowired
-    private RouteMatchService routeMatchService;
+    private MatchService matchService;
+    @Autowired
+    private PermissionService permissionService;
 
     /**
-     * 1. 检验是否白名单或非api开头 {@link RouteMatchService#ignoreAuthentication(String,String)}
-     * 2. 检验token是否正确 {@link AuthService#checkToken(String)}
+     * 1. 检验是否白名单或非api开头 {@link MatchService#ignoreAuthentication(String, String)}
+     * 2. 检验token是否正确 {@link AuthService#checkToken(String, Class)}
      *
-     * @param exchange
-     * @param chain
+     * @param exchange exchange信息
+     * @param chain    chain信息
      */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -55,31 +54,37 @@ public class AccessGatewayFilter implements GlobalFilter {
         String url = request.getPath().value();
         String method = request.getMethodValue();
         HttpHeaders headers = request.getHeaders();
-        String authentication = headers.getFirst(HttpHeaders.AUTHORIZATION);
 
-        if (routeMatchService.ignoreAuthentication(method, url)) {
-            // 白名单，不需要检验token，使用-1作为userId
-            return authorized(chain, exchange, request, StringUtils.MINUS_ONE);
+        String authentication = authService.getAuthentication(headers);
+
+        if (matchService.ignoreAuthentication(method, url)) {
+            return mutateExchange(chain, exchange, request, StringUtils.MINUS_ONE);
         }
         // 校验token
-        AuthResult<AuthWebMsg> authResult = authorizeService.checkToken(authentication, AuthWebMsg.class);
+        AuthResult<AuthMsg> authResult = authService.checkToken(authentication, AuthMsg.class);
         if (authResult.getResult()) {
-            return authorized(chain, exchange, request, authResult.getUserId());
+            permissionService.authorizePermission(authResult, method, url);
+            // 权限校验通过
+            if (authResult.getResult()) {
+                return mutateExchange(chain, exchange, request, authResult.getUserId());
+            }
         }
+
 
         return unauthorized(exchange, authResult.getAuthException());
     }
 
     /**
      * 通过检验，重新构建exchange
+     * 将解析token获取的userId以及服务元数据中的中token放到ServerHttpRequest的header中，用以标识是通过网关转发的请求
      */
-    private Mono<Void> authorized(GatewayFilterChain chain,
-                                  ServerWebExchange exchange,
-                                  ServerHttpRequest request,
-                                  String userId) {
+    private Mono<Void> mutateExchange(GatewayFilterChain chain,
+                                      ServerWebExchange exchange,
+                                      ServerHttpRequest request,
+                                      String userId) {
         DefaultResponse response = (DefaultResponse) exchange.getAttributes().get(GATEWAY_LOADBALANCER_RESPONSE_ATTR);
         String serviceId = response.getServer().getServiceId();
-        String routeApiToken = GatewayRoute.getRouteApiToken(serviceId);
+        String routeApiToken = GatewayRouteMsg.getRouteApiToken(serviceId);
         ServerHttpRequest httpRequest = request.mutate()
                 .header(VerifyConstant.USER_ID, userId)
                 .header(VerifyConstant.ROUTE_API_TOKEN, routeApiToken)

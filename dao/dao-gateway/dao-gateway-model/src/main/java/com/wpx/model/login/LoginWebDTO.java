@@ -15,11 +15,6 @@ public class LoginWebDTO implements Serializable {
      */
     private String userId;
 
-    /**
-     * 用户权限，暂时是单一权限
-     */
-    private AuthWebMsg authMsg;
-
     public String getUserId() {
         return userId;
     }
@@ -28,25 +23,16 @@ public class LoginWebDTO implements Serializable {
         this.userId = userId;
     }
 
-    public AuthWebMsg getAuthMsg() {
-        return authMsg;
-    }
-
-    public void setAuthMsg(AuthWebMsg authMsg) {
-        this.authMsg = authMsg;
-    }
-
     public LoginWebDTO() {
     }
 
-    public LoginWebDTO(String userId, AuthWebMsg authMsg) {
+    public LoginWebDTO(String userId) {
         this.userId = userId;
-        this.authMsg = authMsg;
     }
 
     @Override
     public String toString() {
-        return "{" + "userId=" + userId + ", role=" + authMsg + "}";
+        return "{" + "userId=" + userId + "}";
     }
 
 }

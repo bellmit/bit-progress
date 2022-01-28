@@ -5,6 +5,7 @@ import com.wpx.exception.CommonException;
 import com.wpx.exception.ExceptionMessage;
 import com.wpx.util.StringUtils;
 import com.wpx.property.ApplicationTokenProperties;
+import com.wpx.util.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -23,6 +24,14 @@ public class ApiInterceptor implements HandlerInterceptor {
     @Autowired
     private ApplicationTokenProperties applicationTokenProperties;
 
+    /**
+     * 对请求进行处理，检验是否由网关转发，并将网关追加到请求头的信息进行缓存
+     *
+     * @param request
+     * @param response
+     * @param handler
+     * @return 处理是否通过
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String routeApiToken = request.getHeader(VerifyConstant.ROUTE_API_TOKEN);

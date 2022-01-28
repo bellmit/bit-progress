@@ -10,7 +10,7 @@ import java.util.Map;
  * Created on 2021/1/26 16:56
  * 
  */
-public class GatewayRoute {
+public class GatewayRouteMsg {
 
     /**
      * 路由ID列表
@@ -25,7 +25,7 @@ public class GatewayRoute {
     /**
      * 路由资源
      */
-    private static final Map<String, List<String>> ROUTE_ROUSE_MAP = new HashMap<>();
+    private static final Map<String, RouteRouse> ROUTE_ROUSE_MAP = new HashMap<>();
 
     /**
      * 路由API_TOKEN
@@ -56,7 +56,7 @@ public class GatewayRoute {
      * @param    key
      * @return   List<String>
      */
-    public static List<String> getRouteRouseList(String key) {
+    public static RouteRouse getRouteRouseList(String key) {
         return ROUTE_ROUSE_MAP.get(key);
     }
 
@@ -93,7 +93,7 @@ public class GatewayRoute {
      *
      * @param    roleMap
      */
-    public static void addRouteRouse(Map<String, List<String>> roleMap) {
+    public static void addRouteRouse(Map<String, RouteRouse> roleMap) {
         ROUTE_ROUSE_MAP.putAll(roleMap);
     }
 

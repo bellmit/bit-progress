@@ -6,7 +6,7 @@ import com.wpx.model.login.LoginVO;
 import com.wpx.model.login.LoginWebDTO;
 import com.wpx.model.login.LogoutDTO;
 import com.wpx.model.login.TokenDTO;
-import com.wpx.service.AuthService;
+import com.wpx.service.AuthorizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthFeignController {
 
     @Autowired
-    private AuthService authService;
+    private AuthorizationService authorizationService;
 
     /**
      * 用户登录获取token
@@ -29,7 +29,7 @@ public class AuthFeignController {
      */
     @PostMapping("login")
     public ResultVO<LoginVO> login(@RequestBody LoginWebDTO loginDTO) {
-        return ResultVO.successData(authService.login(loginDTO.getUserId(), loginDTO.getAuthMsg()));
+        return ResultVO.successData(authorizationService.login(loginDTO.getUserId()));
     }
 
     /**
@@ -39,7 +39,7 @@ public class AuthFeignController {
      */
     @PostMapping("logout")
     public ResultVO<BooleanVO> logout(@RequestBody LogoutDTO logoutDTO) {
-        authService.logout(logoutDTO.getUserId());
+        authorizationService.logout(logoutDTO.getUserId());
         return ResultVO.successData(BooleanVO.result(true));
     }
 
@@ -50,7 +50,7 @@ public class AuthFeignController {
      */
     @GetMapping("userId")
     public ResultVO<LoginVO> getUserIdInToken(@RequestParam String token) {
-        return ResultVO.successData(authService.getUserIdInToken(token));
+        return ResultVO.successData(authorizationService.getUserIdInToken(token));
     }
 
     /**
@@ -60,7 +60,7 @@ public class AuthFeignController {
      */
     @PostMapping("checkToken")
     public ResultVO<BooleanVO> checkToken(@RequestBody TokenDTO tokenDTO) {
-        return ResultVO.successData(BooleanVO.result(authService.checkToken(tokenDTO.getToken()).getResult()));
+        return ResultVO.successData(BooleanVO.result(authorizationService.checkToken(tokenDTO.getToken()).getResult()));
     }
 
 }

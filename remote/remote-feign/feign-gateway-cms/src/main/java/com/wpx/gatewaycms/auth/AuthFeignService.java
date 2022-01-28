@@ -2,6 +2,7 @@ package com.wpx.gatewaycms.auth;
 
 import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
+import com.wpx.model.login.LoginCmsDTO;
 import com.wpx.model.login.LoginVO;
 import com.wpx.model.login.LogoutDTO;
 import com.wpx.model.login.TokenDTO;
@@ -26,7 +27,7 @@ public interface AuthFeignService {
      * @return 返回token
      */
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    ResultVO<LoginVO> login(@RequestBody LoginDTO loginDTO);
+    ResultVO<LoginVO> login(@RequestBody LoginCmsDTO loginDTO);
 
     /**
      * 退出登录

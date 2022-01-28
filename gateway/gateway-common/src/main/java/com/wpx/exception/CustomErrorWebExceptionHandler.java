@@ -1,7 +1,7 @@
 package com.wpx.exception;
 
-import com.wpx.exception.envm.AuthException;
-import com.wpx.model.result.Result;
+import com.wpx.auth.base.AuthException;
+import com.wpx.auth.base.Result;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.boot.autoconfigure.web.reactive.error.DefaultErrorWebExceptionHandler;
@@ -34,7 +34,7 @@ public class CustomErrorWebExceptionHandler extends DefaultErrorWebExceptionHand
         errorAttributes.put("status", errorStatus.value());
         errorAttributes.put("error", errorStatus.getReasonPhrase());
         errorAttributes.put("code", result.getCode());
-        errorAttributes.put("msg", result.getMsg());
+        errorAttributes.put("msg", result.getMessage());
         return errorAttributes;
     }
 

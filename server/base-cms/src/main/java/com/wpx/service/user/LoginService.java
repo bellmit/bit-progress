@@ -3,6 +3,7 @@ package com.wpx.service.user;
 import com.wpx.exception.MessageCodes;
 import com.wpx.exception.ValidationException;
 import com.wpx.model.ResultVO;
+import com.wpx.model.login.LoginCmsDTO;
 import com.wpx.model.login.LoginVO;
 import com.wpx.util.BcryptUtils;
 import com.wpx.util.StringUtils;
@@ -80,7 +81,7 @@ public class LoginService {
                 Long managerId = manager.getManagerId();
                 int role = manager.getRole().ordinal();
                 // 登录获取token
-                String token = generateToken(String.valueOf(managerId), String.valueOf(role));
+                String token = generateToken(String.valueOf(managerId));
                 LoginSuccessVO successVO = new LoginSuccessVO();
                 successVO.setToken(token);
                 successVO.setRole(manager.getRole());
@@ -94,10 +95,10 @@ public class LoginService {
      * 生成token
      *
      * @param userId
-     * @param role
      */
-    public String generateToken(String userId, String role) {
-        LoginDTO loginDTO = new LoginDTO(userId, role);
+    public String generateToken(String userId) {
+        LoginCmsDTO loginDTO = new LoginCmsDTO();
+        loginDTO.setUserId(userId);
         ResultVO<LoginVO> login = authFeignService.login(loginDTO);
         return login.getData().getToken();
     }

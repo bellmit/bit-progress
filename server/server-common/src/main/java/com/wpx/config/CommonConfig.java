@@ -16,8 +16,9 @@ public class CommonConfig {
 
     /**
      * 跨域配置
+     * Gateway已经配置跨域，服务上不能重复配置
+     * @Bean
      */
-    @Bean
     public FilterRegistrationBean corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();

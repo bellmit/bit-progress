@@ -5,7 +5,7 @@ import com.wpx.mapper.user.ManagerLogMapper;
 import com.wpx.model.user.managerlog.envm.MethodEnum;
 import com.wpx.util.NumberUtils;
 import com.wpx.model.user.managerlog.ManagerLog;
-import com.wpx.util.UserHelper;
+import com.wpx.util.UserUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -48,7 +48,7 @@ public class ControllerAspect {
     @Before(value = "controllerPointcut()")
     public void controllerBefore(JoinPoint joinPoint) {
         try {
-            Long userId = UserHelper.getUserId();
+            Long userId = UserUtils.getUserId();
             if (userId == NumberUtils.INT_MINUS_ONE) {
                 return;
             }

@@ -11,10 +11,7 @@ import com.wpx.model.JsCode2SessionResult;
 import com.wpx.model.ResultVO;
 import com.wpx.model.app.wechatapp.envm.WechatAppTypeEnum;
 import com.wpx.model.app.wechatapp.pojo.WechatAppRO;
-import com.wpx.model.login.LoginVO;
-import com.wpx.model.login.TokenDTO;
-import com.wpx.model.login.SmsCaptchaLoginDTO;
-import com.wpx.model.login.WechatLoginDTO;
+import com.wpx.model.login.*;
 import com.wpx.service.WechatLoginService;
 import com.wpx.service.app.WechatAppService;
 import com.wpx.service.user.PhoneUserService;
@@ -140,7 +137,7 @@ public class LoginService {
      */
     private LoginVO login(Long userId, Integer role) {
         // 调用gateway登录接口获取token
-        LoginDTO loginDTO = new LoginDTO();
+        LoginWebDTO loginDTO = new LoginWebDTO();
         loginDTO.setUserId(String.valueOf(userId));
         ResultVO<LoginVO> loginResult = authFeignService.login(loginDTO);
         return ResultUtils.checkResultVO(loginResult);

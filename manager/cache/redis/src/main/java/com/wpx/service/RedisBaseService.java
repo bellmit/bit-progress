@@ -1,6 +1,7 @@
 package com.wpx.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.wpx.util.CollectionUtils;
 import com.wpx.util.JsonUtils;
 import com.wpx.util.RedisCacheUtils;
@@ -10,6 +11,8 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
+import static com.wpx.util.JsonUtils.deserializeList;
 
 /**
  * @author 不会飞的小鹏
@@ -48,8 +51,8 @@ public class RedisBaseService {
      * @param str
      * @param target
      */
-    private <T> List<T> strToList(String str, Class<T> target) throws JsonProcessingException {
-        return StringUtils.isEmpty(str) ? new ArrayList<>() : JsonUtils.deserializeList(str, target);
+    private <T> List<T> strToList(String str, Class<T> target) {
+        return StringUtils.isEmpty(str) ? new ArrayList<>() : deserializeList(str, new TypeReference<List<T>>() {});
     }
 
     /**

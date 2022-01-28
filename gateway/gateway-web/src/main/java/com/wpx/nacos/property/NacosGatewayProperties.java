@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * 
  */
 @Configuration
-@ConfigurationProperties(prefix = "module.gateway")
+@ConfigurationProperties(prefix = "gateway.nacos")
 public class NacosGatewayProperties {
 
     /**

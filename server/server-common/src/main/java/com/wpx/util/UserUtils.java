@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author wpx
  * Created on 2021/2/5 10:11
  */
-public class UserHelper {
+public class UserUtils {
 
     public static Long getUserId() {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();

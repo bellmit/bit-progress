@@ -4,7 +4,7 @@ import com.wpx.gatewaycms.auth.AuthDubboService;
 import com.wpx.model.BooleanVO;
 import com.wpx.model.ResultVO;
 import com.wpx.model.login.*;
-import com.wpx.service.AuthService;
+import com.wpx.service.AuthorizationService;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AuthDubboServiceImpl implements AuthDubboService {
 
     @Autowired
-    private AuthService authService;
+    private AuthorizationService authorizationService;
 
     /**
      * 用户登录 -- 返回token
@@ -26,7 +26,7 @@ public class AuthDubboServiceImpl implements AuthDubboService {
      */
     @Override
     public ResultVO<LoginVO> login(LoginCmsDTO loginDTO) {
-        return ResultVO.successData(authService.login(loginDTO.getUserId(), loginDTO.getAuthMsg()));
+        return ResultVO.successData(authorizationService.login(loginDTO.getUserId()));
     }
 
     /**
@@ -37,7 +37,7 @@ public class AuthDubboServiceImpl implements AuthDubboService {
      */
     @Override
     public ResultVO<BooleanVO> logout(LogoutDTO logoutDTO) {
-        authService.logout(logoutDTO.getUserId());
+        authorizationService.logout(logoutDTO.getUserId());
         return ResultVO.successData(BooleanVO.result(true));
     }
 
@@ -49,7 +49,7 @@ public class AuthDubboServiceImpl implements AuthDubboService {
      */
     @Override
     public ResultVO<LoginVO> getUserIdInToken(TokenDTO tokenDTO) {
-        return ResultVO.successData(authService.getUserIdInToken(tokenDTO.getToken()));
+        return ResultVO.successData(authorizationService.getUserIdInToken(tokenDTO.getToken()));
     }
 
     /**
@@ -60,7 +60,7 @@ public class AuthDubboServiceImpl implements AuthDubboService {
      */
     @Override
     public ResultVO<BooleanVO> checkToken(TokenDTO tokenDTO) {
-        return ResultVO.successData(BooleanVO.result(authService.checkToken(tokenDTO.getToken()).getResult()));
+        return ResultVO.successData(BooleanVO.result(authorizationService.checkToken(tokenDTO.getToken()).getResult()));
     }
 
 }

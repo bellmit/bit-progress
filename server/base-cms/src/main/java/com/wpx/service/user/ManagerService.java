@@ -19,7 +19,7 @@ import com.wpx.model.user.manager.pojo.cms.*;
 import com.wpx.util.Assert;
 import com.wpx.util.BeanUtils;
 import com.wpx.util.PageUtils;
-import com.wpx.util.UserHelper;
+import com.wpx.util.UserUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -151,13 +151,13 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
      * @param updateDTO
      */
     @Transactional(rollbackFor = RuntimeException.class)
-    public ManagerCmsVO update(ManagerCmsUpdateDTO updateDTO) {
+    public ManagerCmsVO update(ManagerCmsUpdateDTO updateDTO, Long userId) {
         Long managerId = updateDTO.getManagerId();
         RoleEnum role = updateDTO.getRole();
         Manager manager = getById(managerId);
         Assert.notNull(manager, BaseExceptionMessage.MANAGER_NOT_EXIST_EXCEPTION);
         // 非超管只能编辑自己的信息
-        if (!Objects.equals(manager.getRole(), RoleEnum.ROOT) && !Objects.equals(managerId, UserHelper.getUserId())) {
+        if (!Objects.equals(manager.getRole(), RoleEnum.ROOT) && !Objects.equals(managerId, userId)) {
             throw new CommonException(BaseExceptionMessage.NOT_ROOT_EDIT_OTHER_INFO_EXCEPTION);
         }
         // 检查角色权限
@@ -254,11 +254,11 @@ public class ManagerService extends ServiceImpl<ManagerMapper, Manager> {
      * @param managerRoleDTO
      */
     @Transactional(rollbackFor = RuntimeException.class)
-    public ManagerCmsVO handleRole(ManagerRoleDTO managerRoleDTO) {
+    public ManagerCmsVO handleRole(ManagerRoleDTO managerRoleDTO, Long userId) {
         Manager manager = getById(managerRoleDTO.getManagerId());
         Assert.notNull(manager, BaseExceptionMessage.MANAGER_NOT_EXIST_EXCEPTION);
 
-        Manager currentManager = getById(UserHelper.getUserId());
+        Manager currentManager = getById(userId);
         Assert.notNull(currentManager, BaseExceptionMessage.MANAGER_NOT_EXIST_EXCEPTION);
 
         Assert.isTrue(currentManager.getRole().ordinal() < manager.getRole().ordinal(), BaseExceptionMessage.ALLOW_SUPERIOR_ROLE_EXCEPTION);

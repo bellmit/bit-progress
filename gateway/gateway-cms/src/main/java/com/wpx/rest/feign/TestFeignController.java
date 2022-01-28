@@ -1,5 +1,6 @@
 package com.wpx.rest.feign;
 
+import com.wpx.model.login.LoginCmsDTO;
 import com.wpx.util.JsonUtils;
 import com.wpx.model.ResultVO;
 import com.wpx.model.login.TokenDTO;
@@ -20,14 +21,14 @@ public class TestFeignController {
     }
 
     @GetMapping("a")
-    public ResultVO<String> testg(@ModelAttribute LoginDTO loginDTO) {
+    public ResultVO<String> testg(@ModelAttribute LoginCmsDTO loginDTO) {
         String s = loginDTO.toString();
         System.out.println(s);
         return ResultVO.successData(JsonUtils.serializeObject(loginDTO));
     }
 
     @DeleteMapping("a")
-    public ResultVO<String> testd(@ModelAttribute LoginDTO loginDTO) {
+    public ResultVO<String> testd(@ModelAttribute LoginCmsDTO loginDTO) {
         String s = loginDTO.toString();
         System.out.println(s);
         return ResultVO.successData(JsonUtils.serializeObject(loginDTO));

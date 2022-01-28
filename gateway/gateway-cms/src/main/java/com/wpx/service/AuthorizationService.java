@@ -1,35 +1,30 @@
 package com.wpx.service;
 
-import com.wpx.manager.shiro.service.ShiroTokenService;
-import com.wpx.model.BooleanVO;
-import com.wpx.model.login.AuthWebMsg;
+import com.wpx.auth.base.AuthMsg;
 import com.wpx.model.login.LoginVO;
-import com.wpx.model.result.AuthResult;
-import com.wpx.util.StringUtils;
+import com.wpx.auth.base.AuthResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * @author wpx
  * Created on 2021/1/27 17:44
- * 
  */
 @Service
-public class AuthService {
+public class AuthorizationService {
 
     @Autowired
-    private ShiroTokenService shiroTokenService;
+    private AuthTokenService authTokenService;
 
     /**
      * 用户进行登录
      *
      * @param    userId
-     * @param    authMsg
      * @return   String
      */
-    public LoginVO login(String userId, AuthWebMsg authMsg) {
+    public LoginVO login(String userId) {
         LoginVO loginVO = new LoginVO();
-        String token = shiroTokenService.login(userId, authMsg);
+        String token = authTokenService.login(userId, new AuthMsg());
         loginVO.setUserId(Long.parseLong(userId));
         loginVO.setToken(token);
         return loginVO;
@@ -41,7 +36,7 @@ public class AuthService {
      * @param    userId
      */
     public void logout(String userId) {
-        shiroTokenService.logout(userId);
+        authTokenService.logout(userId);
     }
 
     /**
@@ -51,7 +46,7 @@ public class AuthService {
      */
     public LoginVO getUserIdInToken(String token) {
         LoginVO loginVO = new LoginVO();
-        String userId = shiroTokenService.getUserIdInToken(token);
+        String userId = authTokenService.getUserIdInToken(token);
         loginVO.setUserId(Long.parseLong(userId));
         loginVO.setToken(token);
         return loginVO;
@@ -63,7 +58,7 @@ public class AuthService {
      * @param rawToken
      */
     public String encodeToken(String rawToken) {
-        return shiroTokenService.encodeToken(rawToken);
+        return authTokenService.encodeToken(rawToken);
     }
 
     /**
@@ -72,7 +67,7 @@ public class AuthService {
      * @param token
      */
     public String decodeToken(String token) {
-        return shiroTokenService.decodeToken(token);
+        return authTokenService.decodeToken(token);
     }
 
     /**
@@ -80,7 +75,7 @@ public class AuthService {
      *
      * @param token
      */
-    public AuthResult<AuthWebMsg> checkToken(String token) {
-        return shiroTokenService.checkToken(token, AuthWebMsg.class);
+    public AuthResult<AuthMsg> checkToken(String token) {
+        return authTokenService.checkToken(token, AuthMsg.class);
     }
 }

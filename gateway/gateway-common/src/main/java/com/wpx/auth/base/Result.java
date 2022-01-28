@@ -1,17 +1,15 @@
-package com.wpx.model.result;
-
-import com.wpx.exception.envm.AuthException;
+package com.wpx.auth.base;
 
 import java.util.Objects;
 
 public class Result {
 
     private String code;
-    private String msg;
+    private String message;
 
-    public Result(String code, String msg) {
+    public Result(String code, String message) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
     }
 
     public static Result error(String code, String msg) {
@@ -29,8 +27,8 @@ public class Result {
         return code;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
 }

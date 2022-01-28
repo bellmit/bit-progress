@@ -1,6 +1,6 @@
-package com.wpx.service;
+package com.wpx.route;
 
-import com.wpx.route.GatewayRoute;
+import com.wpx.service.MatchService;
 import com.wpx.util.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.AntPathMatcher;
@@ -12,7 +12,7 @@ import java.util.List;
  * 路由匹配服务
  */
 @Service
-public class RouteMatchService {
+public class RouteMatchServiceImpl implements MatchService {
 
     /**
      * 需要匹配的路径前缀
@@ -24,15 +24,16 @@ public class RouteMatchService {
     /**
      * 查询是否为不校验路由
      *
-     * @param  method 校验路径method
-     * @param  url 检验路径
+     * @param method 校验路径method
+     * @param url    检验路径
      * @return boolean
      */
+    @Override
     public boolean ignoreAuthentication(String method, String url) {
         //如果为非/api/开头，一律通过
         if (StringUtils.startWithIgnoreCase(url, MATCH_URL_PRE)) {
             // 获取路由白名单
-            List<String> whiteRoutes = GatewayRoute.getWhiteRoute();
+            List<String> whiteRoutes = GatewayRouteMsg.getWhiteRoute();
 
             if (whiteRoutes.isEmpty()) {
                 return false;
@@ -55,9 +56,9 @@ public class RouteMatchService {
     /**
      * 路由规则匹配（ant格式）
      *
-     * @param  pattern
-     * @param  method
-     * @param  url
+     * @param pattern 白名单路径
+     * @param method  请求方法
+     * @param url     请求路径
      */
     private boolean pathMatch(String pattern, String method, String url) {
         AntPathMatcher pathMatcher = this.matcher;

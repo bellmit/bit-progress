@@ -1,4 +1,4 @@
-package com.wpx.manager.swagger;
+package com.wpx.swagger;
 
 import com.wpx.property.SwaggerProperties;
 import org.springframework.beans.factory.annotation.Autowired;
