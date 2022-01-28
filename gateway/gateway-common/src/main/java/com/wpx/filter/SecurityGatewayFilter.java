@@ -10,6 +10,7 @@ import com.wpx.route.GatewayRouteMsg;
 import com.wpx.service.AuthService;
 import com.wpx.service.MatchService;
 import com.wpx.service.PermissionService;
+import com.wpx.util.CollectionUtils;
 import com.wpx.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.DefaultResponse;
@@ -23,6 +24,8 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.Map;
 
 import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_LOADBALANCER_RESPONSE_ATTR;
 
@@ -58,7 +61,7 @@ public class SecurityGatewayFilter implements GlobalFilter {
         String authentication = authService.getAuthentication(headers);
 
         if (matchService.ignoreAuthentication(method, url)) {
-            return mutateExchange(chain, exchange, request, StringUtils.MINUS_ONE);
+            return mutateExchange(chain, exchange, request, StringUtils.MINUS_ONE, new AuthMsg());
         }
         // 校验token
         AuthResult<AuthMsg> authResult = authService.checkToken(authentication, AuthMsg.class);
@@ -66,7 +69,7 @@ public class SecurityGatewayFilter implements GlobalFilter {
             permissionService.authorizePermission(authResult, method, url);
             // 权限校验通过
             if (authResult.getResult()) {
-                return mutateExchange(chain, exchange, request, authResult.getUserId());
+                return mutateExchange(chain, exchange, request, authResult.getUserId(), authResult.getAuthMsg());
             }
         }
 
@@ -81,14 +84,23 @@ public class SecurityGatewayFilter implements GlobalFilter {
     private Mono<Void> mutateExchange(GatewayFilterChain chain,
                                       ServerWebExchange exchange,
                                       ServerHttpRequest request,
-                                      String userId) {
+                                      String userId,
+                                      AuthMsg authMsg) {
         DefaultResponse response = (DefaultResponse) exchange.getAttributes().get(GATEWAY_LOADBALANCER_RESPONSE_ATTR);
         String serviceId = response.getServer().getServiceId();
         String routeApiToken = GatewayRouteMsg.getRouteApiToken(serviceId);
-        ServerHttpRequest httpRequest = request.mutate()
-                .header(VerifyConstant.USER_ID, userId)
+        String roleKey = authMsg.getRoleKey();
+        String permissions = authMsg.getPermissions();
+        Map<String, String> params = authMsg.getParams();
+        ServerHttpRequest.Builder mutate = request.mutate();
+        mutate.header(VerifyConstant.USER_ID, userId)
                 .header(VerifyConstant.ROUTE_API_TOKEN, routeApiToken)
-                .build();
+                .header(VerifyConstant.ROLE_KEY, roleKey)
+                .header(VerifyConstant.PERMISSIONS, permissions);
+        if (CollectionUtils.nonEmpty(params)) {
+            params.forEach(mutate::header);
+        }
+        ServerHttpRequest httpRequest = mutate.build();
         ServerWebExchange cmsExchange = exchange.mutate().request(httpRequest).build();
         return chain.filter(cmsExchange);
     }

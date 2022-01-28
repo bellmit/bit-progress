@@ -10,7 +10,17 @@ public class VerifyConstant {
     /**
      * 追加用户ID
      */
-    public static final String USER_ID = "User-Id";
+    public static final String USER_ID = "UserId";
+
+    /**
+     * 追加用户ID
+     */
+    public static final String ROLE_KEY = "RoleKey";
+
+    /**
+     * 追加用户ID
+     */
+    public static final String PERMISSIONS = "Permissions";
 
     /**
      * 请求头header
