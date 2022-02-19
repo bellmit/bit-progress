@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>server</artifactId>
-        <groupId>com.wpx</groupId>
+        <groupId>com.bitprogress</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -12,47 +12,47 @@
     <artifactId>scheduler</artifactId>
 
     <properties>
-        <start-class>com.wpx.SchedulerApplication</start-class>
+        <start-class>com.bitprogress.SchedulerApplication</start-class>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.wpx</groupId>
+            <groupId>com.bitprogress</groupId>
             <artifactId>common-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wpx</groupId>
+            <groupId>com.bitprogress</groupId>
             <artifactId>feign-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wpx</groupId>
+            <groupId>com.bitprogress</groupId>
             <artifactId>server-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wpx</groupId>
+            <groupId>com.bitprogress</groupId>
             <artifactId>dao-scheduler-mapper</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wpx</groupId>
+            <groupId>com.bitprogress</groupId>
             <artifactId>dubbo-scheduler</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wpx</groupId>
+            <groupId>com.bitprogress</groupId>
             <artifactId>swagger-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wpx</groupId>
+            <groupId>com.bitprogress</groupId>
             <artifactId>nacos-discovery</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wpx</groupId>
+            <groupId>com.bitprogress</groupId>
             <artifactId>nacos-config</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

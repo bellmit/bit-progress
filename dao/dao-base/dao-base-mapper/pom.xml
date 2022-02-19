@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>dao-base</artifactId>
-        <groupId>com.wpx</groupId>
+        <groupId>com.bitprogress</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,12 +13,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.wpx</groupId>
+            <groupId>com.bitprogress</groupId>
             <artifactId>dao-common-mapper</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.wpx</groupId>
+            <groupId>com.bitprogress</groupId>
             <artifactId>dao-base-model</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

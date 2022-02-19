@@ -56,8 +56,8 @@ spring:
 - 对redis配置的引用如下
 
 ```java
-import com.wpx.service.RedisBaseService;
-import com.wpx.util.RedisCacheUtils;
+import com.bitprogress.service.RedisBaseService;
+import com.bitprogress.util.RedisCacheUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.StringRedisTemplate;
