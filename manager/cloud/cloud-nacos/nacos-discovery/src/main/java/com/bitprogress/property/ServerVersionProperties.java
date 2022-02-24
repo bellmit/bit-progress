@@ -1,7 +1,5 @@
 package com.bitprogress.property;
 
-import com.bitprogress.constant.NacosConstant;
-import com.bitprogress.util.StringUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.HashMap;
@@ -40,8 +38,7 @@ public class ServerVersionProperties {
      * @param serviceId
      */
     public String getServerVersionByServiceId(String serviceId) {
-        String version = this.serverVersion.get(serviceId);
-        return StringUtils.isEmpty(version) ? NacosConstant.DEFAULT : version;
+        return this.serverVersion.get(serviceId);
     }
 
 }
